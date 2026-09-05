@@ -1,5 +1,5 @@
 #include "config.h"
-#include "../third_party/cjson/cJSON.h"
+#include "cJSON.h"
 #include <stdlib.h>
 #include <string.h>
 

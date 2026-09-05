@@ -6,21 +6,27 @@
 #include <string.h>
 #include <time.h>
 #include <complex.h>
-#include <sys/stat.h>
-#include <sys/types.h>
 #include <signal.h>
-#include <unistd.h>
+#include <sys/stat.h>
 
 #include "config.h"
 #include "presets.h"
 #include "settings.h"
-#include "../core/signal.h"
-#include "../core/chain.h"
+#include "../engine/core/signal.h"
+#include "../engine/core/chain.h"
 
-#define MAX_STAGES  16
-#define CONFIG_DIR  "configs"
+#if defined(_WIN32) && !defined(__CYGWIN__)
+#include <direct.h>
+#define MKDIR(path) _mkdir(path)
+#else
+#define MKDIR(path) mkdir(path, 0755)
+#endif
+
+#define MAX_STAGES 16
+#define CONFIG_DIR "configs"
 #define CONFIG_PATH "configs/config.json"
-#define PID_PATH    "configs/.rfsyn.pid"
+#define LOCK_PATH "configs/.rfsyn.lock"
+#define STOP_PATH "configs/.rfsyn.stop"
 
 static volatile sig_atomic_t g_stop_requested = 0;
 
@@ -46,29 +52,29 @@ static int write_signal(const signal_t *sig, const char *path) {
     return (written == sig->n_samples) ? 0 : -1;
 }
 
-static int write_pid_file(void) {
-    FILE *f = fopen(PID_PATH, "w");
-    if (!f) return -1;
-    fprintf(f, "%ld\n", (long)getpid());
-    fclose(f);
+static int run_is_active(void) {
+    FILE *f = fopen(LOCK_PATH, "r");
+    if (f) { fclose(f); return 1; }
     return 0;
 }
 
-static void remove_pid_file(void) {
-    remove(PID_PATH);
+static void create_lock(void) {
+    FILE *f = fopen(LOCK_PATH, "w");
+    if (f) fclose(f);
 }
 
-static long read_pid_file(void) {
-    FILE *f = fopen(PID_PATH, "r");
-    if (!f) return -1;
-    long pid = -1;
-    if (fscanf(f, "%ld", &pid) != 1) pid = -1;
-    fclose(f);
-    return pid;
+static void remove_lock(void) {
+    remove(LOCK_PATH);
 }
 
-static int process_is_alive(long pid) {
-    return kill((pid_t)pid, 0) == 0;
+static int stop_file_present(void) {
+    FILE *f = fopen(STOP_PATH, "r");
+    if (f) { fclose(f); return 1; }
+    return 0;
+}
+
+static void remove_stop_file(void) {
+    remove(STOP_PATH);
 }
 
 static int cmd_init(void) {
@@ -78,7 +84,7 @@ static int cmd_init(void) {
         return 1;
     }
 
-    mkdir(CONFIG_DIR, 0755);
+    MKDIR(CONFIG_DIR);
 
     config_t *cfg = preset_build("realistic");
     if (!cfg) {
@@ -94,7 +100,7 @@ static int cmd_init(void) {
 
     const char *out_dir = config_get(cfg, "job", "output_dir");
     if (!out_dir) out_dir = PRESET_REALISTIC_JOB_OUTPUTDIR;
-    mkdir(out_dir, 0755);
+    MKDIR(out_dir);
 
     printf("created %s/\n", CONFIG_DIR);
     printf("wrote %s with realistic defaults:\n", CONFIG_PATH);
@@ -129,7 +135,7 @@ static int cmd_config_preset(const char *name) {
         return 1;
     }
 
-    mkdir(CONFIG_DIR, 0755);
+    MKDIR(CONFIG_DIR);
     if (config_save(cfg, CONFIG_PATH) != 0) {
         fprintf(stderr, "failed to write %s\n", CONFIG_PATH);
         config_destroy(cfg);
@@ -196,15 +202,14 @@ static int cmd_config_set(const char *dotted_key, const char *value) {
 }
 
 static int cmd_start(void) {
-    long existing_pid = read_pid_file();
-    if (existing_pid > 0 && process_is_alive(existing_pid)) {
-        fprintf(stderr, "a run is already in progress (pid %ld) -- use `rfsyn end` first\n", existing_pid);
+    if (run_is_active()) {
+        fprintf(stderr, "a run already appears to be in progress - use `rfsyn end`, or delete %s if you're sure nothing is running\n", LOCK_PATH);
         return 1;
     }
 
     config_t *cfg = config_load(CONFIG_PATH);
     if (!cfg) {
-        fprintf(stderr, "no config found at %s -- run `rfsyn init` first\n", CONFIG_PATH);
+        fprintf(stderr, "no config found at %s - run `rfsyn init` first\n", CONFIG_PATH);
         return 1;
     }
 
@@ -219,10 +224,11 @@ static int cmd_start(void) {
         return 1;
     }
 
-    mkdir(out_dir, 0755);
+    MKDIR(out_dir);
     signal(SIGINT, handle_stop_signal);
     signal(SIGTERM, handle_stop_signal);
-    write_pid_file();
+    create_lock();
+    remove_stop_file();
 
     printf("generating %ld example(s) into '%s/'\n", count, out_dir);
 
@@ -230,7 +236,12 @@ static int cmd_start(void) {
     int failures = 0;
     long completed = 0;
 
-    for (long i = 0; i < count && !g_stop_requested; i++) {
+    for (long i = 0; i < count; i++) {
+        if (g_stop_requested || stop_file_present()) {
+            g_stop_requested = 1;
+            break;
+        }
+
         transform_t stages[MAX_STAGES];
         size_t n_stages;
 
@@ -256,7 +267,7 @@ static int cmd_start(void) {
             char path[512];
             snprintf(path, sizeof(path), "%s/example_%06ld.iq", out_dir, i);
             if (write_signal(sig, path) != 0) {
-                fprintf(stderr, "couldn't write '%s'\n", path);
+                fprintf(stderr, "could not write '%s'\n", path);
                 failures++;
             }
         }
@@ -274,7 +285,8 @@ static int cmd_start(void) {
     }
     printf("\n");
 
-    remove_pid_file();
+    remove_lock();
+    remove_stop_file();
     config_destroy(cfg);
 
     if (g_stop_requested) {
@@ -290,17 +302,19 @@ static int cmd_start(void) {
 }
 
 static int cmd_end(void) {
-    long pid = read_pid_file();
-    if (pid <= 0) {
+    if (!run_is_active()) {
         fprintf(stderr, "no run in progress\n");
         return 1;
     }
-    if (kill((pid_t)pid, SIGTERM) != 0) {
-        fprintf(stderr, "no running process found for pid %ld, clearing stale pid file\n", pid);
-        remove_pid_file();
+
+    FILE *f = fopen(STOP_PATH, "w");
+    if (!f) {
+        fprintf(stderr, "couldn't write %s\n", STOP_PATH);
         return 1;
     }
-    printf("sent stop signal to pid %ld -- it will finish its current example and exit\n", pid);
+    fclose(f);
+
+    printf("stop requested - the running job will finish its current example and exit\n");
     return 0;
 }
 

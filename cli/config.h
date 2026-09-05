@@ -19,4 +19,6 @@ int config_get_bool(const config_t *cfg, const char *section, const char *key, i
 void config_set_string(config_t *cfg, const char *section, const char *key, const char *value);
 void config_set_double(config_t *cfg, const char *section, const char *key, double value);
 void config_set_long(config_t *cfg, const char *section, const char *key, long value);
-void conf
+void config_set_bool(config_t *cfg, const char *section, const char *key, int value);
+
+#endif
