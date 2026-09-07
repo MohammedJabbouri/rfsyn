@@ -1,0 +1,12 @@
+{
+	"job":	{
+		"count":	100,
+		"n_samples":	1024,
+		"output_dir":	"output"
+	},
+	"awgn":	{
+		"enabled":	true,
+		"snr_db":	6,
+		"seed":	42
+	}
+}

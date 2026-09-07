@@ -1,0 +1,8 @@
+#ifndef ENGINE_CORE_CONSTANTS_H
+#define ENGINE_CORE_CONSTANTS_H
+
+#define C0    299792458.0
+#define EPS0  8.8541878128e-12
+#define MU0   1.25663706212e-6
+
+#endif
