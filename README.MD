@@ -12,15 +12,9 @@ This will be added later on once it's more stable.
 
 Currently in development, so Pre-Alpha 0.0.0.
 
-- As of 08/27/2026, chains.h/c, signal.h/c are done.
+# Documentation
 
-# Roadmap
-
-* Core done by 9/7/2026
-* Antenna done by 9/10/2026
-* Waveforms done by 9/13/2026
-
-* Launch expected 9/27/2026
+All documents are found under /docs (not available here yet).
 
 # Contacts
 
