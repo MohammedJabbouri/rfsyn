@@ -4,9 +4,18 @@
 #include <math.h>
 
 fdtd_grid_t *fdtd_grid_create(size_t nx, size_t ny, size_t nz, double dx, double courant_safety_factor) {
+    if (dx <= 0.0 || courant_safety_factor <= 0.0) return NULL;
+    if (nx > SIZE_MAX - 1 || ny > SIZE_MAX - 1 || nz > SIZE_MAX - 1) return NULL;
+    
+    size_t nx1 = nx + 1;
+    size_t ny1 = ny + 1;
+    size_t nz1 = nz + 1;
+    
+    if (nx1 > SIZE_MAX / ny1 || (nx1 * ny1) > SIZE_MAX / nz1) return NULL;
+
     fdtd_grid_t *g = malloc(sizeof(fdtd_grid_t));
     if (!g) return NULL;
-
+    
     g->nx = nx;
     g->ny = ny;
     g->nz = nz;
@@ -14,9 +23,9 @@ fdtd_grid_t *fdtd_grid_create(size_t nx, size_t ny, size_t nz, double dx, double
 
     double dt_max = dx / (C0 * sqrt(3.0));
     g->dt = courant_safety_factor * dt_max;
-
-    size_t total = (nx + 1) * (ny + 1) * (nz + 1);
-
+    
+    size_t total = nx1 * ny1 * nz1;
+    
     g->ex = calloc(total, sizeof(double));
     g->ey = calloc(total, sizeof(double));
     g->ez = calloc(total, sizeof(double));
