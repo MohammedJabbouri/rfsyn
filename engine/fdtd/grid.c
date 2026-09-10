@@ -5,6 +5,9 @@
 
 fdtd_grid_t *fdtd_grid_create(size_t nx, size_t ny, size_t nz, double dx, double courant_safety_factor) {
     if (dx <= 0.0 || courant_safety_factor <= 0.0) return NULL;
+
+    // error here for now
+    
     if (nx > SIZE_MAX - 1 || ny > SIZE_MAX - 1 || nz > SIZE_MAX - 1) return NULL;
     
     size_t nx1 = nx + 1;
