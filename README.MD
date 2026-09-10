@@ -2,11 +2,9 @@
 
 Hello, and welcome to our project, rfsyn, it is an open source software to generate synthetic electromagnetic waves and interference, and then it is turned into an exportable file that can be applied in machine learning or industrial proccesses. And it shows how accurate synthetic signals can get, in hopes to open up this field of synthetic signal generation.
 
-This project is made mostly in C, and it is made to support a research project, which is titled "Applications of Synthetic RF Generation in Machine Learning". The software is mostly designed to be run on a server, it's recommended to run it for around 1 hour to get a wide range of results.
+This project is made mostly in C, and it is made to support a research project, which is titled "Applications of Synthetic RF Generation in Machine Learning". The software is mostly designed to be run on a server due to high RAM usage (scales N³), thus making it be ran on C for maximum speed.
 
-# Instructions
-
-This will be added later on once it's more stable.
+To maintain realism, rfsyn uses FDTD within 3D (Ex, Ey, Ez, Hx, Hy, Hz). Alongside autocorrelation, linear modulation, and TBD.
 
 # Change Log
 
