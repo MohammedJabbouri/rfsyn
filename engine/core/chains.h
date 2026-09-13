@@ -1,5 +1,5 @@
-#ifndef ENGINE_CORE_CHAIN_H
-#define ENGINE_CORE_CHAIN_H
+#ifndef ENGINE_CORE_CHAINS_H
+#define ENGINE_CORE_CHAINS_H
 
 #include <stddef.h>
 #include "signal.h"
