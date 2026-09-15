@@ -35,9 +35,9 @@ cpml_params_t cpml_default_params(size_t npml) {
 }
 
 static int build_axis_profiles(size_t n, size_t npml, double dx, double m, double ma,
-                                double kappa_max, double alpha_max, double sigma_max, double dt,
-                                double **kinv_m_out, double **b_m_out, double **a_m_out,
-                                double **kinv_h_out, double **b_h_out, double **a_h_out)
+    double kappa_max, double alpha_max, double sigma_max, double dt,
+    double **kinv_m_out, double **b_m_out, double **a_m_out,
+    double **kinv_h_out, double **b_h_out, double **a_h_out)
 {
     size_t nm = n + 1;
     size_t nh = n;
@@ -121,18 +121,9 @@ cpml_t *cpml_create(const fdtd_grid_t *g, cpml_params_t params) {
                         (2.0 * eta0 * (double)params.npml * g->dx);
 
     int ok = 1;
-    ok &= (build_axis_profiles(g->nx, params.npml, g->dx, params.m, params.ma,
-                                params.kappa_max, params.alpha_max, sigma_max, g->dt,
-                                &pml->kappa_inv_m_x, &pml->b_m_x, &pml->a_m_x,
-                                &pml->kappa_inv_h_x, &pml->b_h_x, &pml->a_h_x) == 0);
-    ok &= (build_axis_profiles(g->ny, params.npml, g->dx, params.m, params.ma,
-                                params.kappa_max, params.alpha_max, sigma_max, g->dt,
-                                &pml->kappa_inv_m_y, &pml->b_m_y, &pml->a_m_y,
-                                &pml->kappa_inv_h_y, &pml->b_h_y, &pml->a_h_y) == 0);
-    ok &= (build_axis_profiles(g->nz, params.npml, g->dx, params.m, params.ma,
-                                params.kappa_max, params.alpha_max, sigma_max, g->dt,
-                                &pml->kappa_inv_m_z, &pml->b_m_z, &pml->a_m_z,
-                                &pml->kappa_inv_h_z, &pml->b_h_z, &pml->a_h_z) == 0);
+    ok &= (build_axis_profiles(g->nx, params.npml, g->dx, params.m, params.ma, params.kappa_max, params.alpha_max, sigma_max, g->dt, &pml->kappa_inv_m_x, &pml->b_m_x, &pml->a_m_x, &pml->kappa_inv_h_x, &pml->b_h_x, &pml->a_h_x) == 0);
+    ok &= (build_axis_profiles(g->ny, params.npml, g->dx, params.m, params.ma, params.kappa_max, params.alpha_max, sigma_max, g->dt, &pml->kappa_inv_m_y, &pml->b_m_y, &pml->a_m_y, &pml->kappa_inv_h_y, &pml->b_h_y, &pml->a_h_y) == 0);
+    ok &= (build_axis_profiles(g->nz, params.npml, g->dx, params.m, params.ma, params.kappa_max, params.alpha_max, sigma_max, g->dt, &pml->kappa_inv_m_z, &pml->b_m_z, &pml->a_m_z, &pml->kappa_inv_h_z, &pml->b_h_z, &pml->a_h_z) == 0);
 
     if (!ok) { cpml_destroy(pml); return NULL; }
 
@@ -177,8 +168,7 @@ void cpml_destroy(cpml_t *pml) {
     free(pml);
 }
 
-static inline double cpml_term(double diff, double kappa_inv, double b, double a,
-                                double dx, double *psi)
+static inline double cpml_term(double diff, double kappa_inv, double b, double a, double dx, double *psi)
 {
     *psi = b * (*psi) + a * diff;
     return diff * kappa_inv + dx * (*psi);
