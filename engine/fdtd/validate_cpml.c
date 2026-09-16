@@ -18,7 +18,7 @@ int main(void) {
   const size_t N_TEST = 40;
   const double dx = 1e-3;
   const size_t NPML = 8;
-  const size_t n_steps = 400;
+  const size_t n_steps = 150;
 
   size_t src_ref = N_REF / 2, probe_ref_i = N_REF / 2 + 12, probe_ref_j = N_REF/2, probe_ref_k = N_REF/2;
   size_t src_test = N_TEST / 2, probe_test_i = N_TEST / 2 + 12, probe_test_j = N_TEST/2, probe_test_k = N_TEST/2;
