@@ -61,6 +61,8 @@ void fdtd_grid_destroy(fdtd_grid_t *g) {
 void fdtd_update_h(fdtd_grid_t *g) {
     double cb = g->dt / (MU0 * g->dx);
 
+    #pragma omp parallel for collapse(2) schedule(static)
+    
     for (size_t i = 0; i <= g->nx; i++) {
         for (size_t j = 0; j < g->ny; j++) {
             for (size_t k = 0; k < g->nz; k++) {
