@@ -168,12 +168,6 @@ void cpml_destroy(cpml_t *pml) {
     free(pml);
 }
 
-static inline double cpml_term(double diff, double kappa_inv, double b, double a, double dx, double *psi)
-{
-    *psi = b * (*psi) + a * diff;
-    return diff * kappa_inv + dx * (*psi);
-}
-
 #define EX(i,j,k) g->ex[fdtd_index(g,(i),(j),(k))]
 #define EY(i,j,k) g->ey[fdtd_index(g,(i),(j),(k))]
 #define EZ(i,j,k) g->ez[fdtd_index(g,(i),(j),(k))]
