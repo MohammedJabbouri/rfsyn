@@ -3,26 +3,6 @@
 #include <stdlib.h>
 #include <math.h>
 
-struct cpml {
-    size_t npml;
-    double dx;
-
-    double *kappa_inv_m_x, *b_m_x, *a_m_x;
-    double *kappa_inv_m_y, *b_m_y, *a_m_y;
-    double *kappa_inv_m_z, *b_m_z, *a_m_z;
-
-    double *kappa_inv_h_x, *b_h_x, *a_h_x;
-    double *kappa_inv_h_y, *b_h_y, *a_h_y;
-    double *kappa_inv_h_z, *b_h_z, *a_h_z;
-
-    double *psi_hx_y, *psi_hx_z;
-    double *psi_hy_z, *psi_hy_x;
-    double *psi_hz_x, *psi_hz_y;
-    double *psi_ex_y, *psi_ex_z;
-    double *psi_ey_z, *psi_ey_x;
-    double *psi_ez_x, *psi_ez_y;
-};
-
 cpml_params_t cpml_default_params(size_t npml) {
     cpml_params_t p;
     p.npml = npml;
