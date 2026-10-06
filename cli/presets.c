@@ -1,7 +1,9 @@
 #include "presets.h"
 #include <string.h>
 
-static config_t *preset_build_realistic(void) {
+config_t *preset_build(const char *name) {
+    if (!name || strcmp(name, "realistic") != 0) return NULL;
+
     config_t *cfg = config_create_empty();
     if (!cfg) return NULL;
 
@@ -13,10 +15,22 @@ static config_t *preset_build_realistic(void) {
     config_set_double(cfg, "awgn", "snr_db", PRESET_REALISTIC_AWGN_SNRDB);
     config_set_long(cfg, "awgn", "seed", PRESET_REALISTIC_AWGN_SEED);
 
-    return cfg;
-}
+    config_set_bool(cfg, "fdtd", "enabled", PRESET_FDTD_ENABLED);
+    config_set_long(cfg, "fdtd", "nx", PRESET_FDTD_NX);
+    config_set_long(cfg, "fdtd", "ny", PRESET_FDTD_NY);
+    config_set_long(cfg, "fdtd", "nz", PRESET_FDTD_NZ);
+    config_set_double(cfg, "fdtd", "dx", PRESET_FDTD_DX);
+    config_set_double(cfg, "fdtd", "courant", PRESET_FDTD_COURANT);
+    config_set_long(cfg, "fdtd", "n_steps", PRESET_FDTD_NSTEPS);
+    config_set_long(cfg, "fdtd", "npml", PRESET_FDTD_NPML);
+    config_set_long(cfg, "fdtd", "src_i", PRESET_FDTD_SRC_I);
+    config_set_long(cfg, "fdtd", "src_j", PRESET_FDTD_SRC_J);
+    config_set_long(cfg, "fdtd", "src_k", PRESET_FDTD_SRC_K);
+    config_set_long(cfg, "fdtd", "probe_i", PRESET_FDTD_PROBE_I);
+    config_set_long(cfg, "fdtd", "probe_j", PRESET_FDTD_PROBE_J);
+    config_set_long(cfg, "fdtd", "probe_k", PRESET_FDTD_PROBE_K);
+    config_set_double(cfg, "fdtd", "t0", PRESET_FDTD_T0);
+    config_set_double(cfg, "fdtd", "tau", PRESET_FDTD_TAU);
 
-config_t *preset_build(const char *name) {
-    if (strcmp(name, "realistic") == 0) return preset_build_realistic();
-    return NULL;
+    return cfg;
 }
