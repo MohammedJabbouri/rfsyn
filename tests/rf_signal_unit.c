@@ -10,7 +10,7 @@ static int check(int cond, const char *what) {
     return cond;
 }
 
-nt main(void) {
+int main(void) {
     int ok = 1;
 
     signal_t *sig = signal_create(100, 1e6, 915e6);

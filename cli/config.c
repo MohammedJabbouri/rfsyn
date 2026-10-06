@@ -2,6 +2,8 @@
 #include "cJSON.h"
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
+#include <limits.h>
 
 struct config {
     cJSON *root;
@@ -31,14 +33,13 @@ config_t *config_load(const char *path) {
     buf[read_len] = '\0';
 
     cJSON *root = cJSON_Parse(buf);
-
     if (!root) {
         const char *err = cJSON_GetErrorPtr();
         fprintf(stderr, "config: JSON parse error near byte %ld\n", err ? (long)(err - buf) : -1L);
         free(buf);
         return NULL;
     }
-free(buf);
+    free(buf);
 
     config_t *cfg = malloc(sizeof(config_t));
     if (!cfg) { cJSON_Delete(root); return NULL; }
@@ -51,7 +52,7 @@ int config_save(const config_t *cfg, const char *path) {
     char *text = cJSON_Print(cfg->root);
     if (!text) return -1;
 
-    size_t need = strlen(path) + 5; //.tmp + NUL fix
+    size_t need = strlen(path) + 5;  //.tmp + nul
     char *tmp = malloc(need);
     if (!tmp) { free(text); return -1; }
     snprintf(tmp, need, "%s.tmp", path);
@@ -65,7 +66,7 @@ int config_save(const config_t *cfg, const char *path) {
     free(text);
 
     int ok = (written == len && close_err == 0);
-    if (ok) ok = (rename(tmp, path) == 0); // atomic replace
+    if (ok) ok = (rename(tmp, path) == 0);
     if (!ok) remove(tmp);
     free(tmp);
     return ok ? 0 : -1;
@@ -131,6 +132,7 @@ static cJSON *get_or_create_section(cJSON *root, const char *section) {
 }
 
 static void set_item(cJSON *section, const char *key, cJSON *newitem) {
+    if (!section || !newitem) return;
     if (cJSON_HasObjectItem(section, key)) {
         cJSON_ReplaceItemInObjectCaseSensitive(section, key, newitem);
     } else {
@@ -139,7 +141,6 @@ static void set_item(cJSON *section, const char *key, cJSON *newitem) {
 }
 
 void config_set_string(config_t *cfg, const char *section, const char *key, const char *value) {
-    char *value) {
     if (!cfg || !value) return;
     cJSON *s = get_or_create_section(cfg->root, section);
     if (!s) return;
@@ -149,6 +150,7 @@ void config_set_string(config_t *cfg, const char *section, const char *key, cons
 void config_set_double(config_t *cfg, const char *section, const char *key, double value) {
     if (!cfg) return;
     cJSON *s = get_or_create_section(cfg->root, section);
+    if (!s) return;
     set_item(s, key, cJSON_CreateNumber(value));
 }
 
@@ -159,5 +161,6 @@ void config_set_long(config_t *cfg, const char *section, const char *key, long v
 void config_set_bool(config_t *cfg, const char *section, const char *key, int value) {
     if (!cfg) return;
     cJSON *s = get_or_create_section(cfg->root, section);
+    if (!s) return;
     set_item(s, key, cJSON_CreateBool(value));
 }
