@@ -139,8 +139,10 @@ static void set_item(cJSON *section, const char *key, cJSON *newitem) {
 }
 
 void config_set_string(config_t *cfg, const char *section, const char *key, const char *value) {
-    if (!cfg) return;
+    char *value) {
+    if (!cfg || !value) return;
     cJSON *s = get_or_create_section(cfg->root, section);
+    if (!s) return;
     set_item(s, key, cJSON_CreateString(value));
 }
 
