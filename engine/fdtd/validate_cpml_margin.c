@@ -92,16 +92,29 @@ int main(void) {
     }
     fclose(out);
 
+
+    // PASS OR FAIL, measured error at this resolution was ~2.2% when this validator was ran, 10% real margin for run-to-run/compiler noise
+    const double THRESHOLD_DB = -35.0;
+    int pass = 1;
+
     printf("wrote cpml_margin_validation.csv\n\n");
-    printf("reflection floor vs. distance from PML interface (steps %zu-%zu):\n", SUMMARY_START, n_steps);
+    printf("reflection floor vs. distance from PML interface (steps %zu-%zu), threshold %.1f dB:\n",
+           SUMMARY_START, n_steps, THRESHOLD_DB);
     printf("%-14s %-12s %-12s\n", "dist_to_pml", "mean_db", "worst_db");
     for (int p = 0; p < N_PROBES; p++) {
         double mean_db = sum_db[p] / (double)count_db[p];
         printf("%-14zu %-12.2f %-12.2f\n", dist_to_pml[p], mean_db, max_db[p]);
+        if (max_db[p] > THRESHOLD_DB) pass = 0;
     }
 
     cpml_destroy(pml);
     fdtd_grid_destroy(g_test);
     fdtd_grid_destroy(g_ref);
+
+    if (!pass) {
+        fprintf(stderr, "\nFAIL: at least one probe's worst_db exceeded %.1f dB\n", THRESHOLD_DB);
+        return 1;
+    }
+    printf("\nPASS\n");
     return 0;
 }

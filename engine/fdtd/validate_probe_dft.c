@@ -37,12 +37,8 @@ int main(void) {
     double tau = 8.0 * g_ref->dt;
     source_gaussian_deriv_params_t src_params = { t0, tau };
 
-    source_t src_ref  = source_make_point(center_ref, center_ref, center_ref,
-                                           FIELD_EZ, SRC_SOFT, 1.0,
-                                           source_waveform_gaussian_derivative, &src_params);
-    source_t src_test = source_make_point(center_test, center_test, center_test,
-                                           FIELD_EZ, SRC_SOFT, 1.0,
-                                           source_waveform_gaussian_derivative, &src_params);
+    source_t src_ref  = source_make_point(center_ref, center_ref, center_ref, FIELD_EZ, SRC_SOFT, 1.0, source_waveform_gaussian_derivative, &src_params);
+    source_t src_test = source_make_point(center_test, center_test, center_test, FIELD_EZ, SRC_SOFT, 1.0, source_waveform_gaussian_derivative, &src_params);
 
     double freq_hz = 1.5e10;
 
@@ -78,15 +74,18 @@ int main(void) {
 
         fdtd_update_e(g_ref);
         fdtd_update_e_cpml(g_test, pml);
-
+        double t_post = (double)(n + 1) * g_ref->dt;
         for (size_t p = 0; p < N_PROBES; p++) {
-            probe_dft_record(&probes_ref[p], g_ref, t, g_ref->dt);
-            probe_dft_record(&probes_test[p], g_test, t, g_test->dt);
+            probe_dft_record(&probes_ref[p], g_ref, t_post, g_ref->dt);
+            probe_dft_record(&probes_test[p], g_test, t_post, g_test->dt);
         }
     }
 
+    const double THRESHOLD_DB = -30.0;
+    int pass = 1;
+
     printf("cross-check: source.c/probe.c vs. previously-validated margin result\n");
-    printf("frequency = %.3e Hz\n\n", freq_hz);
+    printf("frequency = %.3e Hz, threshold = %.1f dB\n\n", freq_hz, THRESHOLD_DB);
     printf("%-14s %-14s %-14s %-12s\n", "dist_to_pml", "mag_ref", "diff_mag", "error_db");
 
     for (size_t p = 0; p < N_PROBES; p++) {
@@ -103,6 +102,8 @@ int main(void) {
 
         printf("%-14zu %-14.6e %-14.6e %-12.3f\n",
                dist_to_pml[p], mag_ref, diff_mag, error_db);
+
+        if (error_db > THRESHOLD_DB) pass = 0;
     }
 
     for (size_t p = 0; p < N_PROBES; p++) {
@@ -113,5 +114,10 @@ int main(void) {
     fdtd_grid_destroy(g_test);
     fdtd_grid_destroy(g_ref);
 
+    if (!pass) {
+        fprintf(stderr, "\nFAIL: at least one probe exceeded %.1f dB\n", THRESHOLD_DB);
+        return 1;
+    }
+    printf("\nPASS: all probes below %.1f dB\n", THRESHOLD_DB);
     return 0;
 }

@@ -1,7 +1,7 @@
 #ifndef ENGINE_CORE_TRANSFORM_H
 #define ENGINE_CORE_TRANSFORM_H
 
-#include "signal.h"
+#include "rf_signal.h"
 
 typedef struct {
     int (*apply)(void *ctx, signal_t *sig);

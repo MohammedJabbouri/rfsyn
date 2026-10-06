@@ -1,5 +1,6 @@
 #include "grid.h"
 #include "../core/constants.h"
+#include <stdint.h>
 #include <stdlib.h>
 #include <math.h>
 
