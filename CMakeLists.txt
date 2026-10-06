@@ -66,6 +66,7 @@ add_executable(rf_signal_unit tests/rf_signal_unit.c)
 target_link_libraries(rf_signal_unit PRIVATE rfsyn_core m)
 
 add_executable(simulate_unit tests/simulate_unit.c)
+target_link_libraries(simulate_unit PRIVATE rfsyn_fdtd m)
 
 # FDTD validators 
 set(RFSYN_FDTD_VALIDATORS
