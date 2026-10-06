@@ -31,12 +31,14 @@ config_t *config_load(const char *path) {
     buf[read_len] = '\0';
 
     cJSON *root = cJSON_Parse(buf);
-    free(buf);
+
     if (!root) {
         const char *err = cJSON_GetErrorPtr();
-        fprintf(stderr, "config: JSON parse error near: %s\n", err ? err : "(unknown)");
+        fprintf(stderr, "config: JSON parse error near byte %ld\n", err ? (long)(err - buf) : -1L);
+        free(buf);
         return NULL;
     }
+free(buf);
 
     config_t *cfg = malloc(sizeof(config_t));
     if (!cfg) { cJSON_Delete(root); return NULL; }
@@ -45,17 +47,28 @@ config_t *config_load(const char *path) {
 }
 
 int config_save(const config_t *cfg, const char *path) {
-    if (!cfg) return -1;
+    if (!cfg || !path) return -1;
     char *text = cJSON_Print(cfg->root);
     if (!text) return -1;
 
-    FILE *f = fopen(path, "w");
-    if (!f) { free(text); return -1; }
+    size_t need = strlen(path) + 5; //.tmp + NUL fix
+    char *tmp = malloc(need);
+    if (!tmp) { free(text); return -1; }
+    snprintf(tmp, need, "%s.tmp", path);
+
+    FILE *f = fopen(tmp, "w");
+    if (!f) { free(tmp); free(text); return -1; }
+
     size_t len = strlen(text);
     size_t written = fwrite(text, 1, len, f);
-    fclose(f);
+    int close_err = fclose(f);
     free(text);
-    return (written == len) ? 0 : -1;
+
+    int ok = (written == len && close_err == 0);
+    if (ok) ok = (rename(tmp, path) == 0); // atomic replace
+    if (!ok) remove(tmp);
+    free(tmp);
+    return ok ? 0 : -1;
 }
 
 void config_print(const config_t *cfg, FILE *out) {
@@ -91,7 +104,15 @@ double config_get_double(const config_t *cfg, const char *section, const char *k
 }
 
 long config_get_long(const config_t *cfg, const char *section, const char *key, long default_value) {
-    return (long)config_get_double(cfg, section, key, (double)default_value);
+    if (!cfg) return default_value;
+    cJSON *s = cJSON_GetObjectItemCaseSensitive(cfg->root, section);
+    if (!s) return default_value;
+    cJSON *item = cJSON_GetObjectItemCaseSensitive(s, key);
+    if (!cJSON_IsNumber(item)) return default_value;
+    double d = item->valuedouble;
+    if (!isfinite(d) || d != floor(d) || d < (double)LONG_MIN || d > (double)LONG_MAX)
+        return default_value;
+    return (long)d;
 }
 
 int config_get_bool(const config_t *cfg, const char *section, const char *key, int default_value) {
