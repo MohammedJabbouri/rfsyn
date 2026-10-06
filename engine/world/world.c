@@ -141,4 +141,3 @@ size_t world_mixed_cell_count(const world_t *world) {
 double world_solid_volume_m3(const world_t *world) {
     return world ? world->solid_volume : 0.0;
 }
-}
