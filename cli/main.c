@@ -464,3 +464,33 @@ int main(int argc, char **argv) {
         print_usage(argv[0]);
         return 0;
     }
+
+    if (!strcmp(command, "config")) {
+        if (argc < 3) {
+            print_usage(argv[0]);
+            return 1;
+        }
+
+        const char *sub = argv[2];
+
+        if (!strcmp(sub, "view") && argc == 3) {
+            return cmd_config_view();
+        }
+
+        if (!strcmp(sub, "preset") && argc == 4) {
+            return cmd_config_preset(argv[3]);
+        }
+
+        if (!strcmp(sub, "set") && argc == 5) {
+            return cmd_config_set(argv[3], argv[4]);
+        }
+
+        fprintf(stderr, "invalid config command or argument count\n");
+        print_usage(argv[0]);
+        return 1;
+    }
+
+    fprintf(stderr, "unknown command '%s'\n", command);
+    print_usage(argv[0]);
+    return 1;
+}
