@@ -32,28 +32,46 @@ static void build_fdtd_config(const config_t *cfg, fdtd_sim_config_t *s) {
     s->probe_k = (pk < 0) ? s->nz / 2 : (size_t)pk;
 }
 
-int settings_build_chain(const config_t *cfg, uint64_t example_index, transform_t *stages_out, size_t max_stages, size_t *n_stages_out) {
+int settings_build_chain(
+    const config_t *cfg,
+    uint64_t example_index,
+    transform_t *stages_out,
+    size_t max_stages,
+    size_t *n_stages_out
+) {
     size_t n = 0;
-    if (n_stages_out) *n_stages_out = 0;
+
+    if (!n_stages_out) return -1;
+    *n_stages_out = 0;
+
+    if (!cfg || !stages_out) return -1;
 
     if (config_get_bool(cfg, "fdtd", "enabled", PRESET_FDTD_ENABLED)) {
         if (n >= max_stages) return -1;
-        fdtd_sim_config_t sim;
+
+        fdtd_sim_config_t sim = {0};
         build_fdtd_config(cfg, &sim);
+
         transform_t stage = fdtd_stage_create(&sim);
         if (!stage.apply) return -1;
+
         stages_out[n++] = stage;
-        if (n_stages_out) *n_stages_out = n;
+        *n_stages_out = n;
     }
 
     if (config_get_bool(cfg, "awgn", "enabled", PRESET_REALISTIC_AWGN_ENABLED)) {
-        if (n >= max_stages) { chain_free_stages(stages_out, n); return -1; }
+        if (n >= max_stages) return -1;
+
         double snr_db = config_get_double(cfg, "awgn", "snr_db", PRESET_REALISTIC_AWGN_SNRDB);
+
         long seed = config_get_long(cfg, "awgn", "seed", PRESET_REALISTIC_AWGN_SEED);
+
         transform_t stage = awgn_create((float)snr_db, (uint64_t)seed, example_index);
-        if (!stage.apply) { chain_free_stages(stages_out, n); return -1; }
+
+        if (!stage.apply) return -1;
+
         stages_out[n++] = stage;
-        if (n_stages_out) *n_stages_out = n;
+        *n_stages_out = n;
     }
 
     return 0;

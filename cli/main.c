@@ -9,6 +9,7 @@
 #include <signal.h>
 #include <sys/stat.h>
 #include <errno.h>
+#include <math.h>
 
 #include "config.h"
 #include "presets.h"
@@ -18,6 +19,7 @@
 
 #if defined(_WIN32) && !defined(__CYGWIN__)
 #include <direct.h>
+#include <windows.h>
 #define MKDIR(path) _mkdir(path)
 #else
 #define MKDIR(path) mkdir(path, 0755)
@@ -40,9 +42,7 @@ static int ensure_directory(const char *path) {
     struct stat st;
 
     if (!path || !*path) return -1;
-
     if (MKDIR(path) == 0) return 0;
-
     if (errno != EEXIST || stat(path, &st) != 0) return -1;
 
 #if defined(_WIN32) && !defined(__CYGWIN__)
@@ -52,6 +52,7 @@ static int ensure_directory(const char *path) {
 #endif
 }
 
+/* Debug fallback used only when fdtd.enabled is false. */
 static signal_t *make_constant_signal(size_t n_samples) {
     signal_t *sig = signal_create(n_samples, 1e6, 915e6);
     if (!sig) return NULL;
@@ -71,18 +72,13 @@ static int write_signal(const signal_t *sig, const char *path) {
     if (!f) return -1;
 
     size_t written = 0;
+
     if (sig->n_samples > 0) {
-        written = fwrite(
-            sig->samples,
-            sizeof(*sig->samples),
-            sig->n_samples,
-            f
-        );
+        written = fwrite(sig->samples, sizeof(*sig->samples), sig->n_samples, f);
     }
 
     int close_result = fclose(f);
-    return (written == sig->n_samples && close_result == 0)
-        ? 0 : -1;
+    return (written == sig->n_samples && close_result == 0) ? 0 : -1;
 }
 
 static int run_is_active(void) {
@@ -91,15 +87,41 @@ static int run_is_active(void) {
 }
 
 static int create_lock(void) {
+#if defined(_WIN32) && !defined(__CYGWIN__)
+    HANDLE h = CreateFileA(LOCK_PATH, GENERIC_WRITE, 0, NULL, CREATE_NEW, FILE_ATTRIBUTE_NORMAL, NULL);
+
+    if (h == INVALID_HANDLE_VALUE) {
+        DWORD error = GetLastError();
+        fprintf(stderr, "could not create lock '%s': Windows error %lu\n", LOCK_PATH, (unsigned long)error);
+        return -1;
+    }
+
+    if (!CloseHandle(h)) {
+        DWORD error = GetLastError();
+        fprintf(stderr, "could not close lock handle: Windows error %lu\n", (unsigned long)error);
+        DeleteFileA(LOCK_PATH);
+        return -1;
+    }
+
+    return 0;
+#else
     FILE *f = fopen(LOCK_PATH, "wx");
-    if (!f) return -1;
+
+    if (!f) {
+        int error = errno;
+        fprintf(stderr, "could not create lock '%s': %s (errno=%d)\n", LOCK_PATH, strerror(error), error);
+        return -1;
+    }
 
     if (fclose(f) != 0) {
+        int error = errno;
+        fprintf(stderr, "could not close lock: %s\n", strerror(error));
         remove(LOCK_PATH);
         return -1;
     }
 
     return 0;
+#endif
 }
 
 static void remove_lock(void) {
@@ -119,12 +141,7 @@ static int cmd_init(void) {
     struct stat st;
 
     if (stat(CONFIG_PATH, &st) == 0) {
-        fprintf(
-            stderr,
-            "%s already exists -- use "
-            "`rfsyn config preset realistic` to reset values\n",
-            CONFIG_PATH
-        );
+        fprintf(stderr, "%s already exists - use `rfsyn config preset realistic` to reset values\n", CONFIG_PATH);
         return 1;
     }
 
@@ -134,6 +151,7 @@ static int cmd_init(void) {
     }
 
     config_t *cfg = preset_build("realistic");
+
     if (!cfg) {
         fprintf(stderr, "failed to build default config\n");
         return 1;
@@ -166,12 +184,9 @@ static int cmd_init(void) {
 
 static int cmd_config_view(void) {
     config_t *cfg = config_load(CONFIG_PATH);
+
     if (!cfg) {
-        fprintf(
-            stderr,
-            "could not load %s - check the file or run `rfsyn init`\n",
-            CONFIG_PATH
-        );
+        fprintf(stderr, "could not load %s -- check the file or run `rfsyn init`\n", CONFIG_PATH);
         return 1;
     }
 
@@ -182,13 +197,13 @@ static int cmd_config_view(void) {
 
 static int cmd_config_preset(const char *name) {
     config_t *cfg = preset_build(name);
+
     if (!cfg) {
-        fprintf(stderr, "unknown preset '%s' - available: realistic\n", name);
+        fprintf(stderr, "unknown preset '%s' -- available: realistic\n", name);
         return 1;
     }
 
-    if (ensure_directory(CONFIG_DIR) != 0 ||
-        config_save(cfg, CONFIG_PATH) != 0) {
+    if (ensure_directory(CONFIG_DIR) != 0 || config_save(cfg, CONFIG_PATH) != 0) {
         fprintf(stderr, "failed to write %s\n", CONFIG_PATH);
         config_destroy(cfg);
         return 1;
@@ -218,6 +233,7 @@ static int cmd_config_set(const char *dotted_key, const char *value) {
     char key[128];
 
     const char *dot = strchr(dotted_key, '.');
+
     if (!dot) {
         fprintf(stderr, "key must use section.key form\n");
         return 1;
@@ -226,8 +242,7 @@ static int cmd_config_set(const char *dotted_key, const char *value) {
     size_t section_len = (size_t)(dot - dotted_key);
     size_t key_len = strlen(dot + 1);
 
-    if (section_len == 0 || section_len >= sizeof(section) ||
-        key_len == 0 || key_len >= sizeof(key)) {
+    if (section_len == 0 || section_len >= sizeof(section) || key_len == 0 || key_len >= sizeof(key)) {
         fprintf(stderr, "section/key is empty or too long\n");
         return 1;
     }
@@ -237,6 +252,7 @@ static int cmd_config_set(const char *dotted_key, const char *value) {
     memcpy(key, dot + 1, key_len + 1);
 
     config_t *cfg = config_load(CONFIG_PATH);
+
     if (!cfg) {
         fprintf(stderr, "could not load %s\n", CONFIG_PATH);
         return 1;
@@ -247,14 +263,12 @@ static int cmd_config_set(const char *dotted_key, const char *value) {
 
     errno = 0;
     double double_value = strtod(value, &endptr);
+    int parse_error = errno;
 
     if (try_parse_bool(value, &bool_value)) {
         config_set_bool(cfg, section, key, bool_value);
     } else if (endptr != value && *endptr == '\0') {
-        if (errno == ERANGE ||
-            double_value != double_value ||
-            double_value > 1.7976931348623157e308 ||
-            double_value < -1.7976931348623157e308) {
+        if (parse_error == ERANGE || !isfinite(double_value)) {
             fprintf(stderr, "numeric value must be finite and in range\n");
             config_destroy(cfg);
             return 1;
@@ -279,22 +293,15 @@ static int cmd_config_set(const char *dotted_key, const char *value) {
 
 static int cmd_start(void) {
     config_t *cfg = config_load(CONFIG_PATH);
+
     if (!cfg) {
         fprintf(stderr, "could not load %s -- run `rfsyn init`\n", CONFIG_PATH);
         return 1;
     }
 
-    long count = config_get_long(
-        cfg, "job", "count", PRESET_REALISTIC_JOB_COUNT
-    );
-
-    long n_samples = config_get_long(
-        cfg, "job", "n_samples", PRESET_REALISTIC_JOB_NSAMPLES
-    );
-
-    int fdtd_enabled = config_get_bool(
-        cfg, "fdtd", "enabled", PRESET_FDTD_ENABLED
-    );
+    long count = config_get_long(cfg, "job", "count", PRESET_REALISTIC_JOB_COUNT);
+    long n_samples = config_get_long(cfg, "job", "n_samples", PRESET_REALISTIC_JOB_NSAMPLES);
+    int fdtd_enabled = config_get_bool(cfg, "fdtd", "enabled", PRESET_FDTD_ENABLED);
 
     const char *out_dir = config_get(cfg, "job", "output_dir");
     if (!out_dir) out_dir = PRESET_REALISTIC_JOB_OUTPUTDIR;
@@ -305,28 +312,20 @@ static int cmd_start(void) {
         return 1;
     }
 
-    if (!fdtd_enabled &&
-        (n_samples <= 0 ||
-         (uintmax_t)n_samples > SIZE_MAX / sizeof(float complex))) {
+    if (!fdtd_enabled && (n_samples <= 0 || (uintmax_t)n_samples > SIZE_MAX / sizeof(float complex))) {
         fprintf(stderr, "job.n_samples must be positive and allocatable\n");
         config_destroy(cfg);
         return 1;
     }
 
-    if (ensure_directory(CONFIG_DIR) != 0 ||
-        ensure_directory(out_dir) != 0) {
+    if (ensure_directory(CONFIG_DIR) != 0 || ensure_directory(out_dir) != 0) {
         fprintf(stderr, "could not create config/output directories\n");
         config_destroy(cfg);
         return 1;
     }
 
     if (create_lock() != 0) {
-        fprintf(
-            stderr,
-            "could not acquire %s - a job may already be running; "
-            "if no job is running, check for a stale lock\n",
-            LOCK_PATH
-        );
+        fprintf(stderr, "could not acquire %s -- check for a running job or a stale lock\n", LOCK_PATH);
         config_destroy(cfg);
         return 1;
     }
@@ -337,12 +336,7 @@ static int cmd_start(void) {
     signal(SIGINT, handle_stop_signal);
     signal(SIGTERM, handle_stop_signal);
 
-    printf(
-        "generating %ld example(s) into '%s/' (%s)\n",
-        count,
-        out_dir,
-        fdtd_enabled ? "FDTD simulation" : "constant-signal debug mode"
-    );
+    printf("generating %ld example(s) into '%s/' (%s)\n", count, out_dir, fdtd_enabled ? "FDTD simulation" : "constant-signal debug mode");
 
     time_t last_report = time(NULL);
     long failures = 0;
@@ -360,18 +354,14 @@ static int cmd_start(void) {
         transform_t stages[MAX_STAGES] = {0};
         size_t n_stages = 0;
 
-        if (settings_build_chain(
-                cfg, (uint64_t)i, stages, MAX_STAGES, &n_stages
-            ) != 0) {
+        if (settings_build_chain(cfg, (uint64_t)i, stages, MAX_STAGES, &n_stages) != 0) {
             fprintf(stderr, "could not build transform chain for example %ld\n", i);
             chain_free_stages(stages, n_stages);
             failures++;
             continue;
         }
 
-        signal_t *sig = fdtd_enabled
-            ? signal_create(0, 0.0, 0.0)
-            : make_constant_signal((size_t)n_samples);
+        signal_t *sig = fdtd_enabled ? signal_create(0, 0.0, 0.0) : make_constant_signal((size_t)n_samples);
 
         if (!sig) {
             fprintf(stderr, "could not allocate signal for example %ld\n", i);
@@ -385,9 +375,7 @@ static int cmd_start(void) {
             failures++;
         } else {
             char path[1024];
-            int path_len = snprintf(
-                path, sizeof(path), "%s/example_%06ld.iq", out_dir, i
-            );
+            int path_len = snprintf(path, sizeof(path), "%s/example_%06ld.iq", out_dir, i);
 
             if (path_len < 0 || (size_t)path_len >= sizeof(path)) {
                 fprintf(stderr, "output path too long for example %ld\n", i);
@@ -404,11 +392,9 @@ static int cmd_start(void) {
         chain_free_stages(stages, n_stages);
 
         time_t now = time(NULL);
+
         if (difftime(now, last_report) >= 1.0 || i == count - 1) {
-            printf(
-                "\r  %ld / %ld attempted; %ld written",
-                attempted, count, written_ok
-            );
+            printf("\r  %ld / %ld attempted; %ld written", attempted, count, written_ok);
             fflush(stdout);
             last_report = now;
         }
@@ -418,13 +404,7 @@ static int cmd_start(void) {
     remove_lock();
     remove_stop_file();
 
-    printf(
-        "%s: %ld / %ld example(s) written to '%s/'\n",
-        g_stop_requested ? "stopped early" : "done",
-        written_ok,
-        count,
-        out_dir
-    );
+    printf("%s: %ld / %ld example(s) written to '%s/'\n", g_stop_requested ? "stopped early" : "done", written_ok, count, out_dir);
 
     if (failures > 0) {
         fprintf(stderr, "%ld example(s) failed\n", failures);
@@ -441,6 +421,7 @@ static int cmd_end(void) {
     }
 
     FILE *f = fopen(STOP_PATH, "w");
+
     if (!f) {
         fprintf(stderr, "could not write %s\n", STOP_PATH);
         return 1;
@@ -456,19 +437,15 @@ static int cmd_end(void) {
 }
 
 static void print_usage(const char *prog) {
-    fprintf(
-        stderr,
-        "usage: %s <command> [args]\n\n"
-        "commands:\n"
-        "  init                         create default config\n"
-        "  config set <key> <value>     set section.key\n"
-        "  config preset <name>         apply a preset\n"
-        "  config view                  show config\n"
-        "  start                        generate signals\n"
-        "  end                          request job stop\n"
-        "  help                         show usage\n",
-        prog
-    );
+    fprintf(stderr, "usage: %s <command> [args]\n\n", prog);
+    fprintf(stderr, "commands:\n");
+    fprintf(stderr, "  init                         create default config\n");
+    fprintf(stderr, "  config set <key> <value>     set section.key\n");
+    fprintf(stderr, "  config preset <name>         apply a preset\n");
+    fprintf(stderr, "  config view                  show config\n");
+    fprintf(stderr, "  start                        generate signals\n");
+    fprintf(stderr, "  end                          request job stop\n");
+    fprintf(stderr, "  help                         show usage\n");
 }
 
 int main(int argc, char **argv) {
@@ -487,33 +464,3 @@ int main(int argc, char **argv) {
         print_usage(argv[0]);
         return 0;
     }
-
-    if (!strcmp(command, "config")) {
-        if (argc < 3) {
-            print_usage(argv[0]);
-            return 1;
-        }
-
-        const char *sub = argv[2];
-
-        if (!strcmp(sub, "view") && argc == 3) {
-            return cmd_config_view();
-        }
-
-        if (!strcmp(sub, "preset") && argc == 4) {
-            return cmd_config_preset(argv[3]);
-        }
-
-        if (!strcmp(sub, "set") && argc == 5) {
-            return cmd_config_set(argv[3], argv[4]);
-        }
-
-        fprintf(stderr, "invalid config command or argument count\n");
-        print_usage(argv[0]);
-        return 1;
-    }
-
-    fprintf(stderr, "unknown command '%s'\n", command);
-    print_usage(argv[0]);
-    return 1;
-}
