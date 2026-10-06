@@ -10,7 +10,10 @@ int settings_build_chain(const config_t *cfg, uint64_t example_index, transform_
         if (n >= max_stages) return -1;
         double snr_db = config_get_double(cfg, "awgn", "snr_db", PRESET_REALISTIC_AWGN_SNRDB);
         long seed = config_get_long(cfg, "awgn", "seed", PRESET_REALISTIC_AWGN_SEED);
-        stages_out[n++] = awgn_create((float)snr_db, (uint64_t)seed, example_index);
+        transform_t stage = awgn_create((float)snr_db, (uint64_t)seed, example_index);
+
+        if (!stage.apply) return -1;
+        stages_out[n++] = stage;
         if (n_stages_out) *n_stages_out = n;
     }
 

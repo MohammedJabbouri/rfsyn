@@ -12,7 +12,7 @@
 #include "config.h"
 #include "presets.h"
 #include "settings.h"
-#include "../engine/core/signal.h"
+#include "../engine/core/rf_signal.h"
 #include "../engine/core/chain.h"
 
 #if defined(_WIN32) && !defined(__CYGWIN__)
@@ -287,17 +287,19 @@ static int cmd_start(void) {
 
     remove_lock();
     remove_stop_file();
-    config_destroy(cfg);
 
     if (g_stop_requested) {
         printf("stopped early: %ld / %ld example(s) written to '%s/'\n", completed, count, out_dir);
+        config_destroy(cfg);
         return 0;
     }
     if (failures > 0) {
         fprintf(stderr, "done with %d failure(s)\n", failures);
+        config_destroy(cfg);
         return 1;
     }
     printf("done: %ld example(s) written to '%s/'\n", count, out_dir);
+    config_destroy(cfg);
     return 0;
 }
 

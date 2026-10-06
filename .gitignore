@@ -1,1 +1,15 @@
-.vs/ 
+.vs/
+
+build/
+*.o
+*.obj
+*.exe
+*.out
+*.a
+*.lib
+*.dll
+*.so
+
+/output/*.iq
+*.csv
+!/data/emptyset.csv

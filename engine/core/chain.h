@@ -2,7 +2,7 @@
 #define ENGINE_CORE_CHAIN_H
 
 #include <stddef.h>
-#include "signal.h"
+#include "rf_signal.h"
 #include "transform.h"
 
 int chain_apply(const transform_t *stages, size_t n_stages, signal_t *sig);
