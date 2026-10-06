@@ -66,7 +66,16 @@ int config_save(const config_t *cfg, const char *path) {
     free(text);
 
     int ok = (written == len && close_err == 0);
-    if (ok) ok = (rename(tmp, path) == 0);
+    if (ok) {
+        ok = (rename(tmp, path) == 0);
+
+        if (!ok) {
+            #ifdef _WIN32
+            remove(path);
+            ok = (rename(tmp, path) == 0);
+        #endif
+    }
+}
     if (!ok) remove(tmp);
     free(tmp);
     return ok ? 0 : -1;
