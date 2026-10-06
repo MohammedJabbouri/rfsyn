@@ -1,4 +1,4 @@
-#include "signal.h"
+#include "rf_signal.h"
 #include <stdlib.h>
 #include <string.h>
 #include <complex.h>
@@ -16,6 +16,8 @@ signal_t *signal_create(size_t n_samples, double sample_rate_hz, double center_f
 	sig->sample_rate_hz = sample_rate_hz;
 	sig->center_freq_hz = center_freq_hz;
 	sig->metadata = NULL;
+	sig->meta_copy = NULL;
+	sig->meta_free = NULL;
 
 	return sig;
 }
@@ -34,15 +36,14 @@ int signal_resize(signal_t *sig, size_t new_n_samples) {
 		return -1;
 	}
 
-	if (new_n_samples > sig->n_samples) {
-		size_t old_bytes = sig->n_samples * sizeof(float complex);
+	size_t old_n_samples = sig->n_samples;
+	sig->samples   = grown;
+	sig->n_samples = new_n_samples;
+
+	if (new_n_samples > old_n_samples) {
+		size_t old_bytes = old_n_samples * sizeof(float complex);
 		size_t new_bytes = new_n_samples * sizeof(float complex);
 		memset((char *)grown + old_bytes, 0, new_bytes - old_bytes);
-
-		sig->samples   = grown;
-		sig->n_samples = new_n_samples;
-
-		return 0;
 	}
 
 	return 0;

@@ -1,4 +1,5 @@
 #include "chains.h"
+#include "chain.h"
 #include <stdlib.h>
 #include <string.h>
 

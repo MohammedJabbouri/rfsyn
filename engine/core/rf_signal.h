@@ -1,5 +1,5 @@
-#ifndef ENGINE_CORE_SIGNAL_H
-#define ENGINE_CORE_SIGNAL_H
+#ifndef ENGINE_CORE_RF_SIGNAL_H
+#define ENGINE_CORE_RF_SIGNAL_H
 
 #include <complex.h>
 #include <stddef.h>
