@@ -1,4 +1,4 @@
-// PYTHON
+# PYTHON
 
 from pathlib import Path
 import math
