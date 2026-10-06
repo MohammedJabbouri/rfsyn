@@ -30,6 +30,7 @@ add_library(rfsyn_fdtd STATIC
   engine/fdtd/materials.c
   engine/fdtd/source.c
   engine/fdtd/probe.c
+  engine/fdtd/simulate.c
 )
 target_link_libraries(rfsyn_fdtd PUBLIC m)
 if(OpenMP_C_FOUND)
@@ -55,13 +56,16 @@ add_executable(rfsyn
   cli/config.c
   cli/presets.c
   cli/settings.c
+  cli/fdtd_stage.c
 )
-target_link_libraries(rfsyn PRIVATE rfsyn_core rfsyn_noise m)
+target_link_libraries(rfsyn PRIVATE rfsyn_core rfsyn_noise rfsyn_fdtd m)
 
 add_executable(cli_smoke tests/cli_smoke.c)
 
 add_executable(rf_signal_unit tests/rf_signal_unit.c)
 target_link_libraries(rf_signal_unit PRIVATE rfsyn_core m)
+
+add_executable(simulate_unit tests/simulate_unit.c)
 
 # FDTD validators 
 set(RFSYN_FDTD_VALIDATORS
@@ -79,6 +83,8 @@ endforeach()
 
 enable_testing()
 
+add_test(NAME simulate_unit COMMAND simulate_unit)
+
 foreach(test_name IN ITEMS validate_cpml_margin validate_materials_fresnel validate_probe_dft validate_materials_energy)
   add_test(NAME ${test_name} COMMAND ${test_name})
 endforeach()
@@ -91,7 +97,7 @@ add_test(NAME rf_signal_unit COMMAND rf_signal_unit)
 
 if(RFSYN_SANITIZE)
   if(CMAKE_C_COMPILER_ID MATCHES "GNU|Clang")
-    set(RFSYN_ALL_TARGETS rfsyn_fdtd rfsyn_core rfsyn_noise rfsyn cli_smoke rf_signal_unit ${RFSYN_FDTD_VALIDATORS})
+    set(RFSYN_ALL_TARGETS rfsyn_fdtd rfsyn_core rfsyn_noise rfsyn cli_smoke rf_signal_unit simulate_unit ${RFSYN_FDTD_VALIDATORS})
     foreach(tgt IN LISTS RFSYN_ALL_TARGETS)
       target_compile_options(${tgt} PRIVATE -fsanitize=address,undefined -fno-omit-frame-pointer -g)
       target_link_options(${tgt} PRIVATE -fsanitize=address,undefined)
