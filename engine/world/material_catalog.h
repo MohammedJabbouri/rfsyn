@@ -32,6 +32,23 @@ typedef struct {
     double frequency_hz, eps_r, sigma_s_per_m;
 } catalog_properties_t;
 
+typedef struct {
+    uint8_t r;
+    uint8_t g;
+    uint8_t b;
+} color_rgb_t;
+
+int material_catalog_map_color(
+    material_catalog_t *catalog,
+    color_rgb_t color,
+    const char *material_name);
+
+int material_catalog_lookup_color(
+    const material_catalog_t *catalog,
+    color_rgb_t color,
+    char *name_out,
+    size_t name_capacity);
+
 material_catalog_t *material_catalog_create_default(void);
 void material_catalog_destroy(material_catalog_t *catalog);
 size_t material_catalog_count(const material_catalog_t *catalog);

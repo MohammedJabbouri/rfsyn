@@ -1,30 +1,62 @@
 {
-	"job":	{
-		"count":	2,
-		"n_samples":	1024,
-		"output_dir":	"output_phase1_check"
-	},
-	"awgn":	{
-		"enabled":	false,
-		"snr_db":	15,
-		"seed":	42
-	},
-	"fdtd":	{
-		"enabled":	true,
-		"nx":	50,
-		"ny":	50,
-		"nz":	50,
-		"dx":	0.001,
-		"courant":	0.99,
-		"n_steps":	200,
-		"npml":	8,
-		"src_i":	-1,
-		"src_j":	-1,
-		"src_k":	-1,
-		"probe_i":	-1,
-		"probe_j":	-1,
-		"probe_k":	-1,
-		"t0":	40,
-		"tau":	8
-	}
+  "job": {
+    "count": 2,
+    "n_samples": 1024,
+    "output_dir": "output_phase1_check"
+  },
+  "awgn": {
+    "enabled": false,
+    "snr_db": 15,
+    "seed": 42
+  },
+  "fdtd": {
+    "enabled": true,
+    "nx": 50,
+    "ny": 50,
+    "nz": 50,
+    "dx": 0.001,
+    "courant": 0.99,
+    "n_steps": 200,
+    "npml": 8,
+    "src_i": -1,
+    "src_j": -1,
+    "src_k": -1,
+    "probe_i": -1,
+    "probe_j": -1,
+    "probe_k": -1,
+    "t0": 40,
+    "tau": 8
+  },
+  "material_catalog": {
+    "schema_version": 1,
+    "enabled": false,
+    "evaluation_frequency_hz": 1000000000,
+    "allow_proxy": false
+  },
+  "materials": {},
+  "colors": {
+    "#FFFFFF": "air",
+    "#C8A270": "wood_framing_spf",
+    "#D6B66F": "wood_pine",
+    "#805533": "wood_oak",
+    "#B55239": "brick_clay",
+    "#9A8F82": "brick_concrete",
+    "#808080": "concrete_normal",
+    "#B0B0B0": "concrete_lightweight",
+    "#303030": "asphalt",
+    "#E0D4C0": "ceramic_tile",
+    "#B8C8D0": "vinyl_flooring",
+    "#705080": "carpet",
+    "#686858": "gravel",
+    "#E8D090": "sand_dry",
+    "#C49A6C": "soil_very_dry",
+    "#8B6545": "soil_medium_dry",
+    "#503824": "soil_wet",
+    "#F0E8D8": "plasterboard",
+    "#88CCEE": "glass",
+    "#D8D8C8": "ceiling_board",
+    "#C85050": "tissue_muscle",
+    "#F0CF70": "tissue_fat",
+    "#DCA080": "tissue_skin"
+  }
 }

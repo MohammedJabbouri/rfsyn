@@ -3,9 +3,19 @@
 #include <string.h>
 #include <math.h>
 
+#define MATERIAL_CATALOG_COLOR_LIMIT 256
+
+typedef struct {
+    color_rgb_t color;
+    char name[MATERIAL_CATALOG_NAME_SIZE];
+} color_entry_t;
+
 struct material_catalog {
     catalog_definition_t entries[MATERIAL_CATALOG_LIMIT];
     size_t count;
+
+    color_entry_t colors[MATERIAL_CATALOG_COLOR_LIMIT];
+    size_t color_count;
 };
 
 typedef struct { const char *name, *target; } alias_t;
@@ -200,6 +210,69 @@ void material_catalog_destroy(material_catalog_t *catalog)
 size_t material_catalog_count(const material_catalog_t *catalog)
 {
     return catalog ? catalog->count : 0;
+}
+
+int material_catalog_map_color(material_catalog_t *catalog,
+                               color_rgb_t color,
+                               const char *material_name)
+{
+    size_t slot;
+    catalog_material_id_t id;
+
+    if (!catalog ||
+        !material_name ||
+        strlen(material_name) >= MATERIAL_CATALOG_NAME_SIZE) {
+        return CATALOG_INVALID;
+    }
+
+    if (material_catalog_find(catalog, material_name, &id) != CATALOG_OK) {
+        return CATALOG_NOT_FOUND;
+    }
+
+    for (slot = 0; slot < catalog->color_count; slot++) {
+        color_rgb_t stored = catalog->colors[slot].color;
+
+        if (stored.r == color.r &&
+            stored.g == color.g &&
+            stored.b == color.b) {
+            strcpy(catalog->colors[slot].name,
+                   catalog->entries[id].name);
+            return CATALOG_OK;
+        }
+    }
+
+    if (catalog->color_count == MATERIAL_CATALOG_COLOR_LIMIT) {
+        return CATALOG_FULL;
+    }
+
+    slot = catalog->color_count++;
+    catalog->colors[slot].color = color;
+    strcpy(catalog->colors[slot].name, catalog->entries[id].name);
+
+    return CATALOG_OK;
+}
+
+int material_catalog_lookup_color(const material_catalog_t *catalog, color_rgb_t color, char *name_out, size_t name_capacity) {
+    if (!catalog || !name_out || name_capacity == 0) {
+        return CATALOG_INVALID;
+    }
+
+    for (size_t slot = 0; slot < catalog->color_count; slot++) {
+        color_rgb_t stored = catalog->colors[slot].color;
+
+        if (stored.r == color.r &&
+            stored.g == color.g &&
+            stored.b == color.b) {
+            if (strlen(catalog->colors[slot].name) >= name_capacity) {
+                return CATALOG_INVALID;
+            }
+
+            strcpy(name_out, catalog->colors[slot].name);
+            return CATALOG_OK;
+        }
+    }
+
+    return CATALOG_NOT_FOUND;
 }
 
 const char *material_catalog_error(int result)
