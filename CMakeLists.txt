@@ -87,6 +87,10 @@ add_executable(cli_smoke tests/cli_smoke.c)
 target_link_libraries(cli_smoke PRIVATE rfsyn_core rfsyn_noise rfsyn_fdtd rfsyn_world m)
 add_test(NAME cli_smoke COMMAND cli_smoke $<TARGET_FILE:rfsyn>)
 
+add_executable(material_config_unit tests/material_config_unit.c)
+target_link_libraries(material_config_unit PRIVATE rfsyn_world m)
+add_test(NAME material_config_unit COMMAND material_config_unit)
+
 set(RFSYN_FDTD_VALIDATORS
   validate_cpml
   validate_cpml_margin

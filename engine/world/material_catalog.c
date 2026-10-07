@@ -139,6 +139,18 @@ static int add_power(material_catalog_t *cat, const char *name, const char *desc
     return material_catalog_define(cat, &d, 0, &id);
 }
 
+static int add_const(material_catalog_t *cat, const char *name, const char *description, catalog_status_t status, const char *source, double eps_r, double sigma, double ref_hz, double low_hz, double high_hz) {
+    catalog_definition_t d = {0};
+    catalog_material_id_t id;
+    if (copy_text(d.name, sizeof(d.name), name) ||
+        copy_text(d.description, sizeof(d.description), description) ||
+        copy_text(d.source, sizeof(d.source), source)) return -1;
+    d.model = CATALOG_CONSTANT; d.status = status;
+    d.eps_r = eps_r; d.sigma_s_per_m = sigma; d.reference_frequency_hz = ref_hz;
+    d.min_frequency_hz = low_hz; d.max_frequency_hz = high_hz;
+    return material_catalog_define(cat, &d, 0, &id);
+}
+
 static int add_pending(material_catalog_t *cat, const char *name, const char *description) {
     catalog_definition_t d = {0};
     catalog_material_id_t id;
@@ -171,28 +183,20 @@ material_catalog_t *material_catalog_create_default(void) {
     if (add_pending(cat, "vinyl_flooring", "Vinyl covering; composition-specific properties required")) goto fail;
     if (add_pending(cat, "carpet", "Carpet layer; fibers, backing and effective properties required")) goto fail;
     if (add_pending(cat, "gravel", "Aggregate/air/water effective material; composition required")) goto fail;
-    if (add_pending(cat, "sand_dry", "Dry sand; density and material assumptions required")) goto fail;
-    if (add_pending(cat, "soil_very_dry", "Very dry soil; frequency-valid ground model required")) goto fail;
-    if (add_pending(cat, "soil_medium_dry", "Medium-dry soil; frequency-valid ground model required")) goto fail;
-    if (add_pending(cat, "soil_wet", "Wet soil; frequency-valid ground model required")) goto fail;
+    if (add_const(cat, "soil_very_dry", "Silty loam, mv=0.07, T=23 C; 1 GHz point value (sigma varies ~2x over 0.9-2.45 GHz)", CATALOG_SOURCED,  "ITU-R P.527-6 Sec. 5.2, eqs (57)-(70), Table 2 texture",  4.280, 0.02665, 1e9, 0.8e9, 2.6e9)) goto fail;
+    if (add_const(cat, "soil_medium_dry",  "Silty loam, mv=0.20, T=23 C; 1 GHz point value (sigma varies ~2x over 0.9-2.45 GHz)", CATALOG_SOURCED, "ITU-R P.527-6 Sec. 5.2, eqs (57)-(70), Table 2 texture", 9.896, 0.06674, 1e9, 0.8e9, 2.6e9)) goto fail;
+    if (add_const(cat, "soil_wet", "Silty loam, mv=0.50, T=23 C; 1 GHz point value (sigma varies ~2x over 0.9-2.45 GHz)", CATALOG_SOURCED, "ITU-R P.527-6 Sec. 5.2, eqs (57)-(70), Table 2 texture", 30.290, 0.17151, 1e9, 0.8e9, 2.6e9)) goto fail;
     if (add_power(cat, "plasterboard", "Generic plasterboard class", CATALOG_SOURCED, 2.73, 0.0085, 0.9395, 1e9, 100e9)) goto fail;
     if (add_power(cat, "glass", "Generic glass class; lower-frequency branch only", CATALOG_SOURCED, 6.31, 0.0036, 1.3394, 0.1e9, 100e9)) goto fail;
-    if (add_power(cat, "ceiling_board",
-                  "Generic ceiling-board class; lower-frequency branch only",
-                  CATALOG_SOURCED,
-                  1.48, 0.0011, 1.0750,
-                  1e9, 100e9)) goto fail;
+    if (add_power(cat, "ceiling_board", "Generic ceiling-board class; lower-frequency branch only", CATALOG_SOURCED, 1.48, 0.0011, 1.0750, 1e9, 100e9)) goto fail;
 
-    if (add_pending(cat, "tissue_muscle",
-                    "Frequency-specific published tissue properties required"))
+    if (add_pending(cat, "tissue_muscle", "Frequency-specific published tissue properties required"))
         goto fail;
 
-    if (add_pending(cat, "tissue_fat",
-                    "Frequency-specific published tissue properties required"))
+    if (add_pending(cat, "tissue_fat", "Frequency-specific published tissue properties required"))
         goto fail;
 
-    if (add_pending(cat, "tissue_skin",
-                    "Frequency-specific published tissue properties required"))
+    if (add_pending(cat, "tissue_skin", "Frequency-specific published tissue properties required"))
         goto fail;
 
     return cat;

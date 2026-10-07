@@ -64,7 +64,8 @@ static int parse_material_one(const char *name, const cJSON *node, material_cata
     d.eps_r = eps->valuedouble;
     d.sigma_s_per_m = sig->valuedouble;
     d.reference_frequency_hz = cJSON_IsNumber(f0) ? f0->valuedouble : 1e9;
-    return material_catalog_define(catalog, &d, cJSON_IsBool(override_flag) && cJSON_IsTrue(override_flag) ? 1 : 0, NULL);
+    catalog_material_id_t id;
+    return material_catalog_define(catalog, &d, cJSON_IsBool(override_flag) && cJSON_IsTrue(override_flag) ? 1 : 0, &id);
 }
 
 int material_config_load(const cJSON *root, material_catalog_t *catalog, material_config_result_t *result, FILE *log) {

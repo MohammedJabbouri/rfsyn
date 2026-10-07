@@ -459,6 +459,49 @@ static int cmd_end(void) {
     return 0;
 }
 
+static const char *status_name(catalog_status_t status) {
+    switch (status) {
+        case CATALOG_ANALYTIC:     return "analytic";
+        case CATALOG_SOURCED:      return "sourced";
+        case CATALOG_PROXY:        return "proxy";
+        case CATALOG_USER_DEFINED: return "user";
+        case CATALOG_PENDING:      return "pending";
+        default:                   return "unknown";
+    }
+}
+
+static int cmd_materials_list(void) {
+    config_t *cfg = config_load(CONFIG_PATH);
+
+    if (!cfg) {
+        fprintf(stderr, "could not load %s -- run `rfsyn init`\n", CONFIG_PATH);
+        return 1;
+    }
+
+    material_catalog_t *catalog = material_catalog_create_default();
+    material_config_result_t result;
+
+    if (!catalog || material_config_load(config_root(cfg), catalog, &result, stderr) != 0) {
+        material_catalog_destroy(catalog);
+        config_destroy(cfg);
+        return 1;
+    }
+
+    size_t n = material_catalog_count(catalog);
+    printf("%zu material(s)\n", n);
+    printf("  #  name                   status  \tdescription\n");
+
+    for (size_t i = 0; i < n; i++) {
+        catalog_definition_t d;
+        if (material_catalog_get(catalog, (catalog_material_id_t)i, &d) != CATALOG_OK) continue;
+        printf("%3zu  %-22s %-8s\t%s\n", i, d.name, status_name(d.status), d.description);
+    }
+
+    material_catalog_destroy(catalog);
+    config_destroy(cfg);
+    return 0;
+}
+
 static void print_usage(const char *prog) {
     fprintf(stderr, "usage: %s <command> [args]\n\n", prog);
     fprintf(stderr, "commands:\n");
@@ -467,6 +510,7 @@ static void print_usage(const char *prog) {
     fprintf(stderr, "  config preset <name>         apply a preset\n");
     fprintf(stderr, "  config view                  show config\n");
     fprintf(stderr, "  start                        generate signals\n");
+    fprintf(stderr, "  materials                    list catalog materials\n");
     fprintf(stderr, "  end                          request job stop\n");
     fprintf(stderr, "  help                         show usage\n");
 }
@@ -481,6 +525,7 @@ int main(int argc, char **argv) {
 
     if (!strcmp(command, "init")) return cmd_init();
     if (!strcmp(command, "start")) return cmd_start();
+    if (!strcmp(command, "materials") && argc == 2) return cmd_materials_list();
     if (!strcmp(command, "end")) return cmd_end();
 
     if (!strcmp(command, "help")) {

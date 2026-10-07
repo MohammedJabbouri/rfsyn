@@ -19,6 +19,7 @@ int main(void)
     catalog_material_id_t id;
     catalog_material_id_t other;
     catalog_material_id_t old;
+    catalog_material_id_t soil_id;
 
     catalog_properties_t p;
     catalog_properties_t q;
@@ -60,22 +61,25 @@ int main(void)
               cat, "wood_oak", 1e9, 1, &p) == CATALOG_OK);
     CHECK(p.status == CATALOG_PROXY);
 
-    /* Pending materials must not silently get fake properties. */
-    CHECK(material_catalog_evaluate(
-              cat, "asphalt", 1e9, 1, &p) ==
-          CATALOG_NEEDS_PROPERTIES);
+    CHECK(material_catalog_evaluate(cat, "asphalt", 1e9, 1, &p) ==CATALOG_NEEDS_PROPERTIES);
 
-    CHECK(material_catalog_evaluate(
-              cat, "human_phantom", 1e9, 1, &p) ==
-          CATALOG_NEEDS_PROPERTIES);
+    CHECK(material_catalog_evaluate(cat, "human_phantom", 1e9, 1, &p) == CATALOG_NEEDS_PROPERTIES);
 
     CHECK(material_catalog_find(cat, "dirt", &id) == CATALOG_OK);
     CHECK(material_catalog_find(cat, "soil_medium_dry", &other) == CATALOG_OK);
     CHECK(id == other);
+    CHECK(material_catalog_find(cat, "soil_medium_dry", &soil_id) == CATALOG_OK);
+
+    CHECK(material_catalog_evaluate(cat, "soil_wet", 1e9, 0, &p) == CATALOG_OK);
+    CHECK(near(p.eps_r, 30.290) && near(p.sigma_s_per_m, 0.17151));
+    CHECK(p.status == CATALOG_SOURCED);
+    CHECK(material_catalog_evaluate(cat, "soil_medium_dry", 0.5e9, 0, &q) == CATALOG_FREQUENCY_RANGE);
+    CHECK(material_catalog_evaluate(cat, "dirt", 2.4e9, 0, &q) == CATALOG_OK);
+    CHECK(q.id == soil_id);
 
     CHECK(material_catalog_define_constant(cat, "my_wall", 4.0, 0.01, 1e9, "Test-only definition", "Unit test; not measured", 0, &id) == CATALOG_OK);
 
-    CHECK(material_catalog_evaluate( cat, "my_wall", 1e9, 0, &p) == CATALOG_OK);
+    CHECK(material_catalog_evaluate(cat, "my_wall", 1e9, 0, &p) == CATALOG_OK);
     CHECK(p.eps_r == 4.0);
     CHECK(p.status == CATALOG_USER_DEFINED);
 
@@ -86,7 +90,7 @@ int main(void)
 
     CHECK(material_catalog_find(cat, "asphalt", &old) == CATALOG_OK);
 
-    CHECK(material_catalog_define_constant( cat, "asphalt", 4.0, 0.01, 1e9, "Illustration; not validated asphalt", "Unit test", 1, &id) == CATALOG_OK);
+    CHECK(material_catalog_define_constant(cat, "asphalt", 4.0, 0.01, 1e9, "Illustration; not validated asphalt", "Unit test", 1, &id) == CATALOG_OK);
     CHECK(id == old);
 
     CHECK(material_catalog_get(cat, id, &d) == CATALOG_OK);
@@ -104,12 +108,10 @@ int main(void)
 
     CHECK(material_catalog_find(cat, "unknown", &id) == CATALOG_NOT_FOUND);
 
-    CHECK(material_catalog_find(NULL, "air", &id) ==
-          CATALOG_INVALID);
+    CHECK(material_catalog_find(NULL, "air", &id) == CATALOG_INVALID);
 
-    CHECK(material_catalog_evaluate(  cat, "air", 1e9, 0, NULL) == CATALOG_INVALID);
+    CHECK(material_catalog_evaluate(cat, "air", 1e9, 0, NULL) == CATALOG_INVALID);
 
-    // all 256 bytes to be used, even 255
     while (material_catalog_count(cat) < MATERIAL_CATALOG_LIMIT) {
         char name[64];
 
