@@ -32,6 +32,7 @@ add_library(rfsyn_fdtd STATIC
   engine/fdtd/probe.c
   engine/fdtd/simulate.c
 )
+
 target_link_libraries(rfsyn_fdtd PUBLIC m)
 if(OpenMP_C_FOUND)
   target_link_libraries(rfsyn_fdtd PUBLIC OpenMP::OpenMP_C)
@@ -46,6 +47,8 @@ add_library(rfsyn_core STATIC
 
 add_library(rfsyn_world STATIC
   engine/world/world.c
+  engine/world/material_catalog.c
+
 )
 
 add_executable(world_unit tests/world_unit.c)
@@ -53,6 +56,9 @@ target_link_libraries(world_unit PRIVATE rfsyn_world m)
 
 target_link_libraries(rfsyn_world PUBLIC m)
 target_link_libraries(rfsyn_core PUBLIC m)
+
+add_executable(material_catalog_unit tests/material_catalog_unit.c)
+target_link_libraries(material_catalog_unit PRIVATE rfsyn_world m)
 
 add_library(rfsyn_noise STATIC
   engine/noise/awgn.c
@@ -99,6 +105,7 @@ enable_testing()
 add_test(NAME simulate_unit COMMAND simulate_unit)
 add_test(NAME materials_unit COMMAND materials_unit)
 add_test(NAME world_unit COMMAND world_unit)
+add_test(NAME material_catalog_unit COMMAND material_catalog_unit)
 
 foreach(test_name IN ITEMS validate_cpml_margin validate_materials_fresnel validate_probe_dft validate_materials_energy)
   add_test(NAME ${test_name} COMMAND ${test_name})
