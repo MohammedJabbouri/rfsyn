@@ -1,31 +1,12 @@
 {
-  "job": {
-    "count": 2,
-    "n_samples": 1024,
-    "output_dir": "output_phase1_check"
-  },
-  "awgn": {
-    "enabled": false,
-    "snr_db": 15,
-    "seed": 42
-  },
+  "job": { "count": 2, "n_samples": 1024, "output_dir": "output_phase1_check" },
+  "awgn": { "enabled": false, "snr_db": 15, "seed": 42 },
   "fdtd": {
-    "enabled": true,
-    "nx": 50,
-    "ny": 50,
-    "nz": 50,
-    "dx": 0.001,
-    "courant": 0.99,
-    "n_steps": 200,
-    "npml": 8,
-    "src_i": -1,
-    "src_j": -1,
-    "src_k": -1,
-    "probe_i": -1,
-    "probe_j": -1,
-    "probe_k": -1,
-    "t0": 40,
-    "tau": 8
+    "enabled": true, "nx": 50, "ny": 50, "nz": 50, "dx": 0.001,
+    "courant": 0.99, "n_steps": 200, "npml": 8,
+    "src_i": -1, "src_j": -1, "src_k": -1,
+    "probe_i": -1, "probe_j": -1, "probe_k": -1,
+    "t0": 40, "tau": 8
   },
   "material_catalog": {
     "schema_version": 1,
