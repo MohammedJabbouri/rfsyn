@@ -9,6 +9,10 @@ struct config {
     cJSON *root;
 };
 
+const cJSON *config_root(const config_t *cfg) {
+    return cfg ? cfg->root : NULL;
+}
+
 config_t *config_create_empty(void) {
     config_t *cfg = malloc(sizeof(config_t));
     if (!cfg) return NULL;
@@ -21,21 +25,26 @@ config_t *config_load(const char *path) {
     FILE *f = fopen(path, "rb");
     if (!f) return NULL;
 
-    fseek(f, 0, SEEK_END);
+    if (fseek(f, 0, SEEK_END) != 0) { fclose(f); return NULL; }
     long size = ftell(f);
-    fseek(f, 0, SEEK_SET);
     if (size < 0) { fclose(f); return NULL; }
+    if (fseek(f, 0, SEEK_SET) != 0) { fclose(f); return NULL; }
 
     char *buf = malloc((size_t)size + 1);
     if (!buf) { fclose(f); return NULL; }
+
     size_t read_len = fread(buf, 1, (size_t)size, f);
+    int read_failed = ferror(f);
     fclose(f);
+
+    if (read_failed) { free(buf); return NULL; }
     buf[read_len] = '\0';
 
     cJSON *root = cJSON_Parse(buf);
     if (!root) {
         const char *err = cJSON_GetErrorPtr();
-        fprintf(stderr, "config: JSON parse error near byte %ld\n", err ? (long)(err - buf) : -1L);
+        long offset = (err && err >= buf && err <= buf + read_len) ? (long)(err - buf) : -1L;
+        fprintf(stderr, "config: JSON parse error near byte %ld\n", offset);
         free(buf);
         return NULL;
     }
@@ -49,15 +58,16 @@ config_t *config_load(const char *path) {
 
 int config_save(const config_t *cfg, const char *path) {
     if (!cfg || !path) return -1;
+
     char *text = cJSON_Print(cfg->root);
     if (!text) return -1;
 
-    size_t need = strlen(path) + 5;  //.tmp + nul
+    size_t need = strlen(path) + 5;
     char *tmp = malloc(need);
     if (!tmp) { free(text); return -1; }
     snprintf(tmp, need, "%s.tmp", path);
 
-    FILE *f = fopen(tmp, "w");
+    FILE *f = fopen(tmp, "wb");
     if (!f) { free(tmp); free(text); return -1; }
 
     size_t len = strlen(text);
@@ -66,23 +76,21 @@ int config_save(const config_t *cfg, const char *path) {
     free(text);
 
     int ok = (written == len && close_err == 0);
-    if (ok) {
-        ok = (rename(tmp, path) == 0);
 
-        if (!ok) {
-            #ifdef _WIN32
-            remove(path);
-            ok = (rename(tmp, path) == 0);
-        #endif
+    if (ok) {
+#ifdef _WIN32
+        remove(path);
+#endif
+        ok = (rename(tmp, path) == 0);
     }
-}
+
     if (!ok) remove(tmp);
     free(tmp);
     return ok ? 0 : -1;
 }
 
 void config_print(const config_t *cfg, FILE *out) {
-    if (!cfg) return;
+    if (!cfg || !out) return;
     char *text = cJSON_Print(cfg->root);
     if (!text) return;
     fprintf(out, "%s\n", text);
@@ -157,7 +165,7 @@ void config_set_string(config_t *cfg, const char *section, const char *key, cons
 }
 
 void config_set_double(config_t *cfg, const char *section, const char *key, double value) {
-    if (!cfg) return;
+    if (!cfg || !isfinite(value)) return;
     cJSON *s = get_or_create_section(cfg->root, section);
     if (!s) return;
     set_item(s, key, cJSON_CreateNumber(value));
@@ -172,4 +180,12 @@ void config_set_bool(config_t *cfg, const char *section, const char *key, int va
     cJSON *s = get_or_create_section(cfg->root, section);
     if (!s) return;
     set_item(s, key, cJSON_CreateBool(value));
+}
+
+void config_set_empty_object(config_t *cfg, const char *section) {
+    if (!cfg || !section) return;
+    if (cJSON_HasObjectItem(cfg->root, section)) return;
+    cJSON *obj = cJSON_CreateObject();
+    if (!obj) return;
+    cJSON_AddItemToObject(cfg->root, section, obj);
 }

@@ -32,5 +32,9 @@ config_t *preset_build(const char *name) {
     config_set_double(cfg, "fdtd", "t0", PRESET_FDTD_T0);
     config_set_double(cfg, "fdtd", "tau", PRESET_FDTD_TAU);
 
+    config_set_bool(cfg, "material_catalog", "enabled", 0);
+    config_set_double(cfg, "material_catalog", "evaluation_frequency_hz", 1e9);
+    config_set_bool(cfg, "material_catalog", "allow_proxy", 0);
+
     return cfg;
 }

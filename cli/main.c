@@ -11,6 +11,9 @@
 #include <errno.h>
 #include <math.h>
 
+#include "material_config.h"
+#include "../engine/world/material_catalog.h"
+
 #include "config.h"
 #include "presets.h"
 #include "settings.h"
@@ -302,6 +305,7 @@ static int cmd_start(void) {
     long count = config_get_long(cfg, "job", "count", PRESET_REALISTIC_JOB_COUNT);
     long n_samples = config_get_long(cfg, "job", "n_samples", PRESET_REALISTIC_JOB_NSAMPLES);
     int fdtd_enabled = config_get_bool(cfg, "fdtd", "enabled", PRESET_FDTD_ENABLED);
+    int rc = 1;
 
     const char *out_dir = config_get(cfg, "job", "output_dir");
     if (!out_dir) out_dir = PRESET_REALISTIC_JOB_OUTPUTDIR;
@@ -318,16 +322,31 @@ static int cmd_start(void) {
         return 1;
     }
 
-    if (ensure_directory(CONFIG_DIR) != 0 || ensure_directory(out_dir) != 0) {
-        fprintf(stderr, "could not create config/output directories\n");
+    material_catalog_t *catalog = material_catalog_create_default();
+    material_config_result_t mat_result;
+
+    if (!catalog || material_config_load(config_root(cfg), catalog, &mat_result, stderr) != 0) {
+        fprintf(stderr, "invalid material catalog configuration in %s\n", CONFIG_PATH);
+        material_catalog_destroy(catalog);
         config_destroy(cfg);
         return 1;
     }
 
+    if (mat_result.enabled) {
+        printf("material catalog: %d custom definition(s), %d palette color(s), evaluated at %.6g Hz\n",
+               mat_result.materials_loaded,
+               mat_result.colors_seen,
+               mat_result.evaluation_frequency_hz);
+    }
+
+    if (ensure_directory(CONFIG_DIR) != 0 || ensure_directory(out_dir) != 0) {
+        fprintf(stderr, "could not create config/output directories\n");
+        goto done;
+    }
+
     if (create_lock() != 0) {
         fprintf(stderr, "could not acquire %s -- check for a running job or a stale lock\n", LOCK_PATH);
-        config_destroy(cfg);
-        return 1;
+        goto done;
     }
 
     g_stop_requested = 0;
@@ -410,8 +429,12 @@ static int cmd_start(void) {
         fprintf(stderr, "%ld example(s) failed\n", failures);
     }
 
+    rc = failures > 0 ? 1 : 0;
+
+done:
+    material_catalog_destroy(catalog);
     config_destroy(cfg);
-    return failures > 0 ? 1 : 0;
+    return rc;
 }
 
 static int cmd_end(void) {
