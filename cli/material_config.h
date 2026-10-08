@@ -15,6 +15,9 @@ typedef struct {
 } material_config_result_t;
 
 int material_config_load(const cJSON *root, material_catalog_t *catalog, material_config_result_t *result, FILE *log);
+
+// LOADING IS NOT TRANSACTIONAL, ON FAILURE DISCARD THE CATALOG AND DO NOT RESULT, CREATE FRESH CATALOG
+
 const char *material_config_error(int result);
 
 #endif

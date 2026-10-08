@@ -333,10 +333,7 @@ static int cmd_start(void) {
     }
 
     if (mat_result.enabled) {
-        printf("material catalog: %d custom definition(s), %d palette color(s), evaluated at %.6g Hz\n",
-               mat_result.materials_loaded,
-               mat_result.colors_seen,
-               mat_result.evaluation_frequency_hz);
+        printf("material catalog: %d custom definition(s), %d palette color(s), configured evaluation frequency %.6g Hz\n", mat_result.materials_loaded, mat_result.colors_seen, mat_result.evaluation_frequency_hz);
     }
 
     if (ensure_directory(CONFIG_DIR) != 0 || ensure_directory(out_dir) != 0) {

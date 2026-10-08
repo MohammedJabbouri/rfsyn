@@ -52,6 +52,28 @@ static int parse_material_one(const char *name, const cJSON *node, material_cata
     const cJSON *src = cJSON_GetObjectItemCaseSensitive((cJSON*)node, "source");
     const cJSON *override_flag = cJSON_GetObjectItemCaseSensitive((cJSON*)node, "override");
 
+    if (override_flag && !cJSON_IsBool(override_flag)) {
+        if (log) fprintf(log, "material_config: materials.%s.override must be boolean\n", name);
+        return MC_INVALID;
+    }
+
+    if (descr && !cJSON_IsString(descr)) {
+        if (log) fprintf(log, "material_config: materials.%s.description must be string\n", name);
+        return MC_INVALID;
+    }
+
+    if (src && (!cJSON_IsString(src) || !src->valuestring[0])) {
+        if (log) fprintf(log, "material_config: materials.%s.source must be a nonempty string\n", name);
+        return MC_INVALID;
+    }
+
+    if (f0 && (!cJSON_IsNumber(f0) ||
+               !isfinite(f0->valuedouble) ||
+               f0->valuedouble <= 0.0)) {
+        if (log) fprintf(log, "material_config: materials.%s.reference_frequency_hz must be positive and finite\n", name);
+        return MC_INVALID;
+    }
+
     if (!cJSON_IsString(model) || strcmp(model->valuestring, "constant") != 0 || !cJSON_IsNumber(eps) || !cJSON_IsNumber(sig)) {
         if (log) fprintf(log, "material_config: %s requires model='constant' and numeric eps_r/sigma_s_per_m\n", name);
         return MC_INVALID;
@@ -86,6 +108,28 @@ int material_config_load(const cJSON *root, material_catalog_t *catalog, materia
         const cJSON *enabled = cJSON_GetObjectItemCaseSensitive(catalog_node, "enabled");
         const cJSON *frequency = cJSON_GetObjectItemCaseSensitive(catalog_node, "evaluation_frequency_hz");
         const cJSON *allow = cJSON_GetObjectItemCaseSensitive(catalog_node, "allow_proxy");
+        const cJSON *version = cJSON_GetObjectItemCaseSensitive(catalog_node, "schema_version");
+
+        if (version &&
+            (!cJSON_IsNumber(version) || version->valuedouble != 1.0)) {
+            log_line(log, "material_config: schema_version must be 1");
+            return MC_INVALID;
+        }
+
+        if (enabled && !cJSON_IsBool(enabled)) {
+            log_line(log, "material_config: enabled must be boolean");
+            return MC_INVALID;
+        }
+
+        if (allow && !cJSON_IsBool(allow)) {
+            log_line(log, "material_config: allow_proxy must be boolean");
+            return MC_INVALID;
+        }
+
+        if (frequency && !cJSON_IsNumber(frequency)) {
+            log_line(log, "material_config: evaluation_frequency_hz must be numeric");
+            return MC_INVALID;
+        }
         result->enabled = cJSON_IsBool(enabled) ? cJSON_IsTrue(enabled) : 0;
         result->allow_proxy = cJSON_IsBool(allow) ? cJSON_IsTrue(allow) : 0;
         if (cJSON_IsNumber(frequency)) result->evaluation_frequency_hz = frequency->valuedouble;

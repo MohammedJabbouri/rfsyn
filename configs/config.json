@@ -28,9 +28,9 @@
 		"tau":	8
 	},
 	"material_catalog":	{
-		"enabled":	false,
+		"enabled":	true,
 		"evaluation_frequency_hz":	1000000000,
-		"allow_proxy":	false
+		"allow_proxy":	true
 	},
 	"materials":	{
 	},
