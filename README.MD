@@ -4,7 +4,7 @@ Hello, and welcome to our project, rfsyn, it is an open source software to gener
 
 This project is made mostly in C, and it is made to support a research project, which is titled "Applications of Synthetic RF Generation in Machine Learning". The software is mostly designed to be run on a server due to high RAM usage (scales N³), thus making it be ran on C for maximum speed.
 
-To maintain realism, rfsyn uses FDTD within 3D (Ex, Ey, Ez, Hx, Hy, Hz). Alongside autocorrelation, linear modulation, and TBD.
+To maintain realism, rfsyn uses FDTD within 3D (Ex, Ey, Ez, Hx, Hy, Hz). Alongside autocorrelation, linear modulation, and subdivisions to fix Yee-Grid issues such as staircasing and staggering. There also 23 materials, ranging from wet soil to human tissue. Users are able to input their own heightmaps and colormaps to denote materials, alongside placement for antennas.
 
 # Change Log
 
@@ -20,6 +20,6 @@ If you ever need to contact any of us, you can find our emails here:
 
 Mohammed Jabbouri: mohammedbelmeharzia@gmail.com
 
-Obsinet Kumsa: Obsinetgk@gmail.com
+Obsinet Kumsa: obsinetgk@gmail.com
 
 Do note that we probably won't reply within a few hours.
