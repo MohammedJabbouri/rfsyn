@@ -7,12 +7,11 @@
 #include <stdlib.h>
 #include <math.h>
 
-int fdtd_simulate_echo(const fdtd_sim_config_t *cfg, double *out_td, double *sample_rate_out) {
+int fdtd_simulate_echo_with_setup(const fdtd_sim_config_t *cfg, double *out_td, double *sample_rate_out, fdtd_material_setup_fn setup, void *context) {
     if (!cfg || !out_td) return -1;
     if (cfg->n_steps == 0) return -1;
 
-    fdtd_grid_t *g = fdtd_grid_create(cfg->nx, cfg->ny, cfg->nz,
-                                      cfg->dx, cfg->courant_safety);
+    fdtd_grid_t *g = fdtd_grid_create(cfg->nx, cfg->ny, cfg->nz, cfg->dx, cfg->courant_safety);
     if (!g) return -1;
 
     if (cfg->src_i > g->nx || cfg->src_j > g->ny || cfg->src_k > g->nz ||
@@ -24,12 +23,18 @@ int fdtd_simulate_echo(const fdtd_sim_config_t *cfg, double *out_td, double *sam
     cpml_t *pml = cpml_create(g, cpml_default_params(cfg->npml));
     if (!pml) { fdtd_grid_destroy(g); return -1; }
 
-    /* vacuum for now; world.c fills this in phase 2 */
+    /* Default vacuum; optional setup assigns scene materials. */
     materials_t *mat = materials_create(g);
     if (!mat) { cpml_destroy(pml); fdtd_grid_destroy(g); return -1; }
 
-    source_gaussian_deriv_params_t sp = { cfg->t0_over_dt * g->dt,
-                                          cfg->tau_over_dt * g->dt };
+    if (setup && setup(g, mat, context) != 0) {
+        materials_destroy(mat);
+        cpml_destroy(pml);
+        fdtd_grid_destroy(g);
+        return -1;
+    }
+
+    source_gaussian_deriv_params_t sp = { cfg->t0_over_dt * g->dt, cfg->tau_over_dt * g->dt };
     source_t src = source_make_point(cfg->src_i, cfg->src_j, cfg->src_k, cfg->src_component, SRC_SOFT, 1.0, source_waveform_gaussian_derivative, &sp);
 
     probe_td_t probe;
@@ -58,4 +63,7 @@ int fdtd_simulate_echo(const fdtd_sim_config_t *cfg, double *out_td, double *sam
     cpml_destroy(pml);
     fdtd_grid_destroy(g);
     return 0;
+}
+int fdtd_simulate_echo(const fdtd_sim_config_t *cfg, double *out_td, double *sample_rate_out) {
+    return fdtd_simulate_echo_with_setup(cfg, out_td, sample_rate_out, NULL, NULL);
 }
