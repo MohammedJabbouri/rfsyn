@@ -1,0 +1,33 @@
+Isolated Linux GCC -O2 tests. Full application and MSYS2 not tested.
+
+validate_cpml: exit 0
+probe 0: max normalized 0.00564851976, relative L2 0.00788511703
+PASS
+
+validate_cpml_margin: exit 0
+probe 0: max normalized 0.00417997619, relative L2 0.0040186177
+probe 1: max normalized 0.00443705633, relative L2 0.00525515435
+probe 2: max normalized 0.00478577391, relative L2 0.00634458602
+probe 3: max normalized 0.00568728943, relative L2 0.00824111186
+probe 4: max normalized 0.00579124523, relative L2 0.00880691036
+PASS
+
+validate_cpml_planewave: exit 0
+CPML: max normalized error 3.23401409e-06 (-109.805 dB), relative L2 4.88901426e-06
+PASS
+
+validate_materials_fresnel: exit 0
+Fresnel pulse magnitude: measured 0.33183219, theory 0.333333333, relative error 0.450343%
+PASS
+
+validate_materials_energy: exit 0
+Energy per unit area: R=-0 T=1 balance=1 mismatch=8.82483e-10%
+PASS
+Energy per unit area: R=0.107016393 T=0.892983607 balance=1 mismatch=1.28805e-09%
+PASS
+
+Fresnel refinement runs (fixed physical x geometry, waveform and PML thickness):
+refinement 1: Fresnel pulse magnitude: measured 0.33183219, theory 0.333333333, relative error 0.450343%
+PASS
+refinement 4: Fresnel pulse magnitude: measured 0.333279185, theory 0.333333333, relative error 0.0162445%
+PASS

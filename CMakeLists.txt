@@ -1,137 +1,72 @@
-﻿cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.16)
 project(rfsyn C)
-
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-
 if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE Release)
 endif()
-
-option(RFSYN_SANITIZE "Build with -fsanitize=address,undefined" OFF)
-
-add_library(rfsyn_fdtd STATIC
-  engine/fdtd/grid.c
-  engine/fdtd/cpml.c
-  engine/fdtd/materials.c
-  engine/fdtd/source.c
-  engine/fdtd/probe.c
-  engine/fdtd/simulate.c
-)
-
+option(RFSYN_SANITIZE "Build with address/undefined sanitizers" OFF)
+add_library(rfsyn_fdtd STATIC engine/fdtd/grid.c engine/fdtd/cpml.c engine/fdtd/materials.c engine/fdtd/source.c engine/fdtd/probe.c engine/fdtd/simulate.c)
 find_package(OpenMP QUIET)
 if(OpenMP_C_FOUND)
   target_link_libraries(rfsyn_fdtd PUBLIC OpenMP::OpenMP_C)
   target_compile_definitions(rfsyn_fdtd PUBLIC RFSYN_HAS_OPENMP=1)
-else()
-  message(STATUS "rfsyn: OpenMP not found -- FDTD single-threaded")
 endif()
-
 target_link_libraries(rfsyn_fdtd PUBLIC m)
-
-add_library(rfsyn_core STATIC
-  engine/core/chain.c
-  engine/core/chains.c
-  engine/core/rf_signal.c
-  engine/core/rng.c
-)
+add_library(rfsyn_core STATIC engine/core/chain.c engine/core/chains.c engine/core/rf_signal.c engine/core/rng.c)
 target_link_libraries(rfsyn_core PUBLIC m)
-
 add_library(rfsyn_cjson STATIC cli/cJSON.c)
 target_include_directories(rfsyn_cjson PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/cli)
-
-add_library(rfsyn_world STATIC
-  engine/world/world.c
-  engine/world/material_catalog.c
-  cli/material_config.c
-)
+add_library(rfsyn_world STATIC engine/world/world.c engine/world/material_catalog.c cli/material_config.c)
 target_include_directories(rfsyn_world PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(rfsyn_world PUBLIC rfsyn_cjson m)
-
 add_library(rfsyn_noise STATIC engine/noise/awgn.c)
 target_link_libraries(rfsyn_noise PUBLIC rfsyn_core m)
-
-add_executable(rfsyn
-  cli/main.c
-  cli/settings.c
-  cli/config.c
-  cli/presets.c
-  cli/fdtd_stage.c
-)
+add_executable(rfsyn cli/main.c cli/settings.c cli/config.c cli/presets.c cli/fdtd_stage.c)
 target_link_libraries(rfsyn PRIVATE rfsyn_fdtd rfsyn_core rfsyn_noise rfsyn_world m)
-
+set(RFSYN_VALIDATION_REFINEMENT 1 CACHE STRING "Normal-incidence refinement: 1, 2, or 4")
+if(NOT RFSYN_VALIDATION_REFINEMENT MATCHES "^(1|2|4)$")
+  message(FATAL_ERROR "RFSYN_VALIDATION_REFINEMENT must be 1, 2, or 4")
+endif()
 enable_testing()
-
-add_executable(world_unit tests/world_unit.c)
-target_link_libraries(world_unit PRIVATE rfsyn_world m)
-add_test(NAME world_unit COMMAND world_unit)
-
-add_executable(material_catalog_unit tests/material_catalog_unit.c)
-target_link_libraries(material_catalog_unit PRIVATE rfsyn_world m)
-add_test(NAME material_catalog_unit COMMAND material_catalog_unit)
-
-add_executable(simulate_unit tests/simulate_unit.c)
-target_link_libraries(simulate_unit PRIVATE rfsyn_fdtd m)
-add_test(NAME simulate_unit COMMAND simulate_unit)
-
-add_executable(materials_unit tests/materials_unit.c)
-target_link_libraries(materials_unit PRIVATE rfsyn_fdtd m)
-add_test(NAME materials_unit COMMAND materials_unit)
-
-add_executable(rf_signal_unit tests/rf_signal_unit.c)
-target_link_libraries(rf_signal_unit PRIVATE rfsyn_core m)
-add_test(NAME rf_signal_unit COMMAND rf_signal_unit)
-
-add_executable(cli_smoke tests/cli_smoke.c)
-target_link_libraries(cli_smoke PRIVATE rfsyn_core rfsyn_noise rfsyn_fdtd rfsyn_world m)
-add_test(NAME cli_smoke COMMAND cli_smoke $<TARGET_FILE:rfsyn>)
-
-add_executable(material_config_unit tests/material_config_unit.c)
-target_link_libraries(material_config_unit PRIVATE rfsyn_world m)
-add_test(NAME material_config_unit COMMAND material_config_unit)
-
-set(RFSYN_FDTD_VALIDATORS
-  validate_cpml
-  validate_cpml_margin
-  validate_materials_fresnel
-  validate_probe_dft
-  validate_materials_energy
-)
-
-foreach(validator IN LISTS RFSYN_FDTD_VALIDATORS)
-  add_executable(${validator} engine/fdtd/${validator}.c)
-  target_link_libraries(${validator} PRIVATE rfsyn_fdtd m)
+set(RFSYN_ALL_TARGETS rfsyn_fdtd rfsyn_core rfsyn_cjson rfsyn_world rfsyn_noise rfsyn)
+foreach(name IN ITEMS world_unit material_catalog_unit material_config_unit simulate_unit materials_unit rf_signal_unit cli_smoke)
+  add_executable(${name} tests/${name}.c)
+  if(name MATCHES "^(world_unit|material_catalog_unit|material_config_unit)$")
+    target_link_libraries(${name} PRIVATE rfsyn_world m)
+  elseif(name STREQUAL "rf_signal_unit")
+    target_link_libraries(${name} PRIVATE rfsyn_core m)
+  elseif(name STREQUAL "cli_smoke")
+    target_link_libraries(${name} PRIVATE rfsyn_core rfsyn_noise rfsyn_fdtd rfsyn_world m)
+  else()
+    target_link_libraries(${name} PRIVATE rfsyn_fdtd m)
+  endif()
+  if(name STREQUAL "cli_smoke")
+    add_test(NAME ${name} COMMAND ${name} $<TARGET_FILE:rfsyn>)
+  else()
+    add_test(NAME ${name} COMMAND ${name})
+  endif()
+  list(APPEND RFSYN_ALL_TARGETS ${name})
 endforeach()
-
-foreach(test_name IN ITEMS validate_cpml_margin validate_materials_fresnel validate_probe_dft validate_materials_energy)
-  add_test(NAME ${test_name} COMMAND ${test_name})
+set(RFSYN_FDTD_VALIDATORS validate_cpml validate_cpml_margin validate_cpml_planewave validate_materials_fresnel validate_probe_dft validate_materials_energy)
+foreach(name IN LISTS RFSYN_FDTD_VALIDATORS)
+  add_executable(${name} engine/fdtd/${name}.c)
+  target_link_libraries(${name} PRIVATE rfsyn_fdtd m)
+  target_compile_definitions(${name} PRIVATE RFSYN_VALIDATION_REFINEMENT=${RFSYN_VALIDATION_REFINEMENT})
+  file(MAKE_DIRECTORY "${CMAKE_BINARY_DIR}/validation/${name}")
+  add_test(NAME ${name} COMMAND ${name})
+  set_tests_properties(${name} PROPERTIES WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/validation/${name}")
+  set_tests_properties(${name} PROPERTIES LABELS "fdtd;validation")
+  list(APPEND RFSYN_ALL_TARGETS ${name})
 endforeach()
-
-add_test(NAME validate_cpml_smoke COMMAND validate_cpml)
-
 if(RFSYN_SANITIZE)
   if(CMAKE_C_COMPILER_ID MATCHES "GNU|Clang")
-    set(RFSYN_ALL_TARGETS
-      rfsyn_fdtd
-      rfsyn_core
-      rfsyn_world
-      rfsyn_cjson
-      rfsyn_noise
-      rfsyn
-      cli_smoke
-      rf_signal_unit
-      simulate_unit
-      materials_unit
-      world_unit
-      material_catalog_unit
-      ${RFSYN_FDTD_VALIDATORS}
-    )
     foreach(tgt IN LISTS RFSYN_ALL_TARGETS)
       target_compile_options(${tgt} PRIVATE -fsanitize=address,undefined -fno-omit-frame-pointer -g)
       target_link_options(${tgt} PRIVATE -fsanitize=address,undefined)
     endforeach()
   else()
-    message(WARNING "rfsyn: RFSYN_SANITIZE requested but compiler is not GNU/Clang -- ignoring")
+    message(WARNING "Requested sanitizers require GCC or Clang")
   endif()
 endif()
