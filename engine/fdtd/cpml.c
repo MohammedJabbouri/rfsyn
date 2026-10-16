@@ -85,8 +85,8 @@ static int build_axis_profiles(size_t n, size_t npml, double dx, double m, doubl
 }
 
 cpml_t *cpml_create(const fdtd_grid_t *g, cpml_params_t params) {
-    if (!g || params.npml == 0) return NULL;
-    if (2 * params.npml >= g->nx || 2 * params.npml >= g->ny || 2 * params.npml >= g->nz) {
+    if (!g || params.npml == 0 || !isfinite(params.r0) || params.r0 <= 0.0 || params.r0 >= 1.0 || !isfinite(params.m) || params.m <= 0.0 || !isfinite(params.ma) || params.ma < 0.0 || !isfinite(params.kappa_max) || params.kappa_max < 1.0 || !isfinite(params.alpha_max) || params.alpha_max < 0.0) return NULL;
+    if ((!(g->periodic_axes & 1u) && params.npml >= (g->nx + 1) / 2) || (!(g->periodic_axes & 2u) && params.npml >= (g->ny + 1) / 2) || (!(g->periodic_axes & 4u) && params.npml >= (g->nz + 1) / 2)) {
         return NULL;
     }
 
@@ -106,6 +106,20 @@ cpml_t *cpml_create(const fdtd_grid_t *g, cpml_params_t params) {
     ok &= (build_axis_profiles(g->nz, params.npml, g->dx, params.m, params.ma, params.kappa_max, params.alpha_max, sigma_max, g->dt, &pml->kappa_inv_m_z, &pml->b_m_z, &pml->a_m_z, &pml->kappa_inv_h_z, &pml->b_h_z, &pml->a_h_z) == 0);
 
     if (!ok) { cpml_destroy(pml); return NULL; }
+    /* Periodic axes have identity stretching and no absorbing memory. */
+    if (g->periodic_axes & 1u) {
+        for (size_t q = 0; q <= g->nx; q++) { pml->kappa_inv_m_x[q] = 1; pml->b_m_x[q] = 1; pml->a_m_x[q] = 0; }
+        for (size_t q = 0; q < g->nx; q++) { pml->kappa_inv_h_x[q] = 1; pml->b_h_x[q] = 1; pml->a_h_x[q] = 0; }
+    }
+    if (g->periodic_axes & 2u) {
+        for (size_t q = 0; q <= g->ny; q++) { pml->kappa_inv_m_y[q] = 1; pml->b_m_y[q] = 1; pml->a_m_y[q] = 0; }
+        for (size_t q = 0; q < g->ny; q++) { pml->kappa_inv_h_y[q] = 1; pml->b_h_y[q] = 1; pml->a_h_y[q] = 0; }
+    }
+    if (g->periodic_axes & 4u) {
+        for (size_t q = 0; q <= g->nz; q++) { pml->kappa_inv_m_z[q] = 1; pml->b_m_z[q] = 1; pml->a_m_z[q] = 0; }
+        for (size_t q = 0; q < g->nz; q++) { pml->kappa_inv_h_z[q] = 1; pml->b_h_z[q] = 1; pml->a_h_z[q] = 0; }
+    }
+
 
     size_t total = (g->nx + 1) * (g->ny + 1) * (g->nz + 1);
     pml->psi_hx_y = calloc(total, sizeof(double));
@@ -160,7 +174,7 @@ void fdtd_update_h_cpml(fdtd_grid_t *g, cpml_t *pml) {
     double cb = g->dt / (MU0 * g->dx);
     double dx = g->dx;
 
-    for (size_t i = 0; i <= g->nx; i++) {
+    for (size_t i = 0; i < g->nx + ((g->periodic_axes & 1u) ? 0u : 1u); i++) {
         for (size_t j = 0; j < g->ny; j++) {
             for (size_t k = 0; k < g->nz; k++) {
                 size_t idx = fdtd_index(g, i, j, k);
@@ -174,7 +188,7 @@ void fdtd_update_h_cpml(fdtd_grid_t *g, cpml_t *pml) {
     }
 
     for (size_t i = 0; i < g->nx; i++) {
-        for (size_t j = 0; j <= g->ny; j++) {
+        for (size_t j = 0; j < g->ny + ((g->periodic_axes & 2u) ? 0u : 1u); j++) {
             for (size_t k = 0; k < g->nz; k++) {
                 size_t idx = fdtd_index(g, i, j, k);
                 double dEx_dz = EX(i,j,k+1) - EX(i,j,k);
@@ -188,7 +202,7 @@ void fdtd_update_h_cpml(fdtd_grid_t *g, cpml_t *pml) {
 
     for (size_t i = 0; i < g->nx; i++) {
         for (size_t j = 0; j < g->ny; j++) {
-            for (size_t k = 0; k <= g->nz; k++) {
+            for (size_t k = 0; k < g->nz + ((g->periodic_axes & 4u) ? 0u : 1u); k++) {
                 size_t idx = fdtd_index(g, i, j, k);
                 double dEy_dx = EY(i+1,j,k) - EY(i,j,k);
                 double dEx_dy = EX(i,j+1,k) - EX(i,j,k);
@@ -206,8 +220,8 @@ void fdtd_update_e_cpml(fdtd_grid_t *g, cpml_t *pml) {
     double dx = g->dx;
 
     for (size_t i = 0; i < g->nx; i++) {
-        for (size_t j = 1; j < g->ny; j++) {
-            for (size_t k = 1; k < g->nz; k++) {
+        for (size_t j = (g->periodic_axes & 2u) ? 0u : 1u; j < g->ny; j++) {
+            for (size_t k = (g->periodic_axes & 4u) ? 0u : 1u; k < g->nz; k++) {
                 size_t idx = fdtd_index(g, i, j, k);
                 double dHz_dy = HZ(i,j,k) - HZ(i,j-1,k);
                 double dHy_dz = HY(i,j,k) - HY(i,j,k-1);
@@ -218,9 +232,9 @@ void fdtd_update_e_cpml(fdtd_grid_t *g, cpml_t *pml) {
         }
     }
 
-    for (size_t i = 1; i < g->nx; i++) {
+    for (size_t i = (g->periodic_axes & 1u) ? 0u : 1u; i < g->nx; i++) {
         for (size_t j = 0; j < g->ny; j++) {
-            for (size_t k = 1; k < g->nz; k++) {
+            for (size_t k = (g->periodic_axes & 4u) ? 0u : 1u; k < g->nz; k++) {
                 size_t idx = fdtd_index(g, i, j, k);
                 double dHx_dz = HX(i,j,k) - HX(i,j,k-1);
                 double dHz_dx = HZ(i,j,k) - HZ(i-1,j,k);
@@ -231,8 +245,8 @@ void fdtd_update_e_cpml(fdtd_grid_t *g, cpml_t *pml) {
         }
     }
 
-    for (size_t i = 1; i < g->nx; i++) {
-        for (size_t j = 1; j < g->ny; j++) {
+    for (size_t i = (g->periodic_axes & 1u) ? 0u : 1u; i < g->nx; i++) {
+        for (size_t j = (g->periodic_axes & 2u) ? 0u : 1u; j < g->ny; j++) {
             for (size_t k = 0; k < g->nz; k++) {
                 size_t idx = fdtd_index(g, i, j, k);
                 double dHy_dx = HY(i,j,k) - HY(i-1,j,k);

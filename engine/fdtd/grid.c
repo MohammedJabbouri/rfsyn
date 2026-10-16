@@ -5,7 +5,7 @@
 #include <math.h>
 
 fdtd_grid_t *fdtd_grid_create(size_t nx, size_t ny, size_t nz, double dx, double courant_safety_factor) {
-    if (dx <= 0.0 || courant_safety_factor <= 0.0) return NULL;
+    if (!nx || !ny || !nz || !isfinite(dx) || dx <= 0.0 || !isfinite(courant_safety_factor) || courant_safety_factor <= 0.0 || courant_safety_factor > 1.0) return NULL;
 
     // error here for now
     
@@ -20,6 +20,7 @@ fdtd_grid_t *fdtd_grid_create(size_t nx, size_t ny, size_t nz, double dx, double
     fdtd_grid_t *g = malloc(sizeof(fdtd_grid_t));
     if (!g) return NULL;
     
+    g->periodic_axes = 0;
     g->nx = nx;
     g->ny = ny;
     g->nz = nz;
@@ -29,6 +30,7 @@ fdtd_grid_t *fdtd_grid_create(size_t nx, size_t ny, size_t nz, double dx, double
     g->dt = courant_safety_factor * dt_max;
     
     size_t total = nx1 * ny1 * nz1;
+    if (total > SIZE_MAX / sizeof(double) || !isfinite(g->dt) || g->dt <= 0.0) { free(g); return NULL; }
     
     g->ex = calloc(total, sizeof(double));
     g->ey = calloc(total, sizeof(double));
@@ -64,7 +66,7 @@ void fdtd_update_h(fdtd_grid_t *g) {
 
     #pragma omp parallel for collapse(2) schedule(static)
     
-    for (size_t i = 0; i <= g->nx; i++) {
+    for (size_t i = 0; i < g->nx + ((g->periodic_axes & 1u) ? 0u : 1u); i++) {
         for (size_t j = 0; j < g->ny; j++) {
             for (size_t k = 0; k < g->nz; k++) {
                 HX(i,j,k) -= cb * ((EZ(i,j+1,k) - EZ(i,j,k)) - (EY(i,j,k+1) - EY(i,j,k)));
@@ -73,7 +75,7 @@ void fdtd_update_h(fdtd_grid_t *g) {
     }
 
     for (size_t i = 0; i < g->nx; i++) {
-        for (size_t j = 0; j <= g->ny; j++) {
+        for (size_t j = 0; j < g->ny + ((g->periodic_axes & 2u) ? 0u : 1u); j++) {
             for (size_t k = 0; k < g->nz; k++) {
                 HY(i,j,k) -= cb * ((EX(i,j,k+1) - EX(i,j,k)) - (EZ(i+1,j,k) - EZ(i,j,k)));
             }
@@ -82,7 +84,7 @@ void fdtd_update_h(fdtd_grid_t *g) {
 
     for (size_t i = 0; i < g->nx; i++) {
         for (size_t j = 0; j < g->ny; j++) {
-            for (size_t k = 0; k <= g->nz; k++) {
+            for (size_t k = 0; k < g->nz + ((g->periodic_axes & 4u) ? 0u : 1u); k++) {
                 HZ(i,j,k) -= cb * ((EY(i+1,j,k) - EY(i,j,k)) - (EX(i,j+1,k) - EX(i,j,k)));
             }
         }
@@ -93,23 +95,23 @@ void fdtd_update_e(fdtd_grid_t *g) {
     double ca = g->dt / (EPS0 * g->dx);
 
     for (size_t i = 0; i < g->nx; i++) {
-        for (size_t j = 1; j < g->ny; j++) {
-            for (size_t k = 1; k < g->nz; k++) {
+        for (size_t j = (g->periodic_axes & 2u) ? 0u : 1u; j < g->ny; j++) {
+            for (size_t k = (g->periodic_axes & 4u) ? 0u : 1u; k < g->nz; k++) {
                 EX(i,j,k) += ca * ((HZ(i,j,k) - HZ(i,j-1,k)) - (HY(i,j,k) - HY(i,j,k-1)));
             }
         }
     }
 
-    for (size_t i = 1; i < g->nx; i++) {
+    for (size_t i = (g->periodic_axes & 1u) ? 0u : 1u; i < g->nx; i++) {
         for (size_t j = 0; j < g->ny; j++) {
-            for (size_t k = 1; k < g->nz; k++) {
+            for (size_t k = (g->periodic_axes & 4u) ? 0u : 1u; k < g->nz; k++) {
                 EY(i,j,k) += ca * ((HX(i,j,k) - HX(i,j,k-1)) - (HZ(i,j,k) - HZ(i-1,j,k)));
             }
         }
     }
 
-    for (size_t i = 1; i < g->nx; i++) {
-        for (size_t j = 1; j < g->ny; j++) {
+    for (size_t i = (g->periodic_axes & 1u) ? 0u : 1u; i < g->nx; i++) {
+        for (size_t j = (g->periodic_axes & 2u) ? 0u : 1u; j < g->ny; j++) {
             for (size_t k = 0; k < g->nz; k++) {
                 EZ(i,j,k) += ca * ((HY(i,j,k) - HY(i-1,j,k)) - (HX(i,j,k) - HX(i,j-1,k)));
             }
@@ -123,3 +125,8 @@ void fdtd_update_e(fdtd_grid_t *g) {
 #undef HX
 #undef HY
 #undef HZ
+int fdtd_grid_set_periodic(fdtd_grid_t *g, unsigned axes) {
+    if (!g || (axes & ~7u)) return -1;
+    g->periodic_axes = axes;
+    return 0;
+}
