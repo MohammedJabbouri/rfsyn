@@ -24,8 +24,8 @@ CMAKE_AR:FILEPATH=C:/msys64/mingw64/bin/ar.exe
 // MinSizeRel ...
 CMAKE_BUILD_TYPE:STRING=Release
 
-//C compiler
-CMAKE_C_COMPILER:STRING=C:/msys64/mingw64/bin/gcc.exe
+//No help, variable specified on the command line.
+CMAKE_C_COMPILER:UNINITIALIZED=C:/msys64/mingw64/bin/gcc.exe
 
 //A wrapper around 'ar' adding the appropriate '--plugin' option
 // for the GCC compiler
@@ -230,6 +230,9 @@ OpenMP_gomp_LIBRARY:FILEPATH=C:/msys64/mingw64/lib/libgomp.dll.a
 
 //Path to the mingwthrd library for OpenMP
 OpenMP_mingwthrd_LIBRARY:FILEPATH=C:/msys64/mingw64/lib/libmingwthrd.a
+
+//No help, variable specified on the command line.
+RFSYN_BUILD_EXTENDED_VALIDATORS:UNINITIALIZED=ON
 
 //Build with address/undefined sanitizers
 RFSYN_SANITIZE:BOOL=OFF
