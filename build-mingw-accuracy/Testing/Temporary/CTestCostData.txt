@@ -11,7 +11,7 @@ validate_cpml_planewave 4 1.39876
 validate_materials_fresnel 4 2.0273
 validate_probe_dft 4 3.04883
 validate_materials_energy 4 4.04844
-validate_cpml_oblique 1 47.0027
-validate_materials_high_contrast 1 14.0926
-validate_long_term_stability 1 34.7971
+validate_cpml_oblique 2 23.3911
+validate_materials_high_contrast 2 7.02529
+validate_long_term_stability 2 17.4088
 ---

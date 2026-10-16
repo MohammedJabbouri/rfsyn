@@ -1,0 +1,62 @@
+UpdateCTestConfiguration  from :C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/DartConfiguration.tcl
+Parse Config file:C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/DartConfiguration.tcl
+Test project C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy
+Constructing a list of tests
+Done constructing a list of tests
+Updating test list for fixtures
+Added 0 tests to meet fixture requirements
+Checking test dependency graph...
+Checking test dependency graph end
+test 14
+    Start 14: validate_cpml_oblique
+
+14: Test command: "C:\Users\binso\3D Objects\rfsyn\build-mingw-accuracy\validate_cpml_oblique.exe"
+14: Working Directory: C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/validation/validate_cpml_oblique
+14: Test timeout computed to be: 7200
+14: TE requested 30.0 actual 30.0000 deg: |r| 4.0332e-07 (-127.89 dB), reference 9.3539e-07, drift 1.87e-07, steps 4028 PASS
+14:   Note: window drift is not small relative to reflection; do not treat this as a precision reflection measurement.
+14: TM requested 30.0 actual 30.0000 deg: |r| 1.0394e-06 (-119.66 dB), reference 1.1068e-06, drift 3.39e-08, steps 4028 PASS
+14: TE requested 60.0 actual 60.0000 deg: |r| 0.0017414 (-55.18 dB), reference 0.00051006, drift 0.00231, steps 6936 PASS
+14:   Note: window drift is not small relative to reflection; do not treat this as a precision reflection measurement.
+14: TM requested 60.0 actual 60.0000 deg: |r| 0.000626 (-64.07 dB), reference 0.00063177, drift 6.57e-05, steps 6936 PASS
+14:   Note: window drift is not small relative to reflection; do not treat this as a precision reflection measurement.
+1/3 Test #14: validate_cpml_oblique ..............   Passed   46.78 sec
+test 15
+    Start 15: validate_materials_high_contrast
+
+15: Test command: "C:\Users\binso\3D Objects\rfsyn\build-mingw-accuracy\validate_materials_high_contrast.exe" "--full"
+15: Working Directory: C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/validation/validate_materials_high_contrast
+15: Test timeout computed to be: 7200
+15: eps 1 -> 1: |r| 1.1383115e-06 theory 0 R 1.295753e-12 T 1 drift 1.43e-09 phase_error nan deg PASS
+15: eps 1 -> 4: |r| 0.33230272 theory 0.33333333 R 0.1104251 T 0.8916416 drift 2.26e-10 phase_error 0.00013 deg PASS
+15: eps 4 -> 1: |r| 0.33230154 theory 0.33333333 R 0.11042431 T 0.88751378 drift 1.47e-09 phase_error 0.0001217 deg PASS
+15: eps 1 -> 10: |r| 0.51848406 theory 0.51949385 R 0.26882572 T 0.73320064 drift 4.36e-11 phase_error 0.000115 deg PASS
+15: eps 10 -> 1: |r| 0.51848205 theory 0.51949385 R 0.26882364 T 0.72915559 drift 1.87e-09 phase_error 5.566e-05 deg PASS
+15: eps 1 -> 25: |r| 0.66584258 theory 0.66666667 R 0.44334634 T 0.5583087 drift 1.64e-10 phase_error 9.497e-05 deg PASS
+15: eps 25 -> 1: |r| 0.66584034 theory 0.66666667 R 0.44334336 T 0.5550065 drift 3.06e-09 phase_error 3.197e-05 deg PASS
+15: eps 1 -> 50: |r| 0.75154395 theory 0.75220131 R 0.5648183 T 0.43650238 drift 5.58e-10 phase_error 9.42e-05 deg PASS
+15: eps 50 -> 1: |r| 0.75154322 theory 0.75220131 R 0.56481721 T 0.43386611 drift 1.72e-08 phase_error 4.977e-05 deg PASS
+15: eps 1 -> 100: |r| 0.81767612 theory 0.81818182 R 0.66859424 T 0.33242186 drift 9.59e-10 phase_error 8.84e-05 deg PASS
+15: eps 100 -> 1: |r| 0.8176758 theory 0.81818182 R 0.66859371 T 0.33039329 drift 5.48e-08 phase_error 4.547e-05 deg PASS
+2/3 Test #15: validate_materials_high_contrast ...   Passed   14.05 sec
+test 16
+    Start 16: validate_long_term_stability
+
+16: Test command: "C:\Users\binso\3D Objects\rfsyn\build-mingw-accuracy\validate_long_term_stability.exe" "--steps" "100000"
+16: Working Directory: C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/validation/validate_long_term_stability
+16: Test timeout computed to be: 7200
+16: open_vacuum steps=100000 max/reference=1 late_peak/reference=7.06641e-12 final/reference=4.07068e-15 growth_windows=0 PASS
+16: open_eps25 steps=100000 max/reference=1 late_peak/reference=7.32207e-10 final/reference=2.56368e-10 growth_windows=0 PASS
+16: open_interface25 steps=100000 max/reference=1 late_peak/reference=1.42491e-10 final/reference=1.83265e-11 growth_windows=0 PASS
+16: periodic_vacuum_3d steps=100000 max/reference=1.02929 late_peak/reference=1.01281 final/reference=0.843947 growth_windows=0 PASS
+16: periodic_interface25_3d steps=100000 max/reference=1.06934 late_peak/reference=1.0666 final/reference=1.03119 growth_windows=0 PASS
+3/3 Test #16: validate_long_term_stability .......   Passed   34.82 sec
+
+100% tests passed, 0 tests failed out of 3
+
+Label Time Summary:
+extended      =  95.65 sec*proc (3 tests)
+fdtd          =  95.65 sec*proc (3 tests)
+validation    =  95.65 sec*proc (3 tests)
+
+Total Test time (real) =  95.66 sec
