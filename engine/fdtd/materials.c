@@ -34,9 +34,9 @@ static int component_number(field_component_t component) {
 
 static int component_valid(const fdtd_grid_t *g, int c, size_t i, size_t j, size_t k) {
     if (!g || c < 0 || c > 2) return 0;
-    if (c == 0) return i < g->nx && j <= g->ny && k <= g->nz;
-    if (c == 1) return i <= g->nx && j < g->ny && k <= g->nz;
-    return i <= g->nx && j <= g->ny && k < g->nz;
+    if (c == 0) return i < g->nx && j < g->ny + ((g->periodic_axes & 2u) ? 0u : 1u) && k < g->nz + ((g->periodic_axes & 4u) ? 0u : 1u);
+    if (c == 1) return i < g->nx + ((g->periodic_axes & 1u) ? 0u : 1u) && j < g->ny && k < g->nz + ((g->periodic_axes & 4u) ? 0u : 1u);
+    return i < g->nx + ((g->periodic_axes & 1u) ? 0u : 1u) && j < g->ny + ((g->periodic_axes & 2u) ? 0u : 1u) && k < g->nz;
 }
 
 static int make_coeff(const materials_t *mat, double eps_r, double sigma, material_coeff_t *out) {
@@ -197,8 +197,8 @@ int materials_get_coefficients(const materials_t *mat, const fdtd_grid_t *g, fie
 void fdtd_update_e_materials(fdtd_grid_t *g, const materials_t *mat) {
     if (!grid_matches(mat, g)) return;
     for (size_t i = 0; i < g->nx; i++) {
-        for (size_t j = 1; j < g->ny; j++) {
-            for (size_t k = 1; k < g->nz; k++) {
+        for (size_t j = (g->periodic_axes & 2u) ? 0u : 1u; j < g->ny; j++) {
+            for (size_t k = (g->periodic_axes & 4u) ? 0u : 1u; k < g->nz; k++) {
                 size_t idx = fdtd_index(g, i, j, k);
                 material_coeff_t coeff = lookup(mat, idx, 0);
                 double termA = HZ(i,j,k) - HZ(i,j-1,k);
@@ -207,9 +207,9 @@ void fdtd_update_e_materials(fdtd_grid_t *g, const materials_t *mat) {
             }
         }
     }
-    for (size_t i = 1; i < g->nx; i++) {
+    for (size_t i = (g->periodic_axes & 1u) ? 0u : 1u; i < g->nx; i++) {
         for (size_t j = 0; j < g->ny; j++) {
-            for (size_t k = 1; k < g->nz; k++) {
+            for (size_t k = (g->periodic_axes & 4u) ? 0u : 1u; k < g->nz; k++) {
                 size_t idx = fdtd_index(g, i, j, k);
                 material_coeff_t coeff = lookup(mat, idx, 1);
                 double termA = HX(i,j,k) - HX(i,j,k-1);
@@ -218,8 +218,8 @@ void fdtd_update_e_materials(fdtd_grid_t *g, const materials_t *mat) {
             }
         }
     }
-    for (size_t i = 1; i < g->nx; i++) {
-        for (size_t j = 1; j < g->ny; j++) {
+    for (size_t i = (g->periodic_axes & 1u) ? 0u : 1u; i < g->nx; i++) {
+        for (size_t j = (g->periodic_axes & 2u) ? 0u : 1u; j < g->ny; j++) {
             for (size_t k = 0; k < g->nz; k++) {
                 size_t idx = fdtd_index(g, i, j, k);
                 material_coeff_t coeff = lookup(mat, idx, 2);
@@ -234,8 +234,8 @@ void fdtd_update_e_materials(fdtd_grid_t *g, const materials_t *mat) {
 void fdtd_update_e_cpml_materials(fdtd_grid_t *g, cpml_t *pml, const materials_t *mat) {
     if (!grid_matches(mat, g) || !pml || pml->dx != g->dx) return;
     for (size_t i = 0; i < g->nx; i++) {
-        for (size_t j = 1; j < g->ny; j++) {
-            for (size_t k = 1; k < g->nz; k++) {
+        for (size_t j = (g->periodic_axes & 2u) ? 0u : 1u; j < g->ny; j++) {
+            for (size_t k = (g->periodic_axes & 4u) ? 0u : 1u; k < g->nz; k++) {
                 size_t idx = fdtd_index(g, i, j, k);
                 material_coeff_t coeff = lookup(mat, idx, 0);
                 double termA = HZ(i,j,k) - HZ(i,j-1,k);
@@ -246,9 +246,9 @@ void fdtd_update_e_cpml_materials(fdtd_grid_t *g, cpml_t *pml, const materials_t
             }
         }
     }
-    for (size_t i = 1; i < g->nx; i++) {
+    for (size_t i = (g->periodic_axes & 1u) ? 0u : 1u; i < g->nx; i++) {
         for (size_t j = 0; j < g->ny; j++) {
-            for (size_t k = 1; k < g->nz; k++) {
+            for (size_t k = (g->periodic_axes & 4u) ? 0u : 1u; k < g->nz; k++) {
                 size_t idx = fdtd_index(g, i, j, k);
                 material_coeff_t coeff = lookup(mat, idx, 1);
                 double termA = HX(i,j,k) - HX(i,j,k-1);
@@ -259,8 +259,8 @@ void fdtd_update_e_cpml_materials(fdtd_grid_t *g, cpml_t *pml, const materials_t
             }
         }
     }
-    for (size_t i = 1; i < g->nx; i++) {
-        for (size_t j = 1; j < g->ny; j++) {
+    for (size_t i = (g->periodic_axes & 1u) ? 0u : 1u; i < g->nx; i++) {
+        for (size_t j = (g->periodic_axes & 2u) ? 0u : 1u; j < g->ny; j++) {
             for (size_t k = 0; k < g->nz; k++) {
                 size_t idx = fdtd_index(g, i, j, k);
                 material_coeff_t coeff = lookup(mat, idx, 2);
