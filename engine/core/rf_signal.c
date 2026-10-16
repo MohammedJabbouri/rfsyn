@@ -1,5 +1,6 @@
 #include "rf_signal.h"
 #include <stdlib.h>
+#include <stdint.h>
 #include <string.h>
 #include <complex.h>
 

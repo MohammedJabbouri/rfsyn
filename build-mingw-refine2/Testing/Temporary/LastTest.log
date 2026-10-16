@@ -1,0 +1,61 @@
+Start testing: Oct 15 20:09 Pacific Daylight Time
+----------------------------------------------------------
+10/13 Testing: validate_cpml_planewave
+10/13 Test: validate_cpml_planewave
+Command: "C:/Users/binso/3D Objects/rfsyn/build-mingw-refine2/validate_cpml_planewave.exe"
+Directory: C:/Users/binso/3D Objects/rfsyn/build-mingw-refine2/validation/validate_cpml_planewave
+"validate_cpml_planewave" start time: Oct 15 20:09 Pacific Daylight Time
+Output:
+----------------------------------------------------------
+CPML: max normalized error 1.34820669e-06 (-117.405 dB), relative L2 3.76338082e-06
+PASS
+<end of output>
+Test time =  26.59 sec
+----------------------------------------------------------
+Test Passed.
+"validate_cpml_planewave" end time: Oct 15 20:09 Pacific Daylight Time
+"validate_cpml_planewave" time elapsed: 00:00:26
+----------------------------------------------------------
+
+11/13 Testing: validate_materials_fresnel
+11/13 Test: validate_materials_fresnel
+Command: "C:/Users/binso/3D Objects/rfsyn/build-mingw-refine2/validate_materials_fresnel.exe"
+Directory: C:/Users/binso/3D Objects/rfsyn/build-mingw-refine2/validation/validate_materials_fresnel
+"validate_materials_fresnel" start time: Oct 15 20:09 Pacific Daylight Time
+Output:
+----------------------------------------------------------
+Fresnel pulse magnitude: measured 0.333279185, theory 0.333333333, relative error 0.0162445%
+PASS
+<end of output>
+Test time =  37.16 sec
+----------------------------------------------------------
+Test Passed.
+"validate_materials_fresnel" end time: Oct 15 20:10 Pacific Daylight Time
+"validate_materials_fresnel" time elapsed: 00:00:37
+----------------------------------------------------------
+
+13/13 Testing: validate_materials_energy
+13/13 Test: validate_materials_energy
+Command: "C:/Users/binso/3D Objects/rfsyn/build-mingw-refine2/validate_materials_energy.exe"
+Directory: C:/Users/binso/3D Objects/rfsyn/build-mingw-refine2/validation/validate_materials_energy
+"validate_materials_energy" start time: Oct 15 20:10 Pacific Daylight Time
+Output:
+----------------------------------------------------------
+Energy per unit area: R=-0 T=1 balance=1 mismatch=8.70426e-10%
+PASS
+Energy per unit area: R=0.110108057 T=0.889891943 balance=1 mismatch=1.26893e-09%
+PASS
+<end of output>
+Test time =  69.79 sec
+----------------------------------------------------------
+Test Passed.
+"validate_materials_energy" end time: Oct 15 20:11 Pacific Daylight Time
+"validate_materials_energy" time elapsed: 00:01:09
+----------------------------------------------------------
+
+End testing: Oct 15 20:11 Pacific Daylight Time
+
+fdtd = 133.55 sec*proc
+
+validation = 133.55 sec*proc
+

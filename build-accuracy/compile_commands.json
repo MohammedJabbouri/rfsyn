@@ -1,0 +1,200 @@
+[
+{
+  "directory": "C:/Users/binso/3D Objects/rfsyn/build-accuracy",
+  "command": "C:\\PROGRA~2\\Arm\\GNUTOO~1\\bin\\AR19DD~1.EXE -O3 -DNDEBUG -std=gnu11 -o CMakeFiles\\rfsyn_fdtd.dir\\engine\\fdtd\\grid.c.obj -c \"C:\\Users\\binso\\3D Objects\\rfsyn\\engine\\fdtd\\grid.c\"",
+  "file": "C:/Users/binso/3D Objects/rfsyn/engine/fdtd/grid.c",
+  "output": "C:/Users/binso/3D Objects/rfsyn/build-accuracy/CMakeFiles/rfsyn_fdtd.dir/engine/fdtd/grid.c.obj"
+},
+{
+  "directory": "C:/Users/binso/3D Objects/rfsyn/build-accuracy",
+  "command": "C:\\PROGRA~2\\Arm\\GNUTOO~1\\bin\\AR19DD~1.EXE -O3 -DNDEBUG -std=gnu11 -o CMakeFiles\\rfsyn_fdtd.dir\\engine\\fdtd\\cpml.c.obj -c \"C:\\Users\\binso\\3D Objects\\rfsyn\\engine\\fdtd\\cpml.c\"",
+  "file": "C:/Users/binso/3D Objects/rfsyn/engine/fdtd/cpml.c",
+  "output": "C:/Users/binso/3D Objects/rfsyn/build-accuracy/CMakeFiles/rfsyn_fdtd.dir/engine/fdtd/cpml.c.obj"
+},
+{
+  "directory": "C:/Users/binso/3D Objects/rfsyn/build-accuracy",
+  "command": "C:\\PROGRA~2\\Arm\\GNUTOO~1\\bin\\AR19DD~1.EXE -O3 -DNDEBUG -std=gnu11 -o CMakeFiles\\rfsyn_fdtd.dir\\engine\\fdtd\\materials.c.obj -c \"C:\\Users\\binso\\3D Objects\\rfsyn\\engine\\fdtd\\materials.c\"",
+  "file": "C:/Users/binso/3D Objects/rfsyn/engine/fdtd/materials.c",
+  "output": "C:/Users/binso/3D Objects/rfsyn/build-accuracy/CMakeFiles/rfsyn_fdtd.dir/engine/fdtd/materials.c.obj"
+},
+{
+  "directory": "C:/Users/binso/3D Objects/rfsyn/build-accuracy",
+  "command": "C:\\PROGRA~2\\Arm\\GNUTOO~1\\bin\\AR19DD~1.EXE -O3 -DNDEBUG -std=gnu11 -o CMakeFiles\\rfsyn_fdtd.dir\\engine\\fdtd\\source.c.obj -c \"C:\\Users\\binso\\3D Objects\\rfsyn\\engine\\fdtd\\source.c\"",
+  "file": "C:/Users/binso/3D Objects/rfsyn/engine/fdtd/source.c",
+  "output": "C:/Users/binso/3D Objects/rfsyn/build-accuracy/CMakeFiles/rfsyn_fdtd.dir/engine/fdtd/source.c.obj"
+},
+{
+  "directory": "C:/Users/binso/3D Objects/rfsyn/build-accuracy",
+  "command": "C:\\PROGRA~2\\Arm\\GNUTOO~1\\bin\\AR19DD~1.EXE -O3 -DNDEBUG -std=gnu11 -o CMakeFiles\\rfsyn_fdtd.dir\\engine\\fdtd\\probe.c.obj -c \"C:\\Users\\binso\\3D Objects\\rfsyn\\engine\\fdtd\\probe.c\"",
+  "file": "C:/Users/binso/3D Objects/rfsyn/engine/fdtd/probe.c",
+  "output": "C:/Users/binso/3D Objects/rfsyn/build-accuracy/CMakeFiles/rfsyn_fdtd.dir/engine/fdtd/probe.c.obj"
+},
+{
+  "directory": "C:/Users/binso/3D Objects/rfsyn/build-accuracy",
+  "command": "C:\\PROGRA~2\\Arm\\GNUTOO~1\\bin\\AR19DD~1.EXE -O3 -DNDEBUG -std=gnu11 -o CMakeFiles\\rfsyn_fdtd.dir\\engine\\fdtd\\simulate.c.obj -c \"C:\\Users\\binso\\3D Objects\\rfsyn\\engine\\fdtd\\simulate.c\"",
+  "file": "C:/Users/binso/3D Objects/rfsyn/engine/fdtd/simulate.c",
+  "output": "C:/Users/binso/3D Objects/rfsyn/build-accuracy/CMakeFiles/rfsyn_fdtd.dir/engine/fdtd/simulate.c.obj"
+},
+{
+  "directory": "C:/Users/binso/3D Objects/rfsyn/build-accuracy",
+  "command": "C:\\PROGRA~2\\Arm\\GNUTOO~1\\bin\\AR19DD~1.EXE -O3 -DNDEBUG -std=gnu11 -o CMakeFiles\\rfsyn_core.dir\\engine\\core\\chain.c.obj -c \"C:\\Users\\binso\\3D Objects\\rfsyn\\engine\\core\\chain.c\"",
+  "file": "C:/Users/binso/3D Objects/rfsyn/engine/core/chain.c",
+  "output": "C:/Users/binso/3D Objects/rfsyn/build-accuracy/CMakeFiles/rfsyn_core.dir/engine/core/chain.c.obj"
+},
+{
+  "directory": "C:/Users/binso/3D Objects/rfsyn/build-accuracy",
+  "command": "C:\\PROGRA~2\\Arm\\GNUTOO~1\\bin\\AR19DD~1.EXE -O3 -DNDEBUG -std=gnu11 -o CMakeFiles\\rfsyn_core.dir\\engine\\core\\chains.c.obj -c \"C:\\Users\\binso\\3D Objects\\rfsyn\\engine\\core\\chains.c\"",
+  "file": "C:/Users/binso/3D Objects/rfsyn/engine/core/chains.c",
+  "output": "C:/Users/binso/3D Objects/rfsyn/build-accuracy/CMakeFiles/rfsyn_core.dir/engine/core/chains.c.obj"
+},
+{
+  "directory": "C:/Users/binso/3D Objects/rfsyn/build-accuracy",
+  "command": "C:\\PROGRA~2\\Arm\\GNUTOO~1\\bin\\AR19DD~1.EXE -O3 -DNDEBUG -std=gnu11 -o CMakeFiles\\rfsyn_core.dir\\engine\\core\\rf_signal.c.obj -c \"C:\\Users\\binso\\3D Objects\\rfsyn\\engine\\core\\rf_signal.c\"",
+  "file": "C:/Users/binso/3D Objects/rfsyn/engine/core/rf_signal.c",
+  "output": "C:/Users/binso/3D Objects/rfsyn/build-accuracy/CMakeFiles/rfsyn_core.dir/engine/core/rf_signal.c.obj"
+},
+{
+  "directory": "C:/Users/binso/3D Objects/rfsyn/build-accuracy",
+  "command": "C:\\PROGRA~2\\Arm\\GNUTOO~1\\bin\\AR19DD~1.EXE -O3 -DNDEBUG -std=gnu11 -o CMakeFiles\\rfsyn_core.dir\\engine\\core\\rng.c.obj -c \"C:\\Users\\binso\\3D Objects\\rfsyn\\engine\\core\\rng.c\"",
+  "file": "C:/Users/binso/3D Objects/rfsyn/engine/core/rng.c",
+  "output": "C:/Users/binso/3D Objects/rfsyn/build-accuracy/CMakeFiles/rfsyn_core.dir/engine/core/rng.c.obj"
+},
+{
+  "directory": "C:/Users/binso/3D Objects/rfsyn/build-accuracy",
+  "command": "C:\\PROGRA~2\\Arm\\GNUTOO~1\\bin\\AR19DD~1.EXE -I\"C:/Users/binso/3D Objects/rfsyn/cli\" -O3 -DNDEBUG -std=gnu11 -o CMakeFiles\\rfsyn_cjson.dir\\cli\\cJSON.c.obj -c \"C:\\Users\\binso\\3D Objects\\rfsyn\\cli\\cJSON.c\"",
+  "file": "C:/Users/binso/3D Objects/rfsyn/cli/cJSON.c",
+  "output": "C:/Users/binso/3D Objects/rfsyn/build-accuracy/CMakeFiles/rfsyn_cjson.dir/cli/cJSON.c.obj"
+},
+{
+  "directory": "C:/Users/binso/3D Objects/rfsyn/build-accuracy",
+  "command": "C:\\PROGRA~2\\Arm\\GNUTOO~1\\bin\\AR19DD~1.EXE -I\"C:/Users/binso/3D Objects/rfsyn\" -I\"C:/Users/binso/3D Objects/rfsyn/cli\" -O3 -DNDEBUG -std=gnu11 -o CMakeFiles\\rfsyn_world.dir\\engine\\world\\world.c.obj -c \"C:\\Users\\binso\\3D Objects\\rfsyn\\engine\\world\\world.c\"",
+  "file": "C:/Users/binso/3D Objects/rfsyn/engine/world/world.c",
+  "output": "C:/Users/binso/3D Objects/rfsyn/build-accuracy/CMakeFiles/rfsyn_world.dir/engine/world/world.c.obj"
+},
+{
+  "directory": "C:/Users/binso/3D Objects/rfsyn/build-accuracy",
+  "command": "C:\\PROGRA~2\\Arm\\GNUTOO~1\\bin\\AR19DD~1.EXE -I\"C:/Users/binso/3D Objects/rfsyn\" -I\"C:/Users/binso/3D Objects/rfsyn/cli\" -O3 -DNDEBUG -std=gnu11 -o CMakeFiles\\rfsyn_world.dir\\engine\\world\\material_catalog.c.obj -c \"C:\\Users\\binso\\3D Objects\\rfsyn\\engine\\world\\material_catalog.c\"",
+  "file": "C:/Users/binso/3D Objects/rfsyn/engine/world/material_catalog.c",
+  "output": "C:/Users/binso/3D Objects/rfsyn/build-accuracy/CMakeFiles/rfsyn_world.dir/engine/world/material_catalog.c.obj"
+},
+{
+  "directory": "C:/Users/binso/3D Objects/rfsyn/build-accuracy",
+  "command": "C:\\PROGRA~2\\Arm\\GNUTOO~1\\bin\\AR19DD~1.EXE -I\"C:/Users/binso/3D Objects/rfsyn\" -I\"C:/Users/binso/3D Objects/rfsyn/cli\" -O3 -DNDEBUG -std=gnu11 -o CMakeFiles\\rfsyn_world.dir\\cli\\material_config.c.obj -c \"C:\\Users\\binso\\3D Objects\\rfsyn\\cli\\material_config.c\"",
+  "file": "C:/Users/binso/3D Objects/rfsyn/cli/material_config.c",
+  "output": "C:/Users/binso/3D Objects/rfsyn/build-accuracy/CMakeFiles/rfsyn_world.dir/cli/material_config.c.obj"
+},
+{
+  "directory": "C:/Users/binso/3D Objects/rfsyn/build-accuracy",
+  "command": "C:\\PROGRA~2\\Arm\\GNUTOO~1\\bin\\AR19DD~1.EXE -O3 -DNDEBUG -std=gnu11 -o CMakeFiles\\rfsyn_noise.dir\\engine\\noise\\awgn.c.obj -c \"C:\\Users\\binso\\3D Objects\\rfsyn\\engine\\noise\\awgn.c\"",
+  "file": "C:/Users/binso/3D Objects/rfsyn/engine/noise/awgn.c",
+  "output": "C:/Users/binso/3D Objects/rfsyn/build-accuracy/CMakeFiles/rfsyn_noise.dir/engine/noise/awgn.c.obj"
+},
+{
+  "directory": "C:/Users/binso/3D Objects/rfsyn/build-accuracy",
+  "command": "C:\\PROGRA~2\\Arm\\GNUTOO~1\\bin\\AR19DD~1.EXE -I\"C:/Users/binso/3D Objects/rfsyn\" -I\"C:/Users/binso/3D Objects/rfsyn/cli\" -O3 -DNDEBUG -std=gnu11 -o CMakeFiles\\rfsyn.dir\\cli\\main.c.obj -c \"C:\\Users\\binso\\3D Objects\\rfsyn\\cli\\main.c\"",
+  "file": "C:/Users/binso/3D Objects/rfsyn/cli/main.c",
+  "output": "C:/Users/binso/3D Objects/rfsyn/build-accuracy/CMakeFiles/rfsyn.dir/cli/main.c.obj"
+},
+{
+  "directory": "C:/Users/binso/3D Objects/rfsyn/build-accuracy",
+  "command": "C:\\PROGRA~2\\Arm\\GNUTOO~1\\bin\\AR19DD~1.EXE -I\"C:/Users/binso/3D Objects/rfsyn\" -I\"C:/Users/binso/3D Objects/rfsyn/cli\" -O3 -DNDEBUG -std=gnu11 -o CMakeFiles\\rfsyn.dir\\cli\\settings.c.obj -c \"C:\\Users\\binso\\3D Objects\\rfsyn\\cli\\settings.c\"",
+  "file": "C:/Users/binso/3D Objects/rfsyn/cli/settings.c",
+  "output": "C:/Users/binso/3D Objects/rfsyn/build-accuracy/CMakeFiles/rfsyn.dir/cli/settings.c.obj"
+},
+{
+  "directory": "C:/Users/binso/3D Objects/rfsyn/build-accuracy",
+  "command": "C:\\PROGRA~2\\Arm\\GNUTOO~1\\bin\\AR19DD~1.EXE -I\"C:/Users/binso/3D Objects/rfsyn\" -I\"C:/Users/binso/3D Objects/rfsyn/cli\" -O3 -DNDEBUG -std=gnu11 -o CMakeFiles\\rfsyn.dir\\cli\\config.c.obj -c \"C:\\Users\\binso\\3D Objects\\rfsyn\\cli\\config.c\"",
+  "file": "C:/Users/binso/3D Objects/rfsyn/cli/config.c",
+  "output": "C:/Users/binso/3D Objects/rfsyn/build-accuracy/CMakeFiles/rfsyn.dir/cli/config.c.obj"
+},
+{
+  "directory": "C:/Users/binso/3D Objects/rfsyn/build-accuracy",
+  "command": "C:\\PROGRA~2\\Arm\\GNUTOO~1\\bin\\AR19DD~1.EXE -I\"C:/Users/binso/3D Objects/rfsyn\" -I\"C:/Users/binso/3D Objects/rfsyn/cli\" -O3 -DNDEBUG -std=gnu11 -o CMakeFiles\\rfsyn.dir\\cli\\presets.c.obj -c \"C:\\Users\\binso\\3D Objects\\rfsyn\\cli\\presets.c\"",
+  "file": "C:/Users/binso/3D Objects/rfsyn/cli/presets.c",
+  "output": "C:/Users/binso/3D Objects/rfsyn/build-accuracy/CMakeFiles/rfsyn.dir/cli/presets.c.obj"
+},
+{
+  "directory": "C:/Users/binso/3D Objects/rfsyn/build-accuracy",
+  "command": "C:\\PROGRA~2\\Arm\\GNUTOO~1\\bin\\AR19DD~1.EXE -I\"C:/Users/binso/3D Objects/rfsyn\" -I\"C:/Users/binso/3D Objects/rfsyn/cli\" -O3 -DNDEBUG -std=gnu11 -o CMakeFiles\\rfsyn.dir\\cli\\fdtd_stage.c.obj -c \"C:\\Users\\binso\\3D Objects\\rfsyn\\cli\\fdtd_stage.c\"",
+  "file": "C:/Users/binso/3D Objects/rfsyn/cli/fdtd_stage.c",
+  "output": "C:/Users/binso/3D Objects/rfsyn/build-accuracy/CMakeFiles/rfsyn.dir/cli/fdtd_stage.c.obj"
+},
+{
+  "directory": "C:/Users/binso/3D Objects/rfsyn/build-accuracy",
+  "command": "C:\\PROGRA~2\\Arm\\GNUTOO~1\\bin\\AR19DD~1.EXE -I\"C:/Users/binso/3D Objects/rfsyn\" -I\"C:/Users/binso/3D Objects/rfsyn/cli\" -O3 -DNDEBUG -std=gnu11 -o CMakeFiles\\world_unit.dir\\tests\\world_unit.c.obj -c \"C:\\Users\\binso\\3D Objects\\rfsyn\\tests\\world_unit.c\"",
+  "file": "C:/Users/binso/3D Objects/rfsyn/tests/world_unit.c",
+  "output": "C:/Users/binso/3D Objects/rfsyn/build-accuracy/CMakeFiles/world_unit.dir/tests/world_unit.c.obj"
+},
+{
+  "directory": "C:/Users/binso/3D Objects/rfsyn/build-accuracy",
+  "command": "C:\\PROGRA~2\\Arm\\GNUTOO~1\\bin\\AR19DD~1.EXE -I\"C:/Users/binso/3D Objects/rfsyn\" -I\"C:/Users/binso/3D Objects/rfsyn/cli\" -O3 -DNDEBUG -std=gnu11 -o CMakeFiles\\material_catalog_unit.dir\\tests\\material_catalog_unit.c.obj -c \"C:\\Users\\binso\\3D Objects\\rfsyn\\tests\\material_catalog_unit.c\"",
+  "file": "C:/Users/binso/3D Objects/rfsyn/tests/material_catalog_unit.c",
+  "output": "C:/Users/binso/3D Objects/rfsyn/build-accuracy/CMakeFiles/material_catalog_unit.dir/tests/material_catalog_unit.c.obj"
+},
+{
+  "directory": "C:/Users/binso/3D Objects/rfsyn/build-accuracy",
+  "command": "C:\\PROGRA~2\\Arm\\GNUTOO~1\\bin\\AR19DD~1.EXE -I\"C:/Users/binso/3D Objects/rfsyn\" -I\"C:/Users/binso/3D Objects/rfsyn/cli\" -O3 -DNDEBUG -std=gnu11 -o CMakeFiles\\material_config_unit.dir\\tests\\material_config_unit.c.obj -c \"C:\\Users\\binso\\3D Objects\\rfsyn\\tests\\material_config_unit.c\"",
+  "file": "C:/Users/binso/3D Objects/rfsyn/tests/material_config_unit.c",
+  "output": "C:/Users/binso/3D Objects/rfsyn/build-accuracy/CMakeFiles/material_config_unit.dir/tests/material_config_unit.c.obj"
+},
+{
+  "directory": "C:/Users/binso/3D Objects/rfsyn/build-accuracy",
+  "command": "C:\\PROGRA~2\\Arm\\GNUTOO~1\\bin\\AR19DD~1.EXE -O3 -DNDEBUG -std=gnu11 -o CMakeFiles\\simulate_unit.dir\\tests\\simulate_unit.c.obj -c \"C:\\Users\\binso\\3D Objects\\rfsyn\\tests\\simulate_unit.c\"",
+  "file": "C:/Users/binso/3D Objects/rfsyn/tests/simulate_unit.c",
+  "output": "C:/Users/binso/3D Objects/rfsyn/build-accuracy/CMakeFiles/simulate_unit.dir/tests/simulate_unit.c.obj"
+},
+{
+  "directory": "C:/Users/binso/3D Objects/rfsyn/build-accuracy",
+  "command": "C:\\PROGRA~2\\Arm\\GNUTOO~1\\bin\\AR19DD~1.EXE -O3 -DNDEBUG -std=gnu11 -o CMakeFiles\\materials_unit.dir\\tests\\materials_unit.c.obj -c \"C:\\Users\\binso\\3D Objects\\rfsyn\\tests\\materials_unit.c\"",
+  "file": "C:/Users/binso/3D Objects/rfsyn/tests/materials_unit.c",
+  "output": "C:/Users/binso/3D Objects/rfsyn/build-accuracy/CMakeFiles/materials_unit.dir/tests/materials_unit.c.obj"
+},
+{
+  "directory": "C:/Users/binso/3D Objects/rfsyn/build-accuracy",
+  "command": "C:\\PROGRA~2\\Arm\\GNUTOO~1\\bin\\AR19DD~1.EXE -O3 -DNDEBUG -std=gnu11 -o CMakeFiles\\rf_signal_unit.dir\\tests\\rf_signal_unit.c.obj -c \"C:\\Users\\binso\\3D Objects\\rfsyn\\tests\\rf_signal_unit.c\"",
+  "file": "C:/Users/binso/3D Objects/rfsyn/tests/rf_signal_unit.c",
+  "output": "C:/Users/binso/3D Objects/rfsyn/build-accuracy/CMakeFiles/rf_signal_unit.dir/tests/rf_signal_unit.c.obj"
+},
+{
+  "directory": "C:/Users/binso/3D Objects/rfsyn/build-accuracy",
+  "command": "C:\\PROGRA~2\\Arm\\GNUTOO~1\\bin\\AR19DD~1.EXE -I\"C:/Users/binso/3D Objects/rfsyn\" -I\"C:/Users/binso/3D Objects/rfsyn/cli\" -O3 -DNDEBUG -std=gnu11 -o CMakeFiles\\cli_smoke.dir\\tests\\cli_smoke.c.obj -c \"C:\\Users\\binso\\3D Objects\\rfsyn\\tests\\cli_smoke.c\"",
+  "file": "C:/Users/binso/3D Objects/rfsyn/tests/cli_smoke.c",
+  "output": "C:/Users/binso/3D Objects/rfsyn/build-accuracy/CMakeFiles/cli_smoke.dir/tests/cli_smoke.c.obj"
+},
+{
+  "directory": "C:/Users/binso/3D Objects/rfsyn/build-accuracy",
+  "command": "C:\\PROGRA~2\\Arm\\GNUTOO~1\\bin\\AR19DD~1.EXE -DRFSYN_VALIDATION_REFINEMENT=1 -O3 -DNDEBUG -std=gnu11 -o CMakeFiles\\validate_cpml.dir\\engine\\fdtd\\validate_cpml.c.obj -c \"C:\\Users\\binso\\3D Objects\\rfsyn\\engine\\fdtd\\validate_cpml.c\"",
+  "file": "C:/Users/binso/3D Objects/rfsyn/engine/fdtd/validate_cpml.c",
+  "output": "C:/Users/binso/3D Objects/rfsyn/build-accuracy/CMakeFiles/validate_cpml.dir/engine/fdtd/validate_cpml.c.obj"
+},
+{
+  "directory": "C:/Users/binso/3D Objects/rfsyn/build-accuracy",
+  "command": "C:\\PROGRA~2\\Arm\\GNUTOO~1\\bin\\AR19DD~1.EXE -DRFSYN_VALIDATION_REFINEMENT=1 -O3 -DNDEBUG -std=gnu11 -o CMakeFiles\\validate_cpml_margin.dir\\engine\\fdtd\\validate_cpml_margin.c.obj -c \"C:\\Users\\binso\\3D Objects\\rfsyn\\engine\\fdtd\\validate_cpml_margin.c\"",
+  "file": "C:/Users/binso/3D Objects/rfsyn/engine/fdtd/validate_cpml_margin.c",
+  "output": "C:/Users/binso/3D Objects/rfsyn/build-accuracy/CMakeFiles/validate_cpml_margin.dir/engine/fdtd/validate_cpml_margin.c.obj"
+},
+{
+  "directory": "C:/Users/binso/3D Objects/rfsyn/build-accuracy",
+  "command": "C:\\PROGRA~2\\Arm\\GNUTOO~1\\bin\\AR19DD~1.EXE -DRFSYN_VALIDATION_REFINEMENT=1 -O3 -DNDEBUG -std=gnu11 -o CMakeFiles\\validate_cpml_planewave.dir\\engine\\fdtd\\validate_cpml_planewave.c.obj -c \"C:\\Users\\binso\\3D Objects\\rfsyn\\engine\\fdtd\\validate_cpml_planewave.c\"",
+  "file": "C:/Users/binso/3D Objects/rfsyn/engine/fdtd/validate_cpml_planewave.c",
+  "output": "C:/Users/binso/3D Objects/rfsyn/build-accuracy/CMakeFiles/validate_cpml_planewave.dir/engine/fdtd/validate_cpml_planewave.c.obj"
+},
+{
+  "directory": "C:/Users/binso/3D Objects/rfsyn/build-accuracy",
+  "command": "C:\\PROGRA~2\\Arm\\GNUTOO~1\\bin\\AR19DD~1.EXE -DRFSYN_VALIDATION_REFINEMENT=1 -O3 -DNDEBUG -std=gnu11 -o CMakeFiles\\validate_materials_fresnel.dir\\engine\\fdtd\\validate_materials_fresnel.c.obj -c \"C:\\Users\\binso\\3D Objects\\rfsyn\\engine\\fdtd\\validate_materials_fresnel.c\"",
+  "file": "C:/Users/binso/3D Objects/rfsyn/engine/fdtd/validate_materials_fresnel.c",
+  "output": "C:/Users/binso/3D Objects/rfsyn/build-accuracy/CMakeFiles/validate_materials_fresnel.dir/engine/fdtd/validate_materials_fresnel.c.obj"
+},
+{
+  "directory": "C:/Users/binso/3D Objects/rfsyn/build-accuracy",
+  "command": "C:\\PROGRA~2\\Arm\\GNUTOO~1\\bin\\AR19DD~1.EXE -DRFSYN_VALIDATION_REFINEMENT=1 -O3 -DNDEBUG -std=gnu11 -o CMakeFiles\\validate_probe_dft.dir\\engine\\fdtd\\validate_probe_dft.c.obj -c \"C:\\Users\\binso\\3D Objects\\rfsyn\\engine\\fdtd\\validate_probe_dft.c\"",
+  "file": "C:/Users/binso/3D Objects/rfsyn/engine/fdtd/validate_probe_dft.c",
+  "output": "C:/Users/binso/3D Objects/rfsyn/build-accuracy/CMakeFiles/validate_probe_dft.dir/engine/fdtd/validate_probe_dft.c.obj"
+},
+{
+  "directory": "C:/Users/binso/3D Objects/rfsyn/build-accuracy",
+  "command": "C:\\PROGRA~2\\Arm\\GNUTOO~1\\bin\\AR19DD~1.EXE -DRFSYN_VALIDATION_REFINEMENT=1 -O3 -DNDEBUG -std=gnu11 -o CMakeFiles\\validate_materials_energy.dir\\engine\\fdtd\\validate_materials_energy.c.obj -c \"C:\\Users\\binso\\3D Objects\\rfsyn\\engine\\fdtd\\validate_materials_energy.c\"",
+  "file": "C:/Users/binso/3D Objects/rfsyn/engine/fdtd/validate_materials_energy.c",
+  "output": "C:/Users/binso/3D Objects/rfsyn/build-accuracy/CMakeFiles/validate_materials_energy.dir/engine/fdtd/validate_materials_energy.c.obj"
+}
+]

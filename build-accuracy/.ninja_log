@@ -1,0 +1,19 @@
+# ninja log v7
+33	447	8138224622544186	CMakeFiles/rfsyn_core.dir/engine/core/chain.c.obj	46d239db1467e9d9
+116	479	8138224623479635	CMakeFiles/rfsyn_fdtd.dir/engine/fdtd/source.c.obj	e4342811e8fbce8e
+56	488	8138224622774088	CMakeFiles/rfsyn_core.dir/engine/core/rng.c.obj	c59f76fdd2ee75b6
+41	551	8138224622614066	CMakeFiles/rfsyn_core.dir/engine/core/chains.c.obj	51f6a9d0677bafd
+137	556	8138224623729634	CMakeFiles/rfsyn_fdtd.dir/engine/fdtd/probe.c.obj	e120bfb2e9951e8c
+73	920	8138224622934468	CMakeFiles/rfsyn_fdtd.dir/engine/fdtd/grid.c.obj	d13c71e0b7c919c
+83	1281	8138224623034469	CMakeFiles/rfsyn_fdtd.dir/engine/fdtd/cpml.c.obj	11177a55b1f77274
+93	1338	8138224623232513	CMakeFiles/rfsyn_fdtd.dir/engine/fdtd/materials.c.obj	99d80580d6ec2b6f
+64	1838	8138224622844085	CMakeFiles/rfsyn_cjson.dir/cli/cJSON.c.obj	9b40d9bf0fa3b50a
+140	524	8138224837422578	librfsyn_cjson.a	f92cdf007daa959d
+102	532	8138224837302544	CMakeFiles/rfsyn_fdtd.dir/engine/fdtd/simulate.c.obj	d6be9f820516c0b3
+198	539	8138224838257763	CMakeFiles/rfsyn_noise.dir/engine/noise/awgn.c.obj	e39410d7be93a0d8
+252	586	8138224838537769	CMakeFiles/rfsyn.dir/cli/settings.c.obj	180a7f444697307c
+184	668	8138224837862550	CMakeFiles/rfsyn_world.dir/cli/material_config.c.obj	471d93ad894f899e
+157	688	8138224837582541	CMakeFiles/rfsyn_world.dir/engine/world/world.c.obj	ea6c83cee1d9d89b
+261	698	8138224838627750	CMakeFiles/rfsyn.dir/cli/config.c.obj	16392616bcd0c651
+170	848	8138224837722563	CMakeFiles/rfsyn_world.dir/engine/world/material_catalog.c.obj	f631a77f3f611a50
+243	878	8138224838447758	CMakeFiles/rfsyn.dir/cli/main.c.obj	af8954df2c35b468

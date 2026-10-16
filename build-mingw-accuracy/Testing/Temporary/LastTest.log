@@ -1,0 +1,125 @@
+Start testing: Oct 15 20:04 Pacific Daylight Time
+----------------------------------------------------------
+8/13 Testing: validate_cpml
+8/13 Test: validate_cpml
+Command: "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/validate_cpml.exe"
+Directory: C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/validation/validate_cpml
+"validate_cpml" start time: Oct 15 20:04 Pacific Daylight Time
+Output:
+----------------------------------------------------------
+probe 0: max normalized 0.00564851976, relative L2 0.00788511703
+PASS
+<end of output>
+Test time =   5.09 sec
+----------------------------------------------------------
+Test Passed.
+"validate_cpml" end time: Oct 15 20:05 Pacific Daylight Time
+"validate_cpml" time elapsed: 00:00:05
+----------------------------------------------------------
+
+9/13 Testing: validate_cpml_margin
+9/13 Test: validate_cpml_margin
+Command: "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/validate_cpml_margin.exe"
+Directory: C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/validation/validate_cpml_margin
+"validate_cpml_margin" start time: Oct 15 20:05 Pacific Daylight Time
+Output:
+----------------------------------------------------------
+probe 0: max normalized 0.00417997619, relative L2 0.0040186177
+probe 1: max normalized 0.00443705633, relative L2 0.00525515435
+probe 2: max normalized 0.00478577391, relative L2 0.00634458602
+probe 3: max normalized 0.00568728943, relative L2 0.00824111186
+probe 4: max normalized 0.00579124523, relative L2 0.00880691036
+PASS
+<end of output>
+Test time =  13.60 sec
+----------------------------------------------------------
+Test Passed.
+"validate_cpml_margin" end time: Oct 15 20:05 Pacific Daylight Time
+"validate_cpml_margin" time elapsed: 00:00:13
+----------------------------------------------------------
+
+10/13 Testing: validate_cpml_planewave
+10/13 Test: validate_cpml_planewave
+Command: "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/validate_cpml_planewave.exe"
+Directory: C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/validation/validate_cpml_planewave
+"validate_cpml_planewave" start time: Oct 15 20:05 Pacific Daylight Time
+Output:
+----------------------------------------------------------
+CPML: max normalized error 3.23401409e-06 (-109.805 dB), relative L2 4.88901426e-06
+PASS
+<end of output>
+Test time =   5.90 sec
+----------------------------------------------------------
+Test Passed.
+"validate_cpml_planewave" end time: Oct 15 20:05 Pacific Daylight Time
+"validate_cpml_planewave" time elapsed: 00:00:05
+----------------------------------------------------------
+
+11/13 Testing: validate_materials_fresnel
+11/13 Test: validate_materials_fresnel
+Command: "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/validate_materials_fresnel.exe"
+Directory: C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/validation/validate_materials_fresnel
+"validate_materials_fresnel" start time: Oct 15 20:05 Pacific Daylight Time
+Output:
+----------------------------------------------------------
+Fresnel pulse magnitude: measured 0.33183219, theory 0.333333333, relative error 0.450343%
+PASS
+<end of output>
+Test time =   8.81 sec
+----------------------------------------------------------
+Test Passed.
+"validate_materials_fresnel" end time: Oct 15 20:05 Pacific Daylight Time
+"validate_materials_fresnel" time elapsed: 00:00:08
+----------------------------------------------------------
+
+12/13 Testing: validate_probe_dft
+12/13 Test: validate_probe_dft
+Command: "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/validate_probe_dft.exe"
+Directory: C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/validation/validate_probe_dft
+"validate_probe_dft" start time: Oct 15 20:05 Pacific Daylight Time
+Output:
+----------------------------------------------------------
+cross-check: source.c/probe.c vs. previously-validated margin result
+frequency = 1.500e+10 Hz, threshold = -30.0 dB
+
+dist_to_pml    mag_ref        diff_mag       error_db    
+11             1.554240e-13   3.500206e-18   -92.948     
+8              1.074077e-13   1.358431e-18   -97.960     
+5              8.211862e-14   5.503735e-18   -83.476     
+2              6.633482e-14   6.450091e-18   -80.244     
+1              6.232234e-14   6.568795e-18   -79.543     
+
+PASS: all probes below -30.0 dB
+<end of output>
+Test time =  14.23 sec
+----------------------------------------------------------
+Test Passed.
+"validate_probe_dft" end time: Oct 15 20:05 Pacific Daylight Time
+"validate_probe_dft" time elapsed: 00:00:14
+----------------------------------------------------------
+
+13/13 Testing: validate_materials_energy
+13/13 Test: validate_materials_energy
+Command: "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/validate_materials_energy.exe"
+Directory: C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/validation/validate_materials_energy
+"validate_materials_energy" start time: Oct 15 20:05 Pacific Daylight Time
+Output:
+----------------------------------------------------------
+Energy per unit area: R=-0 T=1 balance=1 mismatch=8.82483e-10%
+PASS
+Energy per unit area: R=0.107016393 T=0.892983607 balance=1 mismatch=1.28805e-09%
+PASS
+<end of output>
+Test time =  17.99 sec
+----------------------------------------------------------
+Test Passed.
+"validate_materials_energy" end time: Oct 15 20:06 Pacific Daylight Time
+"validate_materials_energy" time elapsed: 00:00:17
+----------------------------------------------------------
+
+End testing: Oct 15 20:06 Pacific Daylight Time
+
+fdtd =  65.61 sec*proc
+
+validation =  65.61 sec*proc
+

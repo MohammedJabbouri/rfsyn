@@ -1,0 +1,85 @@
+UpdateCTestConfiguration  from :C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/DartConfiguration.tcl
+Test project C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy
+Constructing a list of tests
+Done constructing a list of tests
+Updating test list for fixtures
+Added 0 tests to meet fixture requirements
+Checking test dependency graph...
+Checking test dependency graph end
+test 8
+    Start  8: validate_cpml
+
+8: Test command: "C:\Users\binso\3D Objects\rfsyn\build-mingw-accuracy\validate_cpml.exe"
+8: Working Directory: C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/validation/validate_cpml
+8: Test timeout computed to be: 10000000
+8: probe 0: max normalized 0.00564851976, relative L2 0.00788511703
+8: PASS
+1/6 Test  #8: validate_cpml ....................   Passed    5.09 sec
+test 9
+    Start  9: validate_cpml_margin
+
+9: Test command: "C:\Users\binso\3D Objects\rfsyn\build-mingw-accuracy\validate_cpml_margin.exe"
+9: Working Directory: C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/validation/validate_cpml_margin
+9: Test timeout computed to be: 10000000
+9: probe 0: max normalized 0.00417997619, relative L2 0.0040186177
+9: probe 1: max normalized 0.00443705633, relative L2 0.00525515435
+9: probe 2: max normalized 0.00478577391, relative L2 0.00634458602
+9: probe 3: max normalized 0.00568728943, relative L2 0.00824111186
+9: probe 4: max normalized 0.00579124523, relative L2 0.00880691036
+9: PASS
+2/6 Test  #9: validate_cpml_margin .............   Passed   13.60 sec
+test 10
+    Start 10: validate_cpml_planewave
+
+10: Test command: "C:\Users\binso\3D Objects\rfsyn\build-mingw-accuracy\validate_cpml_planewave.exe"
+10: Working Directory: C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/validation/validate_cpml_planewave
+10: Test timeout computed to be: 10000000
+10: CPML: max normalized error 3.23401409e-06 (-109.805 dB), relative L2 4.88901426e-06
+10: PASS
+3/6 Test #10: validate_cpml_planewave ..........   Passed    5.90 sec
+test 11
+    Start 11: validate_materials_fresnel
+
+11: Test command: "C:\Users\binso\3D Objects\rfsyn\build-mingw-accuracy\validate_materials_fresnel.exe"
+11: Working Directory: C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/validation/validate_materials_fresnel
+11: Test timeout computed to be: 10000000
+11: Fresnel pulse magnitude: measured 0.33183219, theory 0.333333333, relative error 0.450343%
+11: PASS
+4/6 Test #11: validate_materials_fresnel .......   Passed    8.81 sec
+test 12
+    Start 12: validate_probe_dft
+
+12: Test command: "C:\Users\binso\3D Objects\rfsyn\build-mingw-accuracy\validate_probe_dft.exe"
+12: Working Directory: C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/validation/validate_probe_dft
+12: Test timeout computed to be: 10000000
+12: cross-check: source.c/probe.c vs. previously-validated margin result
+12: frequency = 1.500e+10 Hz, threshold = -30.0 dB
+12: 
+12: dist_to_pml    mag_ref        diff_mag       error_db    
+12: 11             1.554240e-13   3.500206e-18   -92.948     
+12: 8              1.074077e-13   1.358431e-18   -97.960     
+12: 5              8.211862e-14   5.503735e-18   -83.476     
+12: 2              6.633482e-14   6.450091e-18   -80.244     
+12: 1              6.232234e-14   6.568795e-18   -79.543     
+12: 
+12: PASS: all probes below -30.0 dB
+5/6 Test #12: validate_probe_dft ...............   Passed   14.23 sec
+test 13
+    Start 13: validate_materials_energy
+
+13: Test command: "C:\Users\binso\3D Objects\rfsyn\build-mingw-accuracy\validate_materials_energy.exe"
+13: Working Directory: C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/validation/validate_materials_energy
+13: Test timeout computed to be: 10000000
+13: Energy per unit area: R=-0 T=1 balance=1 mismatch=8.82483e-10%
+13: PASS
+13: Energy per unit area: R=0.107016393 T=0.892983607 balance=1 mismatch=1.28805e-09%
+13: PASS
+6/6 Test #13: validate_materials_energy ........   Passed   17.99 sec
+
+100% tests passed, 0 tests failed out of 6
+
+Label Time Summary:
+fdtd          =  65.61 sec*proc (6 tests)
+validation    =  65.61 sec*proc (6 tests)
+
+Total Test time (real) =  65.63 sec

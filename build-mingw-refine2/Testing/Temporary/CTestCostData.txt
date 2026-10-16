@@ -1,0 +1,4 @@
+validate_cpml_planewave 1 26.5917
+validate_materials_fresnel 1 37.1645
+validate_materials_energy 1 69.7944
+---
