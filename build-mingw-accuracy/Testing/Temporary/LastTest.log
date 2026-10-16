@@ -1,10 +1,10 @@
-Start testing: Oct 15 21:11 Pacific Daylight Time
+Start testing: Oct 15 21:27 Pacific Daylight Time
 ----------------------------------------------------------
 1/13 Testing: world_unit
 1/13 Test: world_unit
 Command: "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/world_unit.exe"
 Directory: C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy
-"world_unit" start time: Oct 15 21:11 Pacific Daylight Time
+"world_unit" start time: Oct 15 21:27 Pacific Daylight Time
 Output:
 ----------------------------------------------------------
 world_unit: PASS
@@ -12,7 +12,7 @@ world_unit: PASS
 Test time =   0.01 sec
 ----------------------------------------------------------
 Test Passed.
-"world_unit" end time: Oct 15 21:11 Pacific Daylight Time
+"world_unit" end time: Oct 15 21:27 Pacific Daylight Time
 "world_unit" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -20,7 +20,7 @@ Test Passed.
 2/13 Test: material_catalog_unit
 Command: "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/material_catalog_unit.exe"
 Directory: C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy
-"material_catalog_unit" start time: Oct 15 21:11 Pacific Daylight Time
+"material_catalog_unit" start time: Oct 15 21:27 Pacific Daylight Time
 Output:
 ----------------------------------------------------------
 material_catalog_unit: PASS
@@ -28,7 +28,7 @@ material_catalog_unit: PASS
 Test time =   0.01 sec
 ----------------------------------------------------------
 Test Passed.
-"material_catalog_unit" end time: Oct 15 21:11 Pacific Daylight Time
+"material_catalog_unit" end time: Oct 15 21:27 Pacific Daylight Time
 "material_catalog_unit" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -36,7 +36,7 @@ Test Passed.
 3/13 Test: material_config_unit
 Command: "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/material_config_unit.exe"
 Directory: C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy
-"material_config_unit" start time: Oct 15 21:11 Pacific Daylight Time
+"material_config_unit" start time: Oct 15 21:27 Pacific Daylight Time
 Output:
 ----------------------------------------------------------
 material_config: concrete_normal failed: material exists; explicit override required
@@ -73,7 +73,7 @@ material_config_unit: PASS (32 cases)
 Test time =   0.01 sec
 ----------------------------------------------------------
 Test Passed.
-"material_config_unit" end time: Oct 15 21:11 Pacific Daylight Time
+"material_config_unit" end time: Oct 15 21:27 Pacific Daylight Time
 "material_config_unit" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -81,7 +81,7 @@ Test Passed.
 4/13 Test: simulate_unit
 Command: "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/simulate_unit.exe"
 Directory: C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy
-"simulate_unit" start time: Oct 15 21:11 Pacific Daylight Time
+"simulate_unit" start time: Oct 15 21:27 Pacific Daylight Time
 Output:
 ----------------------------------------------------------
 simulate_unit: PASS
@@ -91,10 +91,10 @@ early peak: 1.953877629e-07
 sample rate: 5.245007767e+11 Hz
 determinism: bit-for-bit identical
 <end of output>
-Test time =   2.59 sec
+Test time =   2.46 sec
 ----------------------------------------------------------
 Test Passed.
-"simulate_unit" end time: Oct 15 21:12 Pacific Daylight Time
+"simulate_unit" end time: Oct 15 21:27 Pacific Daylight Time
 "simulate_unit" time elapsed: 00:00:02
 ----------------------------------------------------------
 
@@ -102,7 +102,7 @@ Test Passed.
 5/13 Test: materials_unit
 Command: "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/materials_unit.exe"
 Directory: C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy
-"materials_unit" start time: Oct 15 21:12 Pacific Daylight Time
+"materials_unit" start time: Oct 15 21:27 Pacific Daylight Time
 Output:
 ----------------------------------------------------------
 materials_unit: PASS
@@ -110,7 +110,7 @@ materials_unit: PASS
 Test time =   0.01 sec
 ----------------------------------------------------------
 Test Passed.
-"materials_unit" end time: Oct 15 21:12 Pacific Daylight Time
+"materials_unit" end time: Oct 15 21:27 Pacific Daylight Time
 "materials_unit" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -118,7 +118,7 @@ Test Passed.
 6/13 Test: rf_signal_unit
 Command: "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/rf_signal_unit.exe"
 Directory: C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy
-"rf_signal_unit" start time: Oct 15 21:12 Pacific Daylight Time
+"rf_signal_unit" start time: Oct 15 21:27 Pacific Daylight Time
 Output:
 ----------------------------------------------------------
 PASS
@@ -126,7 +126,7 @@ PASS
 Test time =   0.01 sec
 ----------------------------------------------------------
 Test Passed.
-"rf_signal_unit" end time: Oct 15 21:12 Pacific Daylight Time
+"rf_signal_unit" end time: Oct 15 21:27 Pacific Daylight Time
 "rf_signal_unit" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -134,7 +134,7 @@ Test Passed.
 7/13 Test: cli_smoke
 Command: "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/cli_smoke.exe" "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/rfsyn.exe"
 Directory: C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy
-"cli_smoke" start time: Oct 15 21:12 Pacific Daylight Time
+"cli_smoke" start time: Oct 15 21:27 Pacific Daylight Time
 Output:
 ----------------------------------------------------------
 created configs/
@@ -232,10 +232,10 @@ done: 5 / 5 example(s) written to 'output/'
 OK: output/example_000000.iq first sample = 0.000017-0.000491j (AWGN applied)
 PASS
 <end of output>
-Test time =   6.85 sec
+Test time =   6.19 sec
 ----------------------------------------------------------
 Test Passed.
-"cli_smoke" end time: Oct 15 21:12 Pacific Daylight Time
+"cli_smoke" end time: Oct 15 21:28 Pacific Daylight Time
 "cli_smoke" time elapsed: 00:00:06
 ----------------------------------------------------------
 
@@ -243,16 +243,16 @@ Test Passed.
 8/13 Test: validate_cpml
 Command: "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/validate_cpml.exe"
 Directory: C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/validation/validate_cpml
-"validate_cpml" start time: Oct 15 21:12 Pacific Daylight Time
+"validate_cpml" start time: Oct 15 21:28 Pacific Daylight Time
 Output:
 ----------------------------------------------------------
 probe 0: max normalized 0.00564851976, relative L2 0.00788511703
 PASS
 <end of output>
-Test time =   4.85 sec
+Test time =   4.54 sec
 ----------------------------------------------------------
 Test Passed.
-"validate_cpml" end time: Oct 15 21:12 Pacific Daylight Time
+"validate_cpml" end time: Oct 15 21:28 Pacific Daylight Time
 "validate_cpml" time elapsed: 00:00:04
 ----------------------------------------------------------
 
@@ -260,7 +260,7 @@ Test Passed.
 9/13 Test: validate_cpml_margin
 Command: "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/validate_cpml_margin.exe"
 Directory: C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/validation/validate_cpml_margin
-"validate_cpml_margin" start time: Oct 15 21:12 Pacific Daylight Time
+"validate_cpml_margin" start time: Oct 15 21:28 Pacific Daylight Time
 Output:
 ----------------------------------------------------------
 probe 0: max normalized 0.00417997619, relative L2 0.0040186177
@@ -270,27 +270,27 @@ probe 3: max normalized 0.00568728943, relative L2 0.00824111186
 probe 4: max normalized 0.00579124523, relative L2 0.00880691036
 PASS
 <end of output>
-Test time =  12.76 sec
+Test time =  11.83 sec
 ----------------------------------------------------------
 Test Passed.
-"validate_cpml_margin" end time: Oct 15 21:12 Pacific Daylight Time
-"validate_cpml_margin" time elapsed: 00:00:12
+"validate_cpml_margin" end time: Oct 15 21:28 Pacific Daylight Time
+"validate_cpml_margin" time elapsed: 00:00:11
 ----------------------------------------------------------
 
 10/13 Testing: validate_cpml_planewave
 10/13 Test: validate_cpml_planewave
 Command: "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/validate_cpml_planewave.exe"
 Directory: C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/validation/validate_cpml_planewave
-"validate_cpml_planewave" start time: Oct 15 21:12 Pacific Daylight Time
+"validate_cpml_planewave" start time: Oct 15 21:28 Pacific Daylight Time
 Output:
 ----------------------------------------------------------
 CPML: max normalized error 3.23401409e-06 (-109.805 dB), relative L2 4.88901426e-06
 PASS
 <end of output>
-Test time =   5.85 sec
+Test time =   5.60 sec
 ----------------------------------------------------------
 Test Passed.
-"validate_cpml_planewave" end time: Oct 15 21:12 Pacific Daylight Time
+"validate_cpml_planewave" end time: Oct 15 21:28 Pacific Daylight Time
 "validate_cpml_planewave" time elapsed: 00:00:05
 ----------------------------------------------------------
 
@@ -298,16 +298,16 @@ Test Passed.
 11/13 Test: validate_materials_fresnel
 Command: "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/validate_materials_fresnel.exe"
 Directory: C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/validation/validate_materials_fresnel
-"validate_materials_fresnel" start time: Oct 15 21:12 Pacific Daylight Time
+"validate_materials_fresnel" start time: Oct 15 21:28 Pacific Daylight Time
 Output:
 ----------------------------------------------------------
 Fresnel pulse magnitude: measured 0.33183219, theory 0.333333333, relative error 0.450343%
 PASS
 <end of output>
-Test time =   8.42 sec
+Test time =   8.11 sec
 ----------------------------------------------------------
 Test Passed.
-"validate_materials_fresnel" end time: Oct 15 21:12 Pacific Daylight Time
+"validate_materials_fresnel" end time: Oct 15 21:28 Pacific Daylight Time
 "validate_materials_fresnel" time elapsed: 00:00:08
 ----------------------------------------------------------
 
@@ -315,7 +315,7 @@ Test Passed.
 12/13 Test: validate_probe_dft
 Command: "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/validate_probe_dft.exe"
 Directory: C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/validation/validate_probe_dft
-"validate_probe_dft" start time: Oct 15 21:12 Pacific Daylight Time
+"validate_probe_dft" start time: Oct 15 21:28 Pacific Daylight Time
 Output:
 ----------------------------------------------------------
 cross-check: source.c/probe.c vs. previously-validated margin result
@@ -330,10 +330,10 @@ dist_to_pml    mag_ref        diff_mag       error_db
 
 PASS: all probes below -30.0 dB
 <end of output>
-Test time =  12.59 sec
+Test time =  12.20 sec
 ----------------------------------------------------------
 Test Passed.
-"validate_probe_dft" end time: Oct 15 21:12 Pacific Daylight Time
+"validate_probe_dft" end time: Oct 15 21:28 Pacific Daylight Time
 "validate_probe_dft" time elapsed: 00:00:12
 ----------------------------------------------------------
 
@@ -341,7 +341,7 @@ Test Passed.
 13/13 Test: validate_materials_energy
 Command: "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/validate_materials_energy.exe"
 Directory: C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/validation/validate_materials_energy
-"validate_materials_energy" start time: Oct 15 21:12 Pacific Daylight Time
+"validate_materials_energy" start time: Oct 15 21:28 Pacific Daylight Time
 Output:
 ----------------------------------------------------------
 Energy per unit area: R=-0 T=1 balance=1 mismatch=8.82483e-10%
@@ -349,16 +349,16 @@ PASS
 Energy per unit area: R=0.107016393 T=0.892983607 balance=1 mismatch=1.28805e-09%
 PASS
 <end of output>
-Test time =  16.85 sec
+Test time =  16.19 sec
 ----------------------------------------------------------
 Test Passed.
-"validate_materials_energy" end time: Oct 15 21:13 Pacific Daylight Time
+"validate_materials_energy" end time: Oct 15 21:29 Pacific Daylight Time
 "validate_materials_energy" time elapsed: 00:00:16
 ----------------------------------------------------------
 
-End testing: Oct 15 21:13 Pacific Daylight Time
+End testing: Oct 15 21:29 Pacific Daylight Time
 
-fdtd =  61.32 sec*proc
+fdtd =  58.47 sec*proc
 
-validation =  61.32 sec*proc
+validation =  58.47 sec*proc
 

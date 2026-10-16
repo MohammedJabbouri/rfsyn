@@ -1,41 +1,3 @@
-/*
- * validate_materials_high_contrast.c -- normal-incidence reflection and
- * transmission at high-contrast lossless dielectric interfaces.
- *
- * IMPORTANT SCOPE NOTE
- *   A clean normal-incidence plane wave needs transverse periodic (or
- *   PEC/PMC) boundaries. Those are not part of the public grid/CPML API used
- *   by these validators, so this program runs a self-contained 1-D Yee
- *   kernel that uses the same staggering, the same timestep rule
- *   (dt = 0.99 dx / (c sqrt 3)), and the same Ca/Cb coefficient form as
- *   materials.c. It therefore measures the discretization and the
- *   interface rule -- not the 3-D library code path. Once the periodic
- *   boundary API is confirmed, the kernel can be swapped for the library.
- *
- * Method
- *   Run A: homogeneous medium 1 (incident reference).
- *   Run B: medium 1 | interface | medium 2.
- *   P1 sits in medium 1 before the interface, P2 in medium 2 after it.
- *   incident  = A(P1)          reflected = B(P1) - A(P1)
- *   transmitted = B(P2)
- *   R = |DFT refl|^2 / |DFT inc|^2,  T = (n2/n1) |DFT trans|^2 / |DFT inc|^2
- *   evaluated at f0 (default 1 GHz). The domain is long enough that the
- *   PEC ends cannot contaminate the recorded window.
- *
- * Interface rule: the E node on the interface uses eps = (eps1+eps2)/2
- * (second-order for a grid-aligned planar interface). --staircase assigns
- * medium 2 to that node instead, giving the uncorrected baseline.
- *
- * Options:
- *   --eps X            single eps_r instead of {1,4,10,25,50,100}
- *   --direction in|out|both   air->dielectric, dielectric->air (default both)
- *   --scale 1|2|4      refinement (dx = 1 mm / scale), default 1
- *   --freq HZ          analysis frequency (default 1e9)
- *   --tol X            absolute gate on R, T and R+T-1 (default 0.02)
- *   --staircase        disable interface averaging
- *   --no-waveforms     skip per-case waveform CSVs
- *   --strict           nonzero exit if any gate fails
- */
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -56,11 +18,9 @@ static int run_case(double eps1, double eps2, int scale, double f0, int staircas
     const double n1 = sqrt(eps1), n2 = sqrt(eps2);
     const double v1 = AT_C0 / n1, v2 = AT_C0 / n2;
 
-    /* pulse: Gaussian-modulated sinusoid at f0, ~32% fractional bandwidth */
     const double tau = 1.0 / f0;
     const double t0 = 4.5 * tau;
 
-    /* physical geometry (metres) */
     const double d_src = 0.120, d1 = 0.060, d2 = 0.060;
     double t_end = 2.0 * t0 + fmax((d_src + d1) / v1, d_src / v1 + d2 / v2) + 2.0 * tau;
     size_t n_steps = (size_t)ceil(t_end / dt);
@@ -68,9 +28,9 @@ static int run_case(double eps1, double eps2, int scale, double f0, int staircas
     size_t pad = (size_t)ceil(0.55 * AT_C0 * t_end / dx) + 20;
     size_t c_src = (size_t)llround(d_src / dx), c1 = (size_t)llround(d1 / dx), c2 = (size_t)llround(d2 / dx);
     size_t is = pad;
-    size_t ii = is + c_src;           /* interface E node */
+    size_t ii = is + c_src;
     size_t p1 = ii - c1, p2 = ii + c2;
-    size_t N = p2 + pad;              /* E nodes 0..N, H nodes 0..N-1 */
+    size_t N = p2 + pad;
 
     double *ea = at_xcalloc(N + 1, sizeof(double), "ea"), *ha = at_xcalloc(N, sizeof(double), "ha");
     double *eb = at_xcalloc(N + 1, sizeof(double), "eb"), *hb = at_xcalloc(N, sizeof(double), "hb");
