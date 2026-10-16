@@ -196,5 +196,23 @@
   "command": "C:\\msys64\\mingw64\\bin\\gcc.exe -DRFSYN_HAS_OPENMP=1 -DRFSYN_VALIDATION_REFINEMENT=1 -O3 -DNDEBUG -std=gnu11 -fopenmp -o CMakeFiles\\validate_materials_energy.dir\\engine\\fdtd\\validate_materials_energy.c.obj -c \"C:\\Users\\binso\\3D Objects\\rfsyn\\engine\\fdtd\\validate_materials_energy.c\"",
   "file": "C:/Users/binso/3D Objects/rfsyn/engine/fdtd/validate_materials_energy.c",
   "output": "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/CMakeFiles/validate_materials_energy.dir/engine/fdtd/validate_materials_energy.c.obj"
+},
+{
+  "directory": "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy",
+  "command": "C:\\msys64\\mingw64\\bin\\gcc.exe -DRFSYN_HAS_OPENMP=1 -DRFSYN_VALIDATION_REFINEMENT=1 -O3 -DNDEBUG -std=gnu11 -fopenmp -o CMakeFiles\\validate_cpml_oblique.dir\\engine\\fdtd\\validate_cpml_oblique.c.obj -c \"C:\\Users\\binso\\3D Objects\\rfsyn\\engine\\fdtd\\validate_cpml_oblique.c\"",
+  "file": "C:/Users/binso/3D Objects/rfsyn/engine/fdtd/validate_cpml_oblique.c",
+  "output": "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/CMakeFiles/validate_cpml_oblique.dir/engine/fdtd/validate_cpml_oblique.c.obj"
+},
+{
+  "directory": "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy",
+  "command": "C:\\msys64\\mingw64\\bin\\gcc.exe -DRFSYN_HAS_OPENMP=1 -DRFSYN_VALIDATION_REFINEMENT=1 -O3 -DNDEBUG -std=gnu11 -fopenmp -o CMakeFiles\\validate_materials_high_contrast.dir\\engine\\fdtd\\validate_materials_high_contrast.c.obj -c \"C:\\Users\\binso\\3D Objects\\rfsyn\\engine\\fdtd\\validate_materials_high_contrast.c\"",
+  "file": "C:/Users/binso/3D Objects/rfsyn/engine/fdtd/validate_materials_high_contrast.c",
+  "output": "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/CMakeFiles/validate_materials_high_contrast.dir/engine/fdtd/validate_materials_high_contrast.c.obj"
+},
+{
+  "directory": "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy",
+  "command": "C:\\msys64\\mingw64\\bin\\gcc.exe -DRFSYN_HAS_OPENMP=1 -DRFSYN_VALIDATION_REFINEMENT=1 -O3 -DNDEBUG -std=gnu11 -fopenmp -o CMakeFiles\\validate_long_term_stability.dir\\engine\\fdtd\\validate_long_term_stability.c.obj -c \"C:\\Users\\binso\\3D Objects\\rfsyn\\engine\\fdtd\\validate_long_term_stability.c\"",
+  "file": "C:/Users/binso/3D Objects/rfsyn/engine/fdtd/validate_long_term_stability.c",
+  "output": "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/CMakeFiles/validate_long_term_stability.dir/engine/fdtd/validate_long_term_stability.c.obj"
 }
 ]

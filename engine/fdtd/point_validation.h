@@ -5,6 +5,7 @@
 #include <math.h>
 #include "grid.h"
 #include "cpml.h"
+
 static int point_validation(int margin) {
  size_t nt=margin?50:40,nr=margin?150:120,steps=margin?200:150,count=margin?5:1;
  const size_t offsets[5]={6,9,12,15,16}; int status=1;FILE *out=NULL;
@@ -15,7 +16,7 @@ static int point_validation(int margin) {
  if(!p||!a||!b) goto cleanup;
  for(size_t n=0;n<steps;n++) {
   fdtd_update_h(r);fdtd_update_h_cpml(g,p);
-  /* Preserve original point-source timing for baseline comparison. */
+
   double u=((double)n-40)/8,v=-2*u*exp(-u*u);
   r->ez[fdtd_index(r,nr/2,nr/2,nr/2)]+=v;g->ez[fdtd_index(g,nt/2,nt/2,nt/2)]+=v;
   fdtd_update_e(r);fdtd_update_e_cpml(g,p);
@@ -37,7 +38,7 @@ static int point_validation(int margin) {
    if(fprintf(out,"%zu,%.17g,%zu,%zu,%.17g,%.17g,%.17g,%.17g\n",n,n*g->dt,q,nt-8-(nt/2+(margin?offsets[q]:12)),a[z],b[z],e,dec)<0) status=1;
   }
   printf("probe %zu: max normalized %.9g, relative L2 %.9g\n",q,worst/peak,sqrt(se/sr));
-  /* Regression gate, not a universal reflection guarantee. */
+
   if(worst/peak>0.01)status=1;
  }
 cleanup:

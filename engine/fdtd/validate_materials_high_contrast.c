@@ -1,154 +1,273 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-#include "accuracy_test.h"
+#include "extended_test.h"
 
-typedef struct {
-    double R, T, R_th, T_th;
-    double cells_per_wl_high;
-    double dx;
-    size_t n_cells, n_steps;
-} hc_result_t;
-
-static int run_case(double eps1, double eps2, int scale, double f0, int staircase,
-                    const char *wave_path, hc_result_t *out)
+static int run_case(FILE *csv, double eps_left, double eps_right)
 {
-    const double dx = 1e-3 / (double)scale;
-    const double dt = 0.99 * dx / (AT_C0 * sqrt(3.0));
-    const double n1 = sqrt(eps1), n2 = sqrt(eps2);
-    const double v1 = AT_C0 / n1, v2 = AT_C0 / n2;
+    const size_t scale = RFSYN_VALIDATION_REFINEMENT;
 
-    const double tau = 1.0 / f0;
-    const double t0 = 4.5 * tau;
+    const size_t nx = 256 * scale;
+    const size_t npml = 24 * scale;
 
-    const double d_src = 0.120, d1 = 0.060, d2 = 0.060;
-    double t_end = 2.0 * t0 + fmax((d_src + d1) / v1, d_src / v1 + d2 / v2) + 2.0 * tau;
-    size_t n_steps = (size_t)ceil(t_end / dt);
+    const size_t i_source = 40 * scale;
+    const size_t i_interface = 112 * scale;
 
-    size_t pad = (size_t)ceil(0.55 * AT_C0 * t_end / dx) + 20;
-    size_t c_src = (size_t)llround(d_src / dx), c1 = (size_t)llround(d1 / dx), c2 = (size_t)llround(d2 / dx);
-    size_t is = pad;
-    size_t ii = is + c_src;
-    size_t p1 = ii - c1, p2 = ii + c2;
-    size_t N = p2 + pad;
+    const size_t i_probe1 = 64 * scale;
+    const size_t i_probe2 = 80 * scale;
 
-    double *ea = at_xcalloc(N + 1, sizeof(double), "ea"), *ha = at_xcalloc(N, sizeof(double), "ha");
-    double *eb = at_xcalloc(N + 1, sizeof(double), "eb"), *hb = at_xcalloc(N, sizeof(double), "hb");
-    double *cba = at_xcalloc(N + 1, sizeof(double), "cba"), *cbb = at_xcalloc(N + 1, sizeof(double), "cbb");
-    const double chh = dt / (AT_MU0 * dx);
-    for (size_t i = 0; i <= N; i++) {
-        double eb_r = (i < ii) ? eps1 : (i > ii) ? eps2 : (staircase ? eps2 : 0.5 * (eps1 + eps2));
-        cba[i] = dt / (AT_EPS0 * eps1 * dx);
-        cbb[i] = dt / (AT_EPS0 * eb_r * dx);
+    const size_t i_trans1 = 144 * scale;
+    const size_t i_trans2 = 160 * scale;
+
+    xt_sim s = {0};
+    int fail = 1;
+
+    if (xt_create(&s, nx, 1, 1, 1e-3 / scale, 6, npml) != 0) {
+        goto cleanup;
     }
 
-    FILE *fw = wave_path ? at_xfopen(wave_path) : NULL;
-    if (fw) fprintf(fw, "step,t,incident_p1,reflected_p1,transmitted_p2\n");
-    at_dft_t Di = {0, 0}, Dr = {0, 0}, Dt = {0, 0};
-    int rc = 0;
-
-    for (size_t n = 0; n < n_steps; n++) {
-        for (size_t i = 0; i < N; i++) {
-            ha[i] += chh * (ea[i + 1] - ea[i]);
-            hb[i] += chh * (eb[i + 1] - eb[i]);
-        }
-        for (size_t i = 1; i < N; i++) {
-            ea[i] += cba[i] * (ha[i] - ha[i - 1]);
-            eb[i] += cbb[i] * (hb[i] - hb[i - 1]);
-        }
-        double t = (double)(n + 1) * dt;
-        double s = at_mod_gauss(t, f0, t0, tau);
-        ea[is] += s; eb[is] += s;
-
-        double inc = ea[p1], refl = eb[p1] - ea[p1], tr = eb[p2];
-        if (!isfinite(inc) || !isfinite(refl) || !isfinite(tr)) {
-            fprintf(stderr, "non-finite field at step %zu\n", n); rc = 1; break;
-        }
-        at_dft_add(&Di, inc, t, f0, dt);
-        at_dft_add(&Dr, refl, t, f0, dt);
-        at_dft_add(&Dt, tr, t, f0, dt);
-        if (fw && (n % (size_t)scale == 0))
-            fprintf(fw, "%zu,%.9e,%.9e,%.9e,%.9e\n", n, t, inc, refl, tr);
+    if (xt_interface(&s, i_interface, eps_left, eps_right) != 0) {
+        goto cleanup;
     }
-    if (fw && at_xfclose(fw, wave_path)) rc = 1;
 
-    double gi = at_dft_abs2(Di);
-    out->R = at_dft_abs2(Dr) / gi;
-    out->T = (n2 / n1) * at_dft_abs2(Dt) / gi;
-    double r = (n1 - n2) / (n1 + n2);
-    out->R_th = r * r;
-    out->T_th = 1.0 - r * r;
-    out->dx = dx;
-    out->cells_per_wl_high = (AT_C0 / f0) / (fmax(n1, n2) * dx);
-    out->n_cells = N;
-    out->n_steps = n_steps;
+    double courant = C0 * s.g->dt / s.g->dx;
+    double maximum_index = sqrt(fmax(eps_left, eps_right));
 
-    free(ea); free(ha); free(eb); free(hb); free(cba); free(cbb);
-    return rc;
+    size_t period = (size_t)ceil(
+        40.0 * maximum_index * scale / courant
+    );
+
+    double omega_dt = 2.0 * XT_PI / period;
+
+    double k_left = xt_kx(omega_dt, courant, eps_left, 0.0);
+    double k_right = xt_kx(omega_dt, courant, eps_right, 0.0);
+
+    if (!isfinite(k_left) || !isfinite(k_right)) {
+        goto cleanup;
+    }
+
+    if (fabs(sin(k_left * (i_probe2 - i_probe1))) < 0.02 ||
+        fabs(sin(k_right * (i_trans2 - i_trans1))) < 0.02) {
+        fprintf(stderr, "Probe spacing is ill-conditioned for this frequency\n");
+        goto cleanup;
+    }
+
+    size_t ramp_steps = 8 * period;
+
+    size_t settle_steps = ramp_steps + (size_t)ceil(
+        8.0 * nx * maximum_index / courant
+    );
+
+    size_t window_steps = 8 * period;
+    size_t total_steps = settle_steps + 2 * window_steps;
+
+    double complex sums[2][4] = {{0}};
+
+    const size_t probe_positions[4] = {
+        i_probe1,
+        i_probe2,
+        i_trans1,
+        i_trans2
+    };
+
+    for (size_t n = 0; n < total_steps; n++) {
+        xt_step(&s);
+
+        double phase = omega_dt * (n + 1);
+        double envelope = 1.0;
+
+        if (n < ramp_steps) {
+            envelope = pow(
+                sin(0.5 * XT_PI * (n + 1) / ramp_steps),
+                2.0
+            );
+        }
+
+        size_t source_index = fdtd_index(s.g, i_source, 0, 0);
+        s.g->ez[source_index] += envelope * cos(phase);
+
+        if (n >= settle_steps) {
+            size_t half = (n - settle_steps) / window_steps;
+            double complex temporal_weight =
+                cexp(I * phase) / window_steps;
+
+            for (size_t q = 0; q < 4; q++) {
+                size_t idx = fdtd_index(
+                    s.g,
+                    probe_positions[q],
+                    0,
+                    0
+                );
+
+                double value = s.g->ez[idx];
+
+                if (!isfinite(value)) {
+                    fprintf(stderr, "Nonfinite monitored field at step %zu\n", n);
+                    goto cleanup;
+                }
+
+                sums[half][q] += value * temporal_weight;
+            }
+        }
+    }
+
+    double complex forward_left[2];
+    double complex backward_left[2];
+    double complex forward_right[2];
+    double complex backward_right[2];
+
+    for (size_t h = 0; h < 2; h++) {
+        xt_modes(
+            sums[h][0],
+            sums[h][1],
+            k_left * (i_probe2 - i_probe1),
+            &forward_left[h],
+            &backward_left[h]
+        );
+
+        xt_modes(
+            sums[h][2],
+            sums[h][3],
+            k_right * (i_trans2 - i_trans1),
+            &forward_right[h],
+            &backward_right[h]
+        );
+
+        if (!xt_finite_complex(forward_left[h]) ||
+            !xt_finite_complex(backward_left[h]) ||
+            !xt_finite_complex(forward_right[h]) ||
+            !xt_finite_complex(backward_right[h])) {
+            goto cleanup;
+        }
+    }
+
+    if (cabs(forward_left[1]) < 1e-12) {
+        fprintf(stderr, "Incident amplitude is too small\n");
+        goto cleanup;
+    }
+
+    double complex reflection =
+        backward_left[1] / forward_left[1]
+        * cexp(-2.0 * I * k_left * (i_interface - i_probe1));
+
+    double transmission_amplitude =
+        cabs(forward_right[1] / forward_left[1]);
+
+    double R = pow(cabs(reflection), 2.0);
+
+    double T =
+        sqrt(eps_right / eps_left)
+        * transmission_amplitude
+        * transmission_amplitude;
+
+    double r_theory =
+        (sqrt(eps_left) - sqrt(eps_right))
+        / (sqrt(eps_left) + sqrt(eps_right));
+
+    double R_theory = r_theory * r_theory;
+    double T_theory = 1.0 - R_theory;
+
+    double amplitude_error =
+        fabs(cabs(reflection) - fabs(r_theory));
+
+    double power_error = fmax(
+        fabs(R - R_theory),
+        fabs(T - T_theory)
+    );
+
+    double window_drift = fmax(
+        cabs(forward_left[1] - forward_left[0]),
+        cabs(backward_left[1] - backward_left[0])
+    ) / cabs(forward_left[1]);
+
+    double transmitted_backward_ratio =
+        cabs(backward_right[1])
+        / fmax(cabs(forward_right[1]), 1e-30);
+
+    double phase_error_deg = NAN;
+
+    if (r_theory != 0.0) {
+        phase_error_deg =
+            fabs(carg(reflection / r_theory))
+            * 180.0 / XT_PI;
+    }
+
+    fail = !(
+        isfinite(R) &&
+        isfinite(T) &&
+        isfinite(window_drift) &&
+        isfinite(transmitted_backward_ratio) &&
+        amplitude_error <= 0.01 &&
+        power_error <= 0.02 &&
+        fabs(R + T - 1.0) <= 0.02 &&
+        window_drift <= 0.002 &&
+        transmitted_backward_ratio <= 0.01 &&
+        (r_theory == 0.0 || phase_error_deg <= 3.0)
+    );
+
+    printf(
+        "eps %.0f -> %.0f: |r| %.8g theory %.8g R %.8g T %.8g drift %.3g phase_error %.4g deg %s\n",
+        eps_left,
+        eps_right,
+        cabs(reflection),
+        fabs(r_theory),
+        R,
+        T,
+        window_drift,
+        phase_error_deg,
+        fail ? "FAIL" : "PASS"
+    );
+
+    if (fprintf(csv, "%.17g,%.17g,%zu,%zu,%.17g,%.17g,%.17g,%.17g,%.17g,%.17g,%.17g,%.17g,%.17g,%d\n", eps_left, eps_right, scale, total_steps, 1.0 / (period * s.g->dt), cabs(reflection), fabs(r_theory), R, T, R_theory, phase_error_deg, window_drift, transmitted_backward_ratio, !fail) < 0) {fail = 1;
+    }
+
+cleanup:
+    if (fail) {
+        fprintf(stderr, "High-contrast case failed or could not complete: eps %.0f -> %.0f\n", eps_left, eps_right);
+    }
+
+    xt_destroy(&s);
+    return fail;
 }
 
-int main(int argc, char **argv) {
-    const int strict = at_has_flag(argc, argv, "--strict");
-    const int staircase = at_has_flag(argc, argv, "--staircase");
-    const int waves = !at_has_flag(argc, argv, "--no-waveforms");
-    const int scale = (int)at_get_long(argc, argv, "--scale", 1);
-    const double f0 = at_get_double(argc, argv, "--freq", 1e9);
-    const double tol = at_get_double(argc, argv, "--tol", 0.02);
-    const char *dir = at_get_str(argc, argv, "--direction", "both");
+int main(int argc, char **argv)
+{
+    int full = 0;
 
-    if (scale != 1 && scale != 2 && scale != 4) { fprintf(stderr, "--scale must be 1, 2 or 4\n"); return 2; }
-    if (f0 <= 0) { fprintf(stderr, "--freq must be positive\n"); return 2; }
-    int do_in = !strcmp(dir, "both") || !strcmp(dir, "in");
-    int do_out = !strcmp(dir, "both") || !strcmp(dir, "out");
-    if (!do_in && !do_out) { fprintf(stderr, "--direction must be in, out or both\n"); return 2; }
-
-    double eps_list[8]; size_t n_eps = 0;
-    if (at_get_str(argc, argv, "--eps", NULL)) {
-        eps_list[n_eps++] = at_get_double(argc, argv, "--eps", 1.0);
-        if (eps_list[0] < 1.0) { fprintf(stderr, "--eps must be >= 1\n"); return 2; }
-    } else {
-        const double e[] = {1, 4, 10, 25, 50, 100};
-        for (size_t i = 0; i < 6; i++) eps_list[n_eps++] = e[i];
+    if (xt_parse_full(argc, argv, &full) != 0) {
+        fprintf(stderr, "Usage: %s [--full]\n", argv[0]);
+        return 2;
     }
 
-    printf("=== validate_materials_high_contrast (1-D Yee kernel) ===\n");
-    printf("f0=%.4g GHz scale=%d dx=%.4g mm interface=%s tol=%.3g\n",
-           f0 / 1e9, scale, 1.0 / scale, staircase ? "staircase" : "averaged", tol);
-    printf("%7s %-14s %8s %10s %10s %10s %10s %10s %9s  %s\n",
-           "eps_r", "direction", "cells/wl", "R", "R_theory", "T", "T_theory", "R+T", "|dR|", "result");
+    FILE *csv = fopen("materials_high_contrast_summary.csv", "w");
 
-    const char *sum_path = "materials_high_contrast_summary.csv";
-    FILE *fs = at_xfopen(sum_path);
-    fprintf(fs, "eps_r,direction,scale,dx_m,freq_hz,interface,cells_per_wl_high,R,R_theory,T,T_theory,R_plus_T,abs_err_R,abs_err_T,abs_err_closure,pass\n");
+    if (!csv) {
+        perror("materials_high_contrast_summary.csv");
+        return 2;
+    }
 
-    int n_fail = 0, rc = 0;
-    for (size_t e = 0; e < n_eps; e++) {
-        for (int d = 0; d < 2; d++) {
-            if ((d == 0 && !do_in) || (d == 1 && !do_out)) continue;
-            double eps1 = d == 0 ? 1.0 : eps_list[e];
-            double eps2 = d == 0 ? eps_list[e] : 1.0;
-            const char *dname = d == 0 ? "air->dielectric" : "dielectric->air";
-            char wpath[96];
-            snprintf(wpath, sizeof wpath, "materials_high_contrast_eps%g_%s_s%d.csv",
-                     eps_list[e], d == 0 ? "in" : "out", scale);
-            hc_result_t r;
-            if (run_case(eps1, eps2, scale, f0, staircase, waves ? wpath : NULL, &r)) { rc = 1; continue; }
-            double eR = fabs(r.R - r.R_th), eT = fabs(r.T - r.T_th), eC = fabs(r.R + r.T - 1.0);
-            int pass = isfinite(r.R) && isfinite(r.T) && eR <= tol && eT <= tol && eC <= tol;
-            if (!pass) n_fail++;
-            printf("%7g %-14s %8.1f %10.6f %10.6f %10.6f %10.6f %10.6f %9.2e  %s\n",
-                   eps_list[e], dname, r.cells_per_wl_high, r.R, r.R_th, r.T, r.T_th, r.R + r.T, eR,
-                   pass ? "PASS" : "FAIL");
-            fprintf(fs, "%g,%s,%d,%.6e,%.6e,%s,%.4f,%.9e,%.9e,%.9e,%.9e,%.9e,%.6e,%.6e,%.6e,%d\n",
-                    eps_list[e], d == 0 ? "in" : "out", scale, r.dx, f0,
-                    staircase ? "staircase" : "averaged", r.cells_per_wl_high,
-                    r.R, r.R_th, r.T, r.T_th, r.R + r.T, eR, eT, eC, pass);
+    int fail = fprintf(csv, "eps_left,eps_right,refinement,steps,frequency_hz,r_magnitude,r_theory_magnitude,R,T,R_theory,reflection_phase_error_deg,window_drift,backward_transmitted_ratio,pass\n" ) < 0;
+
+    const double contrasts[] = {
+        1.0,
+        4.0,
+        10.0,
+        25.0,
+        50.0,
+        100.0
+    };
+
+    size_t count = full ? 6 : 4;
+
+    for (size_t q = 0; q < count; q++) {
+        fail |= run_case(csv, 1.0, contrasts[q]);
+
+        if (contrasts[q] != 1.0) {
+            fail |= run_case(csv, contrasts[q], 1.0);
         }
     }
-    if (at_xfclose(fs, sum_path)) rc = 1;
 
-    if (rc) { printf("\nRESULT: ERROR (execution failure)\n"); return 1; }
-    printf("\nRESULT: %d case(s) outside tolerance%s\n", n_fail,
-           strict ? "" : " (diagnostic mode; use --strict)");
-    return (strict && n_fail) ? 1 : 0;
+    if (fclose(csv) != 0) {
+        perror("Closing high-contrast summary");
+        fail = 1;
+    }
+
+    return fail ? 1 : 0;
 }

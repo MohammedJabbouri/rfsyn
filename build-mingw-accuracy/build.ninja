@@ -384,6 +384,174 @@ build rfsyn.exe: C_EXECUTABLE_LINKER__rfsyn_Release CMakeFiles/rfsyn.dir/cli/mai
   TARGET_PDB = rfsyn.exe.dbg
   TARGET_SUPPORT_DIR = CMakeFiles\rfsyn.dir
 
+
+#############################################
+# Utility command for Experimental
+
+build Experimental: phony CMakeFiles/Experimental
+
+
+#############################################
+# Utility command for Nightly
+
+build Nightly: phony CMakeFiles/Nightly
+
+
+#############################################
+# Utility command for Continuous
+
+build Continuous: phony CMakeFiles/Continuous
+
+
+#############################################
+# Utility command for NightlyMemoryCheck
+
+build NightlyMemoryCheck: phony CMakeFiles/NightlyMemoryCheck
+
+
+#############################################
+# Utility command for NightlyStart
+
+build NightlyStart: phony CMakeFiles/NightlyStart
+
+
+#############################################
+# Utility command for NightlyUpdate
+
+build NightlyUpdate: phony CMakeFiles/NightlyUpdate
+
+
+#############################################
+# Utility command for NightlyConfigure
+
+build NightlyConfigure: phony CMakeFiles/NightlyConfigure
+
+
+#############################################
+# Utility command for NightlyBuild
+
+build NightlyBuild: phony CMakeFiles/NightlyBuild
+
+
+#############################################
+# Utility command for NightlyTest
+
+build NightlyTest: phony CMakeFiles/NightlyTest
+
+
+#############################################
+# Utility command for NightlyCoverage
+
+build NightlyCoverage: phony CMakeFiles/NightlyCoverage
+
+
+#############################################
+# Utility command for NightlyMemCheck
+
+build NightlyMemCheck: phony CMakeFiles/NightlyMemCheck
+
+
+#############################################
+# Utility command for NightlySubmit
+
+build NightlySubmit: phony CMakeFiles/NightlySubmit
+
+
+#############################################
+# Utility command for ExperimentalStart
+
+build ExperimentalStart: phony CMakeFiles/ExperimentalStart
+
+
+#############################################
+# Utility command for ExperimentalUpdate
+
+build ExperimentalUpdate: phony CMakeFiles/ExperimentalUpdate
+
+
+#############################################
+# Utility command for ExperimentalConfigure
+
+build ExperimentalConfigure: phony CMakeFiles/ExperimentalConfigure
+
+
+#############################################
+# Utility command for ExperimentalBuild
+
+build ExperimentalBuild: phony CMakeFiles/ExperimentalBuild
+
+
+#############################################
+# Utility command for ExperimentalTest
+
+build ExperimentalTest: phony CMakeFiles/ExperimentalTest
+
+
+#############################################
+# Utility command for ExperimentalCoverage
+
+build ExperimentalCoverage: phony CMakeFiles/ExperimentalCoverage
+
+
+#############################################
+# Utility command for ExperimentalMemCheck
+
+build ExperimentalMemCheck: phony CMakeFiles/ExperimentalMemCheck
+
+
+#############################################
+# Utility command for ExperimentalSubmit
+
+build ExperimentalSubmit: phony CMakeFiles/ExperimentalSubmit
+
+
+#############################################
+# Utility command for ContinuousStart
+
+build ContinuousStart: phony CMakeFiles/ContinuousStart
+
+
+#############################################
+# Utility command for ContinuousUpdate
+
+build ContinuousUpdate: phony CMakeFiles/ContinuousUpdate
+
+
+#############################################
+# Utility command for ContinuousConfigure
+
+build ContinuousConfigure: phony CMakeFiles/ContinuousConfigure
+
+
+#############################################
+# Utility command for ContinuousBuild
+
+build ContinuousBuild: phony CMakeFiles/ContinuousBuild
+
+
+#############################################
+# Utility command for ContinuousTest
+
+build ContinuousTest: phony CMakeFiles/ContinuousTest
+
+
+#############################################
+# Utility command for ContinuousCoverage
+
+build ContinuousCoverage: phony CMakeFiles/ContinuousCoverage
+
+
+#############################################
+# Utility command for ContinuousMemCheck
+
+build ContinuousMemCheck: phony CMakeFiles/ContinuousMemCheck
+
+
+#############################################
+# Utility command for ContinuousSubmit
+
+build ContinuousSubmit: phony CMakeFiles/ContinuousSubmit
+
 # =============================================================================
 # Object build statements for EXECUTABLE target world_unit
 
@@ -618,7 +786,7 @@ build rf_signal_unit.exe: C_EXECUTABLE_LINKER__rf_signal_unit_Release CMakeFiles
 #############################################
 # Order-only phony target for cli_smoke
 
-build cmake_object_order_depends_target_cli_smoke: phony || cmake_object_order_depends_target_rfsyn_cjson cmake_object_order_depends_target_rfsyn_core cmake_object_order_depends_target_rfsyn_fdtd cmake_object_order_depends_target_rfsyn_noise cmake_object_order_depends_target_rfsyn_world
+build cmake_object_order_depends_target_cli_smoke: phony || cmake_object_order_depends_target_rfsyn_cjson cmake_object_order_depends_target_rfsyn_core cmake_object_order_depends_target_rfsyn_fdtd cmake_object_order_depends_target_rfsyn_noise cmake_object_order_depends_target_rfsyn_world rfsyn.exe
 
 build CMakeFiles/cli_smoke.dir/tests/cli_smoke.c.obj: C_COMPILER__cli_smoke_unscanned_Release C$:/Users/binso/3D$ Objects/rfsyn/tests/cli_smoke.c || cmake_object_order_depends_target_cli_smoke
   CONFIG = Release
@@ -638,7 +806,7 @@ build CMakeFiles/cli_smoke.dir/tests/cli_smoke.c.obj: C_COMPILER__cli_smoke_unsc
 #############################################
 # Link the executable cli_smoke.exe
 
-build cli_smoke.exe: C_EXECUTABLE_LINKER__cli_smoke_Release CMakeFiles/cli_smoke.dir/tests/cli_smoke.c.obj | librfsyn_core.a librfsyn_noise.a librfsyn_fdtd.a librfsyn_world.a librfsyn_core.a C$:/msys64/mingw64/lib/libgomp.dll.a C$:/msys64/mingw64/lib/libmingwthrd.a librfsyn_cjson.a || librfsyn_cjson.a librfsyn_core.a librfsyn_fdtd.a librfsyn_noise.a librfsyn_world.a
+build cli_smoke.exe: C_EXECUTABLE_LINKER__cli_smoke_Release CMakeFiles/cli_smoke.dir/tests/cli_smoke.c.obj | librfsyn_core.a librfsyn_noise.a librfsyn_fdtd.a librfsyn_world.a librfsyn_core.a C$:/msys64/mingw64/lib/libgomp.dll.a C$:/msys64/mingw64/lib/libmingwthrd.a librfsyn_cjson.a || librfsyn_cjson.a librfsyn_core.a librfsyn_fdtd.a librfsyn_noise.a librfsyn_world.a rfsyn.exe
   CONFIG = Release
   FLAGS = -O3 -DNDEBUG
   LINK_LIBRARIES = librfsyn_core.a  librfsyn_noise.a  librfsyn_fdtd.a  librfsyn_world.a  -lm  librfsyn_core.a  C:/msys64/mingw64/lib/libgomp.dll.a  C:/msys64/mingw64/lib/libmingwthrd.a  -lm  librfsyn_cjson.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
@@ -878,6 +1046,120 @@ build validate_materials_energy.exe: C_EXECUTABLE_LINKER__validate_materials_ene
   TARGET_PDB = validate_materials_energy.exe.dbg
   TARGET_SUPPORT_DIR = CMakeFiles\validate_materials_energy.dir
 
+# =============================================================================
+# Object build statements for EXECUTABLE target validate_cpml_oblique
+
+
+#############################################
+# Order-only phony target for validate_cpml_oblique
+
+build cmake_object_order_depends_target_validate_cpml_oblique: phony || cmake_object_order_depends_target_rfsyn_fdtd
+
+build CMakeFiles/validate_cpml_oblique.dir/engine/fdtd/validate_cpml_oblique.c.obj: C_COMPILER__validate_cpml_oblique_unscanned_Release C$:/Users/binso/3D$ Objects/rfsyn/engine/fdtd/validate_cpml_oblique.c || cmake_object_order_depends_target_validate_cpml_oblique
+  CONFIG = Release
+  DEFINES = -DRFSYN_HAS_OPENMP=1 -DRFSYN_VALIDATION_REFINEMENT=1
+  DEP_FILE = CMakeFiles\validate_cpml_oblique.dir\engine\fdtd\validate_cpml_oblique.c.obj.d
+  FLAGS = -O3 -DNDEBUG -std=gnu11 -fopenmp
+  OBJECT_DIR = CMakeFiles\validate_cpml_oblique.dir
+  OBJECT_FILE_DIR = CMakeFiles\validate_cpml_oblique.dir\engine\fdtd
+  TARGET_SUPPORT_DIR = CMakeFiles\validate_cpml_oblique.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target validate_cpml_oblique
+
+
+#############################################
+# Link the executable validate_cpml_oblique.exe
+
+build validate_cpml_oblique.exe: C_EXECUTABLE_LINKER__validate_cpml_oblique_Release CMakeFiles/validate_cpml_oblique.dir/engine/fdtd/validate_cpml_oblique.c.obj | librfsyn_fdtd.a C$:/msys64/mingw64/lib/libgomp.dll.a C$:/msys64/mingw64/lib/libmingwthrd.a || librfsyn_fdtd.a
+  CONFIG = Release
+  FLAGS = -O3 -DNDEBUG
+  LINK_LIBRARIES = librfsyn_fdtd.a  -lm  C:/msys64/mingw64/lib/libgomp.dll.a  C:/msys64/mingw64/lib/libmingwthrd.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  OBJECT_DIR = CMakeFiles\validate_cpml_oblique.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_FILE = validate_cpml_oblique.exe
+  TARGET_IMPLIB = libvalidate_cpml_oblique.dll.a
+  TARGET_PDB = validate_cpml_oblique.exe.dbg
+  TARGET_SUPPORT_DIR = CMakeFiles\validate_cpml_oblique.dir
+
+# =============================================================================
+# Object build statements for EXECUTABLE target validate_materials_high_contrast
+
+
+#############################################
+# Order-only phony target for validate_materials_high_contrast
+
+build cmake_object_order_depends_target_validate_materials_high_contrast: phony || cmake_object_order_depends_target_rfsyn_fdtd
+
+build CMakeFiles/validate_materials_high_contrast.dir/engine/fdtd/validate_materials_high_contrast.c.obj: C_COMPILER__validate_materials_high_contrast_unscanned_Release C$:/Users/binso/3D$ Objects/rfsyn/engine/fdtd/validate_materials_high_contrast.c || cmake_object_order_depends_target_validate_materials_high_contrast
+  CONFIG = Release
+  DEFINES = -DRFSYN_HAS_OPENMP=1 -DRFSYN_VALIDATION_REFINEMENT=1
+  DEP_FILE = CMakeFiles\validate_materials_high_contrast.dir\engine\fdtd\validate_materials_high_contrast.c.obj.d
+  FLAGS = -O3 -DNDEBUG -std=gnu11 -fopenmp
+  OBJECT_DIR = CMakeFiles\validate_materials_high_contrast.dir
+  OBJECT_FILE_DIR = CMakeFiles\validate_materials_high_contrast.dir\engine\fdtd
+  TARGET_SUPPORT_DIR = CMakeFiles\validate_materials_high_contrast.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target validate_materials_high_contrast
+
+
+#############################################
+# Link the executable validate_materials_high_contrast.exe
+
+build validate_materials_high_contrast.exe: C_EXECUTABLE_LINKER__validate_materials_high_contrast_Release CMakeFiles/validate_materials_high_contrast.dir/engine/fdtd/validate_materials_high_contrast.c.obj | librfsyn_fdtd.a C$:/msys64/mingw64/lib/libgomp.dll.a C$:/msys64/mingw64/lib/libmingwthrd.a || librfsyn_fdtd.a
+  CONFIG = Release
+  FLAGS = -O3 -DNDEBUG
+  LINK_LIBRARIES = librfsyn_fdtd.a  -lm  C:/msys64/mingw64/lib/libgomp.dll.a  C:/msys64/mingw64/lib/libmingwthrd.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  OBJECT_DIR = CMakeFiles\validate_materials_high_contrast.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_FILE = validate_materials_high_contrast.exe
+  TARGET_IMPLIB = libvalidate_materials_high_contrast.dll.a
+  TARGET_PDB = validate_materials_high_contrast.exe.dbg
+  TARGET_SUPPORT_DIR = CMakeFiles\validate_materials_high_contrast.dir
+
+# =============================================================================
+# Object build statements for EXECUTABLE target validate_long_term_stability
+
+
+#############################################
+# Order-only phony target for validate_long_term_stability
+
+build cmake_object_order_depends_target_validate_long_term_stability: phony || cmake_object_order_depends_target_rfsyn_fdtd
+
+build CMakeFiles/validate_long_term_stability.dir/engine/fdtd/validate_long_term_stability.c.obj: C_COMPILER__validate_long_term_stability_unscanned_Release C$:/Users/binso/3D$ Objects/rfsyn/engine/fdtd/validate_long_term_stability.c || cmake_object_order_depends_target_validate_long_term_stability
+  CONFIG = Release
+  DEFINES = -DRFSYN_HAS_OPENMP=1 -DRFSYN_VALIDATION_REFINEMENT=1
+  DEP_FILE = CMakeFiles\validate_long_term_stability.dir\engine\fdtd\validate_long_term_stability.c.obj.d
+  FLAGS = -O3 -DNDEBUG -std=gnu11 -fopenmp
+  OBJECT_DIR = CMakeFiles\validate_long_term_stability.dir
+  OBJECT_FILE_DIR = CMakeFiles\validate_long_term_stability.dir\engine\fdtd
+  TARGET_SUPPORT_DIR = CMakeFiles\validate_long_term_stability.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target validate_long_term_stability
+
+
+#############################################
+# Link the executable validate_long_term_stability.exe
+
+build validate_long_term_stability.exe: C_EXECUTABLE_LINKER__validate_long_term_stability_Release CMakeFiles/validate_long_term_stability.dir/engine/fdtd/validate_long_term_stability.c.obj | librfsyn_fdtd.a C$:/msys64/mingw64/lib/libgomp.dll.a C$:/msys64/mingw64/lib/libmingwthrd.a || librfsyn_fdtd.a
+  CONFIG = Release
+  FLAGS = -O3 -DNDEBUG
+  LINK_LIBRARIES = librfsyn_fdtd.a  -lm  C:/msys64/mingw64/lib/libgomp.dll.a  C:/msys64/mingw64/lib/libmingwthrd.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  OBJECT_DIR = CMakeFiles\validate_long_term_stability.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_FILE = validate_long_term_stability.exe
+  TARGET_IMPLIB = libvalidate_long_term_stability.dll.a
+  TARGET_PDB = validate_long_term_stability.exe.dbg
+  TARGET_SUPPORT_DIR = CMakeFiles\validate_long_term_stability.dir
+
 
 #############################################
 # Utility command for test
@@ -913,6 +1195,230 @@ build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
 
 build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 
+
+#############################################
+# Custom command for CMakeFiles\Experimental
+
+build CMakeFiles/Experimental | ${cmake_ninja_workdir}CMakeFiles/Experimental: CUSTOM_COMMAND
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\binso\3D Objects\rfsyn\build-mingw-accuracy" && C:\msys64\mingw64\bin\ctest.exe -DMODEL=Experimental -S CMakeFiles/CTestScript.cmake -V"
+  pool = console
+
+
+#############################################
+# Custom command for CMakeFiles\Nightly
+
+build CMakeFiles/Nightly | ${cmake_ninja_workdir}CMakeFiles/Nightly: CUSTOM_COMMAND
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\binso\3D Objects\rfsyn\build-mingw-accuracy" && C:\msys64\mingw64\bin\ctest.exe -DMODEL=Nightly -S CMakeFiles/CTestScript.cmake -V"
+  pool = console
+
+
+#############################################
+# Custom command for CMakeFiles\Continuous
+
+build CMakeFiles/Continuous | ${cmake_ninja_workdir}CMakeFiles/Continuous: CUSTOM_COMMAND
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\binso\3D Objects\rfsyn\build-mingw-accuracy" && C:\msys64\mingw64\bin\ctest.exe -DMODEL=Continuous -S CMakeFiles/CTestScript.cmake -V"
+  pool = console
+
+
+#############################################
+# Custom command for CMakeFiles\NightlyMemoryCheck
+
+build CMakeFiles/NightlyMemoryCheck | ${cmake_ninja_workdir}CMakeFiles/NightlyMemoryCheck: CUSTOM_COMMAND
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\binso\3D Objects\rfsyn\build-mingw-accuracy" && C:\msys64\mingw64\bin\ctest.exe -DMODEL=NightlyMemoryCheck -S CMakeFiles/CTestScript.cmake -V"
+  pool = console
+
+
+#############################################
+# Custom command for CMakeFiles\NightlyStart
+
+build CMakeFiles/NightlyStart | ${cmake_ninja_workdir}CMakeFiles/NightlyStart: CUSTOM_COMMAND
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\binso\3D Objects\rfsyn\build-mingw-accuracy" && C:\msys64\mingw64\bin\ctest.exe -DMODEL=Nightly -DACTIONS=Start -S CMakeFiles/CTestScript.cmake -V"
+  pool = console
+
+
+#############################################
+# Custom command for CMakeFiles\NightlyUpdate
+
+build CMakeFiles/NightlyUpdate | ${cmake_ninja_workdir}CMakeFiles/NightlyUpdate: CUSTOM_COMMAND
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\binso\3D Objects\rfsyn\build-mingw-accuracy" && C:\msys64\mingw64\bin\ctest.exe -DMODEL=Nightly -DACTIONS=Update -S CMakeFiles/CTestScript.cmake -V"
+  pool = console
+
+
+#############################################
+# Custom command for CMakeFiles\NightlyConfigure
+
+build CMakeFiles/NightlyConfigure | ${cmake_ninja_workdir}CMakeFiles/NightlyConfigure: CUSTOM_COMMAND
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\binso\3D Objects\rfsyn\build-mingw-accuracy" && C:\msys64\mingw64\bin\ctest.exe -DMODEL=Nightly -DACTIONS=Configure -S CMakeFiles/CTestScript.cmake -V"
+  pool = console
+
+
+#############################################
+# Custom command for CMakeFiles\NightlyBuild
+
+build CMakeFiles/NightlyBuild | ${cmake_ninja_workdir}CMakeFiles/NightlyBuild: CUSTOM_COMMAND
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\binso\3D Objects\rfsyn\build-mingw-accuracy" && C:\msys64\mingw64\bin\ctest.exe -DMODEL=Nightly -DACTIONS=Build -S CMakeFiles/CTestScript.cmake -V"
+  pool = console
+
+
+#############################################
+# Custom command for CMakeFiles\NightlyTest
+
+build CMakeFiles/NightlyTest | ${cmake_ninja_workdir}CMakeFiles/NightlyTest: CUSTOM_COMMAND
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\binso\3D Objects\rfsyn\build-mingw-accuracy" && C:\msys64\mingw64\bin\ctest.exe -DMODEL=Nightly -DACTIONS=Test -S CMakeFiles/CTestScript.cmake -V"
+  pool = console
+
+
+#############################################
+# Custom command for CMakeFiles\NightlyCoverage
+
+build CMakeFiles/NightlyCoverage | ${cmake_ninja_workdir}CMakeFiles/NightlyCoverage: CUSTOM_COMMAND
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\binso\3D Objects\rfsyn\build-mingw-accuracy" && C:\msys64\mingw64\bin\ctest.exe -DMODEL=Nightly -DACTIONS=Coverage -S CMakeFiles/CTestScript.cmake -V"
+  pool = console
+
+
+#############################################
+# Custom command for CMakeFiles\NightlyMemCheck
+
+build CMakeFiles/NightlyMemCheck | ${cmake_ninja_workdir}CMakeFiles/NightlyMemCheck: CUSTOM_COMMAND
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\binso\3D Objects\rfsyn\build-mingw-accuracy" && C:\msys64\mingw64\bin\ctest.exe -DMODEL=Nightly -DACTIONS=MemCheck -S CMakeFiles/CTestScript.cmake -V"
+  pool = console
+
+
+#############################################
+# Custom command for CMakeFiles\NightlySubmit
+
+build CMakeFiles/NightlySubmit | ${cmake_ninja_workdir}CMakeFiles/NightlySubmit: CUSTOM_COMMAND
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\binso\3D Objects\rfsyn\build-mingw-accuracy" && C:\msys64\mingw64\bin\ctest.exe -DMODEL=Nightly -DACTIONS=Submit -S CMakeFiles/CTestScript.cmake -V"
+  pool = console
+
+
+#############################################
+# Custom command for CMakeFiles\ExperimentalStart
+
+build CMakeFiles/ExperimentalStart | ${cmake_ninja_workdir}CMakeFiles/ExperimentalStart: CUSTOM_COMMAND
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\binso\3D Objects\rfsyn\build-mingw-accuracy" && C:\msys64\mingw64\bin\ctest.exe -DMODEL=Experimental -DACTIONS=Start -S CMakeFiles/CTestScript.cmake -V"
+  pool = console
+
+
+#############################################
+# Custom command for CMakeFiles\ExperimentalUpdate
+
+build CMakeFiles/ExperimentalUpdate | ${cmake_ninja_workdir}CMakeFiles/ExperimentalUpdate: CUSTOM_COMMAND
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\binso\3D Objects\rfsyn\build-mingw-accuracy" && C:\msys64\mingw64\bin\ctest.exe -DMODEL=Experimental -DACTIONS=Update -S CMakeFiles/CTestScript.cmake -V"
+  pool = console
+
+
+#############################################
+# Custom command for CMakeFiles\ExperimentalConfigure
+
+build CMakeFiles/ExperimentalConfigure | ${cmake_ninja_workdir}CMakeFiles/ExperimentalConfigure: CUSTOM_COMMAND
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\binso\3D Objects\rfsyn\build-mingw-accuracy" && C:\msys64\mingw64\bin\ctest.exe -DMODEL=Experimental -DACTIONS=Configure -S CMakeFiles/CTestScript.cmake -V"
+  pool = console
+
+
+#############################################
+# Custom command for CMakeFiles\ExperimentalBuild
+
+build CMakeFiles/ExperimentalBuild | ${cmake_ninja_workdir}CMakeFiles/ExperimentalBuild: CUSTOM_COMMAND
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\binso\3D Objects\rfsyn\build-mingw-accuracy" && C:\msys64\mingw64\bin\ctest.exe -DMODEL=Experimental -DACTIONS=Build -S CMakeFiles/CTestScript.cmake -V"
+  pool = console
+
+
+#############################################
+# Custom command for CMakeFiles\ExperimentalTest
+
+build CMakeFiles/ExperimentalTest | ${cmake_ninja_workdir}CMakeFiles/ExperimentalTest: CUSTOM_COMMAND
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\binso\3D Objects\rfsyn\build-mingw-accuracy" && C:\msys64\mingw64\bin\ctest.exe -DMODEL=Experimental -DACTIONS=Test -S CMakeFiles/CTestScript.cmake -V"
+  pool = console
+
+
+#############################################
+# Custom command for CMakeFiles\ExperimentalCoverage
+
+build CMakeFiles/ExperimentalCoverage | ${cmake_ninja_workdir}CMakeFiles/ExperimentalCoverage: CUSTOM_COMMAND
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\binso\3D Objects\rfsyn\build-mingw-accuracy" && C:\msys64\mingw64\bin\ctest.exe -DMODEL=Experimental -DACTIONS=Coverage -S CMakeFiles/CTestScript.cmake -V"
+  pool = console
+
+
+#############################################
+# Custom command for CMakeFiles\ExperimentalMemCheck
+
+build CMakeFiles/ExperimentalMemCheck | ${cmake_ninja_workdir}CMakeFiles/ExperimentalMemCheck: CUSTOM_COMMAND
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\binso\3D Objects\rfsyn\build-mingw-accuracy" && C:\msys64\mingw64\bin\ctest.exe -DMODEL=Experimental -DACTIONS=MemCheck -S CMakeFiles/CTestScript.cmake -V"
+  pool = console
+
+
+#############################################
+# Custom command for CMakeFiles\ExperimentalSubmit
+
+build CMakeFiles/ExperimentalSubmit | ${cmake_ninja_workdir}CMakeFiles/ExperimentalSubmit: CUSTOM_COMMAND
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\binso\3D Objects\rfsyn\build-mingw-accuracy" && C:\msys64\mingw64\bin\ctest.exe -DMODEL=Experimental -DACTIONS=Submit -S CMakeFiles/CTestScript.cmake -V"
+  pool = console
+
+
+#############################################
+# Custom command for CMakeFiles\ContinuousStart
+
+build CMakeFiles/ContinuousStart | ${cmake_ninja_workdir}CMakeFiles/ContinuousStart: CUSTOM_COMMAND
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\binso\3D Objects\rfsyn\build-mingw-accuracy" && C:\msys64\mingw64\bin\ctest.exe -DMODEL=Continuous -DACTIONS=Start -S CMakeFiles/CTestScript.cmake -V"
+  pool = console
+
+
+#############################################
+# Custom command for CMakeFiles\ContinuousUpdate
+
+build CMakeFiles/ContinuousUpdate | ${cmake_ninja_workdir}CMakeFiles/ContinuousUpdate: CUSTOM_COMMAND
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\binso\3D Objects\rfsyn\build-mingw-accuracy" && C:\msys64\mingw64\bin\ctest.exe -DMODEL=Continuous -DACTIONS=Update -S CMakeFiles/CTestScript.cmake -V"
+  pool = console
+
+
+#############################################
+# Custom command for CMakeFiles\ContinuousConfigure
+
+build CMakeFiles/ContinuousConfigure | ${cmake_ninja_workdir}CMakeFiles/ContinuousConfigure: CUSTOM_COMMAND
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\binso\3D Objects\rfsyn\build-mingw-accuracy" && C:\msys64\mingw64\bin\ctest.exe -DMODEL=Continuous -DACTIONS=Configure -S CMakeFiles/CTestScript.cmake -V"
+  pool = console
+
+
+#############################################
+# Custom command for CMakeFiles\ContinuousBuild
+
+build CMakeFiles/ContinuousBuild | ${cmake_ninja_workdir}CMakeFiles/ContinuousBuild: CUSTOM_COMMAND
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\binso\3D Objects\rfsyn\build-mingw-accuracy" && C:\msys64\mingw64\bin\ctest.exe -DMODEL=Continuous -DACTIONS=Build -S CMakeFiles/CTestScript.cmake -V"
+  pool = console
+
+
+#############################################
+# Custom command for CMakeFiles\ContinuousTest
+
+build CMakeFiles/ContinuousTest | ${cmake_ninja_workdir}CMakeFiles/ContinuousTest: CUSTOM_COMMAND
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\binso\3D Objects\rfsyn\build-mingw-accuracy" && C:\msys64\mingw64\bin\ctest.exe -DMODEL=Continuous -DACTIONS=Test -S CMakeFiles/CTestScript.cmake -V"
+  pool = console
+
+
+#############################################
+# Custom command for CMakeFiles\ContinuousCoverage
+
+build CMakeFiles/ContinuousCoverage | ${cmake_ninja_workdir}CMakeFiles/ContinuousCoverage: CUSTOM_COMMAND
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\binso\3D Objects\rfsyn\build-mingw-accuracy" && C:\msys64\mingw64\bin\ctest.exe -DMODEL=Continuous -DACTIONS=Coverage -S CMakeFiles/CTestScript.cmake -V"
+  pool = console
+
+
+#############################################
+# Custom command for CMakeFiles\ContinuousMemCheck
+
+build CMakeFiles/ContinuousMemCheck | ${cmake_ninja_workdir}CMakeFiles/ContinuousMemCheck: CUSTOM_COMMAND
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\binso\3D Objects\rfsyn\build-mingw-accuracy" && C:\msys64\mingw64\bin\ctest.exe -DMODEL=Continuous -DACTIONS=MemCheck -S CMakeFiles/CTestScript.cmake -V"
+  pool = console
+
+
+#############################################
+# Custom command for CMakeFiles\ContinuousSubmit
+
+build CMakeFiles/ContinuousSubmit | ${cmake_ninja_workdir}CMakeFiles/ContinuousSubmit: CUSTOM_COMMAND
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\binso\3D Objects\rfsyn\build-mingw-accuracy" && C:\msys64\mingw64\bin\ctest.exe -DMODEL=Continuous -DACTIONS=Submit -S CMakeFiles/CTestScript.cmake -V"
+  pool = console
+
 # =============================================================================
 # Target aliases.
 
@@ -944,11 +1450,17 @@ build validate_cpml: phony validate_cpml.exe
 
 build validate_cpml_margin: phony validate_cpml_margin.exe
 
+build validate_cpml_oblique: phony validate_cpml_oblique.exe
+
 build validate_cpml_planewave: phony validate_cpml_planewave.exe
+
+build validate_long_term_stability: phony validate_long_term_stability.exe
 
 build validate_materials_energy: phony validate_materials_energy.exe
 
 build validate_materials_fresnel: phony validate_materials_fresnel.exe
+
+build validate_materials_high_contrast: phony validate_materials_high_contrast.exe
 
 build validate_probe_dft: phony validate_probe_dft.exe
 
@@ -962,7 +1474,7 @@ build world_unit: phony world_unit.exe
 #############################################
 # Folder: C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy
 
-build all: phony librfsyn_fdtd.a librfsyn_core.a librfsyn_cjson.a librfsyn_world.a librfsyn_noise.a rfsyn.exe world_unit.exe material_catalog_unit.exe material_config_unit.exe simulate_unit.exe materials_unit.exe rf_signal_unit.exe cli_smoke.exe validate_cpml.exe validate_cpml_margin.exe validate_cpml_planewave.exe validate_materials_fresnel.exe validate_probe_dft.exe validate_materials_energy.exe
+build all: phony librfsyn_fdtd.a librfsyn_core.a librfsyn_cjson.a librfsyn_world.a librfsyn_noise.a rfsyn.exe world_unit.exe material_catalog_unit.exe material_config_unit.exe simulate_unit.exe materials_unit.exe rf_signal_unit.exe cli_smoke.exe validate_cpml.exe validate_cpml_margin.exe validate_cpml_planewave.exe validate_materials_fresnel.exe validate_probe_dft.exe validate_materials_energy.exe validate_cpml_oblique.exe validate_materials_high_contrast.exe validate_long_term_stability.exe
 
 # =============================================================================
 # Built-in targets
@@ -971,14 +1483,14 @@ build all: phony librfsyn_fdtd.a librfsyn_core.a librfsyn_cjson.a librfsyn_world
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja C$:/Users/binso/3D$ Objects/rfsyn/build-mingw-accuracy/cmake_install.cmake C$:/Users/binso/3D$ Objects/rfsyn/build-mingw-accuracy/CTestTestfile.cmake: RERUN_CMAKE | C$:/Users/binso/3D$ Objects/rfsyn/CMakeLists.txt C$:/msys64/mingw64/share/cmake/Modules/CMakeCInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeCommonLanguageInclude.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeGenericSystem.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeInitializeConfigs.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeLanguageInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeParseImplicitLinkInfo.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeRCInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeSystemSpecificInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeSystemSpecificInitialize.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/CMakeCommonCompilerMacros.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU-C.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/FindOpenMP.cmake C$:/msys64/mingw64/share/cmake/Modules/FindPackageHandleStandardArgs.cmake C$:/msys64/mingw64/share/cmake/Modules/FindPackageMessage.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CMakeCLinkerInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CMakeCommonLinkerInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/Linker/GNU-C.cmake C$:/msys64/mingw64/share/cmake/Modules/Linker/GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Linker/GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Linker/Windows-GNU-C.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Linker/Windows-GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-GNU-C-ABI.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-GNU-C.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-Initialize.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-windres.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/WindowsPaths.cmake CMakeCache.txt CMakeFiles/4.2.3/CMakeCCompiler.cmake CMakeFiles/4.2.3/CMakeRCCompiler.cmake CMakeFiles/4.2.3/CMakeSystem.cmake
+build build.ninja C$:/Users/binso/3D$ Objects/rfsyn/build-mingw-accuracy/cmake_install.cmake C$:/Users/binso/3D$ Objects/rfsyn/build-mingw-accuracy/CTestTestfile.cmake: RERUN_CMAKE | C$:/Users/binso/3D$ Objects/rfsyn/CMakeLists.txt C$:/msys64/mingw64/share/cmake/Modules/CMakeCInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeCommonLanguageInclude.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeGenericSystem.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeInitializeConfigs.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeLanguageInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeParseImplicitLinkInfo.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeRCInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeSystemSpecificInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeSystemSpecificInitialize.cmake C$:/msys64/mingw64/share/cmake/Modules/CTest.cmake C$:/msys64/mingw64/share/cmake/Modules/CTestTargets.cmake C$:/msys64/mingw64/share/cmake/Modules/CTestUseLaunchers.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/CMakeCommonCompilerMacros.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU-C.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/DartConfiguration.tcl.in C$:/msys64/mingw64/share/cmake/Modules/FindOpenMP.cmake C$:/msys64/mingw64/share/cmake/Modules/FindPackageHandleStandardArgs.cmake C$:/msys64/mingw64/share/cmake/Modules/FindPackageMessage.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CMakeCLinkerInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CMakeCommonLinkerInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/Linker/GNU-C.cmake C$:/msys64/mingw64/share/cmake/Modules/Linker/GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Linker/GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Linker/Windows-GNU-C.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Linker/Windows-GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-GNU-C-ABI.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-GNU-C.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-Initialize.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-windres.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/WindowsPaths.cmake C$:/msys64/mingw64/share/cmake/Templates/CTestScript.cmake.in CMakeCache.txt CMakeFiles/4.2.3/CMakeCCompiler.cmake CMakeFiles/4.2.3/CMakeRCCompiler.cmake CMakeFiles/4.2.3/CMakeSystem.cmake
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build C$:/Users/binso/3D$ Objects/rfsyn/CMakeLists.txt C$:/msys64/mingw64/share/cmake/Modules/CMakeCInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeCommonLanguageInclude.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeGenericSystem.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeInitializeConfigs.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeLanguageInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeParseImplicitLinkInfo.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeRCInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeSystemSpecificInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeSystemSpecificInitialize.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/CMakeCommonCompilerMacros.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU-C.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/FindOpenMP.cmake C$:/msys64/mingw64/share/cmake/Modules/FindPackageHandleStandardArgs.cmake C$:/msys64/mingw64/share/cmake/Modules/FindPackageMessage.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CMakeCLinkerInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CMakeCommonLinkerInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/Linker/GNU-C.cmake C$:/msys64/mingw64/share/cmake/Modules/Linker/GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Linker/GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Linker/Windows-GNU-C.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Linker/Windows-GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-GNU-C-ABI.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-GNU-C.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-Initialize.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-windres.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/WindowsPaths.cmake CMakeCache.txt CMakeFiles/4.2.3/CMakeCCompiler.cmake CMakeFiles/4.2.3/CMakeRCCompiler.cmake CMakeFiles/4.2.3/CMakeSystem.cmake: phony
+build C$:/Users/binso/3D$ Objects/rfsyn/CMakeLists.txt C$:/msys64/mingw64/share/cmake/Modules/CMakeCInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeCommonLanguageInclude.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeGenericSystem.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeInitializeConfigs.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeLanguageInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeParseImplicitLinkInfo.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeRCInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeSystemSpecificInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeSystemSpecificInitialize.cmake C$:/msys64/mingw64/share/cmake/Modules/CTest.cmake C$:/msys64/mingw64/share/cmake/Modules/CTestTargets.cmake C$:/msys64/mingw64/share/cmake/Modules/CTestUseLaunchers.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/CMakeCommonCompilerMacros.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU-C.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/DartConfiguration.tcl.in C$:/msys64/mingw64/share/cmake/Modules/FindOpenMP.cmake C$:/msys64/mingw64/share/cmake/Modules/FindPackageHandleStandardArgs.cmake C$:/msys64/mingw64/share/cmake/Modules/FindPackageMessage.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CMakeCLinkerInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CMakeCommonLinkerInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/Linker/GNU-C.cmake C$:/msys64/mingw64/share/cmake/Modules/Linker/GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Linker/GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Linker/Windows-GNU-C.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Linker/Windows-GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-GNU-C-ABI.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-GNU-C.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-Initialize.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-windres.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/WindowsPaths.cmake C$:/msys64/mingw64/share/cmake/Templates/CTestScript.cmake.in CMakeCache.txt CMakeFiles/4.2.3/CMakeCCompiler.cmake CMakeFiles/4.2.3/CMakeRCCompiler.cmake CMakeFiles/4.2.3/CMakeSystem.cmake: phony
 
 
 #############################################
