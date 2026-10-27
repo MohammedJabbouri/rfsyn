@@ -262,7 +262,7 @@ OpenMP_gomp_LIBRARY:FILEPATH=C:/msys64/mingw64/lib/libgomp.dll.a
 //Path to the mingwthrd library for OpenMP
 OpenMP_mingwthrd_LIBRARY:FILEPATH=C:/msys64/mingw64/lib/libmingwthrd.a
 
-//Build the extended validators
+//Build extended validators and tilted-interface measurements
 RFSYN_BUILD_EXTENDED_VALIDATORS:BOOL=ON
 
 //Enable OpenMP when available

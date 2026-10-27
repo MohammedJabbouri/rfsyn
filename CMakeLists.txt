@@ -14,9 +14,23 @@ if(NOT CMAKE_CONFIGURATION_TYPES AND NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE Release CACHE STRING "Build type" FORCE)
 endif()
 
-option(RFSYN_SANITIZE "Enable address and undefined-behavior sanitizers" OFF)
-option(RFSYN_ENABLE_OPENMP "Enable OpenMP when available" ON)
-option(RFSYN_BUILD_EXTENDED_VALIDATORS "Build the extended validators" ON)
+option(
+  RFSYN_SANITIZE
+  "Enable address and undefined-behavior sanitizers"
+  OFF
+)
+
+option(
+  RFSYN_ENABLE_OPENMP
+  "Enable OpenMP when available"
+  ON
+)
+
+option(
+  RFSYN_BUILD_EXTENDED_VALIDATORS
+  "Build extended validators and tilted-interface measurements"
+  ON
+)
 
 set(
   RFSYN_VALIDATION_REFINEMENT
@@ -47,7 +61,10 @@ endif()
 
 if(RFSYN_STABILITY_STEPS LESS 10000 OR
    RFSYN_STABILITY_STEPS GREATER 10000000)
-  message(FATAL_ERROR "RFSYN_STABILITY_STEPS must be between 10000 and 10000000")
+  message(
+    FATAL_ERROR
+    "RFSYN_STABILITY_STEPS must be between 10000 and 10000000"
+  )
 endif()
 
 set(
@@ -61,7 +78,7 @@ set(
   RFSYN_EXTENDED_TIMEOUT
   "7200"
   CACHE STRING
-  "Timeout in seconds per extended validator"
+  "Timeout in seconds per extended validator or measurement"
 )
 
 foreach(timeout_var IN ITEMS
@@ -73,7 +90,7 @@ foreach(timeout_var IN ITEMS
 endforeach()
 
 # ---------------------------------------------------------------------------
-# Shared options
+# Shared build options
 # ---------------------------------------------------------------------------
 
 add_library(rfsyn_build_options INTERFACE)
@@ -94,7 +111,10 @@ if(RFSYN_SANITIZE)
         -fsanitize=address,undefined
     )
   else()
-    message(FATAL_ERROR "Sanitizers require a supported GCC or Clang toolchain")
+    message(
+      FATAL_ERROR
+      "Sanitizers require a supported GCC or Clang toolchain"
+    )
   endif()
 endif()
 
@@ -113,7 +133,7 @@ function(rfsyn_apply_build_options target_name)
 endfunction()
 
 # ---------------------------------------------------------------------------
-# Libraries
+# FDTD library
 # ---------------------------------------------------------------------------
 
 add_library(
@@ -127,7 +147,11 @@ add_library(
 )
 
 if(RFSYN_MATH_LIBRARIES)
-  target_link_libraries(rfsyn_fdtd PUBLIC ${RFSYN_MATH_LIBRARIES})
+  target_link_libraries(
+    rfsyn_fdtd
+    PUBLIC
+      ${RFSYN_MATH_LIBRARIES}
+  )
 endif()
 
 rfsyn_apply_build_options(rfsyn_fdtd)
@@ -136,8 +160,18 @@ if(RFSYN_ENABLE_OPENMP)
   find_package(OpenMP QUIET COMPONENTS C)
 
   if(OpenMP_C_FOUND)
-    target_link_libraries(rfsyn_fdtd PUBLIC OpenMP::OpenMP_C)
-    target_compile_definitions(rfsyn_fdtd PUBLIC RFSYN_HAS_OPENMP=1)
+    target_link_libraries(
+      rfsyn_fdtd
+      PUBLIC
+        OpenMP::OpenMP_C
+    )
+
+    target_compile_definitions(
+      rfsyn_fdtd
+      PUBLIC
+        RFSYN_HAS_OPENMP=1
+    )
+
     message(STATUS "rfsyn: OpenMP enabled")
   else()
     message(STATUS "rfsyn: OpenMP unavailable; FDTD is single-threaded")
@@ -145,6 +179,10 @@ if(RFSYN_ENABLE_OPENMP)
 else()
   message(STATUS "rfsyn: OpenMP disabled")
 endif()
+
+# ---------------------------------------------------------------------------
+# Core library
+# ---------------------------------------------------------------------------
 
 add_library(
   rfsyn_core STATIC
@@ -155,10 +193,18 @@ add_library(
 )
 
 if(RFSYN_MATH_LIBRARIES)
-  target_link_libraries(rfsyn_core PUBLIC ${RFSYN_MATH_LIBRARIES})
+  target_link_libraries(
+    rfsyn_core
+    PUBLIC
+      ${RFSYN_MATH_LIBRARIES}
+  )
 endif()
 
 rfsyn_apply_build_options(rfsyn_core)
+
+# ---------------------------------------------------------------------------
+# JSON library
+# ---------------------------------------------------------------------------
 
 add_library(
   rfsyn_cjson STATIC
@@ -172,6 +218,10 @@ target_include_directories(
 )
 
 rfsyn_apply_build_options(rfsyn_cjson)
+
+# ---------------------------------------------------------------------------
+# World library
+# ---------------------------------------------------------------------------
 
 add_library(
   rfsyn_world STATIC
@@ -194,6 +244,10 @@ target_link_libraries(
 )
 
 rfsyn_apply_build_options(rfsyn_world)
+
+# ---------------------------------------------------------------------------
+# Noise library
+# ---------------------------------------------------------------------------
 
 add_library(
   rfsyn_noise STATIC
@@ -242,6 +296,10 @@ include(CTest)
 
 if(BUILD_TESTING)
 
+  # -------------------------------------------------------------------------
+  # Unit-test registration
+  # -------------------------------------------------------------------------
+
   function(rfsyn_add_unit_test name)
     add_executable(
       ${name}
@@ -276,6 +334,10 @@ if(BUILD_TESTING)
   rfsyn_add_unit_test(materials_unit rfsyn_fdtd)
   rfsyn_add_unit_test(rf_signal_unit rfsyn_core)
 
+  # -------------------------------------------------------------------------
+  # CLI smoke test
+  # -------------------------------------------------------------------------
+
   add_executable(
     cli_smoke
     tests/cli_smoke.c
@@ -292,11 +354,14 @@ if(BUILD_TESTING)
   )
 
   rfsyn_apply_build_options(cli_smoke)
+
   add_dependencies(cli_smoke rfsyn)
 
   add_test(
     NAME cli_smoke
-    COMMAND $<TARGET_FILE:cli_smoke> $<TARGET_FILE:rfsyn>
+    COMMAND
+      $<TARGET_FILE:cli_smoke>
+      $<TARGET_FILE:rfsyn>
   )
 
   set_tests_properties(
@@ -305,7 +370,12 @@ if(BUILD_TESTING)
       LABELS "smoke;cli"
   )
 
-  # Additional arguments are passed to the validator executable.
+  # -------------------------------------------------------------------------
+  # Validator and measurement registration
+  #
+  # Additional arguments are forwarded to the executable.
+  # -------------------------------------------------------------------------
+
   function(rfsyn_add_validator name group timeout_seconds)
     set(
       validator_source
@@ -313,7 +383,10 @@ if(BUILD_TESTING)
     )
 
     if(NOT EXISTS "${validator_source}")
-      message(FATAL_ERROR "Missing validator source: ${validator_source}")
+      message(
+        FATAL_ERROR
+        "Missing validator source: ${validator_source}"
+      )
     endif()
 
     add_executable(
@@ -348,16 +421,25 @@ if(BUILD_TESTING)
       COMMAND $<TARGET_FILE:${name}> ${ARGN}
     )
 
+    if("${group}" STREQUAL "measurement")
+      set(validator_labels "fdtd;measurement;tilted")
+    else()
+      set(validator_labels "fdtd;validation;${group}")
+    endif()
+
     set_tests_properties(
       ${name}
       PROPERTIES
         WORKING_DIRECTORY "${validator_workdir}"
-        LABELS "fdtd;validation;${group}"
+        LABELS "${validator_labels}"
         TIMEOUT "${timeout_seconds}"
     )
   endfunction()
 
-  # Existing six validators.
+  # -------------------------------------------------------------------------
+  # Existing six baseline validators
+  # -------------------------------------------------------------------------
+
   set(
     RFSYN_FDTD_VALIDATORS
     validate_cpml
@@ -376,21 +458,30 @@ if(BUILD_TESTING)
     )
   endforeach()
 
-  # New extended validators.
+  # -------------------------------------------------------------------------
+  # Extended validators and tilted-interface measurement
+  # -------------------------------------------------------------------------
+
   if(RFSYN_BUILD_EXTENDED_VALIDATORS)
+
     set(
       RFSYN_REQUIRED_EXTENDED_FILES
       engine/fdtd/extended_test.h
       engine/fdtd/validate_cpml_oblique.c
       engine/fdtd/validate_materials_high_contrast.c
       engine/fdtd/validate_long_term_stability.c
+      engine/fdtd/validate_materials_tilted.c
     )
 
     set(RFSYN_MISSING_EXTENDED_FILES)
 
     foreach(relative_path IN LISTS RFSYN_REQUIRED_EXTENDED_FILES)
       if(NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/${relative_path}")
-        list(APPEND RFSYN_MISSING_EXTENDED_FILES "${relative_path}")
+        list(
+          APPEND
+          RFSYN_MISSING_EXTENDED_FILES
+          "${relative_path}"
+        )
       endif()
     endforeach()
 
@@ -405,11 +496,12 @@ if(BUILD_TESTING)
         FATAL_ERROR
         "Missing extended-validator files:\n"
         "  ${missing_files_text}\n"
-        "Add these files or set RFSYN_BUILD_EXTENDED_VALIDATORS=OFF."
+        "Add these files or configure with "
+        "-DRFSYN_BUILD_EXTENDED_VALIDATORS=OFF."
       )
     endif()
 
-    # Declaration checks only; these do not prove boundary functionality.
+    # Declaration checks only; these do not verify implementation behavior.
     file(
       READ
       "${CMAKE_CURRENT_SOURCE_DIR}/engine/fdtd/grid.h"
@@ -431,6 +523,8 @@ if(BUILD_TESTING)
     )
 
     foreach(required_api IN ITEMS
+        materials_register
+        materials_assign_box
         materials_set_component
         materials_get_coefficients)
       if(NOT materials_header MATCHES "${required_api}")
@@ -461,14 +555,24 @@ if(BUILD_TESTING)
       --steps
       "${RFSYN_STABILITY_STEPS}"
     )
+
+    rfsyn_add_validator(
+      validate_materials_tilted
+      measurement
+      "${RFSYN_EXTENDED_TIMEOUT}"
+    )
+
   endif()
 
 elseif(RFSYN_BUILD_EXTENDED_VALIDATORS)
-  message(STATUS "rfsyn: BUILD_TESTING=OFF; validators will not be built")
+  message(
+    STATUS
+    "rfsyn: BUILD_TESTING=OFF; validators will not be built"
+  )
 endif()
 
 # ---------------------------------------------------------------------------
-# Summary
+# Configuration summary
 # ---------------------------------------------------------------------------
 
 message(STATUS "rfsyn: C compiler = ${CMAKE_C_COMPILER}")

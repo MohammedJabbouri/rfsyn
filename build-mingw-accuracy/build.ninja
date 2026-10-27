@@ -1160,6 +1160,44 @@ build validate_long_term_stability.exe: C_EXECUTABLE_LINKER__validate_long_term_
   TARGET_PDB = validate_long_term_stability.exe.dbg
   TARGET_SUPPORT_DIR = CMakeFiles\validate_long_term_stability.dir
 
+# =============================================================================
+# Object build statements for EXECUTABLE target validate_materials_tilted
+
+
+#############################################
+# Order-only phony target for validate_materials_tilted
+
+build cmake_object_order_depends_target_validate_materials_tilted: phony || cmake_object_order_depends_target_rfsyn_fdtd
+
+build CMakeFiles/validate_materials_tilted.dir/engine/fdtd/validate_materials_tilted.c.obj: C_COMPILER__validate_materials_tilted_unscanned_Release C$:/Users/binso/3D$ Objects/rfsyn/engine/fdtd/validate_materials_tilted.c || cmake_object_order_depends_target_validate_materials_tilted
+  CONFIG = Release
+  DEFINES = -DRFSYN_HAS_OPENMP=1 -DRFSYN_VALIDATION_REFINEMENT=1
+  DEP_FILE = CMakeFiles\validate_materials_tilted.dir\engine\fdtd\validate_materials_tilted.c.obj.d
+  FLAGS = -O3 -DNDEBUG -std=gnu11 -fopenmp
+  OBJECT_DIR = CMakeFiles\validate_materials_tilted.dir
+  OBJECT_FILE_DIR = CMakeFiles\validate_materials_tilted.dir\engine\fdtd
+  TARGET_SUPPORT_DIR = CMakeFiles\validate_materials_tilted.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target validate_materials_tilted
+
+
+#############################################
+# Link the executable validate_materials_tilted.exe
+
+build validate_materials_tilted.exe: C_EXECUTABLE_LINKER__validate_materials_tilted_Release CMakeFiles/validate_materials_tilted.dir/engine/fdtd/validate_materials_tilted.c.obj | librfsyn_fdtd.a C$:/msys64/mingw64/lib/libgomp.dll.a C$:/msys64/mingw64/lib/libmingwthrd.a || librfsyn_fdtd.a
+  CONFIG = Release
+  FLAGS = -O3 -DNDEBUG
+  LINK_LIBRARIES = librfsyn_fdtd.a  -lm  C:/msys64/mingw64/lib/libgomp.dll.a  C:/msys64/mingw64/lib/libmingwthrd.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  OBJECT_DIR = CMakeFiles\validate_materials_tilted.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_FILE = validate_materials_tilted.exe
+  TARGET_IMPLIB = libvalidate_materials_tilted.dll.a
+  TARGET_PDB = validate_materials_tilted.exe.dbg
+  TARGET_SUPPORT_DIR = CMakeFiles\validate_materials_tilted.dir
+
 
 #############################################
 # Utility command for test
@@ -1462,6 +1500,8 @@ build validate_materials_fresnel: phony validate_materials_fresnel.exe
 
 build validate_materials_high_contrast: phony validate_materials_high_contrast.exe
 
+build validate_materials_tilted: phony validate_materials_tilted.exe
+
 build validate_probe_dft: phony validate_probe_dft.exe
 
 build world_unit: phony world_unit.exe
@@ -1474,7 +1514,7 @@ build world_unit: phony world_unit.exe
 #############################################
 # Folder: C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy
 
-build all: phony librfsyn_fdtd.a librfsyn_core.a librfsyn_cjson.a librfsyn_world.a librfsyn_noise.a rfsyn.exe world_unit.exe material_catalog_unit.exe material_config_unit.exe simulate_unit.exe materials_unit.exe rf_signal_unit.exe cli_smoke.exe validate_cpml.exe validate_cpml_margin.exe validate_cpml_planewave.exe validate_materials_fresnel.exe validate_probe_dft.exe validate_materials_energy.exe validate_cpml_oblique.exe validate_materials_high_contrast.exe validate_long_term_stability.exe
+build all: phony librfsyn_fdtd.a librfsyn_core.a librfsyn_cjson.a librfsyn_world.a librfsyn_noise.a rfsyn.exe world_unit.exe material_catalog_unit.exe material_config_unit.exe simulate_unit.exe materials_unit.exe rf_signal_unit.exe cli_smoke.exe validate_cpml.exe validate_cpml_margin.exe validate_cpml_planewave.exe validate_materials_fresnel.exe validate_probe_dft.exe validate_materials_energy.exe validate_cpml_oblique.exe validate_materials_high_contrast.exe validate_long_term_stability.exe validate_materials_tilted.exe
 
 # =============================================================================
 # Built-in targets

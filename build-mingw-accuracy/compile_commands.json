@@ -214,5 +214,11 @@
   "command": "C:\\msys64\\mingw64\\bin\\gcc.exe -DRFSYN_HAS_OPENMP=1 -DRFSYN_VALIDATION_REFINEMENT=1 -O3 -DNDEBUG -std=gnu11 -fopenmp -o CMakeFiles\\validate_long_term_stability.dir\\engine\\fdtd\\validate_long_term_stability.c.obj -c \"C:\\Users\\binso\\3D Objects\\rfsyn\\engine\\fdtd\\validate_long_term_stability.c\"",
   "file": "C:/Users/binso/3D Objects/rfsyn/engine/fdtd/validate_long_term_stability.c",
   "output": "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/CMakeFiles/validate_long_term_stability.dir/engine/fdtd/validate_long_term_stability.c.obj"
+},
+{
+  "directory": "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy",
+  "command": "C:\\msys64\\mingw64\\bin\\gcc.exe -DRFSYN_HAS_OPENMP=1 -DRFSYN_VALIDATION_REFINEMENT=1 -O3 -DNDEBUG -std=gnu11 -fopenmp -o CMakeFiles\\validate_materials_tilted.dir\\engine\\fdtd\\validate_materials_tilted.c.obj -c \"C:\\Users\\binso\\3D Objects\\rfsyn\\engine\\fdtd\\validate_materials_tilted.c\"",
+  "file": "C:/Users/binso/3D Objects/rfsyn/engine/fdtd/validate_materials_tilted.c",
+  "output": "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/CMakeFiles/validate_materials_tilted.dir/engine/fdtd/validate_materials_tilted.c.obj"
 }
 ]
