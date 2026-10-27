@@ -1,22 +1,478 @@
-Start testing: Oct 26 21:19 Pacific Daylight Time
+Start testing: Oct 26 21:43 Pacific Daylight Time
 ----------------------------------------------------------
-7/18 Testing: subpixel_te_unit
-7/18 Test: subpixel_te_unit
-Command: "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/subpixel_te_unit.exe"
+1/18 Testing: world_unit
+1/18 Test: world_unit
+Command: "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/world_unit.exe"
 Directory: C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy
-"subpixel_te_unit" start time: Oct 26 21:19 Pacific Daylight Time
+"world_unit" start time: Oct 26 21:43 Pacific Daylight Time
 Output:
 ----------------------------------------------------------
-subpixel_te_unit: 4642 checks, 0 failures
+world_unit: PASS
 <end of output>
 Test time =   0.05 sec
 ----------------------------------------------------------
 Test Passed.
-"subpixel_te_unit" end time: Oct 26 21:19 Pacific Daylight Time
+"world_unit" end time: Oct 26 21:43 Pacific Daylight Time
+"world_unit" time elapsed: 00:00:00
+----------------------------------------------------------
+
+2/18 Testing: material_catalog_unit
+2/18 Test: material_catalog_unit
+Command: "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/material_catalog_unit.exe"
+Directory: C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy
+"material_catalog_unit" start time: Oct 26 21:43 Pacific Daylight Time
+Output:
+----------------------------------------------------------
+material_catalog_unit: PASS
+<end of output>
+Test time =   0.06 sec
+----------------------------------------------------------
+Test Passed.
+"material_catalog_unit" end time: Oct 26 21:43 Pacific Daylight Time
+"material_catalog_unit" time elapsed: 00:00:00
+----------------------------------------------------------
+
+3/18 Testing: material_config_unit
+3/18 Test: material_config_unit
+Command: "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/material_config_unit.exe"
+Directory: C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy
+"material_config_unit" start time: Oct 26 21:43 Pacific Daylight Time
+Output:
+----------------------------------------------------------
+material_config: concrete_normal failed: material exists; explicit override required
+material_config: bad requires model='constant' and numeric eps_r/sigma_s_per_m
+material_config: bad failed: invalid definition, frequency, or argument
+material_config: bad failed: invalid definition, frequency, or argument
+material_config: air failed: reserved air or alias name; use canonical material name
+material_config: evaluation_frequency_hz must be positive and finite
+material_config: color #808080 -> material_that_does_not_exist failed: unknown material
+material_config: invalid color key 'red'
+material_config: root must be a JSON object
+material_config: materials must be object
+material_config: vacuum failed: reserved air or alias name; use canonical material name
+material_config: enabled must be boolean
+material_config: allow_proxy must be boolean
+material_config: materials.test_invalid.override must be boolean
+material_config: test_invalid failed: invalid definition, frequency, or argument
+material_config: materials.test_invalid.reference_frequency_hz must be positive and finite
+material_config: test_invalid failed: invalid definition, frequency, or argument
+material_config: materials.test_invalid.reference_frequency_hz must be positive and finite
+material_config: test_invalid failed: invalid definition, frequency, or argument
+material_config: materials.test_invalid.description must be string
+material_config: test_invalid failed: invalid definition, frequency, or argument
+material_config: materials.test_invalid.source must be a nonempty string
+material_config: test_invalid failed: invalid definition, frequency, or argument
+material_config: materials.test_invalid.source must be a nonempty string
+material_config: test_invalid failed: invalid definition, frequency, or argument
+material_config: evaluation_frequency_hz must be numeric
+material_config: schema_version must be 1
+material_config: schema_version must be 1
+material_config: schema_version must be 1
+material_config_unit: PASS (32 cases)
+<end of output>
+Test time =   0.30 sec
+----------------------------------------------------------
+Test Passed.
+"material_config_unit" end time: Oct 26 21:43 Pacific Daylight Time
+"material_config_unit" time elapsed: 00:00:00
+----------------------------------------------------------
+
+4/18 Testing: simulate_unit
+4/18 Test: simulate_unit
+Command: "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/simulate_unit.exe"
+Directory: C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy
+"simulate_unit" start time: Oct 26 21:43 Pacific Daylight Time
+Output:
+----------------------------------------------------------
+simulate_unit: PASS
+samples: 200
+peak: 7.896462929e-03
+early peak: 1.953877629e-07
+sample rate: 5.245007767e+11 Hz
+determinism: bit-for-bit identical
+<end of output>
+Test time =   2.97 sec
+----------------------------------------------------------
+Test Passed.
+"simulate_unit" end time: Oct 26 21:44 Pacific Daylight Time
+"simulate_unit" time elapsed: 00:00:02
+----------------------------------------------------------
+
+5/18 Testing: materials_unit
+5/18 Test: materials_unit
+Command: "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/materials_unit.exe"
+Directory: C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy
+"materials_unit" start time: Oct 26 21:44 Pacific Daylight Time
+Output:
+----------------------------------------------------------
+materials_unit: PASS
+<end of output>
+Test time =   0.06 sec
+----------------------------------------------------------
+Test Passed.
+"materials_unit" end time: Oct 26 21:44 Pacific Daylight Time
+"materials_unit" time elapsed: 00:00:00
+----------------------------------------------------------
+
+6/18 Testing: rf_signal_unit
+6/18 Test: rf_signal_unit
+Command: "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/rf_signal_unit.exe"
+Directory: C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy
+"rf_signal_unit" start time: Oct 26 21:44 Pacific Daylight Time
+Output:
+----------------------------------------------------------
+PASS
+<end of output>
+Test time =   0.05 sec
+----------------------------------------------------------
+Test Passed.
+"rf_signal_unit" end time: Oct 26 21:44 Pacific Daylight Time
+"rf_signal_unit" time elapsed: 00:00:00
+----------------------------------------------------------
+
+7/18 Testing: subpixel_te_unit
+7/18 Test: subpixel_te_unit
+Command: "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/subpixel_te_unit.exe"
+Directory: C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy
+"subpixel_te_unit" start time: Oct 26 21:44 Pacific Daylight Time
+Output:
+----------------------------------------------------------
+subpixel_te_unit: 4642 checks, 0 failures
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"subpixel_te_unit" end time: Oct 26 21:44 Pacific Daylight Time
 "subpixel_te_unit" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-End testing: Oct 26 21:19 Pacific Daylight Time
+8/18 Testing: cli_smoke
+8/18 Test: cli_smoke
+Command: "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/cli_smoke.exe" "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/rfsyn.exe"
+Directory: C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy
+"cli_smoke" start time: Oct 26 21:44 Pacific Daylight Time
+Output:
+----------------------------------------------------------
+created configs/
+wrote configs/config.json with realistic defaults:
+{
+	"job":	{
+		"count":	100,
+		"n_samples":	1024,
+		"output_dir":	"output"
+	},
+	"awgn":	{
+		"enabled":	true,
+		"snr_db":	15,
+		"seed":	42
+	},
+	"fdtd":	{
+		"enabled":	true,
+		"nx":	50,
+		"ny":	50,
+		"nz":	50,
+		"dx":	0.001,
+		"courant":	0.99,
+		"n_steps":	200,
+		"npml":	8,
+		"src_i":	-1,
+		"src_j":	-1,
+		"src_k":	-1,
+		"probe_i":	-1,
+		"probe_j":	-1,
+		"probe_k":	-1,
+		"t0":	40,
+		"tau":	8
+	},
+	"material_catalog":	{
+		"enabled":	false,
+		"evaluation_frequency_hz":	1000000000,
+		"allow_proxy":	false
+	},
+	"materials":	{
+	},
+	"colors":	{
+	}
+}
+output directory: output/
+run `rfsyn start` to generate
++ "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/rfsyn.exe" init
+set job.count = 5
++ "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/rfsyn.exe" config set job.count 5
+set job.n_samples = 256
++ "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/rfsyn.exe" config set job.n_samples 256
+{
+	"job":	{
+		"count":	5,
+		"n_samples":	256,
+		"output_dir":	"output"
+	},
+	"awgn":	{
+		"enabled":	true,
+		"snr_db":	15,
+		"seed":	42
+	},
+	"fdtd":	{
+		"enabled":	true,
+		"nx":	50,
+		"ny":	50,
+		"nz":	50,
+		"dx":	0.001,
+		"courant":	0.99,
+		"n_steps":	200,
+		"npml":	8,
+		"src_i":	-1,
+		"src_j":	-1,
+		"src_k":	-1,
+		"probe_i":	-1,
+		"probe_j":	-1,
+		"probe_k":	-1,
+		"t0":	40,
+		"tau":	8
+	},
+	"material_catalog":	{
+		"enabled":	false,
+		"evaluation_frequency_hz":	1000000000,
+		"allow_proxy":	false
+	},
+	"materials":	{
+	},
+	"colors":	{
+	}
+}
++ "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/rfsyn.exe" config view
+generating 5 example(s) into 'output/' (FDTD simulation)
+  1 / 5 attempted; 1 written  2 / 5 attempted; 2 written  3 / 5 attempted; 3 written  4 / 5 attempted; 4 written  5 / 5 attempted; 5 written
+done: 5 / 5 example(s) written to 'output/'
++ "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/rfsyn.exe" start
+OK: output/example_000000.iq first sample = 0.000017-0.000491j (AWGN applied)
+PASS
+<end of output>
+Test time =   7.18 sec
+----------------------------------------------------------
+Test Passed.
+"cli_smoke" end time: Oct 26 21:44 Pacific Daylight Time
+"cli_smoke" time elapsed: 00:00:07
+----------------------------------------------------------
 
-unit =   0.05 sec*proc
+9/18 Testing: validate_cpml
+9/18 Test: validate_cpml
+Command: "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/validate_cpml.exe"
+Directory: C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/validation/validate_cpml
+"validate_cpml" start time: Oct 26 21:44 Pacific Daylight Time
+Output:
+----------------------------------------------------------
+probe 0: max normalized 0.00564851976, relative L2 0.00788511703
+PASS
+<end of output>
+Test time =   5.29 sec
+----------------------------------------------------------
+Test Passed.
+"validate_cpml" end time: Oct 26 21:44 Pacific Daylight Time
+"validate_cpml" time elapsed: 00:00:05
+----------------------------------------------------------
+
+10/18 Testing: validate_cpml_margin
+10/18 Test: validate_cpml_margin
+Command: "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/validate_cpml_margin.exe"
+Directory: C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/validation/validate_cpml_margin
+"validate_cpml_margin" start time: Oct 26 21:44 Pacific Daylight Time
+Output:
+----------------------------------------------------------
+probe 0: max normalized 0.00417997619, relative L2 0.0040186177
+probe 1: max normalized 0.00443705633, relative L2 0.00525515435
+probe 2: max normalized 0.00478577391, relative L2 0.00634458602
+probe 3: max normalized 0.00568728943, relative L2 0.00824111186
+probe 4: max normalized 0.00579124523, relative L2 0.00880691036
+PASS
+<end of output>
+Test time =  13.32 sec
+----------------------------------------------------------
+Test Passed.
+"validate_cpml_margin" end time: Oct 26 21:44 Pacific Daylight Time
+"validate_cpml_margin" time elapsed: 00:00:13
+----------------------------------------------------------
+
+11/18 Testing: validate_cpml_planewave
+11/18 Test: validate_cpml_planewave
+Command: "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/validate_cpml_planewave.exe"
+Directory: C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/validation/validate_cpml_planewave
+"validate_cpml_planewave" start time: Oct 26 21:44 Pacific Daylight Time
+Output:
+----------------------------------------------------------
+CPML: max normalized error 3.23401409e-06 (-109.805 dB), relative L2 4.88901426e-06
+PASS
+<end of output>
+Test time =   6.28 sec
+----------------------------------------------------------
+Test Passed.
+"validate_cpml_planewave" end time: Oct 26 21:44 Pacific Daylight Time
+"validate_cpml_planewave" time elapsed: 00:00:06
+----------------------------------------------------------
+
+12/18 Testing: validate_materials_fresnel
+12/18 Test: validate_materials_fresnel
+Command: "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/validate_materials_fresnel.exe"
+Directory: C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/validation/validate_materials_fresnel
+"validate_materials_fresnel" start time: Oct 26 21:44 Pacific Daylight Time
+Output:
+----------------------------------------------------------
+Fresnel pulse magnitude: measured 0.33183219, theory 0.333333333, relative error 0.450343%
+PASS
+<end of output>
+Test time =   9.14 sec
+----------------------------------------------------------
+Test Passed.
+"validate_materials_fresnel" end time: Oct 26 21:44 Pacific Daylight Time
+"validate_materials_fresnel" time elapsed: 00:00:09
+----------------------------------------------------------
+
+13/18 Testing: validate_probe_dft
+13/18 Test: validate_probe_dft
+Command: "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/validate_probe_dft.exe"
+Directory: C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/validation/validate_probe_dft
+"validate_probe_dft" start time: Oct 26 21:44 Pacific Daylight Time
+Output:
+----------------------------------------------------------
+cross-check: source.c/probe.c vs. previously-validated margin result
+frequency = 1.500e+10 Hz, threshold = -30.0 dB
+
+dist_to_pml    mag_ref        diff_mag       error_db    
+11             1.554240e-13   3.500206e-18   -92.948     
+8              1.074077e-13   1.358431e-18   -97.960     
+5              8.211862e-14   5.503735e-18   -83.476     
+2              6.633482e-14   6.450091e-18   -80.244     
+1              6.232234e-14   6.568795e-18   -79.543     
+
+PASS: all probes below -30.0 dB
+<end of output>
+Test time =  13.36 sec
+----------------------------------------------------------
+Test Passed.
+"validate_probe_dft" end time: Oct 26 21:44 Pacific Daylight Time
+"validate_probe_dft" time elapsed: 00:00:13
+----------------------------------------------------------
+
+14/18 Testing: validate_materials_energy
+14/18 Test: validate_materials_energy
+Command: "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/validate_materials_energy.exe"
+Directory: C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/validation/validate_materials_energy
+"validate_materials_energy" start time: Oct 26 21:44 Pacific Daylight Time
+Output:
+----------------------------------------------------------
+Energy per unit area: R=-0 T=1 balance=1 mismatch=8.82483e-10%
+PASS
+Energy per unit area: R=0.107016393 T=0.892983607 balance=1 mismatch=1.28805e-09%
+PASS
+<end of output>
+Test time =  18.02 sec
+----------------------------------------------------------
+Test Passed.
+"validate_materials_energy" end time: Oct 26 21:45 Pacific Daylight Time
+"validate_materials_energy" time elapsed: 00:00:18
+----------------------------------------------------------
+
+15/18 Testing: validate_cpml_oblique
+15/18 Test: validate_cpml_oblique
+Command: "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/validate_cpml_oblique.exe"
+Directory: C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/validation/validate_cpml_oblique
+"validate_cpml_oblique" start time: Oct 26 21:45 Pacific Daylight Time
+Output:
+----------------------------------------------------------
+TE requested 30.0 actual 30.0000 deg: |r| 4.0332e-07 (-127.89 dB), reference 9.3539e-07, drift 1.87e-07, steps 4028 PASS
+  Note: window drift is not small relative to reflection; do not treat this as a precision reflection measurement.
+TM requested 30.0 actual 30.0000 deg: |r| 1.0394e-06 (-119.66 dB), reference 1.1068e-06, drift 3.39e-08, steps 4028 PASS
+TE requested 60.0 actual 60.0000 deg: |r| 0.0017414 (-55.18 dB), reference 0.00051006, drift 0.00231, steps 6936 PASS
+  Note: window drift is not small relative to reflection; do not treat this as a precision reflection measurement.
+TM requested 60.0 actual 60.0000 deg: |r| 0.000626 (-64.07 dB), reference 0.00063177, drift 6.57e-05, steps 6936 PASS
+  Note: window drift is not small relative to reflection; do not treat this as a precision reflection measurement.
+<end of output>
+Test time =  51.93 sec
+----------------------------------------------------------
+Test Passed.
+"validate_cpml_oblique" end time: Oct 26 21:46 Pacific Daylight Time
+"validate_cpml_oblique" time elapsed: 00:00:51
+----------------------------------------------------------
+
+16/18 Testing: validate_materials_high_contrast
+16/18 Test: validate_materials_high_contrast
+Command: "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/validate_materials_high_contrast.exe" "--full"
+Directory: C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/validation/validate_materials_high_contrast
+"validate_materials_high_contrast" start time: Oct 26 21:46 Pacific Daylight Time
+Output:
+----------------------------------------------------------
+eps 1 -> 1: |r| 1.1383115e-06 theory 0 R 1.295753e-12 T 1 drift 1.43e-09 phase_error nan deg PASS
+eps 1 -> 4: |r| 0.33230272 theory 0.33333333 R 0.1104251 T 0.8916416 drift 2.26e-10 phase_error 0.00013 deg PASS
+eps 4 -> 1: |r| 0.33230154 theory 0.33333333 R 0.11042431 T 0.88751378 drift 1.47e-09 phase_error 0.0001217 deg PASS
+eps 1 -> 10: |r| 0.51848406 theory 0.51949385 R 0.26882572 T 0.73320064 drift 4.36e-11 phase_error 0.000115 deg PASS
+eps 10 -> 1: |r| 0.51848205 theory 0.51949385 R 0.26882364 T 0.72915559 drift 1.87e-09 phase_error 5.566e-05 deg PASS
+eps 1 -> 25: |r| 0.66584258 theory 0.66666667 R 0.44334634 T 0.5583087 drift 1.64e-10 phase_error 9.497e-05 deg PASS
+eps 25 -> 1: |r| 0.66584034 theory 0.66666667 R 0.44334336 T 0.5550065 drift 3.06e-09 phase_error 3.197e-05 deg PASS
+eps 1 -> 50: |r| 0.75154395 theory 0.75220131 R 0.5648183 T 0.43650238 drift 5.58e-10 phase_error 9.42e-05 deg PASS
+eps 50 -> 1: |r| 0.75154322 theory 0.75220131 R 0.56481721 T 0.43386611 drift 1.72e-08 phase_error 4.977e-05 deg PASS
+eps 1 -> 100: |r| 0.81767612 theory 0.81818182 R 0.66859424 T 0.33242186 drift 9.59e-10 phase_error 8.84e-05 deg PASS
+eps 100 -> 1: |r| 0.8176758 theory 0.81818182 R 0.66859371 T 0.33039329 drift 5.48e-08 phase_error 4.547e-05 deg PASS
+<end of output>
+Test time =  16.19 sec
+----------------------------------------------------------
+Test Passed.
+"validate_materials_high_contrast" end time: Oct 26 21:46 Pacific Daylight Time
+"validate_materials_high_contrast" time elapsed: 00:00:16
+----------------------------------------------------------
+
+17/18 Testing: validate_long_term_stability
+17/18 Test: validate_long_term_stability
+Command: "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/validate_long_term_stability.exe" "--steps" "100000"
+Directory: C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/validation/validate_long_term_stability
+"validate_long_term_stability" start time: Oct 26 21:46 Pacific Daylight Time
+Output:
+----------------------------------------------------------
+open_vacuum steps=100000 max/reference=1 late_peak/reference=7.06641e-12 final/reference=4.07068e-15 growth_windows=0 PASS
+open_eps25 steps=100000 max/reference=1 late_peak/reference=7.32207e-10 final/reference=2.56368e-10 growth_windows=0 PASS
+open_interface25 steps=100000 max/reference=1 late_peak/reference=1.42491e-10 final/reference=1.83265e-11 growth_windows=0 PASS
+periodic_vacuum_3d steps=100000 max/reference=1.02929 late_peak/reference=1.01281 final/reference=0.843947 growth_windows=0 PASS
+periodic_interface25_3d steps=100000 max/reference=1.06934 late_peak/reference=1.0666 final/reference=1.03119 growth_windows=0 PASS
+<end of output>
+Test time =  38.34 sec
+----------------------------------------------------------
+Test Passed.
+"validate_long_term_stability" end time: Oct 26 21:47 Pacific Daylight Time
+"validate_long_term_stability" time elapsed: 00:00:38
+----------------------------------------------------------
+
+18/18 Testing: validate_materials_tilted
+18/18 Test: validate_materials_tilted
+Command: "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/validate_materials_tilted.exe"
+Directory: C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/validation/validate_materials_tilted
+"validate_materials_tilted" start time: Oct 26 21:47 Pacific Daylight Time
+Output:
+----------------------------------------------------------
+Tilted finite slab: TE smoothing=off angle=30.0 shift=0.500 mm scale=1 drift=4.46257e-07 MEASUREMENT CONVERGED (accuracy not yet graded)
+<end of output>
+Test time =   3.46 sec
+----------------------------------------------------------
+Test Passed.
+"validate_materials_tilted" end time: Oct 26 21:47 Pacific Daylight Time
+"validate_materials_tilted" time elapsed: 00:00:03
+----------------------------------------------------------
+
+End testing: Oct 26 21:47 Pacific Daylight Time
+
+baseline =  65.41 sec*proc
+
+cli =   7.18 sec*proc
+
+extended = 106.46 sec*proc
+
+fdtd = 175.33 sec*proc
+
+measurement =   3.46 sec*proc
+
+smoke =   7.18 sec*proc
+
+tilted =   3.46 sec*proc
+
+unit =   3.51 sec*proc
+
+validation = 171.87 sec*proc
 
