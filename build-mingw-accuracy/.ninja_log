@@ -63,3 +63,5 @@
 52	1858	8147779833133155	CMakeFiles/subpixel_te_unit.dir/tests/subpixel_te_unit.c.obj	616e0fcd0de6fea3
 1844	2235	8147779851046063	librfsyn_fdtd.a	67dca9bda700d8c6
 2235	2632	8147779854957080	subpixel_te_unit.exe	797172cb268f91ba
+27	709	8147782255576986	CMakeFiles/validate_materials_tilted.dir/engine/fdtd/validate_materials_tilted.c.obj	a02ed7fb96626a4
+710	934	8147782262401878	validate_materials_tilted.exe	b18c9bd8a8f60975
