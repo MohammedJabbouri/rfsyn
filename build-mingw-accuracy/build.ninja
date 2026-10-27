@@ -103,6 +103,15 @@ build CMakeFiles/rfsyn_fdtd.dir/engine/fdtd/simulate.c.obj: C_COMPILER__rfsyn_fd
   OBJECT_FILE_DIR = CMakeFiles\rfsyn_fdtd.dir\engine\fdtd
   TARGET_SUPPORT_DIR = CMakeFiles\rfsyn_fdtd.dir
 
+build CMakeFiles/rfsyn_fdtd.dir/engine/fdtd/subpixel_te.c.obj: C_COMPILER__rfsyn_fdtd_unscanned_Release C$:/Users/binso/3D$ Objects/rfsyn/engine/fdtd/subpixel_te.c || cmake_object_order_depends_target_rfsyn_fdtd
+  CONFIG = Release
+  DEFINES = -DRFSYN_HAS_OPENMP=1
+  DEP_FILE = CMakeFiles\rfsyn_fdtd.dir\engine\fdtd\subpixel_te.c.obj.d
+  FLAGS = -O3 -DNDEBUG -std=gnu11 -fopenmp
+  OBJECT_DIR = CMakeFiles\rfsyn_fdtd.dir
+  OBJECT_FILE_DIR = CMakeFiles\rfsyn_fdtd.dir\engine\fdtd
+  TARGET_SUPPORT_DIR = CMakeFiles\rfsyn_fdtd.dir
+
 
 # =============================================================================
 # Link build statements for STATIC_LIBRARY target rfsyn_fdtd
@@ -111,7 +120,7 @@ build CMakeFiles/rfsyn_fdtd.dir/engine/fdtd/simulate.c.obj: C_COMPILER__rfsyn_fd
 #############################################
 # Link the static library librfsyn_fdtd.a
 
-build librfsyn_fdtd.a: C_STATIC_LIBRARY_LINKER__rfsyn_fdtd_Release CMakeFiles/rfsyn_fdtd.dir/engine/fdtd/grid.c.obj CMakeFiles/rfsyn_fdtd.dir/engine/fdtd/cpml.c.obj CMakeFiles/rfsyn_fdtd.dir/engine/fdtd/materials.c.obj CMakeFiles/rfsyn_fdtd.dir/engine/fdtd/source.c.obj CMakeFiles/rfsyn_fdtd.dir/engine/fdtd/probe.c.obj CMakeFiles/rfsyn_fdtd.dir/engine/fdtd/simulate.c.obj
+build librfsyn_fdtd.a: C_STATIC_LIBRARY_LINKER__rfsyn_fdtd_Release CMakeFiles/rfsyn_fdtd.dir/engine/fdtd/grid.c.obj CMakeFiles/rfsyn_fdtd.dir/engine/fdtd/cpml.c.obj CMakeFiles/rfsyn_fdtd.dir/engine/fdtd/materials.c.obj CMakeFiles/rfsyn_fdtd.dir/engine/fdtd/source.c.obj CMakeFiles/rfsyn_fdtd.dir/engine/fdtd/probe.c.obj CMakeFiles/rfsyn_fdtd.dir/engine/fdtd/simulate.c.obj CMakeFiles/rfsyn_fdtd.dir/engine/fdtd/subpixel_te.c.obj
   CONFIG = Release
   LANGUAGE_COMPILE_FLAGS = -O3 -DNDEBUG
   OBJECT_DIR = CMakeFiles\rfsyn_fdtd.dir
@@ -778,6 +787,44 @@ build rf_signal_unit.exe: C_EXECUTABLE_LINKER__rf_signal_unit_Release CMakeFiles
   TARGET_IMPLIB = librf_signal_unit.dll.a
   TARGET_PDB = rf_signal_unit.exe.dbg
   TARGET_SUPPORT_DIR = CMakeFiles\rf_signal_unit.dir
+
+# =============================================================================
+# Object build statements for EXECUTABLE target subpixel_te_unit
+
+
+#############################################
+# Order-only phony target for subpixel_te_unit
+
+build cmake_object_order_depends_target_subpixel_te_unit: phony || cmake_object_order_depends_target_rfsyn_fdtd
+
+build CMakeFiles/subpixel_te_unit.dir/tests/subpixel_te_unit.c.obj: C_COMPILER__subpixel_te_unit_unscanned_Release C$:/Users/binso/3D$ Objects/rfsyn/tests/subpixel_te_unit.c || cmake_object_order_depends_target_subpixel_te_unit
+  CONFIG = Release
+  DEFINES = -DRFSYN_HAS_OPENMP=1
+  DEP_FILE = CMakeFiles\subpixel_te_unit.dir\tests\subpixel_te_unit.c.obj.d
+  FLAGS = -O3 -DNDEBUG -std=gnu11 -fopenmp
+  OBJECT_DIR = CMakeFiles\subpixel_te_unit.dir
+  OBJECT_FILE_DIR = CMakeFiles\subpixel_te_unit.dir\tests
+  TARGET_SUPPORT_DIR = CMakeFiles\subpixel_te_unit.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target subpixel_te_unit
+
+
+#############################################
+# Link the executable subpixel_te_unit.exe
+
+build subpixel_te_unit.exe: C_EXECUTABLE_LINKER__subpixel_te_unit_Release CMakeFiles/subpixel_te_unit.dir/tests/subpixel_te_unit.c.obj | librfsyn_fdtd.a C$:/msys64/mingw64/lib/libgomp.dll.a C$:/msys64/mingw64/lib/libmingwthrd.a || librfsyn_fdtd.a
+  CONFIG = Release
+  FLAGS = -O3 -DNDEBUG
+  LINK_LIBRARIES = librfsyn_fdtd.a  -lm  C:/msys64/mingw64/lib/libgomp.dll.a  C:/msys64/mingw64/lib/libmingwthrd.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  OBJECT_DIR = CMakeFiles\subpixel_te_unit.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_FILE = subpixel_te_unit.exe
+  TARGET_IMPLIB = libsubpixel_te_unit.dll.a
+  TARGET_PDB = subpixel_te_unit.exe.dbg
+  TARGET_SUPPORT_DIR = CMakeFiles\subpixel_te_unit.dir
 
 # =============================================================================
 # Object build statements for EXECUTABLE target cli_smoke
@@ -1484,6 +1531,8 @@ build rfsyn_world: phony librfsyn_world.a
 
 build simulate_unit: phony simulate_unit.exe
 
+build subpixel_te_unit: phony subpixel_te_unit.exe
+
 build validate_cpml: phony validate_cpml.exe
 
 build validate_cpml_margin: phony validate_cpml_margin.exe
@@ -1514,7 +1563,7 @@ build world_unit: phony world_unit.exe
 #############################################
 # Folder: C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy
 
-build all: phony librfsyn_fdtd.a librfsyn_core.a librfsyn_cjson.a librfsyn_world.a librfsyn_noise.a rfsyn.exe world_unit.exe material_catalog_unit.exe material_config_unit.exe simulate_unit.exe materials_unit.exe rf_signal_unit.exe cli_smoke.exe validate_cpml.exe validate_cpml_margin.exe validate_cpml_planewave.exe validate_materials_fresnel.exe validate_probe_dft.exe validate_materials_energy.exe validate_cpml_oblique.exe validate_materials_high_contrast.exe validate_long_term_stability.exe validate_materials_tilted.exe
+build all: phony librfsyn_fdtd.a librfsyn_core.a librfsyn_cjson.a librfsyn_world.a librfsyn_noise.a rfsyn.exe world_unit.exe material_catalog_unit.exe material_config_unit.exe simulate_unit.exe materials_unit.exe rf_signal_unit.exe subpixel_te_unit.exe cli_smoke.exe validate_cpml.exe validate_cpml_margin.exe validate_cpml_planewave.exe validate_materials_fresnel.exe validate_probe_dft.exe validate_materials_energy.exe validate_cpml_oblique.exe validate_materials_high_contrast.exe validate_long_term_stability.exe validate_materials_tilted.exe
 
 # =============================================================================
 # Built-in targets

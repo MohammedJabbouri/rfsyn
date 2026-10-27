@@ -144,6 +144,7 @@ add_library(
   engine/fdtd/source.c
   engine/fdtd/probe.c
   engine/fdtd/simulate.c
+  engine/fdtd/subpixel_te.c
 )
 
 if(RFSYN_MATH_LIBRARIES)
@@ -296,6 +297,8 @@ include(CTest)
 
 if(BUILD_TESTING)
 
+
+
   # -------------------------------------------------------------------------
   # Unit-test registration
   # -------------------------------------------------------------------------
@@ -333,6 +336,7 @@ if(BUILD_TESTING)
   rfsyn_add_unit_test(simulate_unit rfsyn_fdtd)
   rfsyn_add_unit_test(materials_unit rfsyn_fdtd)
   rfsyn_add_unit_test(rf_signal_unit rfsyn_core)
+  rfsyn_add_unit_test(subpixel_te_unit rfsyn_fdtd)
 
   # -------------------------------------------------------------------------
   # CLI smoke test

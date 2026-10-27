@@ -37,6 +37,12 @@
 },
 {
   "directory": "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy",
+  "command": "C:\\msys64\\mingw64\\bin\\gcc.exe -DRFSYN_HAS_OPENMP=1 -O3 -DNDEBUG -std=gnu11 -fopenmp -o CMakeFiles\\rfsyn_fdtd.dir\\engine\\fdtd\\subpixel_te.c.obj -c \"C:\\Users\\binso\\3D Objects\\rfsyn\\engine\\fdtd\\subpixel_te.c\"",
+  "file": "C:/Users/binso/3D Objects/rfsyn/engine/fdtd/subpixel_te.c",
+  "output": "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/CMakeFiles/rfsyn_fdtd.dir/engine/fdtd/subpixel_te.c.obj"
+},
+{
+  "directory": "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy",
   "command": "C:\\msys64\\mingw64\\bin\\gcc.exe -O3 -DNDEBUG -std=gnu11 -o CMakeFiles\\rfsyn_core.dir\\engine\\core\\chain.c.obj -c \"C:\\Users\\binso\\3D Objects\\rfsyn\\engine\\core\\chain.c\"",
   "file": "C:/Users/binso/3D Objects/rfsyn/engine/core/chain.c",
   "output": "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/CMakeFiles/rfsyn_core.dir/engine/core/chain.c.obj"
@@ -154,6 +160,12 @@
   "command": "C:\\msys64\\mingw64\\bin\\gcc.exe -O3 -DNDEBUG -std=gnu11 -o CMakeFiles\\rf_signal_unit.dir\\tests\\rf_signal_unit.c.obj -c \"C:\\Users\\binso\\3D Objects\\rfsyn\\tests\\rf_signal_unit.c\"",
   "file": "C:/Users/binso/3D Objects/rfsyn/tests/rf_signal_unit.c",
   "output": "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/CMakeFiles/rf_signal_unit.dir/tests/rf_signal_unit.c.obj"
+},
+{
+  "directory": "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy",
+  "command": "C:\\msys64\\mingw64\\bin\\gcc.exe -DRFSYN_HAS_OPENMP=1 -O3 -DNDEBUG -std=gnu11 -fopenmp -o CMakeFiles\\subpixel_te_unit.dir\\tests\\subpixel_te_unit.c.obj -c \"C:\\Users\\binso\\3D Objects\\rfsyn\\tests\\subpixel_te_unit.c\"",
+  "file": "C:/Users/binso/3D Objects/rfsyn/tests/subpixel_te_unit.c",
+  "output": "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/CMakeFiles/subpixel_te_unit.dir/tests/subpixel_te_unit.c.obj"
 },
 {
   "directory": "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy",

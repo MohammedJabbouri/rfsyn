@@ -38,6 +38,7 @@ C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/CMakeFiles/material_config_
 C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/CMakeFiles/simulate_unit.dir
 C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/CMakeFiles/materials_unit.dir
 C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/CMakeFiles/rf_signal_unit.dir
+C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/CMakeFiles/subpixel_te_unit.dir
 C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/CMakeFiles/cli_smoke.dir
 C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/CMakeFiles/validate_cpml.dir
 C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/CMakeFiles/validate_cpml_margin.dir

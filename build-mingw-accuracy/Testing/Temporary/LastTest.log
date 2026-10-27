@@ -1,52 +1,22 @@
-Start testing: Oct 25 20:48 Pacific Daylight Time
+Start testing: Oct 26 21:19 Pacific Daylight Time
 ----------------------------------------------------------
-14/17 Testing: validate_cpml_oblique
-14/17 Test: validate_cpml_oblique
-Command: "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/validate_cpml_oblique.exe"
-Directory: C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/validation/validate_cpml_oblique
-"validate_cpml_oblique" start time: Oct 25 20:48 Pacific Daylight Time
+7/18 Testing: subpixel_te_unit
+7/18 Test: subpixel_te_unit
+Command: "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/subpixel_te_unit.exe"
+Directory: C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy
+"subpixel_te_unit" start time: Oct 26 21:19 Pacific Daylight Time
 Output:
 ----------------------------------------------------------
-TE requested 30.0 actual 30.0000 deg: |r| 4.0332e-07 (-127.89 dB), reference 9.3539e-07, drift 1.87e-07, steps 4028 PASS
-  Note: window drift is not small relative to reflection; do not treat this as a precision reflection measurement.
-TM requested 30.0 actual 30.0000 deg: |r| 1.0394e-06 (-119.66 dB), reference 1.1068e-06, drift 3.39e-08, steps 4028 PASS
-TE requested 60.0 actual 60.0000 deg: |r| 0.0017414 (-55.18 dB), reference 0.00051006, drift 0.00231, steps 6936 PASS
-  Note: window drift is not small relative to reflection; do not treat this as a precision reflection measurement.
-TM requested 60.0 actual 60.0000 deg: |r| 0.000626 (-64.07 dB), reference 0.00063177, drift 6.57e-05, steps 6936 PASS
-  Note: window drift is not small relative to reflection; do not treat this as a precision reflection measurement.
+subpixel_te_unit: 4642 checks, 0 failures
 <end of output>
-Test time =  49.37 sec
+Test time =   0.05 sec
 ----------------------------------------------------------
 Test Passed.
-"validate_cpml_oblique" end time: Oct 25 20:48 Pacific Daylight Time
-"validate_cpml_oblique" time elapsed: 00:00:49
+"subpixel_te_unit" end time: Oct 26 21:19 Pacific Daylight Time
+"subpixel_te_unit" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-17/17 Testing: validate_materials_tilted
-17/17 Test: validate_materials_tilted
-Command: "C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/validate_materials_tilted.exe"
-Directory: C:/Users/binso/3D Objects/rfsyn/build-mingw-accuracy/validation/validate_materials_tilted
-"validate_materials_tilted" start time: Oct 25 20:48 Pacific Daylight Time
-Output:
-----------------------------------------------------------
-Tilted finite slab: TE angle=30.0 shift=0.500 mm scale=1 drift=4.46257e-07 MEASUREMENT CONVERGED (accuracy not yet graded)
-<end of output>
-Test time =   3.26 sec
-----------------------------------------------------------
-Test Passed.
-"validate_materials_tilted" end time: Oct 25 20:48 Pacific Daylight Time
-"validate_materials_tilted" time elapsed: 00:00:03
-----------------------------------------------------------
+End testing: Oct 26 21:19 Pacific Daylight Time
 
-End testing: Oct 25 20:48 Pacific Daylight Time
-
-extended =  49.37 sec*proc
-
-fdtd =  52.64 sec*proc
-
-measurement =   3.26 sec*proc
-
-tilted =   3.26 sec*proc
-
-validation =  49.37 sec*proc
+unit =   0.05 sec*proc
 

@@ -59,3 +59,7 @@
 551	748	8138295723339840	validate_long_term_stability.exe	4c5623c863c71e05
 102	2222	8146896483107165	CMakeFiles/validate_materials_tilted.dir/engine/fdtd/validate_materials_tilted.c.obj	a02ed7fb96626a4
 2223	2708	8146896504308506	validate_materials_tilted.exe	b18c9bd8a8f60975
+44	1843	8147779833053215	CMakeFiles/rfsyn_fdtd.dir/engine/fdtd/subpixel_te.c.obj	fdfa4e61b0995669
+52	1858	8147779833133155	CMakeFiles/subpixel_te_unit.dir/tests/subpixel_te_unit.c.obj	616e0fcd0de6fea3
+1844	2235	8147779851046063	librfsyn_fdtd.a	67dca9bda700d8c6
+2235	2632	8147779854957080	subpixel_te_unit.exe	797172cb268f91ba

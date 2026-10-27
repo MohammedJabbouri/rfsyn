@@ -15,4 +15,5 @@ validate_cpml_oblique 3 16.4579
 validate_materials_high_contrast 2 7.02529
 validate_long_term_stability 2 17.4088
 validate_materials_tilted 1 3.26469
+subpixel_te_unit 1 0.0533293
 ---
