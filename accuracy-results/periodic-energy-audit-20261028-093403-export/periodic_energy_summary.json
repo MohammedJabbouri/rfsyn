@@ -1,0 +1,22 @@
+[
+  {
+    "source_file": "/home/mosamen/Projects/rfsyn/accuracy-results/periodic-energy-audit-20261028-093403/periodic_audit_interface25_3d_history.csv",
+    "rows": 100001,
+    "first_step": 0,
+    "last_step": 100000,
+    "sampled_min_over_first": 0.9539016736299513,
+    "sampled_max_over_first": 1.0893767217618215,
+    "final_over_first": 1.029204235818564,
+    "max_abs_modified_relative_drift": 3.4356488770959754e-15
+  },
+  {
+    "source_file": "/home/mosamen/Projects/rfsyn/accuracy-results/periodic-energy-audit-20261028-093403/periodic_audit_vacuum_3d_history.csv",
+    "rows": 100001,
+    "first_step": 0,
+    "last_step": 100000,
+    "sampled_min_over_first": 1.0,
+    "sampled_max_over_first": 2.8508134044612383,
+    "final_over_first": 2.208995512965549,
+    "max_abs_modified_relative_drift": 7.281147414339174e-15
+  }
+]

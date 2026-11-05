@@ -92,17 +92,22 @@ static inline void xt_step(xt_sim *s)
 
 static inline int xt_medium(xt_sim *s, double eps_r)
 {
+    if (!s || !s->g || !s->m) {
+        return -1;
+    }
+
+    const fdtd_grid_t *g = s->g;
+
+    size_t ix = g->nx + ((g->periodic_axes & 1u) ? 0u : 1u);
+    size_t jy = g->ny + ((g->periodic_axes & 2u) ? 0u : 1u);
+    size_t kz = g->nz + ((g->periodic_axes & 4u) ? 0u : 1u);
+
     return materials_set_box(
-        s->m,
-        s->g,
-        0,
-        s->g->nx + 1,
-        0,
-        s->g->ny + 1,
-        0,
-        s->g->nz + 1,
-        eps_r,
-        0.0
+        s->m, g,
+        0, ix,
+        0, jy,
+        0, kz,
+        eps_r, 0.0
     );
 }
 
@@ -112,48 +117,51 @@ static inline int xt_interface(
     double eps_left,
     double eps_right)
 {
-    if (xt_medium(s, eps_left) != 0) return -1;
+    if (!s || !s->g || !s->m ||
+        i_interface == 0 ||
+        i_interface >= s->g->nx) {
+        return -1;
+    }
+
+    if (xt_medium(s, eps_left) != 0) {
+        return -1;
+    }
+
+    const fdtd_grid_t *g = s->g;
+
+    size_t ix = g->nx + ((g->periodic_axes & 1u) ? 0u : 1u);
+    size_t jy = g->ny + ((g->periodic_axes & 2u) ? 0u : 1u);
+    size_t kz = g->nz + ((g->periodic_axes & 4u) ? 0u : 1u);
 
     if (materials_set_box(
-            s->m,
-            s->g,
-            i_interface,
-            s->g->nx + 1,
-            0,
-            s->g->ny + 1,
-            0,
-            s->g->nz + 1,
-            eps_right,
-            0.0) != 0) {
+            s->m, g,
+            i_interface, ix,
+            0, jy,
+            0, kz,
+            eps_right, 0.0) != 0) {
         return -1;
     }
 
     double eps_tangent = 0.5 * (eps_left + eps_right);
+    size_t planes[2] = {i_interface, 0};
+    size_t plane_count = (g->periodic_axes & 1u) ? 2u : 1u;
 
-    for (size_t j = 0; j < s->g->ny; j++) {
-        for (size_t k = 0; k < s->g->nz; k++) {
-            if (materials_set_component(
-                    s->m,
-                    s->g,
-                    FIELD_EY,
-                    i_interface,
-                    j,
-                    k,
-                    eps_tangent,
-                    0.0) != 0) {
-                return -1;
-            }
+    for (size_t p = 0; p < plane_count; p++) {
+        for (size_t j = 0; j < g->ny; j++) {
+            for (size_t k = 0; k < g->nz; k++) {
+                if (materials_set_component(
+                        s->m, g, FIELD_EY,
+                        planes[p], j, k,
+                        eps_tangent, 0.0) != 0) {
+                    return -1;
+                }
 
-            if (materials_set_component(
-                    s->m,
-                    s->g,
-                    FIELD_EZ,
-                    i_interface,
-                    j,
-                    k,
-                    eps_tangent,
-                    0.0) != 0) {
-                return -1;
+                if (materials_set_component(
+                        s->m, g, FIELD_EZ,
+                        planes[p], j, k,
+                        eps_tangent, 0.0) != 0) {
+                    return -1;
+                }
             }
         }
     }

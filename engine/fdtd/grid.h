@@ -18,6 +18,10 @@ int fdtd_grid_set_periodic(fdtd_grid_t *g, unsigned axes);
 
 void fdtd_grid_destroy(fdtd_grid_t *g);
 
+static inline size_t fdtd_previous(size_t q, size_t n) {
+    return q == 0 ? n - 1 : q - 1;
+}
+
 static inline size_t fdtd_index(const fdtd_grid_t *g, size_t i, size_t j, size_t k) {
     if (g->periodic_axes & 1u) i %= g->nx;
     if (g->periodic_axes & 2u) j %= g->ny;

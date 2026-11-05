@@ -1,11 +1,3 @@
-/*
- * accuracy_test.h -- shared helpers for the new accuracy validators.
- *
- * Header-only (all functions are static) so each validator stays a single
- * translation unit with its own main(). Uses only the public FDTD API
- * (grid.h / cpml.h / materials.h) that is common to the original and the
- * replacement engine files.
- */
 #ifndef ENGINE_FDTD_ACCURACY_TEST_H
 #define ENGINE_FDTD_ACCURACY_TEST_H
 
@@ -27,8 +19,6 @@
 #define AT_C0   299792458.0
 #define AT_EPS0 8.8541878128e-12
 #define AT_MU0  1.25663706212e-6
-
-/* ---------------- command-line helpers ---------------- */
 
 static AT_UNUSED int at_has_flag(int argc, char **argv, const char *flag) {
     for (int i = 1; i < argc; i++)
@@ -66,9 +56,6 @@ static AT_UNUSED long at_get_long(int argc, char **argv, const char *key, long d
     return v;
 }
 
-/* ---------------- waveforms ---------------- */
-
-/* Differentiated Gaussian: zero DC content, spectral peak at 1/(sqrt(2)*pi*tau). */
 static AT_UNUSED double at_gauss_deriv(double t, double t0, double tau) {
     double a = (t - t0) / tau;
     return -2.0 * a * exp(-a * a);
@@ -84,8 +71,6 @@ static AT_UNUSED double at_mod_gauss(double t, double f0, double t0, double tau)
     return exp(-a * a) * sin(2.0 * M_PI * f0 * (t - t0));
 }
 
-/* ---------------- running single-frequency DFT ---------------- */
-
 typedef struct { double re, im; } at_dft_t;
 
 static AT_UNUSED void at_dft_add(at_dft_t *d, double value, double t, double f, double dt) {
@@ -95,8 +80,6 @@ static AT_UNUSED void at_dft_add(at_dft_t *d, double value, double t, double f, 
 }
 
 static AT_UNUSED double at_dft_abs2(at_dft_t d) { return d.re * d.re + d.im * d.im; }
-
-/* ---------------- misc ---------------- */
 
 static AT_UNUSED int at_all_finite(const double *a, size_t n) {
     for (size_t i = 0; i < n; i++)

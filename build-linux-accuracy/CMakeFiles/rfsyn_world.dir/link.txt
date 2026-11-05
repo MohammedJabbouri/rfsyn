@@ -1,0 +1,2 @@
+/usr/bin/ar qc librfsyn_world.a CMakeFiles/rfsyn_world.dir/engine/world/world.c.o CMakeFiles/rfsyn_world.dir/engine/world/material_catalog.c.o CMakeFiles/rfsyn_world.dir/cli/material_config.c.o
+/usr/bin/ranlib librfsyn_world.a

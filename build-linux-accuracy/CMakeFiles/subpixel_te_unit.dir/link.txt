@@ -1,0 +1,1 @@
+/usr/bin/cc -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/subpixel_te_unit.dir/link.d CMakeFiles/subpixel_te_unit.dir/tests/subpixel_te_unit.c.o -o subpixel_te_unit  librfsyn_fdtd.a -lm /usr/lib/gcc/x86_64-redhat-linux/16/libgomp.so /usr/lib64/libpthread.a

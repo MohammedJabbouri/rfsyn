@@ -1,0 +1,1 @@
+/usr/bin/cc -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/material_catalog_unit.dir/link.d CMakeFiles/material_catalog_unit.dir/tests/material_catalog_unit.c.o -o material_catalog_unit  librfsyn_world.a -lm librfsyn_cjson.a

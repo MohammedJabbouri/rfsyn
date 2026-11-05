@@ -1,0 +1,2 @@
+/usr/bin/ar qc librfsyn_cjson.a CMakeFiles/rfsyn_cjson.dir/cli/cJSON.c.o
+/usr/bin/ranlib librfsyn_cjson.a

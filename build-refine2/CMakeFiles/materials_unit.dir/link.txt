@@ -1,0 +1,1 @@
+/usr/bin/cc -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/materials_unit.dir/link.d CMakeFiles/materials_unit.dir/tests/materials_unit.c.o -o materials_unit  librfsyn_fdtd.a -lm /usr/lib/gcc/x86_64-redhat-linux/16/libgomp.so /usr/lib64/libpthread.a

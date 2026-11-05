@@ -1,0 +1,2 @@
+/usr/bin/ar qc librfsyn_core.a CMakeFiles/rfsyn_core.dir/engine/core/chain.c.o CMakeFiles/rfsyn_core.dir/engine/core/chains.c.o CMakeFiles/rfsyn_core.dir/engine/core/rf_signal.c.o CMakeFiles/rfsyn_core.dir/engine/core/rng.c.o
+/usr/bin/ranlib librfsyn_core.a

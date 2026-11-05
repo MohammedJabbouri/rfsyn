@@ -1,0 +1,248 @@
+[
+{
+  "directory": "/home/mosamen/Projects/rfsyn/build-sanitize",
+  "command": "/usr/bin/cc -DRFSYN_HAS_OPENMP=1  -O3 -DNDEBUG -std=gnu11 -fsanitize=address,undefined -fno-omit-frame-pointer -g -fopenmp -o CMakeFiles/rfsyn_fdtd.dir/engine/fdtd/grid.c.o -c /home/mosamen/Projects/rfsyn/engine/fdtd/grid.c",
+  "file": "/home/mosamen/Projects/rfsyn/engine/fdtd/grid.c",
+  "output": "CMakeFiles/rfsyn_fdtd.dir/engine/fdtd/grid.c.o"
+},
+{
+  "directory": "/home/mosamen/Projects/rfsyn/build-sanitize",
+  "command": "/usr/bin/cc -DRFSYN_HAS_OPENMP=1  -O3 -DNDEBUG -std=gnu11 -fsanitize=address,undefined -fno-omit-frame-pointer -g -fopenmp -o CMakeFiles/rfsyn_fdtd.dir/engine/fdtd/cpml.c.o -c /home/mosamen/Projects/rfsyn/engine/fdtd/cpml.c",
+  "file": "/home/mosamen/Projects/rfsyn/engine/fdtd/cpml.c",
+  "output": "CMakeFiles/rfsyn_fdtd.dir/engine/fdtd/cpml.c.o"
+},
+{
+  "directory": "/home/mosamen/Projects/rfsyn/build-sanitize",
+  "command": "/usr/bin/cc -DRFSYN_HAS_OPENMP=1  -O3 -DNDEBUG -std=gnu11 -fsanitize=address,undefined -fno-omit-frame-pointer -g -fopenmp -o CMakeFiles/rfsyn_fdtd.dir/engine/fdtd/materials.c.o -c /home/mosamen/Projects/rfsyn/engine/fdtd/materials.c",
+  "file": "/home/mosamen/Projects/rfsyn/engine/fdtd/materials.c",
+  "output": "CMakeFiles/rfsyn_fdtd.dir/engine/fdtd/materials.c.o"
+},
+{
+  "directory": "/home/mosamen/Projects/rfsyn/build-sanitize",
+  "command": "/usr/bin/cc -DRFSYN_HAS_OPENMP=1  -O3 -DNDEBUG -std=gnu11 -fsanitize=address,undefined -fno-omit-frame-pointer -g -fopenmp -o CMakeFiles/rfsyn_fdtd.dir/engine/fdtd/source.c.o -c /home/mosamen/Projects/rfsyn/engine/fdtd/source.c",
+  "file": "/home/mosamen/Projects/rfsyn/engine/fdtd/source.c",
+  "output": "CMakeFiles/rfsyn_fdtd.dir/engine/fdtd/source.c.o"
+},
+{
+  "directory": "/home/mosamen/Projects/rfsyn/build-sanitize",
+  "command": "/usr/bin/cc -DRFSYN_HAS_OPENMP=1  -O3 -DNDEBUG -std=gnu11 -fsanitize=address,undefined -fno-omit-frame-pointer -g -fopenmp -o CMakeFiles/rfsyn_fdtd.dir/engine/fdtd/probe.c.o -c /home/mosamen/Projects/rfsyn/engine/fdtd/probe.c",
+  "file": "/home/mosamen/Projects/rfsyn/engine/fdtd/probe.c",
+  "output": "CMakeFiles/rfsyn_fdtd.dir/engine/fdtd/probe.c.o"
+},
+{
+  "directory": "/home/mosamen/Projects/rfsyn/build-sanitize",
+  "command": "/usr/bin/cc -DRFSYN_HAS_OPENMP=1  -O3 -DNDEBUG -std=gnu11 -fsanitize=address,undefined -fno-omit-frame-pointer -g -fopenmp -o CMakeFiles/rfsyn_fdtd.dir/engine/fdtd/simulate.c.o -c /home/mosamen/Projects/rfsyn/engine/fdtd/simulate.c",
+  "file": "/home/mosamen/Projects/rfsyn/engine/fdtd/simulate.c",
+  "output": "CMakeFiles/rfsyn_fdtd.dir/engine/fdtd/simulate.c.o"
+},
+{
+  "directory": "/home/mosamen/Projects/rfsyn/build-sanitize",
+  "command": "/usr/bin/cc -DRFSYN_HAS_OPENMP=1  -O3 -DNDEBUG -std=gnu11 -fsanitize=address,undefined -fno-omit-frame-pointer -g -fopenmp -o CMakeFiles/rfsyn_fdtd.dir/engine/fdtd/subpixel_te.c.o -c /home/mosamen/Projects/rfsyn/engine/fdtd/subpixel_te.c",
+  "file": "/home/mosamen/Projects/rfsyn/engine/fdtd/subpixel_te.c",
+  "output": "CMakeFiles/rfsyn_fdtd.dir/engine/fdtd/subpixel_te.c.o"
+},
+{
+  "directory": "/home/mosamen/Projects/rfsyn/build-sanitize",
+  "command": "/usr/bin/cc   -O3 -DNDEBUG -std=gnu11 -fsanitize=address,undefined -fno-omit-frame-pointer -g -o CMakeFiles/rfsyn_core.dir/engine/core/chain.c.o -c /home/mosamen/Projects/rfsyn/engine/core/chain.c",
+  "file": "/home/mosamen/Projects/rfsyn/engine/core/chain.c",
+  "output": "CMakeFiles/rfsyn_core.dir/engine/core/chain.c.o"
+},
+{
+  "directory": "/home/mosamen/Projects/rfsyn/build-sanitize",
+  "command": "/usr/bin/cc   -O3 -DNDEBUG -std=gnu11 -fsanitize=address,undefined -fno-omit-frame-pointer -g -o CMakeFiles/rfsyn_core.dir/engine/core/chains.c.o -c /home/mosamen/Projects/rfsyn/engine/core/chains.c",
+  "file": "/home/mosamen/Projects/rfsyn/engine/core/chains.c",
+  "output": "CMakeFiles/rfsyn_core.dir/engine/core/chains.c.o"
+},
+{
+  "directory": "/home/mosamen/Projects/rfsyn/build-sanitize",
+  "command": "/usr/bin/cc   -O3 -DNDEBUG -std=gnu11 -fsanitize=address,undefined -fno-omit-frame-pointer -g -o CMakeFiles/rfsyn_core.dir/engine/core/rf_signal.c.o -c /home/mosamen/Projects/rfsyn/engine/core/rf_signal.c",
+  "file": "/home/mosamen/Projects/rfsyn/engine/core/rf_signal.c",
+  "output": "CMakeFiles/rfsyn_core.dir/engine/core/rf_signal.c.o"
+},
+{
+  "directory": "/home/mosamen/Projects/rfsyn/build-sanitize",
+  "command": "/usr/bin/cc   -O3 -DNDEBUG -std=gnu11 -fsanitize=address,undefined -fno-omit-frame-pointer -g -o CMakeFiles/rfsyn_core.dir/engine/core/rng.c.o -c /home/mosamen/Projects/rfsyn/engine/core/rng.c",
+  "file": "/home/mosamen/Projects/rfsyn/engine/core/rng.c",
+  "output": "CMakeFiles/rfsyn_core.dir/engine/core/rng.c.o"
+},
+{
+  "directory": "/home/mosamen/Projects/rfsyn/build-sanitize",
+  "command": "/usr/bin/cc  -I/home/mosamen/Projects/rfsyn/cli -O3 -DNDEBUG -std=gnu11 -fsanitize=address,undefined -fno-omit-frame-pointer -g -o CMakeFiles/rfsyn_cjson.dir/cli/cJSON.c.o -c /home/mosamen/Projects/rfsyn/cli/cJSON.c",
+  "file": "/home/mosamen/Projects/rfsyn/cli/cJSON.c",
+  "output": "CMakeFiles/rfsyn_cjson.dir/cli/cJSON.c.o"
+},
+{
+  "directory": "/home/mosamen/Projects/rfsyn/build-sanitize",
+  "command": "/usr/bin/cc  -I/home/mosamen/Projects/rfsyn -I/home/mosamen/Projects/rfsyn/cli -O3 -DNDEBUG -std=gnu11 -fsanitize=address,undefined -fno-omit-frame-pointer -g -o CMakeFiles/rfsyn_world.dir/engine/world/world.c.o -c /home/mosamen/Projects/rfsyn/engine/world/world.c",
+  "file": "/home/mosamen/Projects/rfsyn/engine/world/world.c",
+  "output": "CMakeFiles/rfsyn_world.dir/engine/world/world.c.o"
+},
+{
+  "directory": "/home/mosamen/Projects/rfsyn/build-sanitize",
+  "command": "/usr/bin/cc  -I/home/mosamen/Projects/rfsyn -I/home/mosamen/Projects/rfsyn/cli -O3 -DNDEBUG -std=gnu11 -fsanitize=address,undefined -fno-omit-frame-pointer -g -o CMakeFiles/rfsyn_world.dir/engine/world/material_catalog.c.o -c /home/mosamen/Projects/rfsyn/engine/world/material_catalog.c",
+  "file": "/home/mosamen/Projects/rfsyn/engine/world/material_catalog.c",
+  "output": "CMakeFiles/rfsyn_world.dir/engine/world/material_catalog.c.o"
+},
+{
+  "directory": "/home/mosamen/Projects/rfsyn/build-sanitize",
+  "command": "/usr/bin/cc  -I/home/mosamen/Projects/rfsyn -I/home/mosamen/Projects/rfsyn/cli -O3 -DNDEBUG -std=gnu11 -fsanitize=address,undefined -fno-omit-frame-pointer -g -o CMakeFiles/rfsyn_world.dir/cli/material_config.c.o -c /home/mosamen/Projects/rfsyn/cli/material_config.c",
+  "file": "/home/mosamen/Projects/rfsyn/cli/material_config.c",
+  "output": "CMakeFiles/rfsyn_world.dir/cli/material_config.c.o"
+},
+{
+  "directory": "/home/mosamen/Projects/rfsyn/build-sanitize",
+  "command": "/usr/bin/cc   -O3 -DNDEBUG -std=gnu11 -fsanitize=address,undefined -fno-omit-frame-pointer -g -o CMakeFiles/rfsyn_noise.dir/engine/noise/awgn.c.o -c /home/mosamen/Projects/rfsyn/engine/noise/awgn.c",
+  "file": "/home/mosamen/Projects/rfsyn/engine/noise/awgn.c",
+  "output": "CMakeFiles/rfsyn_noise.dir/engine/noise/awgn.c.o"
+},
+{
+  "directory": "/home/mosamen/Projects/rfsyn/build-sanitize",
+  "command": "/usr/bin/cc -DRFSYN_HAS_OPENMP=1 -I/home/mosamen/Projects/rfsyn -I/home/mosamen/Projects/rfsyn/cli -O3 -DNDEBUG -std=gnu11 -fopenmp -fsanitize=address,undefined -fno-omit-frame-pointer -g -o CMakeFiles/rfsyn.dir/cli/main.c.o -c /home/mosamen/Projects/rfsyn/cli/main.c",
+  "file": "/home/mosamen/Projects/rfsyn/cli/main.c",
+  "output": "CMakeFiles/rfsyn.dir/cli/main.c.o"
+},
+{
+  "directory": "/home/mosamen/Projects/rfsyn/build-sanitize",
+  "command": "/usr/bin/cc -DRFSYN_HAS_OPENMP=1 -I/home/mosamen/Projects/rfsyn -I/home/mosamen/Projects/rfsyn/cli -O3 -DNDEBUG -std=gnu11 -fopenmp -fsanitize=address,undefined -fno-omit-frame-pointer -g -o CMakeFiles/rfsyn.dir/cli/settings.c.o -c /home/mosamen/Projects/rfsyn/cli/settings.c",
+  "file": "/home/mosamen/Projects/rfsyn/cli/settings.c",
+  "output": "CMakeFiles/rfsyn.dir/cli/settings.c.o"
+},
+{
+  "directory": "/home/mosamen/Projects/rfsyn/build-sanitize",
+  "command": "/usr/bin/cc -DRFSYN_HAS_OPENMP=1 -I/home/mosamen/Projects/rfsyn -I/home/mosamen/Projects/rfsyn/cli -O3 -DNDEBUG -std=gnu11 -fopenmp -fsanitize=address,undefined -fno-omit-frame-pointer -g -o CMakeFiles/rfsyn.dir/cli/config.c.o -c /home/mosamen/Projects/rfsyn/cli/config.c",
+  "file": "/home/mosamen/Projects/rfsyn/cli/config.c",
+  "output": "CMakeFiles/rfsyn.dir/cli/config.c.o"
+},
+{
+  "directory": "/home/mosamen/Projects/rfsyn/build-sanitize",
+  "command": "/usr/bin/cc -DRFSYN_HAS_OPENMP=1 -I/home/mosamen/Projects/rfsyn -I/home/mosamen/Projects/rfsyn/cli -O3 -DNDEBUG -std=gnu11 -fopenmp -fsanitize=address,undefined -fno-omit-frame-pointer -g -o CMakeFiles/rfsyn.dir/cli/presets.c.o -c /home/mosamen/Projects/rfsyn/cli/presets.c",
+  "file": "/home/mosamen/Projects/rfsyn/cli/presets.c",
+  "output": "CMakeFiles/rfsyn.dir/cli/presets.c.o"
+},
+{
+  "directory": "/home/mosamen/Projects/rfsyn/build-sanitize",
+  "command": "/usr/bin/cc -DRFSYN_HAS_OPENMP=1 -I/home/mosamen/Projects/rfsyn -I/home/mosamen/Projects/rfsyn/cli -O3 -DNDEBUG -std=gnu11 -fopenmp -fsanitize=address,undefined -fno-omit-frame-pointer -g -o CMakeFiles/rfsyn.dir/cli/fdtd_stage.c.o -c /home/mosamen/Projects/rfsyn/cli/fdtd_stage.c",
+  "file": "/home/mosamen/Projects/rfsyn/cli/fdtd_stage.c",
+  "output": "CMakeFiles/rfsyn.dir/cli/fdtd_stage.c.o"
+},
+{
+  "directory": "/home/mosamen/Projects/rfsyn/build-sanitize",
+  "command": "/usr/bin/cc -DRFSYN_HAS_OPENMP=1  -O3 -DNDEBUG -std=gnu11 -fopenmp -fsanitize=address,undefined -fno-omit-frame-pointer -g -o CMakeFiles/audit_periodic_energy.dir/engine/fdtd/audit_periodic_energy.c.o -c /home/mosamen/Projects/rfsyn/engine/fdtd/audit_periodic_energy.c",
+  "file": "/home/mosamen/Projects/rfsyn/engine/fdtd/audit_periodic_energy.c",
+  "output": "CMakeFiles/audit_periodic_energy.dir/engine/fdtd/audit_periodic_energy.c.o"
+},
+{
+  "directory": "/home/mosamen/Projects/rfsyn/build-sanitize",
+  "command": "/usr/bin/cc  -I/home/mosamen/Projects/rfsyn -I/home/mosamen/Projects/rfsyn/cli -O3 -DNDEBUG -std=gnu11 -fsanitize=address,undefined -fno-omit-frame-pointer -g -o CMakeFiles/world_unit.dir/tests/world_unit.c.o -c /home/mosamen/Projects/rfsyn/tests/world_unit.c",
+  "file": "/home/mosamen/Projects/rfsyn/tests/world_unit.c",
+  "output": "CMakeFiles/world_unit.dir/tests/world_unit.c.o"
+},
+{
+  "directory": "/home/mosamen/Projects/rfsyn/build-sanitize",
+  "command": "/usr/bin/cc  -I/home/mosamen/Projects/rfsyn -I/home/mosamen/Projects/rfsyn/cli -O3 -DNDEBUG -std=gnu11 -fsanitize=address,undefined -fno-omit-frame-pointer -g -o CMakeFiles/material_catalog_unit.dir/tests/material_catalog_unit.c.o -c /home/mosamen/Projects/rfsyn/tests/material_catalog_unit.c",
+  "file": "/home/mosamen/Projects/rfsyn/tests/material_catalog_unit.c",
+  "output": "CMakeFiles/material_catalog_unit.dir/tests/material_catalog_unit.c.o"
+},
+{
+  "directory": "/home/mosamen/Projects/rfsyn/build-sanitize",
+  "command": "/usr/bin/cc  -I/home/mosamen/Projects/rfsyn -I/home/mosamen/Projects/rfsyn/cli -O3 -DNDEBUG -std=gnu11 -fsanitize=address,undefined -fno-omit-frame-pointer -g -o CMakeFiles/material_config_unit.dir/tests/material_config_unit.c.o -c /home/mosamen/Projects/rfsyn/tests/material_config_unit.c",
+  "file": "/home/mosamen/Projects/rfsyn/tests/material_config_unit.c",
+  "output": "CMakeFiles/material_config_unit.dir/tests/material_config_unit.c.o"
+},
+{
+  "directory": "/home/mosamen/Projects/rfsyn/build-sanitize",
+  "command": "/usr/bin/cc -DRFSYN_HAS_OPENMP=1  -O3 -DNDEBUG -std=gnu11 -fopenmp -fsanitize=address,undefined -fno-omit-frame-pointer -g -o CMakeFiles/simulate_unit.dir/tests/simulate_unit.c.o -c /home/mosamen/Projects/rfsyn/tests/simulate_unit.c",
+  "file": "/home/mosamen/Projects/rfsyn/tests/simulate_unit.c",
+  "output": "CMakeFiles/simulate_unit.dir/tests/simulate_unit.c.o"
+},
+{
+  "directory": "/home/mosamen/Projects/rfsyn/build-sanitize",
+  "command": "/usr/bin/cc -DRFSYN_HAS_OPENMP=1  -O3 -DNDEBUG -std=gnu11 -fopenmp -fsanitize=address,undefined -fno-omit-frame-pointer -g -o CMakeFiles/materials_unit.dir/tests/materials_unit.c.o -c /home/mosamen/Projects/rfsyn/tests/materials_unit.c",
+  "file": "/home/mosamen/Projects/rfsyn/tests/materials_unit.c",
+  "output": "CMakeFiles/materials_unit.dir/tests/materials_unit.c.o"
+},
+{
+  "directory": "/home/mosamen/Projects/rfsyn/build-sanitize",
+  "command": "/usr/bin/cc   -O3 -DNDEBUG -std=gnu11 -fsanitize=address,undefined -fno-omit-frame-pointer -g -o CMakeFiles/rf_signal_unit.dir/tests/rf_signal_unit.c.o -c /home/mosamen/Projects/rfsyn/tests/rf_signal_unit.c",
+  "file": "/home/mosamen/Projects/rfsyn/tests/rf_signal_unit.c",
+  "output": "CMakeFiles/rf_signal_unit.dir/tests/rf_signal_unit.c.o"
+},
+{
+  "directory": "/home/mosamen/Projects/rfsyn/build-sanitize",
+  "command": "/usr/bin/cc -DRFSYN_HAS_OPENMP=1  -O3 -DNDEBUG -std=gnu11 -fopenmp -fsanitize=address,undefined -fno-omit-frame-pointer -g -o CMakeFiles/subpixel_te_unit.dir/tests/subpixel_te_unit.c.o -c /home/mosamen/Projects/rfsyn/tests/subpixel_te_unit.c",
+  "file": "/home/mosamen/Projects/rfsyn/tests/subpixel_te_unit.c",
+  "output": "CMakeFiles/subpixel_te_unit.dir/tests/subpixel_te_unit.c.o"
+},
+{
+  "directory": "/home/mosamen/Projects/rfsyn/build-sanitize",
+  "command": "/usr/bin/cc -DRFSYN_HAS_OPENMP=1  -O3 -DNDEBUG -std=gnu11 -fopenmp -fsanitize=address,undefined -fno-omit-frame-pointer -g -o CMakeFiles/periodic_materials_unit.dir/tests/periodic_materials_unit.c.o -c /home/mosamen/Projects/rfsyn/tests/periodic_materials_unit.c",
+  "file": "/home/mosamen/Projects/rfsyn/tests/periodic_materials_unit.c",
+  "output": "CMakeFiles/periodic_materials_unit.dir/tests/periodic_materials_unit.c.o"
+},
+{
+  "directory": "/home/mosamen/Projects/rfsyn/build-sanitize",
+  "command": "/usr/bin/cc -DRFSYN_HAS_OPENMP=1 -I/home/mosamen/Projects/rfsyn -I/home/mosamen/Projects/rfsyn/cli -O3 -DNDEBUG -std=gnu11 -fopenmp -fsanitize=address,undefined -fno-omit-frame-pointer -g -o CMakeFiles/cli_smoke.dir/tests/cli_smoke.c.o -c /home/mosamen/Projects/rfsyn/tests/cli_smoke.c",
+  "file": "/home/mosamen/Projects/rfsyn/tests/cli_smoke.c",
+  "output": "CMakeFiles/cli_smoke.dir/tests/cli_smoke.c.o"
+},
+{
+  "directory": "/home/mosamen/Projects/rfsyn/build-sanitize",
+  "command": "/usr/bin/cc -DRFSYN_HAS_OPENMP=1 -DRFSYN_VALIDATION_REFINEMENT=1  -O3 -DNDEBUG -std=gnu11 -fopenmp -fsanitize=address,undefined -fno-omit-frame-pointer -g -o CMakeFiles/validate_cpml.dir/engine/fdtd/validate_cpml.c.o -c /home/mosamen/Projects/rfsyn/engine/fdtd/validate_cpml.c",
+  "file": "/home/mosamen/Projects/rfsyn/engine/fdtd/validate_cpml.c",
+  "output": "CMakeFiles/validate_cpml.dir/engine/fdtd/validate_cpml.c.o"
+},
+{
+  "directory": "/home/mosamen/Projects/rfsyn/build-sanitize",
+  "command": "/usr/bin/cc -DRFSYN_HAS_OPENMP=1 -DRFSYN_VALIDATION_REFINEMENT=1  -O3 -DNDEBUG -std=gnu11 -fopenmp -fsanitize=address,undefined -fno-omit-frame-pointer -g -o CMakeFiles/validate_cpml_margin.dir/engine/fdtd/validate_cpml_margin.c.o -c /home/mosamen/Projects/rfsyn/engine/fdtd/validate_cpml_margin.c",
+  "file": "/home/mosamen/Projects/rfsyn/engine/fdtd/validate_cpml_margin.c",
+  "output": "CMakeFiles/validate_cpml_margin.dir/engine/fdtd/validate_cpml_margin.c.o"
+},
+{
+  "directory": "/home/mosamen/Projects/rfsyn/build-sanitize",
+  "command": "/usr/bin/cc -DRFSYN_HAS_OPENMP=1 -DRFSYN_VALIDATION_REFINEMENT=1  -O3 -DNDEBUG -std=gnu11 -fopenmp -fsanitize=address,undefined -fno-omit-frame-pointer -g -o CMakeFiles/validate_cpml_planewave.dir/engine/fdtd/validate_cpml_planewave.c.o -c /home/mosamen/Projects/rfsyn/engine/fdtd/validate_cpml_planewave.c",
+  "file": "/home/mosamen/Projects/rfsyn/engine/fdtd/validate_cpml_planewave.c",
+  "output": "CMakeFiles/validate_cpml_planewave.dir/engine/fdtd/validate_cpml_planewave.c.o"
+},
+{
+  "directory": "/home/mosamen/Projects/rfsyn/build-sanitize",
+  "command": "/usr/bin/cc -DRFSYN_HAS_OPENMP=1 -DRFSYN_VALIDATION_REFINEMENT=1  -O3 -DNDEBUG -std=gnu11 -fopenmp -fsanitize=address,undefined -fno-omit-frame-pointer -g -o CMakeFiles/validate_materials_fresnel.dir/engine/fdtd/validate_materials_fresnel.c.o -c /home/mosamen/Projects/rfsyn/engine/fdtd/validate_materials_fresnel.c",
+  "file": "/home/mosamen/Projects/rfsyn/engine/fdtd/validate_materials_fresnel.c",
+  "output": "CMakeFiles/validate_materials_fresnel.dir/engine/fdtd/validate_materials_fresnel.c.o"
+},
+{
+  "directory": "/home/mosamen/Projects/rfsyn/build-sanitize",
+  "command": "/usr/bin/cc -DRFSYN_HAS_OPENMP=1 -DRFSYN_VALIDATION_REFINEMENT=1  -O3 -DNDEBUG -std=gnu11 -fopenmp -fsanitize=address,undefined -fno-omit-frame-pointer -g -o CMakeFiles/validate_probe_dft.dir/engine/fdtd/validate_probe_dft.c.o -c /home/mosamen/Projects/rfsyn/engine/fdtd/validate_probe_dft.c",
+  "file": "/home/mosamen/Projects/rfsyn/engine/fdtd/validate_probe_dft.c",
+  "output": "CMakeFiles/validate_probe_dft.dir/engine/fdtd/validate_probe_dft.c.o"
+},
+{
+  "directory": "/home/mosamen/Projects/rfsyn/build-sanitize",
+  "command": "/usr/bin/cc -DRFSYN_HAS_OPENMP=1 -DRFSYN_VALIDATION_REFINEMENT=1  -O3 -DNDEBUG -std=gnu11 -fopenmp -fsanitize=address,undefined -fno-omit-frame-pointer -g -o CMakeFiles/validate_materials_energy.dir/engine/fdtd/validate_materials_energy.c.o -c /home/mosamen/Projects/rfsyn/engine/fdtd/validate_materials_energy.c",
+  "file": "/home/mosamen/Projects/rfsyn/engine/fdtd/validate_materials_energy.c",
+  "output": "CMakeFiles/validate_materials_energy.dir/engine/fdtd/validate_materials_energy.c.o"
+},
+{
+  "directory": "/home/mosamen/Projects/rfsyn/build-sanitize",
+  "command": "/usr/bin/cc -DRFSYN_HAS_OPENMP=1 -DRFSYN_VALIDATION_REFINEMENT=1  -O3 -DNDEBUG -std=gnu11 -fopenmp -fsanitize=address,undefined -fno-omit-frame-pointer -g -o CMakeFiles/validate_cpml_oblique.dir/engine/fdtd/validate_cpml_oblique.c.o -c /home/mosamen/Projects/rfsyn/engine/fdtd/validate_cpml_oblique.c",
+  "file": "/home/mosamen/Projects/rfsyn/engine/fdtd/validate_cpml_oblique.c",
+  "output": "CMakeFiles/validate_cpml_oblique.dir/engine/fdtd/validate_cpml_oblique.c.o"
+},
+{
+  "directory": "/home/mosamen/Projects/rfsyn/build-sanitize",
+  "command": "/usr/bin/cc -DRFSYN_HAS_OPENMP=1 -DRFSYN_VALIDATION_REFINEMENT=1  -O3 -DNDEBUG -std=gnu11 -fopenmp -fsanitize=address,undefined -fno-omit-frame-pointer -g -o CMakeFiles/validate_materials_high_contrast.dir/engine/fdtd/validate_materials_high_contrast.c.o -c /home/mosamen/Projects/rfsyn/engine/fdtd/validate_materials_high_contrast.c",
+  "file": "/home/mosamen/Projects/rfsyn/engine/fdtd/validate_materials_high_contrast.c",
+  "output": "CMakeFiles/validate_materials_high_contrast.dir/engine/fdtd/validate_materials_high_contrast.c.o"
+},
+{
+  "directory": "/home/mosamen/Projects/rfsyn/build-sanitize",
+  "command": "/usr/bin/cc -DRFSYN_HAS_OPENMP=1 -DRFSYN_VALIDATION_REFINEMENT=1  -O3 -DNDEBUG -std=gnu11 -fopenmp -fsanitize=address,undefined -fno-omit-frame-pointer -g -o CMakeFiles/validate_long_term_stability.dir/engine/fdtd/validate_long_term_stability.c.o -c /home/mosamen/Projects/rfsyn/engine/fdtd/validate_long_term_stability.c",
+  "file": "/home/mosamen/Projects/rfsyn/engine/fdtd/validate_long_term_stability.c",
+  "output": "CMakeFiles/validate_long_term_stability.dir/engine/fdtd/validate_long_term_stability.c.o"
+},
+{
+  "directory": "/home/mosamen/Projects/rfsyn/build-sanitize",
+  "command": "/usr/bin/cc -DRFSYN_HAS_OPENMP=1 -DRFSYN_VALIDATION_REFINEMENT=1  -O3 -DNDEBUG -std=gnu11 -fopenmp -fsanitize=address,undefined -fno-omit-frame-pointer -g -o CMakeFiles/validate_materials_tilted.dir/engine/fdtd/validate_materials_tilted.c.o -c /home/mosamen/Projects/rfsyn/engine/fdtd/validate_materials_tilted.c",
+  "file": "/home/mosamen/Projects/rfsyn/engine/fdtd/validate_materials_tilted.c",
+  "output": "CMakeFiles/validate_materials_tilted.dir/engine/fdtd/validate_materials_tilted.c.o"
+}
+]

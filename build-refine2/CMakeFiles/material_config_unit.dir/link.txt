@@ -1,0 +1,1 @@
+/usr/bin/cc -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/material_config_unit.dir/link.d CMakeFiles/material_config_unit.dir/tests/material_config_unit.c.o -o material_config_unit  librfsyn_world.a -lm librfsyn_cjson.a

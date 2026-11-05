@@ -1,0 +1,7 @@
+{
+	"InstallScripts" : 
+	[
+		"/home/mosamen/Projects/rfsyn/build-refine2/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

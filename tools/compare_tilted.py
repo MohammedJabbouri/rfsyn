@@ -46,19 +46,12 @@ def load_samples(path, case):
     with path.open(newline="") as stream:
         rows = list(csv.DictReader(stream))
 
-    rows.sort(
-        key=lambda row: int(row["probe_id"])
-    )
+    rows.sort(key=lambda row: int(row["probe_id"]))
 
-    probe_ids = [
-        int(row["probe_id"])
-        for row in rows
-    ]
+    probe_ids = [int(row["probe_id"]) for row in rows]
 
     if len(rows) != 4 or probe_ids != list(range(4)):
-        raise ValueError(
-            "expected exactly four distinct probes"
-        )
+        raise ValueError("expected exactly four distinct probes")
 
     expected_positions = (
         (0.030, 0.032),
@@ -87,67 +80,47 @@ def load_samples(path, case):
         rows,
         expected_positions,
     ):
-        if not all(
-            math.isfinite(float(row[key]))
-            for key in numeric_fields
-        ):
-            raise ValueError(
-                "nonfinite measurement data"
-            )
+        if not all(math.isfinite(float(row[key])) for key in numeric_fields):
+            raise ValueError("nonfinite measurement data")
 
         checks = (
             int(row["scale"]) == scale,
-
             row["polarization"] == polarization,
-
             math.isclose(
                 float(row["angle_deg"]),
                 angle,
                 abs_tol=1e-12,
             ),
-
             math.isclose(
                 float(row["shift_mm"]),
                 shift,
                 abs_tol=1e-12,
             ),
-
             math.isclose(
                 float(row["dx_m"]),
                 0.001 / scale,
                 rel_tol=1e-10,
             ),
-
             math.isclose(
                 float(row["x_m"]),
                 x,
                 abs_tol=1e-12,
             ),
-
             math.isclose(
                 float(row["y_m"]),
                 y,
                 abs_tol=1e-12,
             ),
-
             float(row["frequency_hz"]) > 0.0,
-
             float(row["incident_norm"]) > 0.0,
-
             float(row["steps"]) > 0.0,
-
             float(row["steps"]).is_integer(),
-
             int(row["measurement_converged"]) == 1,
-
             0.0 <= float(row["window_drift"]) <= 1e-6,
         )
 
         if not all(checks):
-            raise ValueError(
-                "geometry, resolution, or convergence "
-                "check failed"
-            )
+            raise ValueError("geometry, resolution, or convergence " "check failed")
 
         for key in (
             "frequency_hz",
@@ -158,20 +131,14 @@ def load_samples(path, case):
                 float(rows[0][key]),
                 rel_tol=1e-12,
             ):
-                raise ValueError(
-                    "inconsistent rows within measurement"
-                )
+                raise ValueError("inconsistent rows within measurement")
 
     incident_squared = sum(
-        float(row["incident_re"]) ** 2
-        + float(row["incident_im"]) ** 2
-        for row in rows
+        float(row["incident_re"]) ** 2 + float(row["incident_im"]) ** 2 for row in rows
     )
 
     if incident_squared <= 1e-24:
-        raise ValueError(
-            "incident probe vector is too small"
-        )
+        raise ValueError("incident probe vector is too small")
 
     return rows
 
@@ -179,10 +146,7 @@ def load_samples(path, case):
 def case_folder(root, case):
     angle, shift, polarization, scale = case
 
-    return root / (
-        f"a{angle:g}_shift{shift:g}_"
-        f"{polarization}_s{scale}"
-    )
+    return root / (f"a{angle:g}_shift{shift:g}_" f"{polarization}_s{scale}")
 
 
 def inspect_case(
@@ -237,34 +201,21 @@ def inspect_case(
 
         return {
             "status": "ready",
-            "note": (
-                "legacy: executable/settings "
-                "provenance unknown"
-            ),
+            "note": ("legacy: executable/settings " "provenance unknown"),
             "rows": rows,
             "identity": "legacy_unknown",
         }
 
     try:
-        metadata = json.loads(
-            metadata_path.read_text()
-        )
+        metadata = json.loads(metadata_path.read_text())
 
         if metadata["samples_sha256"] != file_hash(samples):
-            raise ValueError(
-                "samples hash does not match "
-                "run_meta.json"
-            )
+            raise ValueError("samples hash does not match " "run_meta.json")
 
         identity = metadata["executable_sha256"]
 
-        if (
-            not isinstance(identity, str)
-            or len(identity) != 64
-        ):
-            raise ValueError(
-                "invalid executable hash in metadata"
-            )
+        if not isinstance(identity, str) or len(identity) != 64:
+            raise ValueError("invalid executable hash in metadata")
 
         if not args.summarize_only:
             if identity != executable_digest:
@@ -276,8 +227,7 @@ def inspect_case(
 
             if metadata["settings"] != settings:
                 raise ValueError(
-                    "run settings changed; use a new "
-                    "output directory or --rerun"
+                    "run settings changed; use a new " "output directory or --rerun"
                 )
 
     except (
@@ -313,14 +263,16 @@ def write_reports(
     for case, record in records.items():
         angle, shift, polarization, scale = case
 
-        progress_rows.append({
-            "angle_deg": angle,
-            "shift_mm": shift,
-            "polarization": polarization,
-            "scale": scale,
-            "status": record["status"],
-            "note": record["note"],
-        })
+        progress_rows.append(
+            {
+                "angle_deg": angle,
+                "shift_mm": shift,
+                "polarization": polarization,
+                "scale": scale,
+                "status": record["status"],
+                "note": record["note"],
+            }
+        )
 
     atomic_csv(
         root / "tilted_progress.csv",
@@ -374,19 +326,14 @@ def write_reports(
                 "reference_window_drift": "",
             }
 
-            if (
-                run["status"] == "ready"
-                and reference["status"] == "ready"
-            ):
+            if run["status"] == "ready" and reference["status"] == "ready":
                 known_identities = {
                     run["identity"],
                     reference["identity"],
                 } - {"legacy_unknown"}
 
                 if len(known_identities) > 1:
-                    result["comparison_status"] = (
-                        "blocked_mixed_executables"
-                    )
+                    result["comparison_status"] = "blocked_mixed_executables"
 
                 else:
                     rows = run["rows"]
@@ -394,16 +341,12 @@ def write_reports(
 
                     frequency_matches = math.isclose(
                         float(rows[0]["frequency_hz"]),
-                        float(
-                            reference_rows[0]["frequency_hz"]
-                        ),
+                        float(reference_rows[0]["frequency_hz"]),
                         rel_tol=1e-10,
                     )
 
                     if not frequency_matches:
-                        result["comparison_status"] = (
-                            "blocked_frequency_mismatch"
-                        )
+                        result["comparison_status"] = "blocked_frequency_mismatch"
 
                     else:
                         values = [
@@ -431,10 +374,7 @@ def write_reports(
                         )
 
                         scattered_norm = math.sqrt(
-                            sum(
-                                abs(value) ** 2
-                                for value in targets
-                            )
+                            sum(abs(value) ** 2 for value in targets)
                         )
 
                         difference = math.sqrt(
@@ -447,41 +387,31 @@ def write_reports(
                             )
                         )
 
-                        legacy_provenance = (
-                            "legacy_unknown"
-                            in (
-                                run["identity"],
-                                reference["identity"],
-                            )
+                        legacy_provenance = "legacy_unknown" in (
+                            run["identity"],
+                            reference["identity"],
                         )
 
                         result.update(
                             comparison_status="ready",
-
                             provenance=(
                                 "legacy_unknown"
                                 if legacy_provenance
                                 else "hash_verified"
                             ),
-
                             scattered_difference_over_incident=(
                                 difference / incident_norm
                             ),
-
                             scattered_relative_difference=(
                                 difference / scattered_norm
                                 if scattered_norm > 1e-12
                                 else "undefined"
                             ),
-
                             window_drift=max(
-                                float(row["window_drift"])
-                                for row in rows
+                                float(row["window_drift"]) for row in rows
                             ),
-
                             reference_window_drift=max(
-                                float(row["window_drift"])
-                                for row in reference_rows
+                                float(row["window_drift"]) for row in reference_rows
                             ),
                         )
 
@@ -534,28 +464,20 @@ def run_case(
 
     command = [
         str(executable),
-
         "--angle",
         str(angle),
-
         "--shift-mm",
         str(shift),
-
         "--pol",
         polarization,
-
         "--scale",
         str(scale),
-
         "--output",
         pending_samples.name,
-
         "--settle-cycles",
         str(settings["settle_cycles"]),
-
         "--window-cycles",
         str(settings["window_cycles"]),
-
         "--max-windows",
         str(settings["max_windows"]),
     ]
@@ -586,10 +508,7 @@ def run_case(
             raise
 
     if return_code != 0:
-        raise RuntimeError(
-            f"validator exit {return_code}; "
-            f"inspect {pending_log}"
-        )
+        raise RuntimeError(f"validator exit {return_code}; " f"inspect {pending_log}")
 
     rows = load_samples(
         pending_samples,
@@ -601,22 +520,14 @@ def run_case(
         "samples_sha256": file_hash(pending_samples),
         "settings": settings,
         "command": command,
-        "completed_utc": (
-            datetime.now(timezone.utc).isoformat()
-        ),
+        "completed_utc": (datetime.now(timezone.utc).isoformat()),
     }
 
-    pending_metadata = (
-        folder / "run_meta.pending.json"
-    )
+    pending_metadata = folder / "run_meta.pending.json"
 
-    pending_metadata.write_text(
-        json.dumps(metadata, indent=2)
-    )
+    pending_metadata.write_text(json.dumps(metadata, indent=2))
 
-    timestamp = datetime.now(
-        timezone.utc
-    ).strftime("%Y%m%dT%H%M%S%fZ")
+    timestamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
 
     for name in (
         "samples.csv",
@@ -626,9 +537,7 @@ def run_case(
         old_file = folder / name
 
         if old_file.exists():
-            old_file.rename(
-                folder / f"{name}.bak-{timestamp}"
-            )
+            old_file.rename(folder / f"{name}.bak-{timestamp}")
 
     os.replace(
         pending_samples,
@@ -655,10 +564,7 @@ def run_case(
 
 def main():
     parser = argparse.ArgumentParser(
-        description=(
-            "Resume tilted-slab runs and save "
-            "partial comparisons."
-        )
+        description=("Resume tilted-slab runs and save " "partial comparisons.")
     )
 
     parser.add_argument(
@@ -724,10 +630,7 @@ def main():
     parser.add_argument(
         "--rerun",
         action="store_true",
-        help=(
-            "Explicitly rerun selected cases; "
-            "back up old results on success"
-        ),
+        help=("Explicitly rerun selected cases; " "back up old results on success"),
     )
 
     parser.add_argument(
@@ -750,79 +653,45 @@ def main():
 
     args = parser.parse_args()
 
-    angles = list(dict.fromkeys(
-        args.angles
-        if args.angles is not None
-        else (
-            [0, 15, 30, 45]
-            if args.full
-            else [30]
+    angles = list(
+        dict.fromkeys(
+            args.angles
+            if args.angles is not None
+            else ([0, 15, 30, 45] if args.full else [30])
         )
-    ))
+    )
 
-    shifts = list(dict.fromkeys(
-        args.shifts
-        if args.shifts is not None
-        else (
-            [0, 0.25, 0.5, 0.75]
-            if args.full
-            else [0.5]
+    shifts = list(
+        dict.fromkeys(
+            args.shifts
+            if args.shifts is not None
+            else ([0, 0.25, 0.5, 0.75] if args.full else [0.5])
         )
-    ))
+    )
 
-    polarizations = list(dict.fromkeys(
-        args.pol
-        if args.pol is not None
-        else (
-            ["TE", "TM"]
-            if args.full
-            else ["TE"]
+    polarizations = list(
+        dict.fromkeys(
+            args.pol
+            if args.pol is not None
+            else (["TE", "TM"] if args.full else ["TE"])
         )
-    ))
+    )
 
-    scales = sorted(set(
-        args.scales
-        if args.scales is not None
-        else [1, 2, 4]
-    ))
+    scales = sorted(set(args.scales if args.scales is not None else [1, 2, 4]))
 
-    if any(
-        not math.isfinite(value)
-        or not 0.0 <= value <= 60.0
-        for value in angles
-    ):
-        parser.error(
-            "angles must be finite and between "
-            "0 and 60 degrees"
-        )
+    if any(not math.isfinite(value) or not 0.0 <= value <= 60.0 for value in angles):
+        parser.error("angles must be finite and between " "0 and 60 degrees")
 
-    if any(
-        not math.isfinite(value)
-        or abs(value) > 1.0
-        for value in shifts
-    ):
-        parser.error(
-            "shifts must be finite and between "
-            "-1 and 1 mm"
-        )
+    if any(not math.isfinite(value) or abs(value) > 1.0 for value in shifts):
+        parser.error("shifts must be finite and between " "-1 and 1 mm")
 
-    if any(
-        scale > args.reference_scale
-        for scale in scales
-    ):
-        parser.error(
-            "scales cannot exceed the reference scale"
-        )
+    if any(scale > args.reference_scale for scale in scales):
+        parser.error("scales cannot exceed the reference scale")
 
-    scales = sorted(set(
-        scales + [args.reference_scale]
-    ))
+    scales = sorted(set(scales + [args.reference_scale]))
 
     if len(scales) < 2:
-        parser.error(
-            "select at least one scale below "
-            "the reference scale"
-        )
+        parser.error("select at least one scale below " "the reference scale")
 
     settings_valid = (
         8 <= args.settle_cycles <= 500
@@ -831,37 +700,19 @@ def main():
     )
 
     if not settings_valid:
-        parser.error(
-            "invalid settling/window settings "
-            "for the tilted validator"
-        )
+        parser.error("invalid settling/window settings " "for the tilted validator")
 
     if args.summarize_only and args.rerun:
-        parser.error(
-            "--rerun cannot be combined "
-            "with --summarize-only"
-        )
+        parser.error("--rerun cannot be combined " "with --summarize-only")
 
-    executable = (
-        args.executable.resolve()
-        if args.executable
-        else None
-    )
+    executable = args.executable.resolve() if args.executable else None
 
     if not args.summarize_only:
-        if (
-            executable is None
-            or not executable.is_file()
-        ):
-            parser.error(
-                "provide the validator executable, "
-                "or use --summarize-only"
-            )
+        if executable is None or not executable.is_file():
+            parser.error("provide the validator executable, " "or use --summarize-only")
 
     executable_digest = (
-        file_hash(executable)
-        if executable and executable.is_file()
-        else None
+        file_hash(executable) if executable and executable.is_file() else None
     )
 
     root = args.output.resolve()
@@ -877,11 +728,13 @@ def main():
         "max_windows": args.max_windows,
     }
 
-    groups = list(itertools.product(
-        angles,
-        shifts,
-        polarizations,
-    ))
+    groups = list(
+        itertools.product(
+            angles,
+            shifts,
+            polarizations,
+        )
+    )
 
     cases = [
         (angle, shift, polarization, scale)
@@ -900,10 +753,7 @@ def main():
         for case in cases
     }
 
-    if any(
-        record["identity"] == "legacy_unknown"
-        for record in records.values()
-    ):
+    if any(record["identity"] == "legacy_unknown" for record in records.values()):
         print(
             "WARNING: legacy runs accepted; "
             "their executable/settings identity "
@@ -928,21 +778,16 @@ def main():
                 record = records[case]
                 name = case_folder(root, case).name
 
-                if (
-                    record["status"] == "ready"
-                    and not args.rerun
-                ):
+                if record["status"] == "ready" and not args.rerun:
                     print(
-                        f"[{index}/{len(cases)}] "
-                        f"REUSE {name}",
+                        f"[{index}/{len(cases)}] " f"REUSE {name}",
                         flush=True,
                     )
 
                     continue
 
                 if (
-                    record["status"]
-                    in ("incompatible", "unverified")
+                    record["status"] in ("incompatible", "unverified")
                     and not args.rerun
                 ):
                     print(
@@ -957,8 +802,7 @@ def main():
                 active_case = case
 
                 print(
-                    f"[{index}/{len(cases)}] "
-                    f"RUN {name}",
+                    f"[{index}/{len(cases)}] " f"RUN {name}",
                     flush=True,
                 )
 
@@ -1007,17 +851,13 @@ def main():
         if active_case is not None:
             records[active_case] = {
                 "status": "interrupted",
-                "note": (
-                    "partial pending files "
-                    "are not reusable"
-                ),
+                "note": ("partial pending files " "are not reusable"),
                 "rows": None,
                 "identity": "",
             }
 
         print(
-            "\nStopped. Completed runs and "
-            "partial summaries are preserved.",
+            "\nStopped. Completed runs and " "partial summaries are preserved.",
             flush=True,
         )
 
@@ -1030,25 +870,13 @@ def main():
             records,
         )
 
-    ready_count = sum(
-        record["status"] == "ready"
-        for record in records.values()
-    )
+    ready_count = sum(record["status"] == "ready" for record in records.values())
 
-    comparison_count = sum(
-        row["comparison_status"] == "ready"
-        for row in comparisons
-    )
+    comparison_count = sum(row["comparison_status"] == "ready" for row in comparisons)
 
-    print(
-        "Complete selected simulations: "
-        f"{ready_count}/{len(cases)}"
-    )
+    print("Complete selected simulations: " f"{ready_count}/{len(cases)}")
 
-    print(
-        "Available comparisons: "
-        f"{comparison_count}/{len(comparisons)}"
-    )
+    print("Available comparisons: " f"{comparison_count}/{len(comparisons)}")
 
     print(
         "Reports: "

@@ -1,0 +1,2 @@
+vacuum_3d: raw/initial min=1 max=2.8508134044612383; modified maximum absolute relative drift=7.2811474143391737e-15 (diagnostic only; no accuracy gate)
+interface25_3d: raw/initial min=0.95445385655184711 max=1.0966206066843083; modified maximum absolute relative drift=3.6038594483621948e-15 (diagnostic only; no accuracy gate)
