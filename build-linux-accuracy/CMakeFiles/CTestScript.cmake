@@ -2,14 +2,14 @@
 # If you choose not to use CMake, this file may be hand configured, by
 # filling in the required variables.
 
-cmake_minimum_required(VERSION 4.3.0)
+cmake_minimum_required(VERSION 4.5.0)
 
 # CTest Start Step
-set(CTEST_SOURCE_DIRECTORY "/home/mosamen/Projects/rfsyn")
-set(CTEST_BINARY_DIRECTORY "/home/mosamen/Projects/rfsyn/build-linux-accuracy")
+set(CTEST_SOURCE_DIRECTORY "/root/Projects/rfsyn")
+set(CTEST_BINARY_DIRECTORY "/root/Projects/rfsyn/build-linux-accuracy")
 
 # CTest Update Step
-set(CTEST_UPDATE_COMMAND "/usr/bin/git")
+set(CTEST_UPDATE_COMMAND "/sbin/git")
 set(CTEST_UPDATE_OPTIONS "")
 set(CTEST_UPDATE_VERSION_ONLY "")
 set(CTEST_NIGHTLY_START_TIME "00:00:00 EDT")
@@ -24,7 +24,7 @@ set(CTEST_SVN_OPTIONS "")
 set(CTEST_SVN_UPDATE_OPTIONS "")
 
 # Git options
-set(CTEST_GIT_COMMAND "/usr/bin/git")
+set(CTEST_GIT_COMMAND "/sbin/git")
 set(CTEST_GIT_INIT_SUBMODULES "")
 set(CTEST_GIT_UPDATE_CUSTOM "")
 set(CTEST_GIT_UPDATE_OPTIONS "")
@@ -48,20 +48,21 @@ set(CTEST_USE_LAUNCHERS "")
 set(CTEST_RESOURCE_SPEC_FILE "")
 set(CTEST_TEST_LOAD "")
 set(CTEST_TEST_TIMEOUT "1500")
+set(CTEST_TEST_COVERAGE_TOOL "")
 
 # CTest Coverage Step
-set(CTEST_COVERAGE_COMMAND "/usr/bin/gcov")
+set(CTEST_COVERAGE_COMMAND "/sbin/gcov")
 set(CTEST_COVERAGE_EXTRA_FLAGS "-l")
 
 # CTest MemCheck Step
-set(CTEST_MEMORYCHECK_COMMAND "MEMORYCHECK_COMMAND-NOTFOUND")
+set(CTEST_MEMORYCHECK_COMMAND "/sbin/valgrind")
 set(CTEST_MEMORYCHECK_COMMAND_OPTIONS "")
 set(CTEST_MEMORYCHECK_TYPE "")
 set(CTEST_MEMORYCHECK_SANITIZER_OPTIONS "")
 set(CTEST_MEMORYCHECK_SUPPRESSIONS_FILE "")
 
 # CTest Submit Step
-set(CTEST_SITE "fedora")
+set(CTEST_SITE "M")
 set(CTEST_BUILD_NAME "Linux-cc")
 set(CTEST_SUBMIT_URL "http://")
 set(CTEST_SUBMIT_INACTIVITY_TIMEOUT "")

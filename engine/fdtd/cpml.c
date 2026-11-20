@@ -3,6 +3,10 @@
 #include <stdlib.h>
 #include <math.h>
 
+static inline size_t cpml_previous(size_t q, size_t extent) {
+    return q == 0 ? extent - 1 : q - 1;
+}
+
 cpml_params_t cpml_default_params(size_t npml) {
     cpml_params_t p;
     p.npml = npml;
@@ -223,8 +227,8 @@ void fdtd_update_e_cpml(fdtd_grid_t *g, cpml_t *pml) {
         for (size_t j = (g->periodic_axes & 2u) ? 0u : 1u; j < g->ny; j++) {
             for (size_t k = (g->periodic_axes & 4u) ? 0u : 1u; k < g->nz; k++) {
                 size_t idx = fdtd_index(g, i, j, k);
-                double dHz_dy = HZ(i,j,k) - HZ(i,j-1,k);
-                double dHy_dz = HY(i,j,k) - HY(i,j,k-1);
+                double dHz_dy = HZ(i,j,k) - HZ(i,cpml_previous(j,g->ny),k);
+                double dHy_dz = HY(i,j,k) - HY(i,j,cpml_previous(k,g->nz));
                 double termA = cpml_term(dHz_dy, pml->kappa_inv_m_y[j], pml->b_m_y[j], pml->a_m_y[j], dx, &pml->psi_ex_y[idx]);
                 double termB = cpml_term(dHy_dz, pml->kappa_inv_m_z[k], pml->b_m_z[k], pml->a_m_z[k], dx, &pml->psi_ex_z[idx]);
                 EX(i,j,k) += ca * (termA - termB);
@@ -236,8 +240,8 @@ void fdtd_update_e_cpml(fdtd_grid_t *g, cpml_t *pml) {
         for (size_t j = 0; j < g->ny; j++) {
             for (size_t k = (g->periodic_axes & 4u) ? 0u : 1u; k < g->nz; k++) {
                 size_t idx = fdtd_index(g, i, j, k);
-                double dHx_dz = HX(i,j,k) - HX(i,j,k-1);
-                double dHz_dx = HZ(i,j,k) - HZ(i-1,j,k);
+                double dHx_dz = HX(i,j,k) - HX(i,j,cpml_previous(k,g->nz));
+                double dHz_dx = HZ(i,j,k) - HZ(cpml_previous(i,g->nx),j,k);
                 double termA = cpml_term(dHx_dz, pml->kappa_inv_m_z[k], pml->b_m_z[k], pml->a_m_z[k], dx, &pml->psi_ey_z[idx]);
                 double termB = cpml_term(dHz_dx, pml->kappa_inv_m_x[i], pml->b_m_x[i], pml->a_m_x[i], dx, &pml->psi_ey_x[idx]);
                 EY(i,j,k) += ca * (termA - termB);
@@ -249,8 +253,8 @@ void fdtd_update_e_cpml(fdtd_grid_t *g, cpml_t *pml) {
         for (size_t j = (g->periodic_axes & 2u) ? 0u : 1u; j < g->ny; j++) {
             for (size_t k = 0; k < g->nz; k++) {
                 size_t idx = fdtd_index(g, i, j, k);
-                double dHy_dx = HY(i,j,k) - HY(i-1,j,k);
-                double dHx_dy = HX(i,j,k) - HX(i,j-1,k);
+                double dHy_dx = HY(i,j,k) - HY(cpml_previous(i,g->nx),j,k);
+                double dHx_dy = HX(i,j,k) - HX(i,cpml_previous(j,g->ny),k);
                 double termA = cpml_term(dHy_dx, pml->kappa_inv_m_x[i], pml->b_m_x[i], pml->a_m_x[i], dx, &pml->psi_ez_x[idx]);
                 double termB = cpml_term(dHx_dy, pml->kappa_inv_m_y[j], pml->b_m_y[j], pml->a_m_y[j], dx, &pml->psi_ez_y[idx]);
                 EZ(i,j,k) += ca * (termA - termB);

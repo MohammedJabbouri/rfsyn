@@ -8,11 +8,11 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/mosamen/Projects/rfsyn/cli/config.c" "CMakeFiles/rfsyn.dir/cli/config.c.o" "gcc" "CMakeFiles/rfsyn.dir/cli/config.c.o.d"
-  "/home/mosamen/Projects/rfsyn/cli/fdtd_stage.c" "CMakeFiles/rfsyn.dir/cli/fdtd_stage.c.o" "gcc" "CMakeFiles/rfsyn.dir/cli/fdtd_stage.c.o.d"
-  "/home/mosamen/Projects/rfsyn/cli/main.c" "CMakeFiles/rfsyn.dir/cli/main.c.o" "gcc" "CMakeFiles/rfsyn.dir/cli/main.c.o.d"
-  "/home/mosamen/Projects/rfsyn/cli/presets.c" "CMakeFiles/rfsyn.dir/cli/presets.c.o" "gcc" "CMakeFiles/rfsyn.dir/cli/presets.c.o.d"
-  "/home/mosamen/Projects/rfsyn/cli/settings.c" "CMakeFiles/rfsyn.dir/cli/settings.c.o" "gcc" "CMakeFiles/rfsyn.dir/cli/settings.c.o.d"
+  "/root/Projects/rfsyn/cli/config.c" "CMakeFiles/rfsyn.dir/cli/config.c.o" "gcc" "CMakeFiles/rfsyn.dir/cli/config.c.o.d"
+  "/root/Projects/rfsyn/cli/fdtd_stage.c" "CMakeFiles/rfsyn.dir/cli/fdtd_stage.c.o" "gcc" "CMakeFiles/rfsyn.dir/cli/fdtd_stage.c.o.d"
+  "/root/Projects/rfsyn/cli/main.c" "CMakeFiles/rfsyn.dir/cli/main.c.o" "gcc" "CMakeFiles/rfsyn.dir/cli/main.c.o.d"
+  "/root/Projects/rfsyn/cli/presets.c" "CMakeFiles/rfsyn.dir/cli/presets.c.o" "gcc" "CMakeFiles/rfsyn.dir/cli/presets.c.o.d"
+  "/root/Projects/rfsyn/cli/settings.c" "CMakeFiles/rfsyn.dir/cli/settings.c.o" "gcc" "CMakeFiles/rfsyn.dir/cli/settings.c.o.d"
   "" "rfsyn" "gcc" "CMakeFiles/rfsyn.dir/link.d"
   )
 

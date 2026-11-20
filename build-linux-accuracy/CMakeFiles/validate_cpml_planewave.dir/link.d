@@ -1,139 +1,130 @@
 validate_cpml_planewave: \
-  /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crt1.o \
-  /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crti.o \
-  /usr/lib/gcc/x86_64-redhat-linux/16/crtbegin.o \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/Scrt1.o \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/crti.o \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/16/crtbeginS.o \
   CMakeFiles/validate_cpml_planewave.dir/engine/fdtd/validate_cpml_planewave.c.o \
   librfsyn_fdtd.a \
-  /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/libm.so \
-  /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/libm.so \
-  /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/libm.so \
-  /lib64/libm.so.6 \
-  /lib64/libmvec.so.1 \
-  /usr/lib/gcc/x86_64-redhat-linux/16/libgomp.so \
-  /usr/lib64/libpthread.a \
-  /usr/lib/gcc/x86_64-redhat-linux/16/libgcc.a \
-  /usr/lib/gcc/x86_64-redhat-linux/16/libgcc_s_asneeded.so \
-  /usr/lib/gcc/x86_64-redhat-linux/16/libgcc_s_asneeded.so \
-  /usr/lib/gcc/x86_64-redhat-linux/16/libgcc_s_asneeded.so \
-  /usr/lib/gcc/x86_64-redhat-linux/16/libgcc_s.so \
-  /usr/lib/gcc/x86_64-redhat-linux/16/libgcc_s.so \
-  /usr/lib/gcc/x86_64-redhat-linux/16/libgcc_s.so \
-  /lib64/libgcc_s.so.1 \
-  /usr/lib/gcc/x86_64-redhat-linux/16/libgcc.a \
-  /usr/lib/gcc/x86_64-redhat-linux/16/libatomic_asneeded.so \
-  /usr/lib/gcc/x86_64-redhat-linux/16/libatomic_asneeded.so \
-  /usr/lib/gcc/x86_64-redhat-linux/16/libatomic_asneeded.so \
-  /usr/lib/gcc/x86_64-redhat-linux/16/libatomic.so \
-  /usr/lib/gcc/x86_64-redhat-linux/16/libatomic.so \
-  /usr/lib/gcc/x86_64-redhat-linux/16/libatomic.so \
-  /usr/lib64/libatomic.so.1.2.0 \
-  /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/libc.so \
-  /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/libc.so \
-  /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/libc.so \
-  /lib64/libc.so.6 \
-  /usr/lib64/libc_nonshared.a \
-  /lib64/ld-linux-x86-64.so.2 \
-  /usr/lib/gcc/x86_64-redhat-linux/16/libgcc.a \
-  /usr/lib/gcc/x86_64-redhat-linux/16/libgcc_s_asneeded.so \
-  /usr/lib/gcc/x86_64-redhat-linux/16/libgcc_s_asneeded.so \
-  /usr/lib/gcc/x86_64-redhat-linux/16/libgcc_s_asneeded.so \
-  /usr/lib/gcc/x86_64-redhat-linux/16/libgcc_s.so \
-  /usr/lib/gcc/x86_64-redhat-linux/16/libgcc_s.so \
-  /usr/lib/gcc/x86_64-redhat-linux/16/libgcc_s.so \
-  /lib64/libgcc_s.so.1 \
-  /usr/lib/gcc/x86_64-redhat-linux/16/libgcc.a \
-  /usr/lib/gcc/x86_64-redhat-linux/16/crtend.o \
-  /usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crtn.o \
-  /lib64/ld-linux-x86-64.so.2
+  /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libm.so \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libm.so \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libm.so \
+  /usr/lib/libm.so.6 \
+  /usr/lib/libmvec.so.1 \
+  /usr/lib/libgomp.so \
+  /usr/lib/libpthread.a \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/16/libgcc.a \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/16/libgcc_s_asneeded.so \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/16/libgcc_s_asneeded.so \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/16/libgcc_s_asneeded.so \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/16/libgcc_s.so \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/16/libgcc_s.so \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/16/libgcc_s.so \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libgcc_s.so.1 \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/16/libgcc.a \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/16/libatomic_asneeded.so \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/16/libatomic_asneeded.so \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/16/libatomic_asneeded.so \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/16/libatomic.so \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libc.so \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libc.so \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libc.so \
+  /usr/lib/libc.so.6 \
+  /usr/lib/libc_nonshared.a \
+  /usr/lib/ld-linux-x86-64.so.2 \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/16/libgcc.a \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/16/libgcc_s_asneeded.so \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/16/libgcc_s_asneeded.so \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/16/libgcc_s_asneeded.so \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/16/libgcc_s.so \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/16/libgcc_s.so \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/16/libgcc_s.so \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libgcc_s.so.1 \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/16/libgcc.a \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/16/crtendS.o \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/crtn.o \
+  /usr/lib/ld-linux-x86-64.so.2
 
-/usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crt1.o:
+/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/Scrt1.o:
 
-/usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crti.o:
+/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/crti.o:
 
-/usr/lib/gcc/x86_64-redhat-linux/16/crtbegin.o:
+/usr/lib/gcc/x86_64-pc-linux-gnu/16/crtbeginS.o:
 
 CMakeFiles/validate_cpml_planewave.dir/engine/fdtd/validate_cpml_planewave.c.o:
 
 librfsyn_fdtd.a:
 
-/usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/libm.so:
+/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libm.so:
 
-/usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/libm.so:
+/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libm.so:
 
-/usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/libm.so:
+/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libm.so:
 
-/lib64/libm.so.6:
+/usr/lib/libm.so.6:
 
-/lib64/libmvec.so.1:
+/usr/lib/libmvec.so.1:
 
-/usr/lib/gcc/x86_64-redhat-linux/16/libgomp.so:
+/usr/lib/libgomp.so:
 
-/usr/lib64/libpthread.a:
+/usr/lib/libpthread.a:
 
-/usr/lib/gcc/x86_64-redhat-linux/16/libgcc.a:
+/usr/lib/gcc/x86_64-pc-linux-gnu/16/libgcc.a:
 
-/usr/lib/gcc/x86_64-redhat-linux/16/libgcc_s_asneeded.so:
+/usr/lib/gcc/x86_64-pc-linux-gnu/16/libgcc_s_asneeded.so:
 
-/usr/lib/gcc/x86_64-redhat-linux/16/libgcc_s_asneeded.so:
+/usr/lib/gcc/x86_64-pc-linux-gnu/16/libgcc_s_asneeded.so:
 
-/usr/lib/gcc/x86_64-redhat-linux/16/libgcc_s_asneeded.so:
+/usr/lib/gcc/x86_64-pc-linux-gnu/16/libgcc_s_asneeded.so:
 
-/usr/lib/gcc/x86_64-redhat-linux/16/libgcc_s.so:
+/usr/lib/gcc/x86_64-pc-linux-gnu/16/libgcc_s.so:
 
-/usr/lib/gcc/x86_64-redhat-linux/16/libgcc_s.so:
+/usr/lib/gcc/x86_64-pc-linux-gnu/16/libgcc_s.so:
 
-/usr/lib/gcc/x86_64-redhat-linux/16/libgcc_s.so:
+/usr/lib/gcc/x86_64-pc-linux-gnu/16/libgcc_s.so:
 
-/lib64/libgcc_s.so.1:
+/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libgcc_s.so.1:
 
-/usr/lib/gcc/x86_64-redhat-linux/16/libgcc.a:
+/usr/lib/gcc/x86_64-pc-linux-gnu/16/libgcc.a:
 
-/usr/lib/gcc/x86_64-redhat-linux/16/libatomic_asneeded.so:
+/usr/lib/gcc/x86_64-pc-linux-gnu/16/libatomic_asneeded.so:
 
-/usr/lib/gcc/x86_64-redhat-linux/16/libatomic_asneeded.so:
+/usr/lib/gcc/x86_64-pc-linux-gnu/16/libatomic_asneeded.so:
 
-/usr/lib/gcc/x86_64-redhat-linux/16/libatomic_asneeded.so:
+/usr/lib/gcc/x86_64-pc-linux-gnu/16/libatomic_asneeded.so:
 
-/usr/lib/gcc/x86_64-redhat-linux/16/libatomic.so:
+/usr/lib/gcc/x86_64-pc-linux-gnu/16/libatomic.so:
 
-/usr/lib/gcc/x86_64-redhat-linux/16/libatomic.so:
+/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libc.so:
 
-/usr/lib/gcc/x86_64-redhat-linux/16/libatomic.so:
+/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libc.so:
 
-/usr/lib64/libatomic.so.1.2.0:
+/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libc.so:
 
-/usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/libc.so:
+/usr/lib/libc.so.6:
 
-/usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/libc.so:
+/usr/lib/libc_nonshared.a:
 
-/usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/libc.so:
+/usr/lib/ld-linux-x86-64.so.2:
 
-/lib64/libc.so.6:
+/usr/lib/gcc/x86_64-pc-linux-gnu/16/libgcc.a:
 
-/usr/lib64/libc_nonshared.a:
+/usr/lib/gcc/x86_64-pc-linux-gnu/16/libgcc_s_asneeded.so:
 
-/lib64/ld-linux-x86-64.so.2:
+/usr/lib/gcc/x86_64-pc-linux-gnu/16/libgcc_s_asneeded.so:
 
-/usr/lib/gcc/x86_64-redhat-linux/16/libgcc.a:
+/usr/lib/gcc/x86_64-pc-linux-gnu/16/libgcc_s_asneeded.so:
 
-/usr/lib/gcc/x86_64-redhat-linux/16/libgcc_s_asneeded.so:
+/usr/lib/gcc/x86_64-pc-linux-gnu/16/libgcc_s.so:
 
-/usr/lib/gcc/x86_64-redhat-linux/16/libgcc_s_asneeded.so:
+/usr/lib/gcc/x86_64-pc-linux-gnu/16/libgcc_s.so:
 
-/usr/lib/gcc/x86_64-redhat-linux/16/libgcc_s_asneeded.so:
+/usr/lib/gcc/x86_64-pc-linux-gnu/16/libgcc_s.so:
 
-/usr/lib/gcc/x86_64-redhat-linux/16/libgcc_s.so:
+/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libgcc_s.so.1:
 
-/usr/lib/gcc/x86_64-redhat-linux/16/libgcc_s.so:
+/usr/lib/gcc/x86_64-pc-linux-gnu/16/libgcc.a:
 
-/usr/lib/gcc/x86_64-redhat-linux/16/libgcc_s.so:
+/usr/lib/gcc/x86_64-pc-linux-gnu/16/crtendS.o:
 
-/lib64/libgcc_s.so.1:
+/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/crtn.o:
 
-/usr/lib/gcc/x86_64-redhat-linux/16/libgcc.a:
-
-/usr/lib/gcc/x86_64-redhat-linux/16/crtend.o:
-
-/usr/lib/gcc/x86_64-redhat-linux/16/../../../../lib64/crtn.o:
-
-/lib64/ld-linux-x86-64.so.2:
+/usr/lib/ld-linux-x86-64.so.2:

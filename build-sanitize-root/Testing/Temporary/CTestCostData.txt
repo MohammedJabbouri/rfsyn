@@ -1,0 +1,21 @@
+world_unit 1 0.0223543
+material_catalog_unit 1 0.0155854
+material_config_unit 1 0.016259
+simulate_unit 1 27.0143
+materials_unit 1 0.0155562
+subpixel_te_unit 1 0.0191738
+periodic_materials_unit 1 0.0167555
+periodic_wrapping_unit 1 0.0215796
+rf_signal_unit 1 0.0111378
+cli_smoke 1 67.9673
+validate_cpml 1 72.3607
+validate_cpml_margin 1 187.783
+validate_cpml_planewave 1 23.1833
+validate_materials_fresnel 1 34.179
+validate_probe_dft 1 193.648
+validate_materials_energy 1 68.1215
+validate_cpml_oblique 1 197.54
+validate_materials_high_contrast 1 73.7001
+validate_long_term_stability 1 102.455
+validate_materials_tilted 1 18.716
+---

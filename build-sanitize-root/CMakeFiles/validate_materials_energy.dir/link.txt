@@ -1,0 +1,1 @@
+/sbin/cc -g -fsanitize=address,undefined -Wl,--dependency-file=CMakeFiles/validate_materials_energy.dir/link.d CMakeFiles/validate_materials_energy.dir/engine/fdtd/validate_materials_energy.c.o -o validate_materials_energy  librfsyn_fdtd.a -lm /usr/lib/libgomp.so /usr/lib/libpthread.a

@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/mosamen/Projects/rfsyn/tests/cli_smoke.c" "CMakeFiles/cli_smoke.dir/tests/cli_smoke.c.o" "gcc" "CMakeFiles/cli_smoke.dir/tests/cli_smoke.c.o.d"
+  "/root/Projects/rfsyn/tests/cli_smoke.c" "CMakeFiles/cli_smoke.dir/tests/cli_smoke.c.o" "gcc" "CMakeFiles/cli_smoke.dir/tests/cli_smoke.c.o.d"
   "" "cli_smoke" "gcc" "CMakeFiles/cli_smoke.dir/link.d"
   )
 

@@ -1,8 +1,8 @@
 CMakeFiles/rfsyn_fdtd.dir/engine/fdtd/subpixel_te.c.o: \
- /home/mosamen/Projects/rfsyn/engine/fdtd/subpixel_te.c \
+ /root/Projects/rfsyn/engine/fdtd/subpixel_te.c \
  /usr/include/stdc-predef.h \
- /home/mosamen/Projects/rfsyn/engine/fdtd/subpixel_te.h \
- /usr/lib/gcc/x86_64-redhat-linux/16/include/float.h /usr/include/math.h \
+ /root/Projects/rfsyn/engine/fdtd/subpixel_te.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/float.h /usr/include/math.h \
  /usr/include/bits/libc-header-start.h /usr/include/features.h \
  /usr/include/features-time64.h /usr/include/bits/wordsize.h \
  /usr/include/bits/timesize.h /usr/include/sys/cdefs.h \
@@ -14,4 +14,4 @@ CMakeFiles/rfsyn_fdtd.dir/engine/fdtd/subpixel_te.c.o: \
  /usr/include/bits/mathcalls-macros.h \
  /usr/include/bits/mathcalls-helper-functions.h \
  /usr/include/bits/mathcalls.h \
- /usr/lib/gcc/x86_64-redhat-linux/16/include/stddef.h
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/stddef.h

@@ -1,12 +1,12 @@
-CMakeFiles/rfsyn.dir/cli/main.c.o: \
- /home/mosamen/Projects/rfsyn/cli/main.c /usr/include/stdc-predef.h \
- /usr/include/stdio.h /usr/include/bits/libc-header-start.h \
- /usr/include/features.h /usr/include/features-time64.h \
- /usr/include/bits/wordsize.h /usr/include/bits/timesize.h \
- /usr/include/sys/cdefs.h /usr/include/bits/long-double.h \
- /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h \
- /usr/lib/gcc/x86_64-redhat-linux/16/include/stddef.h \
- /usr/lib/gcc/x86_64-redhat-linux/16/include/stdarg.h \
+CMakeFiles/rfsyn.dir/cli/main.c.o: /root/Projects/rfsyn/cli/main.c \
+ /usr/include/stdc-predef.h /usr/include/stdio.h \
+ /usr/include/bits/libc-header-start.h /usr/include/features.h \
+ /usr/include/features-time64.h /usr/include/bits/wordsize.h \
+ /usr/include/bits/timesize.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/long-double.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/stddef.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/stdarg.h \
  /usr/include/bits/types.h /usr/include/bits/typesizes.h \
  /usr/include/bits/time64.h /usr/include/bits/types/__fpos_t.h \
  /usr/include/bits/types/__mbstate_t.h \
@@ -17,7 +17,7 @@ CMakeFiles/rfsyn.dir/cli/main.c.o: \
  /usr/include/stdlib.h /usr/include/bits/waitflags.h \
  /usr/include/bits/waitstatus.h /usr/include/bits/stdlib-bsearch.h \
  /usr/include/bits/stdlib-float.h \
- /usr/lib/gcc/x86_64-redhat-linux/16/include/stdint.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/stdint.h \
  /usr/include/stdint.h /usr/include/bits/wchar.h \
  /usr/include/bits/stdint-intn.h /usr/include/bits/stdint-uintn.h \
  /usr/include/bits/stdint-least.h /usr/include/string.h \
@@ -52,14 +52,12 @@ CMakeFiles/rfsyn.dir/cli/main.c.o: \
  /usr/include/bits/flt-eval-method.h /usr/include/bits/fp-logb.h \
  /usr/include/bits/fp-fast.h /usr/include/bits/mathcalls-macros.h \
  /usr/include/bits/mathcalls-helper-functions.h \
- /usr/include/bits/mathcalls.h \
- /home/mosamen/Projects/rfsyn/cli/material_config.h \
- /home/mosamen/Projects/rfsyn/cli/../engine/world/material_catalog.h \
- /home/mosamen/Projects/rfsyn/cli/config.h \
- /home/mosamen/Projects/rfsyn/cli/presets.h \
- /home/mosamen/Projects/rfsyn/cli/settings.h \
- /home/mosamen/Projects/rfsyn/cli/../engine/core/transform.h \
- /home/mosamen/Projects/rfsyn/cli/../engine/core/rf_signal.h \
- /home/mosamen/Projects/rfsyn/cli/../engine/core/rf_signal.h \
- /home/mosamen/Projects/rfsyn/cli/../engine/core/chain.h \
- /home/mosamen/Projects/rfsyn/cli/../engine/core/transform.h
+ /usr/include/bits/mathcalls.h /root/Projects/rfsyn/cli/material_config.h \
+ /root/Projects/rfsyn/cli/../engine/world/material_catalog.h \
+ /root/Projects/rfsyn/cli/config.h /root/Projects/rfsyn/cli/presets.h \
+ /root/Projects/rfsyn/cli/settings.h \
+ /root/Projects/rfsyn/cli/../engine/core/transform.h \
+ /root/Projects/rfsyn/cli/../engine/core/rf_signal.h \
+ /root/Projects/rfsyn/cli/../engine/core/rf_signal.h \
+ /root/Projects/rfsyn/cli/../engine/core/chain.h \
+ /root/Projects/rfsyn/cli/../engine/core/transform.h

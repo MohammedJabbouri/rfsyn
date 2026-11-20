@@ -1,0 +1,7 @@
+{
+	"InstallScripts" : 
+	[
+		"/root/Projects/rfsyn/build-sanitize-root/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

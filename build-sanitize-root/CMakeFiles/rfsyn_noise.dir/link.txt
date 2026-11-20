@@ -1,0 +1,2 @@
+/sbin/ar qc librfsyn_noise.a CMakeFiles/rfsyn_noise.dir/engine/noise/awgn.c.o
+/sbin/ranlib librfsyn_noise.a

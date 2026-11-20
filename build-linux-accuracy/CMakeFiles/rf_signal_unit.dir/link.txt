@@ -1,1 +1,1 @@
-/usr/bin/cc -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/rf_signal_unit.dir/link.d CMakeFiles/rf_signal_unit.dir/tests/rf_signal_unit.c.o -o rf_signal_unit  librfsyn_core.a -lm
+/sbin/cc -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/rf_signal_unit.dir/link.d CMakeFiles/rf_signal_unit.dir/tests/rf_signal_unit.c.o -o rf_signal_unit  librfsyn_core.a -lm

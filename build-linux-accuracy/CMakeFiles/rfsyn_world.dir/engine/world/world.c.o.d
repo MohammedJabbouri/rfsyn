@@ -1,9 +1,8 @@
 CMakeFiles/rfsyn_world.dir/engine/world/world.c.o: \
- /home/mosamen/Projects/rfsyn/engine/world/world.c \
- /usr/include/stdc-predef.h \
- /home/mosamen/Projects/rfsyn/engine/world/world.h \
- /usr/lib/gcc/x86_64-redhat-linux/16/include/stddef.h \
- /usr/lib/gcc/x86_64-redhat-linux/16/include/stdint.h \
+ /root/Projects/rfsyn/engine/world/world.c /usr/include/stdc-predef.h \
+ /root/Projects/rfsyn/engine/world/world.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/stddef.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/stdint.h \
  /usr/include/stdint.h /usr/include/bits/libc-header-start.h \
  /usr/include/features.h /usr/include/features-time64.h \
  /usr/include/bits/wordsize.h /usr/include/bits/timesize.h \

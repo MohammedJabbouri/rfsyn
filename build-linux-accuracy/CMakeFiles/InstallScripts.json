@@ -1,7 +1,7 @@
 {
 	"InstallScripts" : 
 	[
-		"/home/mosamen/Projects/rfsyn/build-linux-accuracy/cmake_install.cmake"
+		"/root/Projects/rfsyn/build-linux-accuracy/cmake_install.cmake"
 	],
 	"Parallel" : false
 }

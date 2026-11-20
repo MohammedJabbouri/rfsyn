@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/mosamen/Projects/rfsyn/engine/noise/awgn.c" "CMakeFiles/rfsyn_noise.dir/engine/noise/awgn.c.o" "gcc" "CMakeFiles/rfsyn_noise.dir/engine/noise/awgn.c.o.d"
+  "/root/Projects/rfsyn/engine/noise/awgn.c" "CMakeFiles/rfsyn_noise.dir/engine/noise/awgn.c.o" "gcc" "CMakeFiles/rfsyn_noise.dir/engine/noise/awgn.c.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

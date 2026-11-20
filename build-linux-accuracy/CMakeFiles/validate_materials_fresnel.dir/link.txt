@@ -1,1 +1,1 @@
-/usr/bin/cc -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/validate_materials_fresnel.dir/link.d CMakeFiles/validate_materials_fresnel.dir/engine/fdtd/validate_materials_fresnel.c.o -o validate_materials_fresnel  librfsyn_fdtd.a -lm /usr/lib/gcc/x86_64-redhat-linux/16/libgomp.so /usr/lib64/libpthread.a
+/sbin/cc -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/validate_materials_fresnel.dir/link.d CMakeFiles/validate_materials_fresnel.dir/engine/fdtd/validate_materials_fresnel.c.o -o validate_materials_fresnel  librfsyn_fdtd.a -lm /usr/lib/libgomp.so /usr/lib/libpthread.a

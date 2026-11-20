@@ -8,7 +8,7 @@ fdtd_grid_t *fdtd_grid_create(size_t nx, size_t ny, size_t nz, double dx, double
     if (!nx || !ny || !nz || !isfinite(dx) || dx <= 0.0 || !isfinite(courant_safety_factor) || courant_safety_factor <= 0.0 || courant_safety_factor > 1.0) return NULL;
     
     if (nx > SIZE_MAX - 1 || ny > SIZE_MAX - 1 || nz > SIZE_MAX - 1) return NULL;
-    
+
     size_t nx1 = nx + 1;
     size_t ny1 = ny + 1;
     size_t nz1 = nz + 1;
@@ -95,7 +95,7 @@ void fdtd_update_e(fdtd_grid_t *g) {
     for (size_t i = 0; i < g->nx; i++) {
         for (size_t j = (g->periodic_axes & 2u) ? 0u : 1u; j < g->ny; j++) {
             for (size_t k = (g->periodic_axes & 4u) ? 0u : 1u; k < g->nz; k++) {
-                EX(i,j,k) += ca * ((HZ(i,j,k) - HZ(i,j-1,k)) - (HY(i,j,k) - HY(i,j,k-1)));
+                EX(i,j,k) += ca * ((HZ(i,j,k) - HZ(i,grid_previous(j,g->ny),k)) - (HY(i,j,k) - HY(i,j,grid_previous(k,g->nz))));
             }
         }
     }
@@ -103,7 +103,7 @@ void fdtd_update_e(fdtd_grid_t *g) {
     for (size_t i = (g->periodic_axes & 1u) ? 0u : 1u; i < g->nx; i++) {
         for (size_t j = 0; j < g->ny; j++) {
             for (size_t k = (g->periodic_axes & 4u) ? 0u : 1u; k < g->nz; k++) {
-                EY(i,j,k) += ca * ((HX(i,j,k) - HX(i,j,k-1)) - (HZ(i,j,k) - HZ(i-1,j,k)));
+                EY(i,j,k) += ca * ((HX(i,j,k) - HX(i,j,grid_previous(k,g->nz))) - (HZ(i,j,k) - HZ(grid_previous(i,g->nx),j,k)));
             }
         }
     }
@@ -111,7 +111,7 @@ void fdtd_update_e(fdtd_grid_t *g) {
     for (size_t i = (g->periodic_axes & 1u) ? 0u : 1u; i < g->nx; i++) {
         for (size_t j = (g->periodic_axes & 2u) ? 0u : 1u; j < g->ny; j++) {
             for (size_t k = 0; k < g->nz; k++) {
-                EZ(i,j,k) += ca * ((HY(i,j,k) - HY(i-1,j,k)) - (HX(i,j,k) - HX(i,j-1,k)));
+                EZ(i,j,k) += ca * ((HY(i,j,k) - HY(grid_previous(i,g->nx),j,k)) - (HX(i,j,k) - HX(i,grid_previous(j,g->ny),k)));
             }
         }
     }

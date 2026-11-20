@@ -8,9 +8,9 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/mosamen/Projects/rfsyn/cli/material_config.c" "CMakeFiles/rfsyn_world.dir/cli/material_config.c.o" "gcc" "CMakeFiles/rfsyn_world.dir/cli/material_config.c.o.d"
-  "/home/mosamen/Projects/rfsyn/engine/world/material_catalog.c" "CMakeFiles/rfsyn_world.dir/engine/world/material_catalog.c.o" "gcc" "CMakeFiles/rfsyn_world.dir/engine/world/material_catalog.c.o.d"
-  "/home/mosamen/Projects/rfsyn/engine/world/world.c" "CMakeFiles/rfsyn_world.dir/engine/world/world.c.o" "gcc" "CMakeFiles/rfsyn_world.dir/engine/world/world.c.o.d"
+  "/root/Projects/rfsyn/cli/material_config.c" "CMakeFiles/rfsyn_world.dir/cli/material_config.c.o" "gcc" "CMakeFiles/rfsyn_world.dir/cli/material_config.c.o.d"
+  "/root/Projects/rfsyn/engine/world/material_catalog.c" "CMakeFiles/rfsyn_world.dir/engine/world/material_catalog.c.o" "gcc" "CMakeFiles/rfsyn_world.dir/engine/world/material_catalog.c.o.d"
+  "/root/Projects/rfsyn/engine/world/world.c" "CMakeFiles/rfsyn_world.dir/engine/world/world.c.o" "gcc" "CMakeFiles/rfsyn_world.dir/engine/world/world.c.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.
