@@ -1,1 +1,1 @@
-/sbin/cc -g -fsanitize=address,undefined -Wl,--dependency-file=CMakeFiles/materials_unit.dir/link.d CMakeFiles/materials_unit.dir/tests/materials_unit.c.o -o materials_unit  librfsyn_fdtd.a -lm /usr/lib/libgomp.so /usr/lib/libpthread.a
+/sbin/cc -g -fsanitize=address,undefined -Wl,--dependency-file=CMakeFiles/materials_unit.dir/link.d CMakeFiles/materials_unit.dir/tests/materials_unit.c.o -o materials_unit  librfsyn_world.a -lm librfsyn_cjson.a

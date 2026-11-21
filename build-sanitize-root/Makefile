@@ -494,6 +494,19 @@ ContinuousSubmit/fast:
 .PHONY : ContinuousSubmit/fast
 
 #=============================================================================
+# Target rules for targets named rfsyn_build_options
+
+# Build rule for target.
+rfsyn_build_options: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 rfsyn_build_options
+.PHONY : rfsyn_build_options
+
+# fast build rule for target.
+rfsyn_build_options/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/rfsyn_build_options.dir/build.make CMakeFiles/rfsyn_build_options.dir/build
+.PHONY : rfsyn_build_options/fast
+
+#=============================================================================
 # Target rules for targets named rfsyn_fdtd
 
 # Build rule for target.
@@ -648,6 +661,19 @@ materials_unit: cmake_check_build_system
 materials_unit/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/materials_unit.dir/build.make CMakeFiles/materials_unit.dir/build
 .PHONY : materials_unit/fast
+
+#=============================================================================
+# Target rules for targets named materials_tensor_unit
+
+# Build rule for target.
+materials_tensor_unit: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 materials_tensor_unit
+.PHONY : materials_tensor_unit
+
+# fast build rule for target.
+materials_tensor_unit/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/materials_tensor_unit.dir/build.make CMakeFiles/materials_tensor_unit.dir/build
+.PHONY : materials_tensor_unit/fast
 
 #=============================================================================
 # Target rules for targets named subpixel_te_unit
@@ -861,6 +887,11 @@ test_prep/material_catalog_unit: cmake_check_build_system
 test_prep/material_config_unit: cmake_check_build_system
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_prep/material_config_unit
 .PHONY : test_prep/material_config_unit
+
+# Build the dependencies of a test.
+test_prep/materials_tensor_unit: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_prep/materials_tensor_unit
+.PHONY : test_prep/materials_tensor_unit
 
 # Build the dependencies of a test.
 test_prep/materials_unit: cmake_check_build_system
@@ -1792,6 +1823,30 @@ tests/material_config_unit.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/material_config_unit.dir/build.make CMakeFiles/material_config_unit.dir/tests/material_config_unit.c.s
 .PHONY : tests/material_config_unit.c.s
 
+tests/materials_tensor_unit.o: tests/materials_tensor_unit.c.o
+.PHONY : tests/materials_tensor_unit.o
+
+# target to build an object file
+tests/materials_tensor_unit.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/materials_tensor_unit.dir/build.make CMakeFiles/materials_tensor_unit.dir/tests/materials_tensor_unit.c.o
+.PHONY : tests/materials_tensor_unit.c.o
+
+tests/materials_tensor_unit.i: tests/materials_tensor_unit.c.i
+.PHONY : tests/materials_tensor_unit.i
+
+# target to preprocess a source file
+tests/materials_tensor_unit.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/materials_tensor_unit.dir/build.make CMakeFiles/materials_tensor_unit.dir/tests/materials_tensor_unit.c.i
+.PHONY : tests/materials_tensor_unit.c.i
+
+tests/materials_tensor_unit.s: tests/materials_tensor_unit.c.s
+.PHONY : tests/materials_tensor_unit.s
+
+# target to generate assembly for a file
+tests/materials_tensor_unit.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/materials_tensor_unit.dir/build.make CMakeFiles/materials_tensor_unit.dir/tests/materials_tensor_unit.c.s
+.PHONY : tests/materials_tensor_unit.c.s
+
 tests/materials_unit.o: tests/materials_unit.c.o
 .PHONY : tests/materials_unit.o
 
@@ -2001,11 +2056,13 @@ help:
 	@echo "... cli_smoke"
 	@echo "... material_catalog_unit"
 	@echo "... material_config_unit"
+	@echo "... materials_tensor_unit"
 	@echo "... materials_unit"
 	@echo "... periodic_materials_unit"
 	@echo "... periodic_wrapping_unit"
 	@echo "... rf_signal_unit"
 	@echo "... rfsyn"
+	@echo "... rfsyn_build_options"
 	@echo "... rfsyn_cjson"
 	@echo "... rfsyn_core"
 	@echo "... rfsyn_fdtd"
@@ -2129,6 +2186,9 @@ help:
 	@echo "... tests/material_config_unit.o"
 	@echo "... tests/material_config_unit.i"
 	@echo "... tests/material_config_unit.s"
+	@echo "... tests/materials_tensor_unit.o"
+	@echo "... tests/materials_tensor_unit.i"
+	@echo "... tests/materials_tensor_unit.s"
 	@echo "... tests/materials_unit.o"
 	@echo "... tests/materials_unit.i"
 	@echo "... tests/materials_unit.s"

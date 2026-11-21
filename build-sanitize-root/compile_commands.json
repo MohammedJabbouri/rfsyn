@@ -151,31 +151,37 @@
 },
 {
   "directory": "/root/Projects/rfsyn/build-sanitize-root",
-  "command": "/sbin/cc -DRFSYN_HAS_OPENMP=1  -g -std=gnu11 -fsanitize=address,undefined -fno-omit-frame-pointer -g -fopenmp -o CMakeFiles/simulate_unit.dir/tests/simulate_unit.c.o -c /root/Projects/rfsyn/tests/simulate_unit.c",
+  "command": "/sbin/cc  -I/root/Projects/rfsyn -I/root/Projects/rfsyn/cli -g -std=gnu11 -fsanitize=address,undefined -fno-omit-frame-pointer -g -o CMakeFiles/simulate_unit.dir/tests/simulate_unit.c.o -c /root/Projects/rfsyn/tests/simulate_unit.c",
   "file": "/root/Projects/rfsyn/tests/simulate_unit.c",
   "output": "CMakeFiles/simulate_unit.dir/tests/simulate_unit.c.o"
 },
 {
   "directory": "/root/Projects/rfsyn/build-sanitize-root",
-  "command": "/sbin/cc -DRFSYN_HAS_OPENMP=1  -g -std=gnu11 -fsanitize=address,undefined -fno-omit-frame-pointer -g -fopenmp -o CMakeFiles/materials_unit.dir/tests/materials_unit.c.o -c /root/Projects/rfsyn/tests/materials_unit.c",
+  "command": "/sbin/cc  -I/root/Projects/rfsyn -I/root/Projects/rfsyn/cli -g -std=gnu11 -fsanitize=address,undefined -fno-omit-frame-pointer -g -o CMakeFiles/materials_unit.dir/tests/materials_unit.c.o -c /root/Projects/rfsyn/tests/materials_unit.c",
   "file": "/root/Projects/rfsyn/tests/materials_unit.c",
   "output": "CMakeFiles/materials_unit.dir/tests/materials_unit.c.o"
 },
 {
   "directory": "/root/Projects/rfsyn/build-sanitize-root",
-  "command": "/sbin/cc -DRFSYN_HAS_OPENMP=1  -g -std=gnu11 -fsanitize=address,undefined -fno-omit-frame-pointer -g -fopenmp -o CMakeFiles/subpixel_te_unit.dir/tests/subpixel_te_unit.c.o -c /root/Projects/rfsyn/tests/subpixel_te_unit.c",
+  "command": "/sbin/cc -DRFSYN_HAS_OPENMP=1 -I/root/Projects/rfsyn -I/root/Projects/rfsyn/cli -g -std=gnu11 -fsanitize=address,undefined -fno-omit-frame-pointer -g -fopenmp -o CMakeFiles/materials_tensor_unit.dir/tests/materials_tensor_unit.c.o -c /root/Projects/rfsyn/tests/materials_tensor_unit.c",
+  "file": "/root/Projects/rfsyn/tests/materials_tensor_unit.c",
+  "output": "CMakeFiles/materials_tensor_unit.dir/tests/materials_tensor_unit.c.o"
+},
+{
+  "directory": "/root/Projects/rfsyn/build-sanitize-root",
+  "command": "/sbin/cc  -I/root/Projects/rfsyn -I/root/Projects/rfsyn/cli -g -std=gnu11 -fsanitize=address,undefined -fno-omit-frame-pointer -g -o CMakeFiles/subpixel_te_unit.dir/tests/subpixel_te_unit.c.o -c /root/Projects/rfsyn/tests/subpixel_te_unit.c",
   "file": "/root/Projects/rfsyn/tests/subpixel_te_unit.c",
   "output": "CMakeFiles/subpixel_te_unit.dir/tests/subpixel_te_unit.c.o"
 },
 {
   "directory": "/root/Projects/rfsyn/build-sanitize-root",
-  "command": "/sbin/cc -DRFSYN_HAS_OPENMP=1  -g -std=gnu11 -fsanitize=address,undefined -fno-omit-frame-pointer -g -fopenmp -o CMakeFiles/periodic_materials_unit.dir/tests/periodic_materials_unit.c.o -c /root/Projects/rfsyn/tests/periodic_materials_unit.c",
+  "command": "/sbin/cc  -I/root/Projects/rfsyn -I/root/Projects/rfsyn/cli -g -std=gnu11 -fsanitize=address,undefined -fno-omit-frame-pointer -g -o CMakeFiles/periodic_materials_unit.dir/tests/periodic_materials_unit.c.o -c /root/Projects/rfsyn/tests/periodic_materials_unit.c",
   "file": "/root/Projects/rfsyn/tests/periodic_materials_unit.c",
   "output": "CMakeFiles/periodic_materials_unit.dir/tests/periodic_materials_unit.c.o"
 },
 {
   "directory": "/root/Projects/rfsyn/build-sanitize-root",
-  "command": "/sbin/cc -DRFSYN_HAS_OPENMP=1  -g -std=gnu11 -fsanitize=address,undefined -fno-omit-frame-pointer -g -fopenmp -o CMakeFiles/periodic_wrapping_unit.dir/tests/periodic_wrapping_unit.c.o -c /root/Projects/rfsyn/tests/periodic_wrapping_unit.c",
+  "command": "/sbin/cc  -I/root/Projects/rfsyn -I/root/Projects/rfsyn/cli -g -std=gnu11 -fsanitize=address,undefined -fno-omit-frame-pointer -g -o CMakeFiles/periodic_wrapping_unit.dir/tests/periodic_wrapping_unit.c.o -c /root/Projects/rfsyn/tests/periodic_wrapping_unit.c",
   "file": "/root/Projects/rfsyn/tests/periodic_wrapping_unit.c",
   "output": "CMakeFiles/periodic_wrapping_unit.dir/tests/periodic_wrapping_unit.c.o"
 },

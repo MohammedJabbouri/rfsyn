@@ -42,7 +42,8 @@ endif()
 
 include(CTest)
 
-add_library(rfsyn_build_options INTERFACE)
+add_library(rfsyn_build_options INTERFACE
+        tests/materials_tensor_unit.c)
 
 if(RFSYN_SANITIZE)
   if(CMAKE_C_COMPILER_ID MATCHES "GNU|Clang" AND NOT MSVC)
@@ -223,18 +224,17 @@ if(BUILD_TESTING)
   foreach(name IN ITEMS
           world_unit
           material_catalog_unit
-          material_config_unit)
-    rfsyn_add_unit_test(${name} rfsyn_world)
-  endforeach()
-
-  foreach(name IN ITEMS
+          material_config_unit
           simulate_unit
           materials_unit
+          materials_tensor_unit
           subpixel_te_unit
           periodic_materials_unit
           periodic_wrapping_unit)
-    rfsyn_add_unit_test(${name} rfsyn_fdtd)
+    rfsyn_add_unit_test(${name} rfsyn_world)
   endforeach()
+
+  target_link_libraries(materials_tensor_unit PRIVATE rfsyn_fdtd)
 
   rfsyn_add_unit_test(rf_signal_unit rfsyn_core)
 

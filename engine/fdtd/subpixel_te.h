@@ -24,6 +24,23 @@ int subpixel_te_rectangle_fraction(
     double *fraction_out
 );
 
+int subpixel_te_rectangle_edge_fraction(
+    const subpixel_te_rectangle_t *rectangle,
+    double sample_x,
+    double sample_y,
+    int edge_axis,
+    double length,
+    double *fraction_out
+);
+
+
+int subpixel_te_mix_epsilon_harmonic(
+    double fraction,
+    double eps_background,
+    double eps_inside,
+    double *epsilon_r_out
+);
+
 int subpixel_te_mix_epsilon(
     double fraction,
     double eps_background,
@@ -41,6 +58,16 @@ int subpixel_te_rectangle_epsilon(
     double eps_inside,
     double *fraction_out,
     double *epsilon_r_out
+);
+
+int subpixel_te_mix_epsilon_tensor(
+    double fraction,
+    double eps_background,
+    double eps_inside,
+    double normal_rad,
+    double *minv_xx,
+    double *minv_xy,
+    double *minv_yy
 );
 
 #endif

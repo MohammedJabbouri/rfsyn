@@ -26,4 +26,13 @@ int materials_get_coefficients(const materials_t *mat, const fdtd_grid_t *g, fie
 void fdtd_update_e_materials(fdtd_grid_t *g, const materials_t *mat);
 void fdtd_update_e_cpml_materials(fdtd_grid_t *g, cpml_t *pml, const materials_t *mat);
 
+typedef struct {
+    double m11, m12, m22;
+    double scale; //dt/(eps0*dx)
+} material_tensor_t;
+
+int materials_set_component_tensor(materials_t *mat, const fdtd_grid_t *g, field_component_t component, size_t i, size_t j, size_t k, double m11, double m12, double m22);
+int materials_clear_component_tensor(materials_t *mat, const fdtd_grid_t *g, field_component_t component, size_t i, size_t j, size_t k);
+int materials_get_tensor(const materials_t *mat, const fdtd_grid_t *g, field_component_t component, size_t i, size_t j, size_t k, material_tensor_t *out);
+
 #endif

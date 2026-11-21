@@ -569,6 +569,67 @@ static void test_errors(void)
     CLOSE(value, 0.123, 0);
 }
 
+static void test_edge_fraction_and_tensor(void)
+{
+    subpixel_te_rectangle_t r;
+    double f, eps, mxx, mxy, myy;
+
+    /* unit rectangle at origin, x-edge through the middle: fully inside */
+    r = (subpixel_te_rectangle_t){0, 0, 2, 2, 0};
+    CHECK(subpixel_te_rectangle_edge_fraction(&r, -0.5, 0, 1, 1.0, &f) == SUBPIXEL_TE_OK);
+    CLOSE(f, 1.0, 1e-14);
+    /* same edge along y at x=0 */
+    CHECK(subpixel_te_rectangle_edge_fraction(&r, 0, -0.5, 2, 1.0, &f) == SUBPIXEL_TE_OK);
+    CLOSE(f, 1.0, 1e-14);
+    /* edge at x=1.5: outside */
+    CHECK(subpixel_te_rectangle_edge_fraction(&r, 1.5, 0, 1, 1.0, &f) == SUBPIXEL_TE_OK);
+    CLOSE(f, 0.0, 0);
+    /* rectangle edge exactly crossing a 1-length x-edge: half inside */
+    r = (subpixel_te_rectangle_t){0.5, 0, 3, 1, 0};
+    CHECK(subpixel_te_rectangle_edge_fraction(&r, 0, 0, 1, 1.0, &f) == SUBPIXEL_TE_OK);
+    CLOSE(f, 0.5, 1e-14);
+    /* rotated 90 deg: role swap */
+    r = (subpixel_te_rectangle_t){0, 0.5, 1, 3, TEST_PI / 2};
+    CHECK(subpixel_te_rectangle_edge_fraction(&r, 0, 0, 2, 1.0, &f) == SUBPIXEL_TE_OK);
+    CLOSE(f, 0.5, 1e-14);
+
+    /* harmonic mixing endpoints and midpoint */
+    CHECK(subpixel_te_mix_epsilon_harmonic(0.0, 1, 4, &eps) == SUBPIXEL_TE_OK);
+    CLOSE(eps, 1.0, 0);
+    CHECK(subpixel_te_mix_epsilon_harmonic(1.0, 1, 4, &eps) == SUBPIXEL_TE_OK);
+    CLOSE(eps, 4.0, 0);
+    CHECK(subpixel_te_mix_epsilon_harmonic(0.5, 1, 4, &eps) == SUBPIXEL_TE_OK);
+    CLOSE(eps, 1.6, 1e-14);          /* 1/(0.5 + 0.125) */
+    CHECK(subpixel_te_mix_epsilon_harmonic(1.1, 1, 4, &eps) == SUBPIXEL_TE_INVALID_ARGUMENT);
+
+    for (int q = 0; q < 2; q++) {
+        double angle = q * 0.77;
+        CHECK(subpixel_te_mix_epsilon_tensor(0.0, 1, 4, angle, &mxx, &mxy, &myy) == SUBPIXEL_TE_OK);
+        CLOSE(mxx, 1.0, 1e-14); CLOSE(myy, 1.0, 1e-14); CLOSE(mxy, 0.0, 0);
+        CHECK(subpixel_te_mix_epsilon_tensor(1.0, 1, 4, angle, &mxx, &mxy, &myy) == SUBPIXEL_TE_OK);
+        CLOSE(mxx, 0.25, 1e-14); CLOSE(myy, 0.25, 1e-14); CLOSE(mxy, 0.0, 0);
+    }
+
+    CHECK(subpixel_te_mix_epsilon_tensor(0.5, 1, 4, 0.0, &mxx, &mxy, &myy) == SUBPIXEL_TE_OK);
+    CLOSE(mxx, 0.625, 1e-14);        /* 1/1.6 */
+    CLOSE(myy, 0.4, 1e-14);          /* 1/2.5 */
+    CLOSE(mxy, 0.0, 0);
+
+    CHECK(subpixel_te_mix_epsilon_tensor(0.5, 1, 4, TEST_PI / 2, &mxx, &mxy, &myy) == SUBPIXEL_TE_OK);
+    CLOSE(mxx, 0.4, 1e-13);
+    CLOSE(myy, 0.625, 1e-13);
+    CLOSE(mxy, 0.0, 1e-13);
+
+    {
+        double lam_n = 0.625, lam_t = 0.4;
+        for (int q = 1; q < 6; q++) {
+            double angle = q * 0.31;
+            CHECK(subpixel_te_mix_epsilon_tensor(0.5, 1, 4, angle, &mxx, &mxy, &myy) == SUBPIXEL_TE_OK);
+            CLOSE(mxx + myy, lam_n + lam_t, 1e-13);
+        }
+    }
+}
+
 int main(void)
 {
     test_basic_geometry();
@@ -587,3 +648,4 @@ int main(void)
 
     return failures ? 1 : 0;
 }
+

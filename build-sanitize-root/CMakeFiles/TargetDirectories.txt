@@ -26,6 +26,7 @@
 /root/Projects/rfsyn/build-sanitize-root/CMakeFiles/ContinuousCoverage.dir
 /root/Projects/rfsyn/build-sanitize-root/CMakeFiles/ContinuousMemCheck.dir
 /root/Projects/rfsyn/build-sanitize-root/CMakeFiles/ContinuousSubmit.dir
+/root/Projects/rfsyn/build-sanitize-root/CMakeFiles/rfsyn_build_options.dir
 /root/Projects/rfsyn/build-sanitize-root/CMakeFiles/rfsyn_fdtd.dir
 /root/Projects/rfsyn/build-sanitize-root/CMakeFiles/rfsyn_core.dir
 /root/Projects/rfsyn/build-sanitize-root/CMakeFiles/rfsyn_cjson.dir
@@ -38,6 +39,7 @@
 /root/Projects/rfsyn/build-sanitize-root/CMakeFiles/material_config_unit.dir
 /root/Projects/rfsyn/build-sanitize-root/CMakeFiles/simulate_unit.dir
 /root/Projects/rfsyn/build-sanitize-root/CMakeFiles/materials_unit.dir
+/root/Projects/rfsyn/build-sanitize-root/CMakeFiles/materials_tensor_unit.dir
 /root/Projects/rfsyn/build-sanitize-root/CMakeFiles/subpixel_te_unit.dir
 /root/Projects/rfsyn/build-sanitize-root/CMakeFiles/periodic_materials_unit.dir
 /root/Projects/rfsyn/build-sanitize-root/CMakeFiles/periodic_wrapping_unit.dir

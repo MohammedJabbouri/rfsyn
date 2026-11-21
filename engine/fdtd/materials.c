@@ -19,6 +19,11 @@ typedef struct {
     material_coeff_t coeff;
 } override_t;
 
+typedef struct {
+    size_t key;
+    material_tensor_t coeff;
+} tensor_override_t;
+
 struct materials {
     size_t nx;
     size_t ny;
@@ -32,6 +37,9 @@ struct materials {
     override_t *overrides;
     size_t override_count;
     size_t override_capacity;
+    tensor_override_t *tensor_overrides;
+    size_t tensor_override_count;
+    size_t tensor_override_capacity;
 };
 
 // Materials must match the grid geometry and time step.
@@ -123,7 +131,7 @@ static size_t lower_bound(const materials_t *mat, size_t key) {
 static material_coeff_t lookup(const materials_t *mat,
                                size_t idx, int component) {
     if (mat->override_count != 0) {
-        size_t key = idx * 3 + (size_t)component;
+        size_t key = idx * 3 + (size_t) component;
         size_t pos = lower_bound(mat, key);
 
         if (pos < mat->override_count &&
@@ -163,6 +171,56 @@ static int reserve_override(materials_t *mat) {
     mat->overrides = grown;
     mat->override_capacity = next;
     return 0;
+}
+
+// Tensor overrides share the key/ordering scheme of scalar overrides.
+static size_t tensor_lower_bound(const materials_t *mat, size_t key) {
+    size_t lo = 0, hi = mat->tensor_override_count;
+    while (lo < hi) {
+        size_t mid = lo + (hi - lo) / 2;
+        if (mat->tensor_overrides[mid].key < key) lo = mid + 1;
+        else hi = mid;
+    }
+    return lo;
+}
+
+static const material_tensor_t *tensor_lookup(const materials_t *mat,
+                                              size_t idx, int component) {
+    if (mat->tensor_override_count == 0) return NULL;
+    size_t key = idx * 3 + (size_t) component;
+    size_t pos = tensor_lower_bound(mat, key);
+    if (pos < mat->tensor_override_count &&
+        mat->tensor_overrides[pos].key == key) {
+        return &mat->tensor_overrides[pos].coeff;
+    }
+    return NULL;
+}
+
+static int tensor_reserve(materials_t *mat) {
+    if (mat->tensor_override_count < mat->tensor_override_capacity) return 0;
+    size_t limit = SIZE_MAX / sizeof(*mat->tensor_overrides);
+    size_t capacity = mat->tensor_override_capacity;
+    if (capacity >= limit) return -1;
+    size_t next = capacity == 0
+                      ? (limit < 16 ? limit : 16)
+                      : (capacity > limit / 2 ? limit : capacity * 2);
+    if (next <= capacity) return -1;
+    tensor_override_t *grown = realloc(mat->tensor_overrides,
+                                       next * sizeof(*mat->tensor_overrides));
+    if (!grown) return -1;
+    mat->tensor_overrides = grown;
+    mat->tensor_override_capacity = next;
+    return 0;
+}
+
+// Tensor edges need one-cell interior margins on nonperiodic axes so the
+// centered cross-curl never samples across a hard boundary.
+static int tensor_margin_ok(const fdtd_grid_t *g, int component, size_t i, size_t j, size_t k) {
+    (void)component;
+    (void)k;
+    if (!(g->periodic_axes & 1u) && (i < 1 || i + 2 > g->nx)) return 0;
+    if (!(g->periodic_axes & 2u) && (j < 1 || j + 2 > g->ny)) return 0;
+    return 1;
 }
 
 materials_t *materials_create(const fdtd_grid_t *g) {
@@ -224,9 +282,9 @@ materials_t *materials_create(const fdtd_grid_t *g) {
 
 void materials_destroy(materials_t *mat) {
     if (!mat) return;
-
     free(mat->ids);
     free(mat->overrides);
+    free(mat->tensor_overrides);
     free(mat);
 }
 
@@ -243,7 +301,7 @@ int materials_register(materials_t *mat,
     for (size_t n = 0; n < mat->table_count; n++) {
         if (mat->table[n].eps_r == eps_r &&
             mat->table[n].sigma == sigma) {
-            *id_out = (material_id_t)n;
+            *id_out = (material_id_t) n;
             return 0;
         }
     }
@@ -259,7 +317,7 @@ int materials_register(materials_t *mat,
     };
 
     mat->table_count++;
-    *id_out = (material_id_t)n;
+    *id_out = (material_id_t) n;
     return 0;
 }
 
@@ -286,13 +344,9 @@ static int box_valid(const materials_t *mat, const fdtd_grid_t *g,
     return 1;
 }
 
-int materials_assign_box(materials_t *mat, const fdtd_grid_t *g,
-                         size_t i0, size_t i1,
-                         size_t j0, size_t j1,
-                         size_t k0, size_t k1,
-                         material_id_t id) {
-    if (!box_valid(mat, g, i0, i1, j0, j1, k0, k1) ||
-        (size_t)id >= mat->table_count) {
+int materials_assign_box(materials_t *mat, const fdtd_grid_t *g, size_t i0, size_t i1, size_t j0, size_t j1, size_t k0,
+                         size_t k1, material_id_t id) {
+    if (!box_valid(mat, g, i0, i1, j0, j1, k0, k1) || (size_t) id >= mat->table_count) {
         return -1;
     }
 
@@ -320,9 +374,7 @@ int materials_assign_box(materials_t *mat, const fdtd_grid_t *g,
         size_t j = row % (g->ny + 1);
         size_t i = row / (g->ny + 1);
 
-        if (i >= i0 && i < i1 &&
-            j >= j0 && j < j1 &&
-            k >= k0 && k < k1) {
+        if (i >= i0 && i < i1 && j >= j0 && j < j1 && k >= k0 && k < k1) {
             continue;
         }
 
@@ -330,6 +382,25 @@ int materials_assign_box(materials_t *mat, const fdtd_grid_t *g,
     }
 
     mat->override_count = kept;
+
+    // Assignment clears tensor overrides only inside the clipped box.
+    size_t tensor_kept = 0;
+
+    for (size_t n = 0; n < mat->tensor_override_count; n++) {
+        size_t idx = mat->tensor_overrides[n].key / 3;
+        size_t k = idx % (g->nz + 1);
+        size_t row = idx / (g->nz + 1);
+        size_t j = row % (g->ny + 1);
+        size_t i = row / (g->ny + 1);
+
+        if (i >= i0 && i < i1 && j >= j0 && j < j1 && k >= k0 && k < k1) {
+            continue;
+        }
+
+        mat->tensor_overrides[tensor_kept++] = mat->tensor_overrides[n];
+    }
+
+    mat->tensor_override_count = tensor_kept;
     return 0;
 }
 
@@ -366,7 +437,7 @@ int materials_set_component(materials_t *mat, const fdtd_grid_t *g,
         return -1;
     }
 
-    size_t key = fdtd_index(g, i, j, k) * 3 + (size_t)c;
+    size_t key = fdtd_index(g, i, j, k) * 3 + (size_t) c;
     size_t pos = lower_bound(mat, key);
 
     if (pos < mat->override_count &&
@@ -406,7 +477,7 @@ int materials_clear_component(materials_t *mat, const fdtd_grid_t *g,
         return -1;
     }
 
-    size_t key = fdtd_index(g, i, j, k) * 3 + (size_t)c;
+    size_t key = fdtd_index(g, i, j, k) * 3 + (size_t) c;
     size_t pos = lower_bound(mat, key);
 
     if (pos < mat->override_count &&
@@ -424,6 +495,85 @@ int materials_clear_component(materials_t *mat, const fdtd_grid_t *g,
         mat->override_count--;
     }
 
+    return 0;
+}
+
+int materials_set_component_tensor(materials_t *mat, const fdtd_grid_t *g,
+                                   field_component_t component, size_t i, size_t j, size_t k,
+                                   double m11, double m12, double m22) {
+    int c = component_number(component);
+    if (c == 2) return -1; /* Ez tensor smoothing is out of scope (v1) */
+
+    if (!grid_matches(mat, g) ||
+        !component_valid(g, c, i, j, k) ||
+        !tensor_margin_ok(g, c, i, j, k) ||
+        !isfinite(m11) || !isfinite(m12) || !isfinite(m22) ||
+        !(m11 > 0.0) || !(m22 > 0.0) ||
+        !(m11 * m22 - m12 * m12 > 0.0)) {
+        /* SPD required */
+        return -1;
+    }
+
+    double scale = mat->dt / (EPS0 * mat->dx);
+    if (!isfinite(scale) || scale <= 0.0) return -1;
+
+    size_t key = fdtd_index(g, i, j, k) * 3 + (size_t) c;
+    size_t pos = tensor_lower_bound(mat, key);
+
+    material_tensor_t coeff = {
+        .m11 = m11, .m12 = m12, .m22 = m22,
+        .scale = scale
+    };
+
+    if (pos < mat->tensor_override_count &&
+        mat->tensor_overrides[pos].key == key) {
+        mat->tensor_overrides[pos].coeff = coeff;
+        return 0;
+    }
+    if (tensor_reserve(mat) != 0) return -1;
+
+    size_t trailing = mat->tensor_override_count - pos;
+    if (trailing != 0) {
+        memmove(mat->tensor_overrides + pos + 1,
+                mat->tensor_overrides + pos,
+                trailing * sizeof(*mat->tensor_overrides));
+    }
+    mat->tensor_overrides[pos] = (tensor_override_t)
+    {
+        .key = key, .coeff = coeff
+    };
+    mat->tensor_override_count++;
+    return 0;
+}
+
+int materials_clear_component_tensor(materials_t *mat, const fdtd_grid_t *g,
+                                     field_component_t component, size_t i, size_t j, size_t k) {
+    int c = component_number(component);
+    if (!grid_matches(mat, g) || !component_valid(g, c, i, j, k)) return -1;
+    size_t key = fdtd_index(g, i, j, k) * 3 + (size_t) c;
+    size_t pos = tensor_lower_bound(mat, key);
+    if (pos < mat->tensor_override_count &&
+        mat->tensor_overrides[pos].key == key) {
+        size_t trailing = mat->tensor_override_count - pos - 1;
+        if (trailing != 0) {
+            memmove(mat->tensor_overrides + pos,
+                    mat->tensor_overrides + pos + 1,
+                    trailing * sizeof(*mat->tensor_overrides));
+        }
+        mat->tensor_override_count--;
+    }
+    return 0;
+}
+
+int materials_get_tensor(const materials_t *mat, const fdtd_grid_t *g,
+                         field_component_t component, size_t i, size_t j, size_t k,
+                         material_tensor_t *out) {
+    int c = component_number(component);
+    if (!out || !grid_matches(mat, g) || !component_valid(g, c, i, j, k))
+        return -1;
+    const material_tensor_t *t = tensor_lookup(mat, fdtd_index(g, i, j, k), c);
+    if (!t) return 1; /* no tensor at this edge */
+    *out = *t;
     return 0;
 }
 
@@ -475,8 +625,16 @@ void fdtd_update_e_materials(fdtd_grid_t *g, const materials_t *mat) {
                 double termA = HZ(i, j, k) - HZ(i, jm, k);
                 double termB = HY(i, j, k) - HY(i, j, km);
 
-                EX(i, j, k) = coeff.Ca * EX(i, j, k) +
-                              coeff.Cb * (termA - termB);
+                const material_tensor_t *t = tensor_lookup(mat, idx, 0);
+                if (t) {
+                    size_t ip = (i + 1 == g->nx) ? 0 : i + 1; /* periodic wrap */
+                    size_t im2 = material_previous(i, g->nx);
+                    /* centered dx*dHz/dx at the Ex node */
+                    double dcross = 0.25 * (HZ(ip, j, k) + HZ(ip, jm, k) - HZ(im2, j, k) - HZ(im2, jm, k));
+                    EX(i, j, k) = EX(i, j, k) + t->scale * (t->m11 * termA - t->m12 * dcross);
+                } else {
+                    EX(i, j, k) = coeff.Ca * EX(i, j, k) + coeff.Cb * (termA - termB);
+                }
             }
         }
     }
@@ -493,8 +651,17 @@ void fdtd_update_e_materials(fdtd_grid_t *g, const materials_t *mat) {
                 double termA = HX(i, j, k) - HX(i, j, km);
                 double termB = HZ(i, j, k) - HZ(im, j, k);
 
-                EY(i, j, k) = coeff.Ca * EY(i, j, k) +
-                              coeff.Cb * (termA - termB);
+                const material_tensor_t *t = tensor_lookup(mat, idx, 1);
+                if (t) {
+                    size_t jp = (j + 1 == g->ny) ? 0 : j + 1;
+                    size_t jm2 = material_previous(j, g->ny);
+                    size_t jmm = material_previous(jm2, g->ny);
+                    /* centered dx*dHz/dy at the Ey node */
+                    double dcross = 0.25 * (HZ(i, jp, k) + HZ(im, jp, k) - HZ(i, jmm, k) - HZ(im, jmm, k));
+                    EY(i, j, k) = EY(i, j, k) + t->scale * (t->m11 * (-termB) + t->m12 * dcross);
+                } else {
+                    EY(i, j, k) = coeff.Ca * EY(i, j, k) + coeff.Cb * (termA - termB);
+                }
             }
         }
     }
@@ -512,15 +679,14 @@ void fdtd_update_e_materials(fdtd_grid_t *g, const materials_t *mat) {
                 double termA = HY(i, j, k) - HY(im, j, k);
                 double termB = HX(i, j, k) - HX(i, jm, k);
 
-                EZ(i, j, k) = coeff.Ca * EZ(i, j, k) +
-                              coeff.Cb * (termA - termB);
+                EZ(i, j, k) = coeff.Ca * EZ(i, j, k) + coeff.Cb * (termA - termB);
             }
         }
     }
 }
 
 void fdtd_update_e_cpml_materials(fdtd_grid_t *g, cpml_t *pml,
-                                 const materials_t *mat) {
+                                  const materials_t *mat) {
     if (!grid_matches(mat, g) || !pml || pml->dx != g->dx) return;
 
     size_t i0 = (g->periodic_axes & 1u) ? 0u : 1u;

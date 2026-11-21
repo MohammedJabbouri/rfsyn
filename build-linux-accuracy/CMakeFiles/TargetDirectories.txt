@@ -26,6 +26,7 @@
 /root/Projects/rfsyn/build-linux-accuracy/CMakeFiles/ContinuousCoverage.dir
 /root/Projects/rfsyn/build-linux-accuracy/CMakeFiles/ContinuousMemCheck.dir
 /root/Projects/rfsyn/build-linux-accuracy/CMakeFiles/ContinuousSubmit.dir
+/root/Projects/rfsyn/build-linux-accuracy/CMakeFiles/rfsyn_build_options.dir
 /root/Projects/rfsyn/build-linux-accuracy/CMakeFiles/rfsyn_fdtd.dir
 /root/Projects/rfsyn/build-linux-accuracy/CMakeFiles/rfsyn_core.dir
 /root/Projects/rfsyn/build-linux-accuracy/CMakeFiles/rfsyn_cjson.dir
@@ -38,6 +39,7 @@
 /root/Projects/rfsyn/build-linux-accuracy/CMakeFiles/material_config_unit.dir
 /root/Projects/rfsyn/build-linux-accuracy/CMakeFiles/simulate_unit.dir
 /root/Projects/rfsyn/build-linux-accuracy/CMakeFiles/materials_unit.dir
+/root/Projects/rfsyn/build-linux-accuracy/CMakeFiles/materials_tensor_unit.dir
 /root/Projects/rfsyn/build-linux-accuracy/CMakeFiles/subpixel_te_unit.dir
 /root/Projects/rfsyn/build-linux-accuracy/CMakeFiles/periodic_materials_unit.dir
 /root/Projects/rfsyn/build-linux-accuracy/CMakeFiles/periodic_wrapping_unit.dir

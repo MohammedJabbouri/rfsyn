@@ -24,6 +24,113 @@ static int valid_rectangle(
         isfinite(rectangle->angle_rad);
 }
 
+int subpixel_te_rectangle_edge_fraction(
+    const subpixel_te_rectangle_t *rectangle,
+    double sample_x,
+    double sample_y,
+    int edge_axis,
+    double length,
+    double *fraction_out
+) {
+    double rel_x, rel_y, u, v, t_lo, t_hi;
+    double du, dv, a_lo, a_hi, b_lo, b_hi, lo, hi;
+
+    if (!rectangle || !fraction_out) return SUBPIXEL_TE_INVALID_ARGUMENT;
+    if (!isfinite(sample_x) || !isfinite(sample_y)) return SUBPIXEL_TE_INVALID_ARGUMENT;
+    if (!(edge_axis == 1 || edge_axis == 2)) return SUBPIXEL_TE_INVALID_ARGUMENT;
+    if (!isfinite(length) || !(length > 0.0)) return SUBPIXEL_TE_INVALID_ARGUMENT;
+    if (!isfinite(rectangle->center_x) || !isfinite(rectangle->center_y) ||
+        !isfinite(rectangle->size_u) || !(rectangle->size_u >= 0.0) ||
+        !isfinite(rectangle->size_v) || !(rectangle->size_v >= 0.0) ||
+        !isfinite(rectangle->angle_rad)) return SUBPIXEL_TE_INVALID_ARGUMENT;
+
+    rel_x = sample_x - rectangle->center_x;
+    rel_y = sample_y - rectangle->center_y;
+    if (!isfinite(rel_x) || !isfinite(rel_y)) return SUBPIXEL_TE_NUMERIC_ERROR;
+
+    {
+        double ca = cos(rectangle->angle_rad), sa = sin(rectangle->angle_rad);
+        double dxu = (edge_axis == 1) ? ca : -sa;   /* du/dt or dv/dt sign-checked below */
+        u  = rel_x * ca + rel_y * sa;
+        v  = rel_y * ca - rel_x * sa;
+        du = (edge_axis == 1) ? ca  : -sa;          /* u(t) = u + du*t, t in [0,length] */
+        dv = (edge_axis == 1) ? sa  :  ca;          /* v(t) = v + dv*t                  */
+        (void)dxu;
+    }
+
+    /* t interval where |u + du t| <= size_u/2 */
+    if (!rectangle->size_u) return SUBPIXEL_TE_NUMERIC_ERROR;
+    if (fabs(du) < 1e-300) {
+        if (fabs(u) > 0.5 * rectangle->size_u * (1.0 + 1e-12)) { *fraction_out = 0.0; return SUBPIXEL_TE_OK; }
+        a_lo = 0.0; a_hi = length;
+    } else {
+        t_lo = (-0.5 * rectangle->size_u - u) / du;
+        t_hi = ( 0.5 * rectangle->size_u - u) / du;
+        a_lo = fmin(t_lo, t_hi); a_hi = fmax(t_lo, t_hi);
+    }
+
+    /* same clip for v */
+    if (fabs(dv) < 1e-300) {
+        if (fabs(v) > 0.5 * rectangle->size_v * (1.0 + 1e-12)) { *fraction_out = 0.0; return SUBPIXEL_TE_OK; }
+        b_lo = 0.0; b_hi = length;
+    } else {
+        t_lo = (-0.5 * rectangle->size_v - v) / dv;
+        t_hi = ( 0.5 * rectangle->size_v - v) / dv;
+        b_lo = fmin(t_lo, t_hi); b_hi = fmax(t_lo, t_hi);
+    }
+
+    lo = fmax(fmax(a_lo, b_lo), 0.0);
+    hi = fmin(fmin(a_hi, b_hi), length);
+    *fraction_out = hi > lo ? (hi - lo) / length : 0.0;
+    return SUBPIXEL_TE_OK;
+}
+
+int subpixel_te_mix_epsilon_harmonic(
+    double fraction,
+    double eps_background,
+    double eps_inside,
+    double *epsilon_r_out
+) {
+    double inv;
+    if (!epsilon_r_out) return SUBPIXEL_TE_INVALID_ARGUMENT;
+    if (!isfinite(fraction) || fraction < 0.0 || fraction > 1.0) return SUBPIXEL_TE_INVALID_ARGUMENT;
+    if (!isfinite(eps_background) || eps_background < 1.0) return SUBPIXEL_TE_INVALID_ARGUMENT;
+    if (!isfinite(eps_inside) || eps_inside < 1.0) return SUBPIXEL_TE_INVALID_ARGUMENT;
+
+    inv = (1.0 - fraction) / eps_background + fraction / eps_inside;
+    if (!isfinite(inv) || !(inv > 0.0)) return SUBPIXEL_TE_NUMERIC_ERROR;
+    *epsilon_r_out = 1.0 / inv;
+    return SUBPIXEL_TE_OK;
+}
+
+int subpixel_te_mix_epsilon_tensor(
+    double fraction,
+    double eps_background,
+    double eps_inside,
+    double normal_rad,
+    double *minv_xx, double *minv_xy, double *minv_yy
+) {
+    double lam_n, eps_t, lam_t, ca, sa;
+    if (!minv_xx || !minv_xy || !minv_yy) return SUBPIXEL_TE_INVALID_ARGUMENT;
+    if (!isfinite(fraction) || fraction < 0.0 || fraction > 1.0) return SUBPIXEL_TE_INVALID_ARGUMENT;
+    if (!isfinite(eps_background) || eps_background < 1.0) return SUBPIXEL_TE_INVALID_ARGUMENT;
+    if (!isfinite(eps_inside) || eps_inside < 1.0) return SUBPIXEL_TE_INVALID_ARGUMENT;
+    if (!isfinite(normal_rad)) return SUBPIXEL_TE_INVALID_ARGUMENT;
+
+    lam_n = (1.0 - fraction) / eps_background + fraction / eps_inside;
+    eps_t = (1.0 - fraction) * eps_background + fraction * eps_inside;
+    if (!isfinite(lam_n) || !(lam_n > 0.0) || !isfinite(eps_t) || !(eps_t > 0.0))
+        return SUBPIXEL_TE_NUMERIC_ERROR;
+    lam_t = 1.0 / eps_t;
+
+    ca = cos(normal_rad); sa = sin(normal_rad);
+
+    *minv_xx = lam_n * ca * ca + lam_t * sa * sa;
+    *minv_yy = lam_n * sa * sa + lam_t * ca * ca;
+    *minv_xy = (lam_n - lam_t) * ca * sa;
+    return SUBPIXEL_TE_OK;
+}
+
 static int append_point(
     spte_point *output,
     size_t *count,
