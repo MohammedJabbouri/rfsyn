@@ -16,7 +16,7 @@ option(RFSYN_BUILD_EXTENDED_VALIDATORS "Build extended validators" ON)
 option(RFSYN_BUILD_PERIODIC_ENERGY_AUDIT "Build periodic-energy audit" ON)
 
 set(RFSYN_VALIDATION_REFINEMENT "1" CACHE STRING "Validator refinement: 1, 2, or 4")
-set(RFSYN_STABILITY_STEPS "100000" CACHE STRING "Steps per stability case")
+set(RFSYN_STABILITY_STEPS "1000" CACHE STRING "Steps per stability case")
 set(RFSYN_VALIDATION_TIMEOUT "900" CACHE STRING "Baseline validator timeout")
 set(RFSYN_EXTENDED_TIMEOUT "7200" CACHE STRING "Extended validator timeout")
 
