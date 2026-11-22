@@ -1,32 +1,31 @@
-Start testing: Nov 21 16:17 PST
+Start testing: Nov 21 16:44 PST
 ----------------------------------------------------------
-6/21 Testing: materials_tensor_unit
-6/21 Test: materials_tensor_unit
-Command: "/root/Projects/rfsyn/build-sanitize-root/materials_tensor_unit"
+4/21 Testing: simulate_unit
+4/21 Test: simulate_unit
+Command: "/root/Projects/rfsyn/build-sanitize-root/simulate_unit"
 Directory: /root/Projects/rfsyn/build-sanitize-root
-"materials_tensor_unit" start time: Nov 21 16:17 PST
+"simulate_unit" start time: Nov 21 16:44 PST
 Output:
 ----------------------------------------------------------
-analytic update: cpml=0 quadratic=0
-analytic update: cpml=0 quadratic=1
-analytic update: cpml=1 quadratic=0
-analytic update: cpml=1 quadratic=1
-diagonal invariance: cpml=0 steps=80
-diagonal invariance: cpml=1 steps=80
-materials_tensor_unit: 1292 checks, 0 failures
+simulate_unit: PASS
+samples: 200
+peak: 7.896462929e-03
+early peak: 1.953877629e-07
+sample rate: 5.245007767e+11 Hz
+determinism: bit-for-bit identical
 <end of output>
-Test time =   0.19 sec
+Test time =  28.02 sec
 ----------------------------------------------------------
 Test Passed.
-"materials_tensor_unit" end time: Nov 21 16:17 PST
-"materials_tensor_unit" time elapsed: 00:00:00
+"simulate_unit" end time: Nov 21 16:44 PST
+"simulate_unit" time elapsed: 00:00:28
 ----------------------------------------------------------
 
 9/21 Testing: periodic_wrapping_unit
 9/21 Test: periodic_wrapping_unit
 Command: "/root/Projects/rfsyn/build-sanitize-root/periodic_wrapping_unit"
 Directory: /root/Projects/rfsyn/build-sanitize-root
-"periodic_wrapping_unit" start time: Nov 21 16:17 PST
+"periodic_wrapping_unit" start time: Nov 21 16:44 PST
 Output:
 ----------------------------------------------------------
 periodic_wrapping_unit: PASS (32 cases, 5 x 6 x 7)
@@ -34,39 +33,23 @@ periodic_wrapping_unit: PASS (32 cases, 5 x 6 x 7)
 Test time =   0.02 sec
 ----------------------------------------------------------
 Test Passed.
-"periodic_wrapping_unit" end time: Nov 21 16:17 PST
+"periodic_wrapping_unit" end time: Nov 21 16:44 PST
 "periodic_wrapping_unit" time elapsed: 00:00:00
-----------------------------------------------------------
-
-1/21 Testing: world_unit
-1/21 Test: world_unit
-Command: "/root/Projects/rfsyn/build-sanitize-root/world_unit"
-Directory: /root/Projects/rfsyn/build-sanitize-root
-"world_unit" start time: Nov 21 16:17 PST
-Output:
-----------------------------------------------------------
-world_unit: PASS
-<end of output>
-Test time =   0.01 sec
-----------------------------------------------------------
-Test Passed.
-"world_unit" end time: Nov 21 16:17 PST
-"world_unit" time elapsed: 00:00:00
 ----------------------------------------------------------
 
 7/21 Testing: subpixel_te_unit
 7/21 Test: subpixel_te_unit
 Command: "/root/Projects/rfsyn/build-sanitize-root/subpixel_te_unit"
 Directory: /root/Projects/rfsyn/build-sanitize-root
-"subpixel_te_unit" start time: Nov 21 16:17 PST
+"subpixel_te_unit" start time: Nov 21 16:44 PST
 Output:
 ----------------------------------------------------------
 subpixel_te_unit: 4642 checks, 0 failures
 <end of output>
-Test time =   0.02 sec
+Test time =   0.01 sec
 ----------------------------------------------------------
 Test Passed.
-"subpixel_te_unit" end time: Nov 21 16:17 PST
+"subpixel_te_unit" end time: Nov 21 16:44 PST
 "subpixel_te_unit" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -74,23 +57,39 @@ Test Passed.
 5/21 Test: materials_unit
 Command: "/root/Projects/rfsyn/build-sanitize-root/materials_unit"
 Directory: /root/Projects/rfsyn/build-sanitize-root
-"materials_unit" start time: Nov 21 16:17 PST
+"materials_unit" start time: Nov 21 16:44 PST
 Output:
 ----------------------------------------------------------
 materials_unit: PASS
 <end of output>
-Test time =   0.02 sec
+Test time =   0.01 sec
 ----------------------------------------------------------
 Test Passed.
-"materials_unit" end time: Nov 21 16:17 PST
+"materials_unit" end time: Nov 21 16:44 PST
 "materials_unit" time elapsed: 00:00:00
+----------------------------------------------------------
+
+1/21 Testing: world_unit
+1/21 Test: world_unit
+Command: "/root/Projects/rfsyn/build-sanitize-root/world_unit"
+Directory: /root/Projects/rfsyn/build-sanitize-root
+"world_unit" start time: Nov 21 16:44 PST
+Output:
+----------------------------------------------------------
+world_unit: PASS
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"world_unit" end time: Nov 21 16:44 PST
+"world_unit" time elapsed: 00:00:00
 ----------------------------------------------------------
 
 3/21 Testing: material_config_unit
 3/21 Test: material_config_unit
 Command: "/root/Projects/rfsyn/build-sanitize-root/material_config_unit"
 Directory: /root/Projects/rfsyn/build-sanitize-root
-"material_config_unit" start time: Nov 21 16:17 PST
+"material_config_unit" start time: Nov 21 16:44 PST
 Output:
 ----------------------------------------------------------
 material_config: concrete_normal failed: material exists; explicit override required
@@ -124,10 +123,10 @@ material_config: schema_version must be 1
 material_config: schema_version must be 1
 material_config_unit: PASS (32 cases)
 <end of output>
-Test time =   0.01 sec
+Test time =   0.02 sec
 ----------------------------------------------------------
 Test Passed.
-"material_config_unit" end time: Nov 21 16:17 PST
+"material_config_unit" end time: Nov 21 16:44 PST
 "material_config_unit" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -135,7 +134,7 @@ Test Passed.
 8/21 Test: periodic_materials_unit
 Command: "/root/Projects/rfsyn/build-sanitize-root/periodic_materials_unit"
 Directory: /root/Projects/rfsyn/build-sanitize-root
-"periodic_materials_unit" start time: Nov 21 16:17 PST
+"periodic_materials_unit" start time: Nov 21 16:44 PST
 Output:
 ----------------------------------------------------------
 PASS: periodic box assignment, overrides, interface and seam coefficients; nonperiodic control
@@ -143,7 +142,7 @@ PASS: periodic box assignment, overrides, interface and seam coefficients; nonpe
 Test time =   0.01 sec
 ----------------------------------------------------------
 Test Passed.
-"periodic_materials_unit" end time: Nov 21 16:17 PST
+"periodic_materials_unit" end time: Nov 21 16:44 PST
 "periodic_materials_unit" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -151,7 +150,7 @@ Test Passed.
 2/21 Test: material_catalog_unit
 Command: "/root/Projects/rfsyn/build-sanitize-root/material_catalog_unit"
 Directory: /root/Projects/rfsyn/build-sanitize-root
-"material_catalog_unit" start time: Nov 21 16:17 PST
+"material_catalog_unit" start time: Nov 21 16:44 PST
 Output:
 ----------------------------------------------------------
 material_catalog_unit: PASS
@@ -159,7 +158,7 @@ material_catalog_unit: PASS
 Test time =   0.01 sec
 ----------------------------------------------------------
 Test Passed.
-"material_catalog_unit" end time: Nov 21 16:17 PST
+"material_catalog_unit" end time: Nov 21 16:44 PST
 "material_catalog_unit" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -167,7 +166,7 @@ Test Passed.
 10/21 Test: rf_signal_unit
 Command: "/root/Projects/rfsyn/build-sanitize-root/rf_signal_unit"
 Directory: /root/Projects/rfsyn/build-sanitize-root
-"rf_signal_unit" start time: Nov 21 16:17 PST
+"rf_signal_unit" start time: Nov 21 16:44 PST
 Output:
 ----------------------------------------------------------
 PASS
@@ -175,36 +174,88 @@ PASS
 Test time =   0.01 sec
 ----------------------------------------------------------
 Test Passed.
-"rf_signal_unit" end time: Nov 21 16:17 PST
+"rf_signal_unit" end time: Nov 21 16:44 PST
 "rf_signal_unit" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-4/21 Testing: simulate_unit
-4/21 Test: simulate_unit
-Command: "/root/Projects/rfsyn/build-sanitize-root/simulate_unit"
+6/21 Testing: materials_tensor_unit
+6/21 Test: materials_tensor_unit
+Command: "/root/Projects/rfsyn/build-sanitize-root/materials_tensor_unit"
 Directory: /root/Projects/rfsyn/build-sanitize-root
-"simulate_unit" start time: Nov 21 16:17 PST
+"materials_tensor_unit" start time: Nov 21 16:44 PST
 Output:
 ----------------------------------------------------------
-simulate_unit: PASS
-samples: 200
-peak: 7.896462929e-03
-early peak: 1.953877629e-07
-sample rate: 5.245007767e+11 Hz
-determinism: bit-for-bit identical
+analytic update: cpml=0 quadratic=0
+analytic update: cpml=0 quadratic=1
+analytic update: cpml=1 quadratic=0
+analytic update: cpml=1 quadratic=1
+diagonal invariance: cpml=0 steps=80
+diagonal invariance: cpml=1 steps=80
+periodic tensor seams: axes=5 cpml=0 mxy=+0.120
+periodic tensor seams: axes=5 cpml=1 mxy=+0.120
+periodic tensor seams: axes=6 cpml=0 mxy=+0.120
+periodic tensor seams: axes=6 cpml=1 mxy=+0.120
+periodic tensor seams: axes=7 cpml=0 mxy=+0.120
+periodic tensor seams: axes=5 cpml=0 mxy=-0.120
+periodic tensor seams: axes=5 cpml=1 mxy=-0.120
+periodic tensor seams: axes=6 cpml=0 mxy=-0.120
+periodic tensor seams: axes=6 cpml=1 mxy=-0.120
+periodic tensor seams: axes=7 cpml=0 mxy=-0.120
+uniform tensor evolution: mode=(2,3) mxy=+0.120 steps=2048
+  modal peak/initial=1.15078 max normalized field error=6.58495e-14
+uniform tensor evolution: mode=(2,3) mxy=-0.120 steps=2048
+  modal peak/initial=1.25671 max normalized field error=4.71071e-14
+uniform tensor evolution: mode=(9,10) mxy=+0.120 steps=2048
+  modal peak/initial=1.36654 max normalized field error=8.37001e-14
+uniform tensor evolution: mode=(9,10) mxy=-0.120 steps=2048
+  modal peak/initial=1.3967 max normalized field error=1.44834e-13
+variable tensor operator: pattern=0 sign=+1
+  max|A|=2.1 relative asymmetry=0 constant-mode residual=1.32169408e-16
+variable tensor evolution: pattern=0 sign=+1 steps=8192
+  peak squared-field norm/initial=1.41001629
+variable tensor operator: pattern=1 sign=+0
+  max|A|=2.25 relative asymmetry=0 constant-mode residual=1.48029737e-16
+variable tensor evolution: pattern=1 sign=+0 steps=8192
+  peak squared-field norm/initial=1.34004483
+variable tensor operator: pattern=1 sign=-1
+  max|A|=2.25 relative asymmetry=0 constant-mode residual=1.48029737e-16
+variable tensor evolution: pattern=1 sign=-1 steps=8192
+  peak squared-field norm/initial=1.34359832
+variable tensor operator: pattern=1 sign=+1
+  max|A|=2.25 relative asymmetry=0 constant-mode residual=1.48029737e-16
+variable tensor evolution: pattern=1 sign=+1 steps=8192
+  peak squared-field norm/initial=1.33945026
+variable tensor operator: pattern=2 sign=-1
+  max|A|=2.1 relative asymmetry=5.28677631e-17 constant-mode residual=2.11471052e-16
+variable tensor evolution: pattern=2 sign=-1 steps=8192
+  peak squared-field norm/initial=1.33577143
+variable tensor operator: pattern=2 sign=+1
+  max|A|=2.1 relative asymmetry=5.28677631e-17 constant-mode residual=1.58603289e-16
+variable tensor evolution: pattern=2 sign=+1 steps=8192
+  peak squared-field norm/initial=1.32867129
+variable tensor operator: pattern=3 sign=-1
+  max|A|=1.86552176 relative asymmetry=2.97563676e-17 constant-mode residual=3.27320043e-16
+variable tensor evolution: pattern=3 sign=-1 steps=8192
+  peak squared-field norm/initial=1.34450535
+variable tensor operator: pattern=3 sign=+1
+  max|A|=1.83447824 relative asymmetry=3.02599126e-17 constant-mode residual=1.22930895e-16
+variable tensor evolution: pattern=3 sign=+1 steps=8192
+  peak squared-field norm/initial=1.33110589
+isolated tensor edge: reciprocal neighbors absent
+materials_tensor_unit: 974646 checks, 0 failures
 <end of output>
-Test time =  28.03 sec
+Test time =  53.01 sec
 ----------------------------------------------------------
 Test Passed.
-"simulate_unit" end time: Nov 21 16:18 PST
-"simulate_unit" time elapsed: 00:00:28
+"materials_tensor_unit" end time: Nov 21 16:45 PST
+"materials_tensor_unit" time elapsed: 00:00:53
 ----------------------------------------------------------
 
-End testing: Nov 21 16:18 PST
+End testing: Nov 21 16:45 PST
 
 fdtd =   0.03 sec*proc
 
 periodic =   0.03 sec*proc
 
-unit =  28.34 sec*proc
+unit =  81.14 sec*proc
 

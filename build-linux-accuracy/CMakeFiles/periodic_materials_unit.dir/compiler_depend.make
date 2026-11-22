@@ -108,14 +108,17 @@ periodic_materials_unit: /usr/lib/Scrt1.o \
   /usr/lib/ld-linux-x86-64.so.2 \
   /usr/lib/libc.so.6 \
   /usr/lib/libc_nonshared.a \
+  /usr/lib/libgomp.so \
   /usr/lib/libm.so.6 \
   /usr/lib/libmvec.so.1 \
+  /usr/lib/libpthread.a \
   CMakeFiles/periodic_materials_unit.dir/tests/periodic_materials_unit.c.o \
-  librfsyn_cjson.a \
-  librfsyn_world.a
+  librfsyn_fdtd.a
 
 
 /usr/lib/libmvec.so.1:
+
+/usr/lib/libgomp.so:
 
 /usr/lib/libc.so.6:
 
@@ -201,6 +204,8 @@ CMakeFiles/periodic_materials_unit.dir/tests/periodic_materials_unit.c.o:
 
 /usr/include/bits/floatn.h:
 
+librfsyn_fdtd.a:
+
 /usr/include/bits/floatn-common.h:
 
 /root/Projects/rfsyn/engine/core/constants.h:
@@ -285,8 +290,6 @@ CMakeFiles/periodic_materials_unit.dir/tests/periodic_materials_unit.c.o:
 
 /usr/include/bits/stdio.h:
 
-librfsyn_cjson.a:
-
 /usr/include/bits/types/struct_timeval.h:
 
 /usr/include/bits/stdio_lim.h:
@@ -321,8 +324,6 @@ librfsyn_cjson.a:
 
 /usr/include/bits/types.h:
 
-librfsyn_world.a:
-
 /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/stddef.h:
 
 /usr/include/bits/types/__mbstate_t.h:
@@ -332,6 +333,8 @@ librfsyn_world.a:
 /usr/include/bits/stdint-uintn.h:
 
 /usr/include/bits/types/cookie_io_functions_t.h:
+
+/usr/lib/libpthread.a:
 
 /usr/include/bits/types/locale_t.h:
 

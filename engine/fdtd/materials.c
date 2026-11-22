@@ -820,54 +820,85 @@ static inline size_t material_next(size_t q, size_t extent) {
 /*
  * Shared tensor update for ordinary and CPML callers.
  *
- * Only the aligned coefficient m11 and cross coefficient m12 act
- * on this component. m22 is retained for tensor storage/validation.
+ * Diagonal entries remain m11. Cross terms use reciprocal edge pairs
+ * and normalized correlations derived from m11, m12, and m22.
  *
  * CPML callers use this only where the whole tensor stencil lies
  * in the unstretched interior. No anisotropic CPML is implemented.
  */
+/*
+ * Reciprocal tensor coupling.
+ *
+ * Cross-couplings exist only between two tensor-enabled edges.
+ * Each Ex/Ey pair uses the same coefficient in both directions.
+ * The diagonal entries remain component-local m11 values.
+ */
+static double tensor_pair_weight(
+    const material_tensor_t *ex,
+    const material_tensor_t *ey)
+{
+    double rx = (ex->m12 / sqrt(ex->m11)) / sqrt(ex->m22);
+    double ry = (ey->m12 / sqrt(ey->m11)) / sqrt(ey->m22);
+    double rho = 0.5 * rx + 0.5 * ry;
+
+    return (0.25 * rho * sqrt(ex->m11)) * sqrt(ey->m11);
+}
+
 static inline void update_tensor_edge(
     fdtd_grid_t *g,
+    const materials_t *mat,
     const material_tensor_t *t,
     int component,
     size_t i,
     size_t j,
-    size_t k) {
+    size_t k)
+{
+    double value;
+
     if (component == 0) {
-        size_t im = material_previous(i, g->nx);
         size_t ip = material_next(i, g->nx);
         size_t jm = material_previous(j, g->ny);
+        size_t ni[4] = { i, ip, i, ip };
+        size_t nj[4] = { j, j, jm, jm };
 
-        double aligned =
-                HZ(i, j, k) - HZ(i, jm, k);
+        value = t->m11 * (HZ(i, j, k) - HZ(i, jm, k));
 
-        double cross = -0.25 * (
-                           HZ(ip, j, k) - HZ(im, j, k) +
-                           HZ(ip, jm, k) - HZ(im, jm, k)
-                       );
+        for (size_t q = 0; q < 4; q++) {
+            size_t u = ni[q];
+            size_t v = nj[q];
+            const material_tensor_t *other = tensor_lookup(
+                mat, fdtd_index(g, u, v, k), 1);
 
-        EX(i, j, k) += t->scale * (
-            t->m11 * aligned +
-            t->m12 * cross
-        );
+            if (!other) continue;
+
+            size_t um = material_previous(u, g->nx);
+            double curl_y = -(HZ(u, v, k) - HZ(um, v, k));
+            value += tensor_pair_weight(t, other) * curl_y;
+        }
+
+        EX(i, j, k) += t->scale * value;
     } else {
         size_t im = material_previous(i, g->nx);
-        size_t jm = material_previous(j, g->ny);
         size_t jp = material_next(j, g->ny);
+        size_t ni[4] = { i, im, i, im };
+        size_t nj[4] = { j, j, jp, jp };
 
-        double aligned = -(
-            HZ(i, j, k) - HZ(im, j, k)
-        );
+        value = -t->m11 * (HZ(i, j, k) - HZ(im, j, k));
 
-        double cross = 0.25 * (
-                           HZ(i, jp, k) - HZ(i, jm, k) +
-                           HZ(im, jp, k) - HZ(im, jm, k)
-                       );
+        for (size_t q = 0; q < 4; q++) {
+            size_t u = ni[q];
+            size_t v = nj[q];
+            const material_tensor_t *other = tensor_lookup(
+                mat, fdtd_index(g, u, v, k), 0);
 
-        EY(i, j, k) += t->scale * (
-            t->m11 * aligned +
-            t->m12 * cross
-        );
+            if (!other) continue;
+
+            size_t vm = material_previous(v, g->ny);
+            double curl_x = HZ(u, v, k) - HZ(u, vm, k);
+            value += tensor_pair_weight(other, t) * curl_x;
+        }
+
+        EY(i, j, k) += t->scale * value;
     }
 }
 
@@ -897,7 +928,7 @@ static void update_e_impl(
                         tensor_lookup(mat, idx, 0);
 
                 if (t) {
-                    update_tensor_edge(g, t, 0, i, j, k);
+                    update_tensor_edge(g, mat, t, 0, i, j, k);
                     continue;
                 }
 
@@ -947,7 +978,7 @@ static void update_e_impl(
                         tensor_lookup(mat, idx, 1);
 
                 if (t) {
-                    update_tensor_edge(g, t, 1, i, j, k);
+                    update_tensor_edge(g, mat, t, 1, i, j, k);
                     continue;
                 }
 

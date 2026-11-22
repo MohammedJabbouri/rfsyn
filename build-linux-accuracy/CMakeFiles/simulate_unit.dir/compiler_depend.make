@@ -98,14 +98,17 @@ simulate_unit: /usr/lib/Scrt1.o \
   /usr/lib/ld-linux-x86-64.so.2 \
   /usr/lib/libc.so.6 \
   /usr/lib/libc_nonshared.a \
+  /usr/lib/libgomp.so \
   /usr/lib/libm.so.6 \
   /usr/lib/libmvec.so.1 \
+  /usr/lib/libpthread.a \
   CMakeFiles/simulate_unit.dir/tests/simulate_unit.c.o \
-  librfsyn_cjson.a \
-  librfsyn_world.a
+  librfsyn_fdtd.a
 
 
 /usr/lib/libmvec.so.1:
+
+/usr/lib/libgomp.so:
 
 /usr/lib/libc.so.6:
 
@@ -191,8 +194,6 @@ simulate_unit: /usr/lib/Scrt1.o \
 
 /root/Projects/rfsyn/tests/simulate_unit.c:
 
-librfsyn_world.a:
-
 /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/stddef.h:
 
 /usr/include/bits/types/__mbstate_t.h:
@@ -240,6 +241,8 @@ librfsyn_world.a:
 /usr/include/bits/waitflags.h:
 
 /usr/include/bits/mathcalls.h:
+
+librfsyn_fdtd.a:
 
 /usr/include/bits/floatn-common.h:
 
@@ -289,13 +292,13 @@ CMakeFiles/simulate_unit.dir/tests/simulate_unit.c.o:
 
 /usr/include/bits/typesizes.h:
 
+/usr/lib/libpthread.a:
+
 /usr/include/bits/types/locale_t.h:
 
 /usr/include/bits/types/struct_FILE.h:
 
 /usr/include/bits/types/struct_timespec.h:
-
-librfsyn_cjson.a:
 
 /usr/include/bits/stdio_lim.h:
 

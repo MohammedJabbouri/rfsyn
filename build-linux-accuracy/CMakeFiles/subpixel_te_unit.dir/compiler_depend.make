@@ -63,16 +63,21 @@ subpixel_te_unit: /usr/lib/Scrt1.o \
   /usr/lib/ld-linux-x86-64.so.2 \
   /usr/lib/libc.so.6 \
   /usr/lib/libc_nonshared.a \
+  /usr/lib/libgomp.so \
   /usr/lib/libm.so.6 \
   /usr/lib/libmvec.so.1 \
+  /usr/lib/libpthread.a \
   CMakeFiles/subpixel_te_unit.dir/tests/subpixel_te_unit.c.o \
-  librfsyn_cjson.a \
-  librfsyn_world.a
+  librfsyn_fdtd.a
 
+
+/usr/lib/libpthread.a:
 
 /usr/lib/libmvec.so.1:
 
 /usr/lib/libm.so.6:
+
+/usr/lib/libgomp.so:
 
 /usr/lib/libc.so.6:
 
@@ -83,8 +88,6 @@ subpixel_te_unit: /usr/lib/Scrt1.o \
 /usr/include/bits/types/__FILE.h:
 
 /usr/include/bits/types/FILE.h:
-
-librfsyn_cjson.a:
 
 /usr/include/bits/stdio_lim.h:
 
@@ -114,6 +117,8 @@ librfsyn_cjson.a:
 
 /usr/include/bits/wordsize.h:
 
+librfsyn_fdtd.a:
+
 /usr/include/bits/floatn-common.h:
 
 /usr/include/bits/long-double.h:
@@ -123,8 +128,6 @@ librfsyn_cjson.a:
 /usr/include/bits/types/__fpos_t.h:
 
 /usr/include/bits/math-vector.h:
-
-librfsyn_world.a:
 
 /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/stddef.h:
 

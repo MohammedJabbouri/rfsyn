@@ -1,11 +1,11 @@
-world_unit 4 0.000689943
-material_catalog_unit 4 0.000930931
-material_config_unit 4 0.00137003
-simulate_unit 4 0.596711
-materials_unit 4 0.000644052
-rf_signal_unit 4 0.000428725
-subpixel_te_unit 6 0.000813622
-periodic_materials_unit 4 0.000530431
+world_unit 5 0.00066562
+material_catalog_unit 5 0.00093819
+material_config_unit 5 0.001262
+simulate_unit 5 0.763595
+materials_unit 5 0.000733633
+rf_signal_unit 5 0.000461868
+subpixel_te_unit 7 0.000873493
+periodic_materials_unit 5 0.00058856
 cli_smoke 3 0.9962
 validate_cpml 3 0.851488
 validate_cpml_margin 3 2.2436
@@ -17,6 +17,6 @@ validate_cpml_oblique 3 5.0424
 validate_materials_high_contrast 3 1.46122
 validate_long_term_stability 3 3.06599
 validate_materials_tilted 3 0.325907
-periodic_wrapping_unit 2 0.00229965
-materials_tensor_unit 1 0.0214697
+periodic_wrapping_unit 3 0.00193919
+materials_tensor_unit 2 6.85245
 ---

@@ -65,9 +65,10 @@ subpixel_te_unit
  /usr/lib/ld-linux-x86-64.so.2
  /usr/lib/libc.so.6
  /usr/lib/libc_nonshared.a
+ /usr/lib/libgomp.so
  /usr/lib/libm.so.6
  /usr/lib/libmvec.so.1
+ /usr/lib/libpthread.a
  /root/Projects/rfsyn/build-linux-accuracy/CMakeFiles/subpixel_te_unit.dir/tests/subpixel_te_unit.c.o
- /root/Projects/rfsyn/build-linux-accuracy/librfsyn_cjson.a
- /root/Projects/rfsyn/build-linux-accuracy/librfsyn_world.a
+ /root/Projects/rfsyn/build-linux-accuracy/librfsyn_fdtd.a
 

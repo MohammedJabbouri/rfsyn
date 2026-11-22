@@ -327,13 +327,17 @@ static void test_analytic_update(int with_cpml, int quadratic) {
     s.g->ex[idx] = ex_old;
     s.g->ey[idx] = ey_old;
 
-    REQUIRE(materials_set_component_tensor(
-        s.m, s.g, FIELD_EX, i, j, 0,
-        mxx, mxy, myy) == 0);
-
-    REQUIRE(materials_set_component_tensor(
-        s.m, s.g, FIELD_EY, i, j, 0,
-        myy, mxy, mxx) == 0);
+    /* Uniform patch supplies all four reciprocal neighbors. */
+    for (size_t ii = i - 1; ii <= i + 1; ii++) {
+        for (size_t jj = j - 1; jj <= j + 1; jj++) {
+            REQUIRE(materials_set_component_tensor(
+                s.m, s.g, FIELD_EX, ii, jj, 0,
+                mxx, mxy, myy) == 0);
+            REQUIRE(materials_set_component_tensor(
+                s.m, s.g, FIELD_EY, ii, jj, 0,
+                myy, mxy, mxx) == 0);
+        }
+    }
 
     double scale = s.g->dt / (EPS0 * s.g->dx);
 
@@ -590,8 +594,13 @@ static void test_periodic_tensor_seams(
     size_t jbegin = (periodic_axes & 2u) ? 0u : 6u;
     size_t jend = (periodic_axes & 2u) ? ny : 18u;
 
-    for (size_t i = ibegin; i < iend; i++) {
-        for (size_t j = jbegin; j < jend; j++) {
+    size_t ti0 = (periodic_axes & 1u) ? ibegin : ibegin - 1;
+    size_t ti1 = (periodic_axes & 1u) ? iend : iend + 1;
+    size_t tj0 = (periodic_axes & 2u) ? jbegin : jbegin - 1;
+    size_t tj1 = (periodic_axes & 2u) ? jend : jend + 1;
+
+    for (size_t i = ti0; i < ti1; i++) {
+        for (size_t j = tj0; j < tj1; j++) {
             size_t idx = fdtd_index(s.g, i, j, 0);
 
             s.g->ex[idx] = ex_old;
@@ -945,6 +954,385 @@ static void test_uniform_tensor_evolution_suite(void)
     test_uniform_tensor_evolution(9u, 10u, -0.12);
 }
 
+static void variable_zero_fields(fdtd_grid_t *g)
+{
+    size_t bytes = grid_storage(g) * sizeof(double);
+
+    memset(g->ex, 0, bytes);
+    memset(g->ey, 0, bytes);
+    memset(g->ez, 0, bytes);
+    memset(g->hx, 0, bytes);
+    memset(g->hy, 0, bytes);
+    memset(g->hz, 0, bytes);
+}
+
+/*
+ * pattern:
+ *   0 = uniform control
+ *   1 = x-directed two-region slab
+ *   2 = periodically repeated tilted bands
+ *   3 = cell-scale checkerboard
+ *
+ * Evaluate the region at each component's physical Yee location.
+ */
+static int variable_region(
+    unsigned pattern,
+    double x,
+    double y,
+    size_t n)
+{
+    switch (pattern) {
+    case 0:
+        return 0;
+
+    case 1:
+        return x >= 0.5 * (double)n;
+
+    case 2:
+        return fmod(x + 2.0 * y + 0.37, (double)n)
+            >= 0.5 * (double)n;
+
+    default:
+        return ((size_t)floor(x) + (size_t)floor(y)) % 2u;
+    }
+}
+
+static int variable_assign(
+    xt_sim *s,
+    unsigned pattern,
+    double coupling_sign)
+{
+    for (size_t i = 0; i < s->g->nx; i++) {
+        for (size_t j = 0; j < s->g->ny; j++) {
+            for (int component = 0; component < 2; component++) {
+                int is_ex = component == 0;
+
+                double x = (double)i + (is_ex ? 0.5 : 0.0);
+                double y = (double)j + (is_ex ? 0.0 : 0.5);
+
+                int region = variable_region(
+                    pattern, x, y, s->g->nx);
+
+                double mxx = region ? 0.25 : 0.65;
+                double myy = region ? 0.55 : 0.40;
+                double mxy = coupling_sign *
+                    (region ? -0.08 : 0.12);
+
+                int rc;
+
+                if (is_ex) {
+                    rc = materials_set_component_tensor(
+                        s->m, s->g, FIELD_EX, i, j, 0,
+                        mxx, mxy, myy);
+                } else {
+                    rc = materials_set_component_tensor(
+                        s->m, s->g, FIELD_EY, i, j, 0,
+                        myy, mxy, mxx);
+                }
+
+                if (rc != 0) {
+                    return -1;
+                }
+            }
+        }
+    }
+
+    return 0;
+}
+
+/*
+ * Probe the dimensionless Hz wave operator:
+ *
+ *     A = C Xi C^T
+ *
+ * For each Hz basis vector:
+ *   E <- escale * Xi * curl(Hz)
+ *   Hz <- Hz - hscale * curl(E)
+ *
+ * Therefore:
+ *   A*Hz = -(Hz_after - Hz_before)/(hscale*escale).
+ *
+ * All operations on fields use the production update functions.
+ */
+static void test_variable_tensor_operator(
+    unsigned pattern,
+    double coupling_sign)
+{
+    xt_sim s = {0};
+    double *a = NULL;
+
+    const size_t n = 8;
+    const size_t count = n * n;
+
+    fprintf(
+        stdout,
+        "variable tensor operator: pattern=%u sign=%+.0f\n",
+        pattern, coupling_sign);
+    fflush(stdout);
+
+    REQUIRE(xt_create(
+        &s, n, n, 1, 0.001, 7u, 0u) == 0);
+
+    REQUIRE(variable_assign(
+        &s, pattern, coupling_sign) == 0);
+
+    a = calloc(count * count, sizeof(*a));
+    REQUIRE(a != NULL);
+
+    double hscale = s.g->dt / (MU0 * s.g->dx);
+    double escale = s.g->dt / (EPS0 * s.g->dx);
+    double factor = hscale * escale;
+
+    for (size_t column = 0; column < count; column++) {
+        variable_zero_fields(s.g);
+
+        size_t ci = column / n;
+        size_t cj = column % n;
+
+        s.g->hz[fdtd_index(s.g, ci, cj, 0)] = 1.0;
+
+        update_e(&s);
+        fdtd_update_h(s.g);
+
+        for (size_t row = 0; row < count; row++) {
+            size_t ri = row / n;
+            size_t rj = row % n;
+
+            double old_hz = row == column ? 1.0 : 0.0;
+            double new_hz =
+                s.g->hz[fdtd_index(s.g, ri, rj, 0)];
+
+            a[row * count + column] =
+                -(new_hz - old_hz) / factor;
+
+            CHECK(isfinite(a[row * count + column]));
+        }
+    }
+
+    double max_entry = 0.0;
+    double max_asymmetry = 0.0;
+    double max_row_sum = 0.0;
+
+    for (size_t row = 0; row < count; row++) {
+        double row_sum = 0.0;
+
+        for (size_t column = 0; column < count; column++) {
+            double value = a[row * count + column];
+
+            double asymmetry = fabs(
+                value - a[column * count + row]);
+
+            if (fabs(value) > max_entry) {
+                max_entry = fabs(value);
+            }
+
+            if (asymmetry > max_asymmetry) {
+                max_asymmetry = asymmetry;
+            }
+
+            row_sum += value;
+        }
+
+        if (fabs(row_sum) > max_row_sum) {
+            max_row_sum = fabs(row_sum);
+        }
+    }
+
+    CHECK(max_entry > 0.0);
+    CHECK(isfinite(max_asymmetry));
+    CHECK(isfinite(max_row_sum));
+
+    /*
+     * A spatially constant Hz must have zero curl, even with
+     * variable coefficients.
+     */
+    CHECK(max_row_sum <= 1e-11 * fmax(1.0, max_entry));
+
+    /* Reciprocal assembly must be symmetric for every pattern. */
+    CHECK(max_asymmetry <= 1e-11 * fmax(1.0, max_entry));
+
+    fprintf(
+        stdout,
+        "  max|A|=%.9g relative asymmetry=%.9g "
+        "constant-mode residual=%.9g\n",
+        max_entry,
+        max_asymmetry / fmax(max_entry, 1e-300),
+        max_row_sum / fmax(max_entry, 1e-300));
+
+cleanup:
+    free(a);
+    xt_destroy(&s);
+}
+
+/*
+ * A finite-run stress test, not an energy-conservation test.
+ * Monitor all six canonical field components.
+ */
+static void test_variable_tensor_evolution(
+    unsigned pattern,
+    double coupling_sign)
+{
+    xt_sim s = {0};
+
+    const size_t n = 16;
+    const size_t steps = 8192;
+    const double impedance = sqrt(MU0 / EPS0);
+
+    double initial_norm = 0.0;
+    double peak_ratio = 1.0;
+
+    fprintf(
+        stdout,
+        "variable tensor evolution: pattern=%u "
+        "sign=%+.0f steps=%zu\n",
+        pattern, coupling_sign, steps);
+    fflush(stdout);
+
+    REQUIRE(xt_create(
+        &s, n, n, 1, 0.001, 7u, 0u) == 0);
+
+    REQUIRE(variable_assign(
+        &s, pattern, coupling_sign) == 0);
+
+    /*
+     * Deterministic, spatially varied initial data.
+     * No sources are applied during evolution.
+     */
+    for (size_t i = 0; i < n; i++) {
+        for (size_t j = 0; j < n; j++) {
+            size_t idx = fdtd_index(s.g, i, j, 0);
+
+            double value =
+                sin(0.71 * (double)(i + 1) * (double)(j + 2)) +
+                0.3 * cos(1.13 * (double)(2 * i + j + 1));
+
+            s.g->hz[idx] = value / impedance;
+            initial_norm += value * value;
+        }
+    }
+
+    REQUIRE(isfinite(initial_norm) && initial_norm > 0.0);
+
+    for (size_t step = 1; step <= steps; step++) {
+        fdtd_update_h(s.g);
+        update_e(&s);
+
+        if (step != 1 && step % 32 != 0 && step != steps) {
+            continue;
+        }
+
+        double norm = 0.0;
+        double unwanted = 0.0;
+
+        for (size_t i = 0; i < n; i++) {
+            for (size_t j = 0; j < n; j++) {
+                size_t idx = fdtd_index(s.g, i, j, 0);
+
+                double ex = s.g->ex[idx];
+                double ey = s.g->ey[idx];
+                double ez = s.g->ez[idx];
+
+                double hx = impedance * s.g->hx[idx];
+                double hy = impedance * s.g->hy[idx];
+                double hz = impedance * s.g->hz[idx];
+
+                norm +=
+                    ex * ex + ey * ey + ez * ez +
+                    hx * hx + hy * hy + hz * hz;
+
+                unwanted += ez * ez + hx * hx + hy * hy;
+            }
+        }
+
+        double ratio = norm / initial_norm;
+
+        CHECK(isfinite(ratio));
+
+        if (!isfinite(ratio)) {
+            fprintf(
+                stderr,
+                "  nonfinite fields at step=%zu\n", step);
+            goto cleanup;
+        }
+
+        if (ratio > peak_ratio) {
+            peak_ratio = ratio;
+        }
+
+        /*
+         * Explicit regression guard:
+         * 100x squared-field norm = 10x aggregate field amplitude.
+         * This is not a derived physical energy bound.
+         */
+        CHECK(ratio <= 100.0);
+
+        CHECK(unwanted <=
+            1e-20 * fmax(initial_norm, norm));
+
+        if (ratio > 100.0) {
+            fprintf(
+                stderr,
+                "  growth guard failed: step=%zu "
+                "norm/initial=%.9g\n",
+                step, ratio);
+            goto cleanup;
+        }
+    }
+
+    fprintf(
+        stdout,
+        "  peak squared-field norm/initial=%.9g\n",
+        peak_ratio);
+
+cleanup:
+    xt_destroy(&s);
+}
+
+static void test_variable_tensor_suite(void)
+{
+    /* Uniform off-diagonal control. */
+    test_variable_tensor_operator(0u, 1.0);
+    test_variable_tensor_evolution(0u, 1.0);
+
+    /* Variable diagonal-only control. */
+    test_variable_tensor_operator(1u, 0.0);
+    test_variable_tensor_evolution(1u, 0.0);
+
+    /* Slab, tilted bands, and checkerboard; both coupling signs. */
+    for (unsigned pattern = 1u; pattern <= 3u; pattern++) {
+        for (int sign = -1; sign <= 1; sign += 2) {
+            test_variable_tensor_operator(pattern, (double)sign);
+            test_variable_tensor_evolution(pattern, (double)sign);
+        }
+    }
+}
+
+
+static void test_isolated_tensor_edge(void)
+{
+    xt_sim s = {0};
+    const size_t i = 10, j = 11;
+    const double mxx = 0.65, mxy = 0.12, myy = 0.40;
+    REQUIRE(create_fixture(&s, 0) == 0);
+    for (size_t u = 0; u < s.g->nx; u++) {
+        for (size_t v = 0; v < s.g->ny; v++) {
+            s.g->hz[fdtd_index(s.g, u, v, 0)] =
+                0.7 * (double)u - 0.2 * (double)v;
+        }
+    }
+    REQUIRE(materials_set_component_tensor(
+        s.m, s.g, FIELD_EX, i, j, 0, mxx, mxy, myy) == 0);
+    update_e(&s);
+    double scale = s.g->dt / (EPS0 * s.g->dx);
+    CLOSE(s.g->ex[fdtd_index(s.g, i, j, 0)],
+          scale * mxx * (-0.2), 1e-10, 1e-12);
+    CLOSE(s.g->ey[fdtd_index(s.g, i, j, 0)],
+          -scale * 0.7, 1e-10, 1e-12);
+    fprintf(stdout, "isolated tensor edge: reciprocal neighbors absent\n");
+cleanup:
+    xt_destroy(&s);
+}
+
 int main(void) {
     test_api();
 
@@ -958,7 +1346,9 @@ int main(void) {
 
     test_periodic_tensor_seam_suite();
     test_uniform_tensor_evolution_suite();
-    
+    test_variable_tensor_suite();
+    test_isolated_tensor_edge();
+
     printf(
         "materials_tensor_unit: %zu checks, %zu failures\n",
         checks, failures);

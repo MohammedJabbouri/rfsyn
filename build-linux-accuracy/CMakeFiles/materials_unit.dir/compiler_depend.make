@@ -66,16 +66,21 @@ materials_unit: /usr/lib/Scrt1.o \
   /usr/lib/ld-linux-x86-64.so.2 \
   /usr/lib/libc.so.6 \
   /usr/lib/libc_nonshared.a \
+  /usr/lib/libgomp.so \
   /usr/lib/libm.so.6 \
   /usr/lib/libmvec.so.1 \
+  /usr/lib/libpthread.a \
   CMakeFiles/materials_unit.dir/tests/materials_unit.c.o \
-  librfsyn_cjson.a \
-  librfsyn_world.a
+  librfsyn_fdtd.a
 
+
+/usr/lib/libpthread.a:
 
 /usr/lib/libmvec.so.1:
 
 /usr/lib/libm.so.6:
+
+/usr/lib/libgomp.so:
 
 /usr/lib/libc.so.6:
 
@@ -88,8 +93,6 @@ materials_unit: /usr/lib/Scrt1.o \
 /usr/include/bits/types/FILE.h:
 
 /root/Projects/rfsyn/engine/fdtd/materials.h:
-
-librfsyn_cjson.a:
 
 /usr/include/bits/stdio_lim.h:
 
@@ -143,6 +146,8 @@ librfsyn_cjson.a:
 
 /root/Projects/rfsyn/engine/fdtd/grid.h:
 
+librfsyn_fdtd.a:
+
 /usr/include/bits/floatn-common.h:
 
 /root/Projects/rfsyn/engine/core/constants.h:
@@ -172,8 +177,6 @@ librfsyn_cjson.a:
 /usr/include/bits/types/__fpos_t.h:
 
 /usr/include/bits/wordsize.h:
-
-librfsyn_world.a:
 
 /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/stddef.h:
 
