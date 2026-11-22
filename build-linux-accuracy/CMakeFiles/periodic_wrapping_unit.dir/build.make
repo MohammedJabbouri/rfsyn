@@ -99,8 +99,9 @@ periodic_wrapping_unit_EXTERNAL_OBJECTS =
 periodic_wrapping_unit: CMakeFiles/periodic_wrapping_unit.dir/tests/periodic_wrapping_unit.c.o
 periodic_wrapping_unit: CMakeFiles/periodic_wrapping_unit.dir/build.make
 periodic_wrapping_unit: CMakeFiles/periodic_wrapping_unit.dir/compiler_depend.ts
-periodic_wrapping_unit: librfsyn_world.a
-periodic_wrapping_unit: librfsyn_cjson.a
+periodic_wrapping_unit: librfsyn_fdtd.a
+periodic_wrapping_unit: /usr/lib/libgomp.so
+periodic_wrapping_unit: /usr/lib/libpthread.a
 periodic_wrapping_unit: CMakeFiles/periodic_wrapping_unit.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/root/Projects/rfsyn/build-linux-accuracy/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking C executable periodic_wrapping_unit"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/periodic_wrapping_unit.dir/link.txt --verbose=$(VERBOSE)

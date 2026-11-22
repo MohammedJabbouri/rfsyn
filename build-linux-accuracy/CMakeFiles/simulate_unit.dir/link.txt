@@ -1,1 +1,1 @@
-/sbin/cc -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/simulate_unit.dir/link.d CMakeFiles/simulate_unit.dir/tests/simulate_unit.c.o -o simulate_unit  librfsyn_world.a -lm librfsyn_cjson.a
+/sbin/cc -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/simulate_unit.dir/link.d CMakeFiles/simulate_unit.dir/tests/simulate_unit.c.o -o simulate_unit  librfsyn_fdtd.a -lm /usr/lib/libgomp.so /usr/lib/libpthread.a

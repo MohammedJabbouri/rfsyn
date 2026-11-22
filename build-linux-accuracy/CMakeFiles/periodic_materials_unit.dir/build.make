@@ -99,8 +99,9 @@ periodic_materials_unit_EXTERNAL_OBJECTS =
 periodic_materials_unit: CMakeFiles/periodic_materials_unit.dir/tests/periodic_materials_unit.c.o
 periodic_materials_unit: CMakeFiles/periodic_materials_unit.dir/build.make
 periodic_materials_unit: CMakeFiles/periodic_materials_unit.dir/compiler_depend.ts
-periodic_materials_unit: librfsyn_world.a
-periodic_materials_unit: librfsyn_cjson.a
+periodic_materials_unit: librfsyn_fdtd.a
+periodic_materials_unit: /usr/lib/libgomp.so
+periodic_materials_unit: /usr/lib/libpthread.a
 periodic_materials_unit: CMakeFiles/periodic_materials_unit.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/root/Projects/rfsyn/build-linux-accuracy/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking C executable periodic_materials_unit"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/periodic_materials_unit.dir/link.txt --verbose=$(VERBOSE)

@@ -99,8 +99,9 @@ subpixel_te_unit_EXTERNAL_OBJECTS =
 subpixel_te_unit: CMakeFiles/subpixel_te_unit.dir/tests/subpixel_te_unit.c.o
 subpixel_te_unit: CMakeFiles/subpixel_te_unit.dir/build.make
 subpixel_te_unit: CMakeFiles/subpixel_te_unit.dir/compiler_depend.ts
-subpixel_te_unit: librfsyn_world.a
-subpixel_te_unit: librfsyn_cjson.a
+subpixel_te_unit: librfsyn_fdtd.a
+subpixel_te_unit: /usr/lib/libgomp.so
+subpixel_te_unit: /usr/lib/libpthread.a
 subpixel_te_unit: CMakeFiles/subpixel_te_unit.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/root/Projects/rfsyn/build-sanitize-root/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking C executable subpixel_te_unit"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/subpixel_te_unit.dir/link.txt --verbose=$(VERBOSE)

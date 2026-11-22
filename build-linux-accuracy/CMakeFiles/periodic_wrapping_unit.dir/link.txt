@@ -1,1 +1,1 @@
-/sbin/cc -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/periodic_wrapping_unit.dir/link.d CMakeFiles/periodic_wrapping_unit.dir/tests/periodic_wrapping_unit.c.o -o periodic_wrapping_unit  librfsyn_world.a -lm librfsyn_cjson.a
+/sbin/cc -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/periodic_wrapping_unit.dir/link.d CMakeFiles/periodic_wrapping_unit.dir/tests/periodic_wrapping_unit.c.o -o periodic_wrapping_unit  librfsyn_fdtd.a -lm /usr/lib/libgomp.so /usr/lib/libpthread.a

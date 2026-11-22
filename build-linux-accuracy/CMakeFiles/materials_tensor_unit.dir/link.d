@@ -3,14 +3,7 @@ materials_tensor_unit: \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/crti.o \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/crtbeginS.o \
   CMakeFiles/materials_tensor_unit.dir/tests/materials_tensor_unit.c.o \
-  librfsyn_world.a \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libm.so \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libm.so \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libm.so \
-  /usr/lib/libm.so.6 \
-  /usr/lib/libmvec.so.1 \
   librfsyn_fdtd.a \
-  librfsyn_cjson.a \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libm.so \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libm.so \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libm.so \
@@ -58,21 +51,7 @@ materials_tensor_unit: \
 
 CMakeFiles/materials_tensor_unit.dir/tests/materials_tensor_unit.c.o:
 
-librfsyn_world.a:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libm.so:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libm.so:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libm.so:
-
-/usr/lib/libm.so.6:
-
-/usr/lib/libmvec.so.1:
-
 librfsyn_fdtd.a:
-
-librfsyn_cjson.a:
 
 /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libm.so:
 

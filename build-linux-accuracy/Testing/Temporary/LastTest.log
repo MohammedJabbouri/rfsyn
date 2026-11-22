@@ -1,10 +1,71 @@
-Start testing: Nov 21 14:49 PST
+Start testing: Nov 21 16:17 PST
 ----------------------------------------------------------
-6/20 Testing: subpixel_te_unit
-6/20 Test: subpixel_te_unit
+9/21 Testing: periodic_wrapping_unit
+9/21 Test: periodic_wrapping_unit
+Command: "/root/Projects/rfsyn/build-linux-accuracy/periodic_wrapping_unit"
+Directory: /root/Projects/rfsyn/build-linux-accuracy
+"periodic_wrapping_unit" start time: Nov 21 16:17 PST
+Output:
+----------------------------------------------------------
+periodic_wrapping_unit: PASS (32 cases, 5 x 6 x 7)
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"periodic_wrapping_unit" end time: Nov 21 16:17 PST
+"periodic_wrapping_unit" time elapsed: 00:00:00
+----------------------------------------------------------
+
+3/21 Testing: material_config_unit
+3/21 Test: material_config_unit
+Command: "/root/Projects/rfsyn/build-linux-accuracy/material_config_unit"
+Directory: /root/Projects/rfsyn/build-linux-accuracy
+"material_config_unit" start time: Nov 21 16:17 PST
+Output:
+----------------------------------------------------------
+material_config: concrete_normal failed: material exists; explicit override required
+material_config: bad requires model='constant' and numeric eps_r/sigma_s_per_m
+material_config: bad failed: invalid definition, frequency, or argument
+material_config: bad failed: invalid definition, frequency, or argument
+material_config: air failed: reserved air or alias name; use canonical material name
+material_config: evaluation_frequency_hz must be positive and finite
+material_config: color #808080 -> material_that_does_not_exist failed: unknown material
+material_config: invalid color key 'red'
+material_config: root must be a JSON object
+material_config: materials must be object
+material_config: vacuum failed: reserved air or alias name; use canonical material name
+material_config: enabled must be boolean
+material_config: allow_proxy must be boolean
+material_config: materials.test_invalid.override must be boolean
+material_config: test_invalid failed: invalid definition, frequency, or argument
+material_config: materials.test_invalid.reference_frequency_hz must be positive and finite
+material_config: test_invalid failed: invalid definition, frequency, or argument
+material_config: materials.test_invalid.reference_frequency_hz must be positive and finite
+material_config: test_invalid failed: invalid definition, frequency, or argument
+material_config: materials.test_invalid.description must be string
+material_config: test_invalid failed: invalid definition, frequency, or argument
+material_config: materials.test_invalid.source must be a nonempty string
+material_config: test_invalid failed: invalid definition, frequency, or argument
+material_config: materials.test_invalid.source must be a nonempty string
+material_config: test_invalid failed: invalid definition, frequency, or argument
+material_config: evaluation_frequency_hz must be numeric
+material_config: schema_version must be 1
+material_config: schema_version must be 1
+material_config: schema_version must be 1
+material_config_unit: PASS (32 cases)
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"material_config_unit" end time: Nov 21 16:17 PST
+"material_config_unit" time elapsed: 00:00:00
+----------------------------------------------------------
+
+7/21 Testing: subpixel_te_unit
+7/21 Test: subpixel_te_unit
 Command: "/root/Projects/rfsyn/build-linux-accuracy/subpixel_te_unit"
 Directory: /root/Projects/rfsyn/build-linux-accuracy
-"subpixel_te_unit" start time: Nov 21 14:49 PST
+"subpixel_te_unit" start time: Nov 21 16:17 PST
 Output:
 ----------------------------------------------------------
 subpixel_te_unit: 4642 checks, 0 failures
@@ -12,11 +73,138 @@ subpixel_te_unit: 4642 checks, 0 failures
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"subpixel_te_unit" end time: Nov 21 14:49 PST
+"subpixel_te_unit" end time: Nov 21 16:17 PST
 "subpixel_te_unit" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-End testing: Nov 21 14:49 PST
+2/21 Testing: material_catalog_unit
+2/21 Test: material_catalog_unit
+Command: "/root/Projects/rfsyn/build-linux-accuracy/material_catalog_unit"
+Directory: /root/Projects/rfsyn/build-linux-accuracy
+"material_catalog_unit" start time: Nov 21 16:17 PST
+Output:
+----------------------------------------------------------
+material_catalog_unit: PASS
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"material_catalog_unit" end time: Nov 21 16:17 PST
+"material_catalog_unit" time elapsed: 00:00:00
+----------------------------------------------------------
 
-unit =   0.00 sec*proc
+1/21 Testing: world_unit
+1/21 Test: world_unit
+Command: "/root/Projects/rfsyn/build-linux-accuracy/world_unit"
+Directory: /root/Projects/rfsyn/build-linux-accuracy
+"world_unit" start time: Nov 21 16:17 PST
+Output:
+----------------------------------------------------------
+world_unit: PASS
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"world_unit" end time: Nov 21 16:17 PST
+"world_unit" time elapsed: 00:00:00
+----------------------------------------------------------
+
+5/21 Testing: materials_unit
+5/21 Test: materials_unit
+Command: "/root/Projects/rfsyn/build-linux-accuracy/materials_unit"
+Directory: /root/Projects/rfsyn/build-linux-accuracy
+"materials_unit" start time: Nov 21 16:17 PST
+Output:
+----------------------------------------------------------
+materials_unit: PASS
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"materials_unit" end time: Nov 21 16:17 PST
+"materials_unit" time elapsed: 00:00:00
+----------------------------------------------------------
+
+8/21 Testing: periodic_materials_unit
+8/21 Test: periodic_materials_unit
+Command: "/root/Projects/rfsyn/build-linux-accuracy/periodic_materials_unit"
+Directory: /root/Projects/rfsyn/build-linux-accuracy
+"periodic_materials_unit" start time: Nov 21 16:17 PST
+Output:
+----------------------------------------------------------
+PASS: periodic box assignment, overrides, interface and seam coefficients; nonperiodic control
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"periodic_materials_unit" end time: Nov 21 16:17 PST
+"periodic_materials_unit" time elapsed: 00:00:00
+----------------------------------------------------------
+
+10/21 Testing: rf_signal_unit
+10/21 Test: rf_signal_unit
+Command: "/root/Projects/rfsyn/build-linux-accuracy/rf_signal_unit"
+Directory: /root/Projects/rfsyn/build-linux-accuracy
+"rf_signal_unit" start time: Nov 21 16:17 PST
+Output:
+----------------------------------------------------------
+PASS
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"rf_signal_unit" end time: Nov 21 16:17 PST
+"rf_signal_unit" time elapsed: 00:00:00
+----------------------------------------------------------
+
+6/21 Testing: materials_tensor_unit
+6/21 Test: materials_tensor_unit
+Command: "/root/Projects/rfsyn/build-linux-accuracy/materials_tensor_unit"
+Directory: /root/Projects/rfsyn/build-linux-accuracy
+"materials_tensor_unit" start time: Nov 21 16:17 PST
+Output:
+----------------------------------------------------------
+analytic update: cpml=0 quadratic=0
+analytic update: cpml=0 quadratic=1
+analytic update: cpml=1 quadratic=0
+analytic update: cpml=1 quadratic=1
+diagonal invariance: cpml=0 steps=80
+diagonal invariance: cpml=1 steps=80
+materials_tensor_unit: 1292 checks, 0 failures
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"materials_tensor_unit" end time: Nov 21 16:17 PST
+"materials_tensor_unit" time elapsed: 00:00:00
+----------------------------------------------------------
+
+4/21 Testing: simulate_unit
+4/21 Test: simulate_unit
+Command: "/root/Projects/rfsyn/build-linux-accuracy/simulate_unit"
+Directory: /root/Projects/rfsyn/build-linux-accuracy
+"simulate_unit" start time: Nov 21 16:17 PST
+Output:
+----------------------------------------------------------
+simulate_unit: PASS
+samples: 200
+peak: 7.896462929e-03
+early peak: 1.953877629e-07
+sample rate: 5.245007767e+11 Hz
+determinism: bit-for-bit identical
+<end of output>
+Test time =   1.22 sec
+----------------------------------------------------------
+Test Passed.
+"simulate_unit" end time: Nov 21 16:17 PST
+"simulate_unit" time elapsed: 00:00:01
+----------------------------------------------------------
+
+End testing: Nov 21 16:17 PST
+
+fdtd =   0.00 sec*proc
+
+periodic =   0.00 sec*proc
+
+unit =   1.25 sec*proc
 

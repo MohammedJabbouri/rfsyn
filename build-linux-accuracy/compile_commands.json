@@ -151,37 +151,37 @@
 },
 {
   "directory": "/root/Projects/rfsyn/build-linux-accuracy",
-  "command": "/sbin/cc  -I/root/Projects/rfsyn -I/root/Projects/rfsyn/cli -O3 -DNDEBUG -std=gnu11 -o CMakeFiles/simulate_unit.dir/tests/simulate_unit.c.o -c /root/Projects/rfsyn/tests/simulate_unit.c",
+  "command": "/sbin/cc -DRFSYN_HAS_OPENMP=1  -O3 -DNDEBUG -std=gnu11 -fopenmp -o CMakeFiles/simulate_unit.dir/tests/simulate_unit.c.o -c /root/Projects/rfsyn/tests/simulate_unit.c",
   "file": "/root/Projects/rfsyn/tests/simulate_unit.c",
   "output": "CMakeFiles/simulate_unit.dir/tests/simulate_unit.c.o"
 },
 {
   "directory": "/root/Projects/rfsyn/build-linux-accuracy",
-  "command": "/sbin/cc  -I/root/Projects/rfsyn -I/root/Projects/rfsyn/cli -O3 -DNDEBUG -std=gnu11 -o CMakeFiles/materials_unit.dir/tests/materials_unit.c.o -c /root/Projects/rfsyn/tests/materials_unit.c",
+  "command": "/sbin/cc -DRFSYN_HAS_OPENMP=1  -O3 -DNDEBUG -std=gnu11 -fopenmp -o CMakeFiles/materials_unit.dir/tests/materials_unit.c.o -c /root/Projects/rfsyn/tests/materials_unit.c",
   "file": "/root/Projects/rfsyn/tests/materials_unit.c",
   "output": "CMakeFiles/materials_unit.dir/tests/materials_unit.c.o"
 },
 {
   "directory": "/root/Projects/rfsyn/build-linux-accuracy",
-  "command": "/sbin/cc -DRFSYN_HAS_OPENMP=1 -I/root/Projects/rfsyn -I/root/Projects/rfsyn/cli -O3 -DNDEBUG -std=gnu11 -fopenmp -o CMakeFiles/materials_tensor_unit.dir/tests/materials_tensor_unit.c.o -c /root/Projects/rfsyn/tests/materials_tensor_unit.c",
+  "command": "/sbin/cc -DRFSYN_HAS_OPENMP=1  -O3 -DNDEBUG -std=gnu11 -fopenmp -o CMakeFiles/materials_tensor_unit.dir/tests/materials_tensor_unit.c.o -c /root/Projects/rfsyn/tests/materials_tensor_unit.c",
   "file": "/root/Projects/rfsyn/tests/materials_tensor_unit.c",
   "output": "CMakeFiles/materials_tensor_unit.dir/tests/materials_tensor_unit.c.o"
 },
 {
   "directory": "/root/Projects/rfsyn/build-linux-accuracy",
-  "command": "/sbin/cc  -I/root/Projects/rfsyn -I/root/Projects/rfsyn/cli -O3 -DNDEBUG -std=gnu11 -o CMakeFiles/subpixel_te_unit.dir/tests/subpixel_te_unit.c.o -c /root/Projects/rfsyn/tests/subpixel_te_unit.c",
+  "command": "/sbin/cc -DRFSYN_HAS_OPENMP=1  -O3 -DNDEBUG -std=gnu11 -fopenmp -o CMakeFiles/subpixel_te_unit.dir/tests/subpixel_te_unit.c.o -c /root/Projects/rfsyn/tests/subpixel_te_unit.c",
   "file": "/root/Projects/rfsyn/tests/subpixel_te_unit.c",
   "output": "CMakeFiles/subpixel_te_unit.dir/tests/subpixel_te_unit.c.o"
 },
 {
   "directory": "/root/Projects/rfsyn/build-linux-accuracy",
-  "command": "/sbin/cc  -I/root/Projects/rfsyn -I/root/Projects/rfsyn/cli -O3 -DNDEBUG -std=gnu11 -o CMakeFiles/periodic_materials_unit.dir/tests/periodic_materials_unit.c.o -c /root/Projects/rfsyn/tests/periodic_materials_unit.c",
+  "command": "/sbin/cc -DRFSYN_HAS_OPENMP=1  -O3 -DNDEBUG -std=gnu11 -fopenmp -o CMakeFiles/periodic_materials_unit.dir/tests/periodic_materials_unit.c.o -c /root/Projects/rfsyn/tests/periodic_materials_unit.c",
   "file": "/root/Projects/rfsyn/tests/periodic_materials_unit.c",
   "output": "CMakeFiles/periodic_materials_unit.dir/tests/periodic_materials_unit.c.o"
 },
 {
   "directory": "/root/Projects/rfsyn/build-linux-accuracy",
-  "command": "/sbin/cc  -I/root/Projects/rfsyn -I/root/Projects/rfsyn/cli -O3 -DNDEBUG -std=gnu11 -o CMakeFiles/periodic_wrapping_unit.dir/tests/periodic_wrapping_unit.c.o -c /root/Projects/rfsyn/tests/periodic_wrapping_unit.c",
+  "command": "/sbin/cc -DRFSYN_HAS_OPENMP=1  -O3 -DNDEBUG -std=gnu11 -fopenmp -o CMakeFiles/periodic_wrapping_unit.dir/tests/periodic_wrapping_unit.c.o -c /root/Projects/rfsyn/tests/periodic_wrapping_unit.c",
   "file": "/root/Projects/rfsyn/tests/periodic_wrapping_unit.c",
   "output": "CMakeFiles/periodic_wrapping_unit.dir/tests/periodic_wrapping_unit.c.o"
 },

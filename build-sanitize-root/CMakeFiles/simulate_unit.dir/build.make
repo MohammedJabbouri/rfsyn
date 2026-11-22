@@ -99,8 +99,9 @@ simulate_unit_EXTERNAL_OBJECTS =
 simulate_unit: CMakeFiles/simulate_unit.dir/tests/simulate_unit.c.o
 simulate_unit: CMakeFiles/simulate_unit.dir/build.make
 simulate_unit: CMakeFiles/simulate_unit.dir/compiler_depend.ts
-simulate_unit: librfsyn_world.a
-simulate_unit: librfsyn_cjson.a
+simulate_unit: librfsyn_fdtd.a
+simulate_unit: /usr/lib/libgomp.so
+simulate_unit: /usr/lib/libpthread.a
 simulate_unit: CMakeFiles/simulate_unit.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/root/Projects/rfsyn/build-sanitize-root/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking C executable simulate_unit"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/simulate_unit.dir/link.txt --verbose=$(VERBOSE)

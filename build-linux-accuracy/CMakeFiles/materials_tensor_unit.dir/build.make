@@ -99,9 +99,7 @@ materials_tensor_unit_EXTERNAL_OBJECTS =
 materials_tensor_unit: CMakeFiles/materials_tensor_unit.dir/tests/materials_tensor_unit.c.o
 materials_tensor_unit: CMakeFiles/materials_tensor_unit.dir/build.make
 materials_tensor_unit: CMakeFiles/materials_tensor_unit.dir/compiler_depend.ts
-materials_tensor_unit: librfsyn_world.a
 materials_tensor_unit: librfsyn_fdtd.a
-materials_tensor_unit: librfsyn_cjson.a
 materials_tensor_unit: /usr/lib/libgomp.so
 materials_tensor_unit: /usr/lib/libpthread.a
 materials_tensor_unit: CMakeFiles/materials_tensor_unit.dir/link.txt

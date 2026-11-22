@@ -4,7 +4,7 @@
 # compile C with /sbin/cc
 C_DEFINES = -DRFSYN_HAS_OPENMP=1
 
-C_INCLUDES = -I/root/Projects/rfsyn -I/root/Projects/rfsyn/cli
+C_INCLUDES = 
 
 C_FLAGS = -g -std=gnu11 -fsanitize=address,undefined -fno-omit-frame-pointer -g -fopenmp
 

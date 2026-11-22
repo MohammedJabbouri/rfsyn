@@ -99,8 +99,9 @@ materials_unit_EXTERNAL_OBJECTS =
 materials_unit: CMakeFiles/materials_unit.dir/tests/materials_unit.c.o
 materials_unit: CMakeFiles/materials_unit.dir/build.make
 materials_unit: CMakeFiles/materials_unit.dir/compiler_depend.ts
-materials_unit: librfsyn_world.a
-materials_unit: librfsyn_cjson.a
+materials_unit: librfsyn_fdtd.a
+materials_unit: /usr/lib/libgomp.so
+materials_unit: /usr/lib/libpthread.a
 materials_unit: CMakeFiles/materials_unit.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/root/Projects/rfsyn/build-linux-accuracy/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking C executable materials_unit"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/materials_unit.dir/link.txt --verbose=$(VERBOSE)
